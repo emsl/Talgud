@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Talgud &ndash; Admin</title>
+</head>
+
+<body>
+  <%= link_to 'Kasutajad', admin_users_path %>
+  <%= link_to 'Haldusjaotused', admin_counties_path %>
+  <hr/>
+  <%= yield %>
+</body>
+</html>

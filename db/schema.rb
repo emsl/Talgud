@@ -9,7 +9,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216202209) do
+ActiveRecord::Schema.define(:version => 20100216220622) do
+
+  create_table "counties", :force => true do |t|
+    t.string   "name"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  create_table "municipalities", :force => true do |t|
+    t.string   "name"
+    t.string   "kind"
+    t.integer  "county_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  create_table "settlements", :force => true do |t|
+    t.string   "name"
+    t.string   "kind"
+    t.integer  "municipality_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "firstname",                         :null => false

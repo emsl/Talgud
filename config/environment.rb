@@ -6,7 +6,7 @@ Rails::Initializer.run do |config|
 
   config.gem 'authlogic'
   # config.gem 'url_store'
-  # config.gem 'formtastic'
+  config.gem 'formtastic'
   # config.gem 'acts_as_audited'
   # config.gem 'declarative_authorization'
   # config.gem 'will_paginate'  

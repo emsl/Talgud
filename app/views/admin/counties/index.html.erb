@@ -1,0 +1,13 @@
+<table border="1">
+<% for county in @counties %>
+<tr>
+  <td><%=h county.name %></td>
+  <td>
+    <%= link_to 'Omavalitsused', admin_county_municipalities_path(county) %>
+    <%= link_to 'Muuda', edit_admin_county_path(county) %>
+  </td>
+</tr>
+<% end %>
+</table>
+
+<%= link_to 'Lisa', new_admin_county_path %>
