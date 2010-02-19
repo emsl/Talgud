@@ -1,5 +1,8 @@
 .DS_Store
 config/database.yml
+config/deploy/staging.rb
+config/deploy/production.rb
+db/schema.rb
 log/*.log
 test/*
 tmp/*
