@@ -1,2 +1,4 @@
-<h1>Admin::Users#new</h1>
-<p>Find me in app/views/admin/users/new.html.erb</p>
+<% semantic_form_for @user, :url => admin_users_path do |f| %>
+  <%= render 'form' %>
+  <%= f.buttons %>
+<% end %>

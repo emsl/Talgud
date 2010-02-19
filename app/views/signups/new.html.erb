@@ -1,0 +1,16 @@
+<h1>Registreeru</h1>
+
+<div style="width: 600px;">
+<% semantic_form_for :signup, @user, :url => signups_path do |f| %>
+  <% f.inputs do %>
+    <%= f.input :firstname %>
+    <%= f.input :lastname %>
+    <%= f.input :email %>
+    <%= f.input :password, :as => :password %>
+    <%= f.input :password_confirmation, :as => :password %>
+  <% end %>
+  <% f.buttons do %>
+    <%= f.commit_button :signup %>
+  <% end %>
+<% end %>
+</div>

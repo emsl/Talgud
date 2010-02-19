@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html>
+  <head>
+    <%= stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes' %>
+  </head>
+  <body>
+    <% if @current_user %>
+      <%= link_to 'Logi välja', logout_path %>
+    <% else %>
+      <%= link_to 'Registreeru', signup_path %>
+      <%= link_to 'Logi sisse', login_path %>
+    <% end %>
+    
+    <% unless flash.empty? %>
+    <div style="border: 1px solid green">
+      <% flash.each do |key, message| %>
+      <%= message %>
+      <% end %>
+    </div>
+    <% end %>
+    
+    <%= yield %>
+  </body>
+</html>

@@ -1,1 +1,40 @@
-/** Stylesheet **/
+body {
+	margin: 30px;
+	pading: 0;
+	font-family: Arial, sans-serif;
+	color: #5e5e5e;
+	font-size: 13px;
+}
+
+.clearer {
+	height: 1px;
+	font-size: 1px;
+	line-height: 1px;
+	clear: both;
+}
+a {
+	color: #1b75bc;
+	outline: none;
+}
+a:hover {
+	text-decoration: none;
+}
+h1 {
+	font-size: 40px;
+	font-family: Georgia, Verdana, serif;
+}
+
+h2 {
+	font-size: 40px;
+	font-weight: normal;
+	font-family: Georgia, Verdana, serif;
+	margin: 0;
+	padding: 0 0 10px;
+}
+h3 {
+	font-size: 18px;
+	font-weight: normal;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 10px 0;
+}

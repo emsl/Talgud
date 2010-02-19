@@ -1,2 +1,475 @@
-et:
-  hello: Tere!
+--- 
+et: 
+  formtastic:
+    labels:
+      user:
+        firstname: Eesnimi
+        lastname: Perekonnanimi
+        email: E-post
+        password: Salasõna
+        password_confirmation: Salasõna kinnitus
+      signup:
+        firstname: Eesnimi
+        lastname: Perekonnanimi
+        email: E-post
+        password: Salasõna
+        password_confirmation: Salasõna kinnitus
+    hints:
+      # user:
+      #   firstname: "Eesnimi"
+    actions:
+      create: "Lisa {{model}}"
+      update: "Salvesta {{model}}"
+      signup: Registreeru
+    submit: "Salvesta"
+  mailers:
+    # common:
+    #   hello: Tere!
+    #   hello_name: "Tere {{name}}!"
+    #   footer_text: Sinu ELT SA meeskond
+  number: 
+    format: 
+      separator: .
+      delimiter: " "
+    human: 
+      format: 
+        delimiter: ""
+      storage_units: 
+        format: "%n %u"
+        units: 
+          kb: KB
+          tb: TB
+          gb: GB
+          byte: Baiti
+          mb: MB
+    percentage: 
+      format: 
+        delimiter: ""
+    currency: 
+      format: 
+        format: "%n %u"
+        unit: EEK
+        separator: .
+        delimiter: " "
+    precision: 
+      format: 
+        delimiter: ""
+  activerecord: 
+    errors: 
+      messages: 
+        accepted: "peab olema aktsepteeritud"
+        blank: "ei tohi olla tühi"
+        confirmation: "ei kattu kinnitusega"
+        empty: "ei tohi olla tühi"
+        equal_to: "peab olema võrdne {{count}}"
+        even: "peab olema paaris"
+        exclusion: "reserveeritud"
+        greater_than: "peab olema suurem kui {{count}}"
+        greater_than_or_equal_to: "peab olema suurem võrdne {{count}}"
+        inclusion: "ei ole nimekirjas"
+        invalid: "on vales formaadis"
+        less_than: "peab olema väiksem kui {{count}}"
+        less_than_or_equal_to: "peab olema väiksem võrdne {{count}}"
+        not_a_number: "ei ole number"
+        odd: "peab olema paaritu"
+        record_invalid: "valideerimine ebaõnnestus: {{errors}}"
+        taken: "{{value}} on juba kasutusel"
+        too_long: "liiga pikk (maksimaalselt {{count}} märki)"
+        too_short: "liiga lühike (vähemalt {{count}} märki)"
+        wrong_length: "vale pikkus (peab olema vähemalt %d märki)"
+        invalid_sec_num: "isikukood ei ole valiidne"
+        email_missing: e-posti aadress ei tohi olla tühi
+        email_taken: e-posti aadress on juba kasutusel
+        invalid_email: vigane e-posti aadress
+        password_missing: parool ei tohi olla tühi
+        password_too_short: salasõna on liiga lühike
+        password_confirmation_do_not_match: salasõna kordus ei klapi
+    models:
+      user: kasutaja
+  support:
+    array:
+      words_connector: ', '
+      two_words_connector: ', '
+      last_word_connector: ''
+  time: 
+    am: "enne l\xC3\xB5unat"
+    formats: 
+      default: "%d.%m.%Y %H:%M:%S"
+      short: "%d. %b %H:%M"
+      long: "%d.%m.%Y %H:%M"
+    pm: "p\xC3\xA4rast l\xC3\xB5unat"
+  date: 
+    month_names: 
+    - 
+    - Jaanuar
+    - Veebruar
+    - !binary |
+      TcOkcnRz
+
+    - Aprill
+    - Mai
+    - Juuni
+    - Juuli
+    - August
+    - September
+    - Oktoober
+    - November
+    - Detsember
+    abbr_day_names: 
+    - !binary |
+      cMO8aGFww6Rldg==
+
+    - "esmasp\xC3\xA4ev"
+    - "teisip\xC3\xA4ev"
+    - "kolmap\xC3\xA4ev"
+    - "neljap\xC3\xA4ev"
+    - reede
+    - "laup\xC3\xA4ev"
+    formats: 
+      default: "%d.%m.%Y"
+      short: "%d. %b"
+      long: "%d. %B %Y"
+    day_names: 
+    - !binary |
+      UMO8aGFww6Rldg==
+
+    - "Esmasp\xC3\xA4ev"
+    - "Teisip\xC3\xA4ev"
+    - "Kolmap\xC3\xA4ev"
+    - "Neljap\xC3\xA4ev"
+    - Reede
+    - "Laup\xC3\xA4ev"
+    abbr_month_names: 
+    - 
+    - jaan
+    - veebr
+    - !binary |
+      bcOkcnRz
+
+    - apr
+    - mai
+    - juuni
+    - juuli
+    - aug
+    - sept
+    - okt
+    - nov
+    - dets
+  arrays: 
+    to_sentence: 
+      skip_last_comma: "0"
+      connector: ja
+  dates: 
+    time_formats: 
+      attributes: "%m/%d/%y %H:%M"
+      short: "%d. %b %H:%M"
+      long: "%d.%m.%Y %H:%M"
+    date_formats: 
+      attributes: "%d/%m/%y"
+      short: "%d.%m"
+      long: "%d.%m.%Y"
+    strftime_overwrites: 
+      x: "%H:%M:%S"
+      c: "%a %b %e %H:%M:%S %Y"
+  datetime: 
+    distance_in_words: 
+      less_than_x_minutes: 
+        many: "{{count}} min"
+        one: "minut"
+        other: "{{count}} min"
+      x_days: 
+        many: "{{count}} p"
+        one: "päev"
+        other: "{{count}} p"
+      x_seconds: 
+        many: "{{count}} s"
+        one: sekund
+        other: "{{count}} s"
+      about_x_hours: 
+        many: "{{count}} h"
+        one: "tund"
+        other: "{{count}} h"
+      less_than_x_seconds: 
+        many: "{{count}} s"
+        one: "sekund"
+        other: "{{count}} s"
+      x_minutes: 
+        many: "{{count}} min"
+        one: minut
+        other: "{{count}} min"
+      x_months: 
+        many: "{{count}} k"
+        one: kuu
+        other: "{{count}} k"
+      about_x_months: 
+        many: "{{count}} k"
+        one: "kuu"
+        other: "{{count}} k"
+      about_x_years: 
+        many: "{{count}} a"
+        one: aasta
+        other: "{{count}} a"
+      over_x_years: 
+        many: "{{count}} a"
+        one: "aasta"
+        other: "{{count}} a"
+      half_a_minute: pool minutit
+  helpers: 
+    number_to_currency: 
+      unit: EEK
+      precision: "2"
+    number_to_phone: 
+      area_code: "0"
+      delimiter: "-"
+    error_messages_for: 
+      heading: 
+        n: "{{value}} errors prohibited this {{model}} from being saved"
+        "1": "\xC3\x9Cks viga takistas andmete ({{model}}) salvestamist"
+      description: "J\xC3\xA4rgmiste v\xC3\xA4ljadega esinesid probleemid:"
+      message: "J\xC3\xA4rgmiste v\xC3\xA4ljadega esinesid probleemid:"
+  numbers: 
+    separator: .
+    precision: "3"
+    delimiter: ","
+  countries: 
+    ad: Andorra
+    ae: "Araabia Ühendemiraadid"
+    af: Afganistan
+    ag: "Antigua ja Barbuda"
+    ai: Anguilla
+    al: Albaania
+    am: Armeenia
+    an: "Hollandi Antillid"
+    ao: Angola
+    aq: Antarktika
+    ar: Argentina
+    as: "Ameerika Samoa"
+    at: Austria
+    au: Austraalia
+    aw: Aruba
+    az: Aserbaidžaan
+    ba: "Bosnia ja Hertsegoviina"
+    bb: Barbados
+    bd: Bangladesh
+    be: Belgia
+    bf: "Burkina Faso"
+    bg: Bulgaaria
+    bh: Bahrein
+    bi: Burundi
+    bj: Benin
+    bm: Bermuda
+    bn: Brunei
+    bo: Boliivia
+    br: Brasiilia
+    bs: Bahama
+    bt: Bhutan
+    bv: "Bouvet' saar"
+    bw: Botswana
+    by: Valgevene
+    bz: Belize
+    ca: Kanada
+    cc: Kookossaared
+    cd: "Kongo Demokraatlik Vabariik"
+    cf: "Kesk-Aafrika Vabariik"
+    cg: "Kongo Vabariik"
+    ch: Šveits
+    ci: "Côte d'Ivoire"
+    ck: "Cooki saared"
+    cl: Tšiili
+    cm: Kamerun
+    cn: Hiina
+    co: Kolumbia
+    cr: "Costa Rica"
+    cu: Kuuba
+    cv: "Cabo Verde"
+    cx: Jõulusaar
+    cy: Küpros
+    cz: "Tšehhi Vabariik"
+    de: Saksamaa
+    dj: Djibouti
+    dk: Taani
+    dm: Dominica
+    do: "Dominikaani Vabariik"
+    dz: Alžeeria
+    ec: Ecuador
+    ee: Eesti
+    eg: Egiptus
+    eh: Lääne-Sahara
+    er: Eritrea
+    es: Hispaania
+    et: Etioopia
+    fi: Soome
+    fj: Fidži
+    fk: "Falklandi saared"
+    fm: Mikroneesia
+    fo: "Fääri saared"
+    fr: Prantsusmaa
+    ga: Gabon
+    gb: Ühendkuningriik
+    gd: Grenada
+    ge: Gruusia
+    gf: "Prantsuse Guajaana"
+    gh: Ghana
+    gi: Gibraltar
+    gl: Gröönimaa
+    gm: Gambia
+    gn: Guinea
+    gp: Guadeloupe
+    gq: Ekvatoriaal-Guinea
+    gr: Kreeka
+    gs: "Lõuna-Georgia ja Lõuna-Sandwichi saared"
+    gt: Guatemala
+    gu: Guam
+    gw: Guinea-Bissau
+    gy: Guyana
+    hk: "Hong Kong"
+    hm: "Heard ja McDonald"
+    hn: Honduras
+    hr: Horvaatia
+    ht: Haiti
+    hu: Ungari
+    id: Indoneesia
+    ie: Iirimaa
+    il: Iisrael
+    in: India
+    io: "Briti India ookeani ala"
+    iq: Iraak
+    ir: Iraan
+    is: Island
+    it: Itaalia
+    jm: Jamaica
+    jo: Jordaania
+    jp: Jaapan
+    ke: Kenya
+    kg: Kõrgõzstan
+    kh: Kambodža
+    ki: Kiribati
+    km: Komoorid
+    kn: "Saint Kitts ja Nevis"
+    kp: Põhja-Korea
+    kr: Lõuna-Korea
+    kw: Kuveit
+    ky: Kaimanisaared
+    kz: Kasahstan
+    la: Laos
+    lb: Liibanon
+    lc: "Saint Lucia"
+    li: Liechtenstein
+    lk: "Sri Lanka"
+    lr: Libeeria
+    ls: Lesotho
+    lt: Leedu
+    lu: Luksemburg
+    lv: Läti
+    ly: Liibüa
+    ma: Maroko
+    mc: Monaco
+    md: Moldova
+    me: Montenegro
+    mg: Madagaskar
+    mh: "Marshalli Saared"
+    mk: Makedoonia
+    ml: Mali
+    mm: Myanmar
+    mn: Mongoolia
+    mo: Aomen
+    mp: Põhja-Mariaanid
+    mq: Martinique
+    mr: Mauritaania
+    ms: Montserrat
+    mt: Malta
+    mu: Mauritius
+    mv: Maldiivid
+    mw: Malawi
+    mx: Mehhiko
+    my: Malaisia
+    mz: Mosambiik
+    na: Namiibia
+    nc: Uus-Kaledoonia
+    ne: Niger
+    nf: Norfolk
+    ng: Nigeeria
+    ni: Nicaragua
+    nl: Holland
+    ? "no"
+    : Norra
+    np: Nepal
+    nr: Nauru
+    nu: Niue
+    nz: Uus-Meremaa
+    om: Omaan
+    pa: Panama
+    pe: Peruu
+    pf: "Prantsuse Polüneesia"
+    pg: "Paapua Uus-Guinea"
+    ph: Filipiinid
+    pk: Pakistan
+    pl: Poola
+    pm: "Saint-Pierre ja Miquelon"
+    pn: Pitcairn
+    pr: "Puerto Rico"
+    ps: Palestiina
+    pt: Portugal
+    pw: Palau
+    py: Paraguay
+    qa: Katar
+    re: Réunion
+    ro: Rumeenia
+    rs: Serbia
+    ru: Venemaa
+    rw: Ruanda
+    sa: "Saudi Araabia"
+    sb: "Saalomoni Saared"
+    sc: Seišellid
+    sd: Sudaan
+    se: Rootsi
+    sg: Singapur
+    sh: "Saint Helena"
+    si: Sloveenia
+    sj: "Svalbard ja Jan Mayen"
+    sk: Slovakkia
+    sl: "Sierra Leone"
+    sm: "San Marino"
+    sn: Senegal
+    so: Somaalia
+    sr: Suriname
+    st: "São Tomé ja Príncipe"
+    sv: "El Salvador"
+    sy: Süüria
+    sz: Svaasimaa
+    tc: "Turks ja Caicos"
+    td: Tšaad
+    tf: "Prantsuse Lõunaalad"
+    tg: Togo
+    th: Tai
+    tj: Tadžikistan
+    tk: Tokelau
+    tl: Timor-Leste
+    tm: Türkmenistan
+    tn: Tuneesia
+    to: Tonga
+    tr: Türgi
+    tt: "Trinidad ja Tobago"
+    tv: Tuvalu
+    tw: Taiwan
+    tz: Tansaania
+    ua: Ukraina
+    ug: Uganda
+    um: "Ühendriikide hajasaared"
+    us: "Ameerika Ühendriigid"
+    uy: Uruguay
+    uz: Usbekistan
+    va: Vatikan
+    vc: "Saint Vincent ja Grenadiinid"
+    ve: Venezuela
+    vg: "Briti Neitsisaared"
+    vi: Neitsisaared
+    vn: Vietnam
+    vu: Vanuatu
+    wf: "Wallis ja Futuna"
+    ws: Samoa
+    ye: Jeemen
+    yt: Mayotte
+    za: "Lõuna-Aafrika Vabariik"
+    zm: Sambia
+    zw: Zimbabwe

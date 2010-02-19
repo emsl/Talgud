@@ -6,6 +6,8 @@ describe 'admin controller', :shared => true do
     
     get :index
     response.should be_success
+    
+    pending 'Check if only users in admin role can use this controller'
   end
   
   it 'should redirect to home page when user is not in admin role' do

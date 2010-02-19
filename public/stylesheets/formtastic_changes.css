@@ -1,0 +1,3 @@
+form.formtastic fieldset { display: block; }
+
+form.formtastic fieldset ol li { display: block; }

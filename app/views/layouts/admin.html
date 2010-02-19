@@ -5,9 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>Talgud &ndash; Admin</title>
+	<%= stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes' %>
 </head>
 
 <body>
+  <%= link_to 'Talgud', admin_events_path %>
   <%= link_to 'Kasutajad', admin_users_path %>
   <%= link_to 'Haldusjaotused', admin_counties_path %>
   <hr/>
