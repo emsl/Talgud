@@ -36,11 +36,19 @@ describe User, 'validations' do
 end
 
 describe User, 'activate!' do
-  
   it 'should set user status to active' do
     user = Factory(:user_not_activated)
     user.should_not be_active
     user.activate! and user.reload
     user.should be_active
+  end
+end
+
+describe User, 'reset_password!' do
+  it 'should set new password for user' do
+    user = Factory(:user)
+    old_password = user.password
+    user.reset_password!
+    user.password.should_not eql(old_password)
   end
 end

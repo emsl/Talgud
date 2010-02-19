@@ -43,6 +43,14 @@ class User < ActiveRecord::Base
     update_attribute(:status, STATUS[:active])
   end
   
+  # 
+  def reset_password!
+    temporary_password = ActiveSupport::SecureRandom.base64(6)
+    self.password = temporary_password
+    self.password_confirmation = temporary_password
+    save! and return temporary_password
+  end
+  
   private
   
   def set_default_status

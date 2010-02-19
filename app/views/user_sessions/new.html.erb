@@ -1,4 +1,6 @@
-<% form_for @user_session do |f| %>
+<% form_for @user_session, :url => user_sessions_path do |f| %>
+  <h2>Login</h2>
+
   <%= f.error_messages %>
   <%= f.label :email %><br />
   <%= f.text_field :email %><br />
@@ -7,4 +9,11 @@
   <%= f.password_field :password %><br />
   <br />
   <%= f.submit "Login" %>
+<% end %>
+<hr/>
+<% form_for :password_reminder, :url => password_reminders_path do |f| %>
+  <h2>Reset password</h2>
+  <%= f.label :email %><br />
+  <%= text_field_tag :email %><br />
+  <%= f.submit "Reset password" %>
 <% end %>
