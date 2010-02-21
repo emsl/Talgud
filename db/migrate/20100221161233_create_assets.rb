@@ -13,7 +13,7 @@ class CreateAssets < ActiveRecord::Migration
       t.references :account, :null => false
     end
     
-    add_index :assets, [:account_id, :attachment_file_name, :model_id, :model_type, :deleted_at]
+    add_index :assets, [:account_id, :attachment_file_name, :model_id, :model_type, :deleted_at], :name => :index_account_attachment_model_deleted
   end
 
   def self.down

@@ -9,14 +9,14 @@ class CreateLanguages < ActiveRecord::Migration
       t.references :account, :null => false
     end
     
-    add_index :languages, [:account_id, :code, :deleted_at], :unique => true
+    add_index :languages, [:account_id, :code, :deleted_at], :name => :index_languages_account_code_deleted, :unique => true
     
     create_table :languages_users, :id => false do |t|
       t.integer :language_id, :null => false
       t.integer :user_id, :null => false
     end
     
-    add_index :languages_users, [:language_id, :user_id], :unique => true
+    add_index :languages_users, [:language_id, :user_id], :name => :index_languages_users_language_user, :unique => true
   end
 
   def self.down

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe "/signups/new" do
+describe "Signup form" do
   
   before(:each) do
     assigns[:user] = User.new

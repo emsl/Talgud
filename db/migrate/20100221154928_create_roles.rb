@@ -10,7 +10,7 @@ class CreateRoles < ActiveRecord::Migration
       t.userstamps(true)
     end
     
-    add_index :roles, [:code, :user_id, :model_type, :model_id, :deleted_at], :unique => true    
+    add_index :roles, [:code, :user_id, :model_type, :model_id, :deleted_at], :name => :index_code_user_model_deleted, :unique => true    
   end
 
   def self.down

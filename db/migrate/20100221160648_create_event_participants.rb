@@ -15,8 +15,8 @@ class CreateEventParticipants < ActiveRecord::Migration
       t.references :account, :null => false
     end
     
-    add_index :event_participants, [:account_id, :event_id, :deleted_at]
-    add_index :event_participants, [:event_participant_id, :deleted_at]
+    add_index :event_participants, [:account_id, :event_id, :deleted_at], :name => :index_event_participants_account_event_deleted
+    add_index :event_participants, [:event_participant_id, :deleted_at], :name => :index_event_participants_ep_deleted
   end
 
   def self.down

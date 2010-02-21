@@ -37,7 +37,7 @@ class CreateEvents < ActiveRecord::Migration
       t.references :account, :null => false
     end
     
-    add_index :events, [:account_id, :deleted_at]
+    add_index :events, [:account_id, :deleted_at], :name => :index_events_account_deleted
   end
 
   def self.down

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   
+  acts_as_scoped :account
+  
   # Authlogic specific intitalizer
   acts_as_authentic do |a|
     a.validates_length_of_password_field_options = {:on => :create, :minimum => 3}
@@ -10,7 +12,7 @@ class User < ActiveRecord::Base
   model_stamper
   
   # Let only certain fields to be set through forms
-  attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
+  attr_protected :crypted_password, :password_salt, :persistence_token, :perishable_token, :login_count, :failed_login_count, :current_login_at, :last_login_at, :current_login_ip, :last_login_ip, :status, :deleted_at
   
   default_scope :conditions => {:deleted_at => nil}
   

@@ -1,0 +1,55 @@
+= TODO
+
+Update this plugin to use named_scope and add an easy way to un-scope stuff.  As it stands it's a major design defiency with this plugin.
+
+= acts_as_scoped
+
+This plugin wraps find, count, save and delete in a scope based on a persistent variable.  This enables you to use something like the userstamp plugin to ensure a model's find method returns objects scoped within the current user.
+
+== Resources
+
+=== Homepage
+
+* http://actsasflinn.com/articles/2007/07/19/acts-as-scoped
+
+=== Documentation
+
+* http://saas.rubyforge.org/acts_as_scoped
+
+=== Rubyforge Project
+
+* http://rubyforge.org/projects/saas
+
+=== Usage
+
+You'll need to add a user_id column to the sandwiches table
+
+class Sandwich < ActiveRecord::Base
+  acts_as_scoped :user # belongs_to is included
+end
+
+class User < ActiveRecord::Base
+  cattr_accessor :current
+  has_many :sandwiches
+end
+
+class ApplicationController < ActionController::Base 
+...
+  before_filter :current_user
+
+  def current_user
+    User.current = User.find(session[:user_id]) unless session[:user_id].blank?
+  end
+...
+
+=== Installation
+
+* script/plugin install svn://rubyforge.org/var/svn/saas/acts_as_scoped/trunk/acts_as_scoped
+
+== License
+
+Released under the MIT license.
+
+== Authors
+
+* Flinn Mueller - http://actsasflinn.com

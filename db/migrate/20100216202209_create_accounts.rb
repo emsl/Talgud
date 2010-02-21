@@ -9,7 +9,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.userstamps(true)
     end
     
-    add_index :accounts, [:deleted_at]
+    add_index :accounts, [:deleted_at], :name => :index_accounts_deleted
   end
 
   def self.down
