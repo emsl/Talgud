@@ -1,5 +1,9 @@
 --- 
-et: 
+et:
+  events:
+    create:
+      notice: Talgu andmed on lisatud!
+      error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
   formtastic:
     labels:
       user:
@@ -14,9 +18,33 @@ et:
         email: E-post
         password: Salasõna
         password_confirmation: Salasõna kinnitus
+      event:
+        event_type: Talgute liik
+        name: Talgute nimi
+        location_address_street: Talgute toimumiskoht
+        meta_aim_description: Talgute eesmärk ja hüvang
+        meta_job_description: Talgutööd
+        max_participants: Talguliste maksimumarv
+        begins_at: Toimumise aeg
+        ends_at: Toimumise lõppaeg
+        meta_bring_with_you: Kaasa võtta
+        meta_provided_for_participiants: Talgulistele pakutav
+        meta_subject_info: Lähem info talguobjekti kohta
+        gathering_location: Kogunemiskoht
+        gathering_time: Kogunemisaeg
+        notes: Muu info
     hints:
-      # user:
-      #   firstname: "Eesnimi"
+      event:
+        name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
+        meta_aim_description: "Kelle või mille hüvanguks talgutöid tehakse, mis on talgute eesmärk või kasu. Või mis on edasised plaanid talguobjektiga."
+        meta_job_description: "Märgi kõik kavandatavad talgutööde tüübid (nt võsa saagimine, langetatud võsa ja okste korjamine ning põletamine)"
+        max_participants: "Märgi oodatav talguliste arv, mis on mõistlik ja vajalik tööde tegemiseks ning mida jõuad hallata"
+        begins_at: Talgute alguse kellaaeg ja prognoositav lõpuaeg
+        meta_bring_with_you: "Mida osalejatel on vaja kaasa võtta: nt kindad, tööriistad, muud vahendid, piknikukorv, kummikud"
+        meta_provided_for_participiants: "Mida korraldajana saad talgulistele pakkuda, väga teretulnud on kohaliku paiga, muinsusväärtuse, looduse või külaseltsi tegemiste lühitutvustus. Siia märgi ka muu talgulise meelehea vastavalt võimalustele: nt soe tee, supp, pillimees, väike meene või saun."
+        meta_subject_info: Võimalusel viide objekti puudutavale veebilehele
+        gathering_location: "Kogunemise koht ja kellaaeg, vajadusel ka kohalejõudmise juhised. Mõistlik on kogunemine leppida kergesti leitavas kohas."
+        notes: Vajadusel lisa siia talgulistele oluline muu info
     actions:
       create: "Lisa {{model}}"
       update: "Salvesta {{model}}"
@@ -35,13 +63,12 @@ et:
     create:
       error: Sisestatud kasutajanimi ja salasõna ei klapi
     new:
-      login_required: Palun sisesta 
+      login_required: Palun logige sisse 
     destroy:
       notice: Olete süsteemist välja logitud
   signups:
     create:
       error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
-
   number: 
     format: 
       separator: .
@@ -101,6 +128,7 @@ et:
         password_confirmation_do_not_match: salasõna kordus ei klapi
     models:
       user: kasutaja
+      event: talgu
   support:
     array:
       words_connector: ', '

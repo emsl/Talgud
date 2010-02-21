@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
 
+  # Account select before filter must be declared before userstamp, which in turn adds one before filter that depends
+  # on selected account.
+  before_filter :select_account
+
   include Userstamp
 
   protect_from_forgery
@@ -7,8 +11,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :current_account
 
   filter_parameter_logging :password
-  
-  before_filter :select_account
   
   protected
   

@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   model_stamper
   
   # Let only certain fields to be set through forms
-  attr_protected :crypted_password, :password_salt, :persistence_token, :perishable_token, :login_count, :failed_login_count, :current_login_at, :last_login_at, :current_login_ip, :last_login_ip, :status, :deleted_at
+  # attr_protected :crypted_password, :password_salt, :persistence_token, :perishable_token, :login_count, :failed_login_count, :current_login_at, :last_login_at, :current_login_ip, :last_login_ip, :status, :deleted_at
   
   default_scope :conditions => {:deleted_at => nil}
   
