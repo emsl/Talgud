@@ -8,6 +8,8 @@ class CreateAccounts < ActiveRecord::Migration
       t.timestamps
       t.userstamps(true)
     end
+    
+    add_index :accounts, [:deleted_at]
   end
 
   def self.down

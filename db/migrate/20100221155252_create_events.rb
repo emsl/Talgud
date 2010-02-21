@@ -6,7 +6,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :begins_at, :null => false                     # Toimumise algus
       t.datetime :ends_at, :null => false                       # Toimumise lõpp
       t.references :event_type, :null => false
-      t.integer :event_manager_id, :references => :users, :null => false         # Talgujuhi id, selle kaudu leiab telefoni, e-posti. Viitab users tabelisse
+      t.integer :manager_id, :references => :users, :null => false         # Talgujuhi id, selle kaudu leiab telefoni, e-posti. Viitab users tabelisse
       t.string :status                                          # Talgu staatus
       
       t.string :location_address_country_code, :null => false   # Talgute toimumiskoht
@@ -22,20 +22,22 @@ class CreateEvents < ActiveRecord::Migration
       t.text :notes                                             # Lisainfo
       
       # Metainfo, mis võiks olla ühes väljas
-      t.text :_talgu_eesmark                                    # Talgute eesmärk ja hüvang
-      t.text :_talgutoode_kirjeldus                             # Talgutööd
-      t.text :_kaasa_votta                                      # Kaasa võtta
-      t.text :_talgulistele_pakutav                             # Talgulistele pakutav
-      t.text :_info_talguobjekti_kohta                          # Info talguobjekti kohta
-      t.string :_talguobjekti_omanik                            # Talguobjekti omanik
-      t.string :_kas_objekt_on_kaitsealune                      # Kas objekt on looduskaitse või muinsuskaitse all
-      t.string :_objekti_malestise_number                       # Muinsuskaitse objekti korral sisestada mäletise number
+      t.text :meta_aim_description                              # Talgute eesmärk ja hüvang
+      t.text :meta_job_description                              # Talgutööd
+      t.text :meta_bring_with_you                               # Kaasa võtta
+      t.text :meta_provided_for_participiants                   # Talgulistele pakutav
+      t.text :meta_subject_info                                 # Info talguobjekti kohta
+      t.string :meta_subject_owner                              # Talguobjekti omanik
+      t.boolean :meta_subject_protegee                          # Kas objekt on looduskaitse või muinsuskaitse all
+      t.string :meta_subject_heritage_number                    # Muinsuskaitse objekti korral sisestada mäletise number
 
       t.datetime :deleted_at
       t.timestamps
       t.userstamps(true)
       t.references :account, :null => false
     end
+    
+    add_index :events, [:account_id, :deleted_at]
   end
 
   def self.down

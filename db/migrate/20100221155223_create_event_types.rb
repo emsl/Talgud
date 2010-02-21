@@ -8,6 +8,8 @@ class CreateEventTypes < ActiveRecord::Migration
       t.userstamps(true)
       t.references :account, :null => false
     end
+    
+    add_index :event_types, [:account_id, :deleted_at]
   end
 
   def self.down

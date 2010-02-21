@@ -14,6 +14,9 @@ class CreateEventParticipants < ActiveRecord::Migration
       t.userstamps(true)
       t.references :account, :null => false
     end
+    
+    add_index :event_participants, [:account_id, :event_id, :deleted_at]
+    add_index :event_participants, [:event_participant_id, :deleted_at]
   end
 
   def self.down

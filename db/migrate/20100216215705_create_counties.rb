@@ -8,6 +8,8 @@ class CreateCounties < ActiveRecord::Migration
       t.userstamps(true)
       t.references :account, :null => false
     end
+    
+    add_index :counties, [:account_id, :deleted_at]
   end
 
   def self.down
