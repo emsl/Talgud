@@ -34,8 +34,14 @@ et:
   user_sessions:
     create:
       error: Sisestatud kasutajanimi ja salasõna ei klapi
+    new:
+      login_required: Palun sisesta 
     destroy:
       notice: Olete süsteemist välja logitud
+  signups:
+    create:
+      error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
+
   number: 
     format: 
       separator: .
