@@ -4,10 +4,11 @@ class CreateMunicipalities < ActiveRecord::Migration
       t.string :name
       t.string :kind
       t.integer :county_id
-      t.datetime :deleted_at
 
+      t.datetime :deleted_at
       t.timestamps
-      t.userstamps
+      t.userstamps(true)
+      t.references :account, :null => false
     end
   end
 

@@ -5,7 +5,8 @@ class CreateCounties < ActiveRecord::Migration
 
       t.datetime :deleted_at
       t.timestamps
-      t.userstamps
+      t.userstamps(true)
+      t.references :account, :null => false
     end
   end
 
