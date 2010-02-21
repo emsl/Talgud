@@ -22,7 +22,7 @@ class CreateUsers < ActiveRecord::Migration
       t.references :account, :null => false
     end
     
-    add_index :users, [:account_id, :deleted_at]
+    add_index :users, [:account_id, :deleted_at], :name => :index_users_account_deleted
   end
 
   def self.down

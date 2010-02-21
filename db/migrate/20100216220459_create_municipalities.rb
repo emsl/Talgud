@@ -11,7 +11,7 @@ class CreateMunicipalities < ActiveRecord::Migration
       t.references :account, :null => false
     end
     
-    add_index :municipalities, [:account_id, :county_id, :deleted_at]
+    add_index :municipalities, [:account_id, :county_id, :deleted_at], :name => :index_municipalities_account_cocunty_deleted
   end
 
   def self.down

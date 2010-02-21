@@ -1,3 +1,8 @@
+Factory.define :account do |a|
+  a.name 'Account'
+  a.domain 'test.local'
+end
+
 Factory.define :user do |u|
   u.firstname 'Admin'
   u.lastname 'User'
