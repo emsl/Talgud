@@ -7,7 +7,7 @@ class CreateRoles < ActiveRecord::Migration
       t.timestamps
       t.userstamps(true)
     end
-    add_index :roles, [:code, :deleted_at], :name => 'index_roles_uk', :unique => true
+    add_index :roles, [:code, :deleted_at], :name => :index_roles_uk, :unique => true
     
     # guest - autentimata kasutaja
     # user - autenditud kasutaja

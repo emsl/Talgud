@@ -6,3 +6,4 @@ db/schema.rb
 log/*.log
 test/*
 tmp/*
+.rake_tasks~
