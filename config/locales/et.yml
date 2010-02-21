@@ -27,6 +27,15 @@ et:
     #   hello: Tere!
     #   hello_name: "Tere {{name}}!"
     #   footer_text: Sinu ELT SA meeskond
+  password_reminders:
+    create:
+      notice: Uus salasõna on saadetud sinu e-posti aadressile
+      error: Sellist e-posti aadressiga kontot ei ole registreeritud. Palun kontrolli aadressi korrektsust.
+  user_sessions:
+    create:
+      error: Sisestatud kasutajanimi ja salasõna ei klapi
+    destroy:
+      notice: Olete süsteemist välja logitud
   number: 
     format: 
       separator: .
