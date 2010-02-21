@@ -1,0 +1,36 @@
+<h1>Registreeri talgu</h1>
+
+<div id="item_map" style="height: 400px;"></div>
+
+Lat: <input type="text" id="item_latitude" />
+Long: <input type="text" id="item_longitude" />
+
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+  function showMap(latitude, longitude) {
+      if (!latitude) {
+          latitude = 58.37956871681301;
+      }
+      if (!longitude) {
+          longitude = 26.722246138095866;
+      }
+    
+      var map = new google.maps.Map(document.getElementById('item_map'), {
+          zoom: 9,
+          center: new google.maps.LatLng(latitude, longitude),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      
+      var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(latitude, longitude),
+          map: map, draggable: true
+      });
+
+      google.maps.event.addListener(marker, 'drag', function() {
+          $('#item_latitude').val(marker.position.lat());
+          $('#item_longitude').val(marker.position.lng());
+      });
+  }
+  
+  showMap($('#item_latitude').val(), $('#item_longitude').val());
+</script>
