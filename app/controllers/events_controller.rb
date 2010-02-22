@@ -1,4 +1,8 @@
 class EventsController < ApplicationController
+
+  def index
+    @events = Event.all
+  end
   
   def new
     @event = Event.new
@@ -6,10 +10,12 @@ class EventsController < ApplicationController
   
   def create
     @event = Event.new(params[:event])
+    @event.manager = current_user
+    @event.location_address_country_code = 'ee'
     if @event.valid?
       @event.save
       flash[:notice] = t('events.create.notice')
-      redirect_to event_path(@event)
+      redirect_to events_path
     else
       render :new
       flash[:error] = t('events.create.error')
@@ -17,6 +23,6 @@ class EventsController < ApplicationController
   end
   
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by_url(params[:id])
   end
 end

@@ -3,6 +3,7 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :name, :null => false                            # Talgute nimi
       t.string :code, :null => false
+      t.string :url, :null => false                            # Talgu internetiaadress
       t.datetime :begins_at, :null => false                     # Toimumise algus
       t.datetime :ends_at, :null => false                       # Toimumise lõpp
       t.references :event_type, :null => false

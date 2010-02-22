@@ -33,6 +33,8 @@ et:
         gathering_location: Kogunemiskoht
         gathering_time: Kogunemisaeg
         notes: Muu info
+        latitude: Pikkuskraad
+        longitude: Laiuskraad
     hints:
       event:
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."

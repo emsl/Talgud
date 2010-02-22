@@ -1,0 +1,64 @@
+<h1><%= @event.name %></h1>
+
+<table>
+<tr>
+  <td><b><%= t('formtastic.labels.event.event_type') %></b></td>
+  <td><%= @event.event_type.name %></td>
+</tr>
+<tr>
+  <td><b>Talgujuht</b></td>
+  <td><%= @event.manager.name %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.name') %></b></td>
+  <td><%= @event.name %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.location_address_street') %></b></td>
+  <td><%= @event.location_address_street %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_aim_description') %></b></td>
+  <td><%= @event.meta_aim_description %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_job_description') %></b></td>
+  <td><%= @event.meta_job_description %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.max_participants') %></b></td>
+  <td><%= @event.max_participants %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.begins_at') %></b></td>
+  <td><%= @event.begins_at %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.ends_at') %></b></td>
+  <td><%= @event.ends_at %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_bring_with_you') %></b></td>
+  <td><%= @event.meta_bring_with_you %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_provided_for_participiants') %></b></td>
+  <td><%= @event.meta_provided_for_participiants %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_subject_info') %></b></td>
+  <td><%= @event.meta_subject_info %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.gathering_location') %></b></td>
+  <td><%= @event.gathering_location %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.gathering_time') %></b></td>
+  <td><%= @event.gathering_time %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.notes') %></b></td>
+  <td><%= @event.notes %></td>
+</tr>
+</table>

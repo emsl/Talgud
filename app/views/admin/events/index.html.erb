@@ -1,1 +1,14 @@
 <h1>Talgute admin</h1>
+
+<table border="1">
+<tr>
+  <th>Talgu nimetus</th>
+  <th>Staatus</th>
+</tr>
+<% for event in @events %>
+<tr>
+  <td><%= event.name %></td>
+  <td><%= event.status %></td>
+</tr>
+<% end %>
+</table>

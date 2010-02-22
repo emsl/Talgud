@@ -1,17 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe EventsController do
+describe EventsController, 'index' do
+  it 'should show a list of events'
+end
 
-  #Delete these examples and add some real ones
-  it "should use EventsController" do
-    controller.should be_an_instance_of(EventsController)
-  end
+describe EventsController, 'new' do
+  it 'should not be displayed when user is not logged in'
+end
 
-
-  describe "GET 'new'" do
-    it "should be successful" do
-      get 'new'
-      response.should be_success
-    end
-  end
+describe EventsController, 'create' do
+  it 'should create event and assign current user as manager when event is valid'
+  
+  it 'should redisplay event create form when event data is invalid'
 end
