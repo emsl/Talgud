@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  
+  acts_as_authentic
   acts_as_scoped :account
   
   # Authlogic specific intitalizer
@@ -19,12 +19,21 @@ class User < ActiveRecord::Base
   # Before validation, set default status for user. Otherwise this record does not validate.
   before_validation_on_create :set_default_status
   
+  has_many :user_roles
+  has_many :roles, :through => :user_roles
+  
   validates_presence_of :firstname, :lastname, :email
   validates_uniqueness_of :email
   
   # Register all available statuses for this user. Setting status for user record should be only done by using the
   # constants defined here.
   STATUS = {:created => 'created', :active => 'active'}
+  
+  def role_symbols
+    roles.map do |role|
+      role.name.underscore.to_sym
+    end
+  end
   
   # Returns full name for given user.
   def name

@@ -1,5 +1,19 @@
 --- 
 et:
+  admin:
+    event_types:
+      index:
+        title: "Talgute liigid"
+    events:
+      index:
+        title: "Talgute admin"
+    users:
+      index:
+        title: "Kasutajate admin"
+    counties:
+      index:
+        title: "Haldusjaotiste admin"
+      
   events:
     create:
       notice: Talgu andmed on lisatud!
@@ -71,6 +85,8 @@ et:
   signups:
     create:
       error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
+    activate: 
+      activation_successful: "Sinu konto aktiveerimine oli edukas"    
   number: 
     format: 
       separator: .

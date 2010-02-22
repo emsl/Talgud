@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
       end
     end
     admin.resources :events
+    admin.resources :event_types
     admin.resources :users
   end
   

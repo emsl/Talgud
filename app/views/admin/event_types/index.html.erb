@@ -1,0 +1,13 @@
+<h1><%= t('.title') %></h1>
+
+<table border="1">
+<% for event_type in @event_types %>
+<tr>
+  <td><%= event_type.name %></td>
+  <td><%= event_type.descritpion %></td>
+  <td><%= link_to 'edit', edit_admin_event_type_path(event_type) %></td>
+</tr>
+<% end %>
+</table>
+
+<%= link_to 'Lisa uus', new_admin_event_type_path %>

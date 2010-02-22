@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::AdminController
+  filter_resource_access
   
   def index
     @users = User.all

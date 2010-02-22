@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   # Account select before filter must be declared before userstamp, which in turn adds one before filter that depends
   # on selected account.
-  before_filter :select_account
+  before_filter :select_account_and_user
 
   include Userstamp
 
@@ -37,7 +37,8 @@ class ApplicationController < ActionController::Base
   end
   
   # TODO: select account and throw an error if not found
-  def select_account
+  def select_account_and_user
     Account.current = Account.first
+    Authorization.current_user = current_user
   end
 end
