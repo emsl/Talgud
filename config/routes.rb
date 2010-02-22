@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users
   end
   
+  map.resources :addresses, :collection => {:municipalities => :get, :settlements => :get}
   map.resources :events
   map.resources :password_reminders
   map.resources :signups

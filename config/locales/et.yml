@@ -19,22 +19,25 @@ et:
         password: Salasõna
         password_confirmation: Salasõna kinnitus
       event:
-        event_type: Talgute liik
-        name: Talgute nimi
-        location_address_street: Talgute toimumiskoht
-        meta_aim_description: Talgute eesmärk ja hüvang
-        meta_job_description: Talgutööd
-        max_participants: Talguliste maksimumarv
         begins_at: Toimumise aeg
         ends_at: Toimumise lõppaeg
+        event_type: Talgute liik
+        gathering_location: Kogunemiskoht
+        gathering_time: Kogunemisaeg
+        latitude: Pikkuskraad
+        location_address_county: Maakond
+        location_address_municipality: Linn / vald
+        location_address_settlement: Asula / küla
+        location_address_street: Talgute toimumiskoht
+        longitude: Laiuskraad
+        max_participants: Talguliste maksimumarv
+        meta_aim_description: Talgute eesmärk ja hüvang
+        meta_job_description: Talgutööd
         meta_bring_with_you: Kaasa võtta
         meta_provided_for_participiants: Talgulistele pakutav
         meta_subject_info: Lähem info talguobjekti kohta
-        gathering_location: Kogunemiskoht
-        gathering_time: Kogunemisaeg
+        name: Talgute nimi
         notes: Muu info
-        latitude: Pikkuskraad
-        longitude: Laiuskraad
     hints:
       event:
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
@@ -53,14 +56,27 @@ et:
       signup: Registreeru
     submit: "Salvesta"
   mailers:
-    # common:
-    #   hello: Tere!
-    #   hello_name: "Tere {{name}}!"
-    #   footer_text: Sinu ELT SA meeskond
+    common:
+      hello: Tere!
+      footer_text: "Sinu Talgute meeskond."
   password_reminders:
     create:
       notice: Uus salasõna on saadetud sinu e-posti aadressile
       error: Sellist e-posti aadressiga kontot ei ole registreeritud. Palun kontrolli aadressi korrektsust.
+  signups:
+    create:
+      notice: Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile.
+      error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
+  user_mailer:
+    activation_instructions:
+      subject: Talgute keskkonna kasutajakonto aktiveerimine
+      intro: "Aitäh, et registreerusid Talgute keskkonnas kasutajaks. Kasutajakonto aktiveerimiseks klikkige alloleval lingil:"
+      activation_url_usage: "Kui see link ei tööta, proovi see kopeerida oma internetilehitseja aadressireale."
+    password_reminder:
+      subject: Sinu Talgute keskkonna salasõna meeldetuletus
+      intro: Tellisid omale Talgute keskkonnast uue salasõna.
+      your_new_password: "Sinu uus salasõna on: {{password}}"
+      login_at_url: "Sisse saad logida aadressilt {{login_url}}"
   user_sessions:
     create:
       error: Sisestatud kasutajanimi ja salasõna ei klapi
@@ -68,9 +84,6 @@ et:
       login_required: Palun logige sisse 
     destroy:
       notice: Olete süsteemist välja logitud
-  signups:
-    create:
-      error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
   number: 
     format: 
       separator: .

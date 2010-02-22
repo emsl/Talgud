@@ -5,11 +5,18 @@ describe EventsController, 'index' do
 end
 
 describe EventsController, 'new' do
-  it 'should not be displayed when user is not logged in'
+  it 'should not be displayed when user is not logged in' do
+    pending('This needs role management to pass') do
+      get :new
+      response.should redirect_to(events_path)
+    end
+  end
 end
 
 describe EventsController, 'create' do
   it 'should create event and assign current user as manager when event is valid'
+  
+  it 'should send e-mail notification to region manager'
   
   it 'should redisplay event create form when event data is invalid'
 end
