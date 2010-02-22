@@ -24,5 +24,6 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find_by_url(params[:id])
+    @events = Event.all(:origin => [@event.latitude, @event.longitude], :within => 10)
   end
 end

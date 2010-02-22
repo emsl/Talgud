@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = "Suksessful login"
-      redirect_to '/'
+      redirect_to events_path
     else
       flash[:error] = t('user_sessions.create.error')
       render :action => :new

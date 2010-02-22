@@ -9,8 +9,9 @@ Rails::Initializer.run do |config|
   config.gem 'formtastic'
   # config.gem 'acts_as_audited'
   # config.gem 'declarative_authorization'
-  # config.gem 'will_paginate'  
+  # config.gem 'will_paginate'
   config.gem 'stringex'
+  config.gem 'geokit'
   
   config.frameworks -= [:active_resource]
 

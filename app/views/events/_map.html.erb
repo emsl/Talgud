@@ -1,0 +1,49 @@
+<div id="show_by_map">
+  <div id="map" style="height: 600px"></div>
+</div>
+
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+
+  var events = <%= @events.collect{ |e| {:name => e.name, :latitude => e.latitude, :longitude => e.longitude, :url => event_path(e)} }.to_json %>;
+  var map, bounds;
+
+  function showMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8, scrollwheel: false,
+          center: new google.maps.LatLng(58.564, 25.729),
+          mapTypeId: google.maps.MapTypeId.HYBRID
+      });
+      
+      bounds = new google.maps.LatLngBounds();
+      
+      addLocations(events);
+  }
+  
+  /**
+   *
+   */
+  function addLocations(data) {
+      jQuery.each(data, function(i, point) {
+          if (Math.abs(point.latitude) >= 0.1 && Math.abs(point.longitude) >= 0.1) {
+              var cbody = '<b>' + point.name + '</b> &ndash; <a href="' + point.url + '" style="text-decoration: underline;">Vaata</a>'
+            
+              var infowindow = new google.maps.InfoWindow({ content: cbody });
+              
+              var position = new google.maps.LatLng(point.latitude, point.longitude);
+              bounds.extend(position);
+              
+              var marker = new google.maps.Marker({position: position, map: map, title: point.name});
+              
+              google.maps.event.addListener(marker, 'click', function() {
+                  infowindow.open(map, marker);
+              });
+          }
+      });
+      
+      map.setCenter(bounds.getCenter());
+      map.panToBounds(bounds);
+  }
+  
+  jQuery(document).ready(showMap);
+</script>

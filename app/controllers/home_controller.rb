@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   
   def index
+    @events = Event.published.all(:select => 'name, url, latitude, longitude')
+    @latest = Event.published.latest(5).all(:select => 'name, url')
   end
 end
