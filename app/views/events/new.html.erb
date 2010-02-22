@@ -4,7 +4,59 @@
   <% f.inputs do %>
     <%= f.input :event_type, :include_blank => false %>
     <%= f.input :name %>
-    <%= f.input :location_address_street, :input_html => {:rows => 4} %>
+    <%= f.input :location_address_county, :include_blank => false %>
+    <%= f.input :location_address_municipality, :collection => @event.location_address_county.try(:municipalities), :wrapper_html => {:style => unless @event.location_address_county then 'display: none;' end } %>
+    <%= f.input :location_address_settlement, :collection => @event.location_address_municipality.try(:settlements), :required => false, :wrapper_html => {:style => unless @event.location_address_municipality then 'display: none;' end } %>
+    <script type="text/javascript" charset="utf-8">
+      jQuery(document).ready(function() {
+          var countySelect = $('#event_location_address_county_id'),
+              municipalitySelect = $('#event_location_address_municipality_id'),
+              settlementSelect = $('#event_location_address_settlement_id');
+        
+          countySelect.change(function() {
+              var countySelect = $(this);
+
+              $.getJSON('<%= municipalities_addresses_path %>?county_id=' + countySelect.val(), function(data) {
+                  municipalitySelect.empty();
+                  settlementSelect.empty();
+                  
+                  municipalitySelect.parent('li').show();
+                  
+                  jQuery.each(data, function(i, m) {
+                      municipalitySelect.append($('<option></option>').attr('value', m.id).text(m.name));
+                  });
+              });
+          });
+
+          municipalitySelect.change(function() {
+              codeAddress(municipalitySelect.find(':selected').text() + ', ' + countySelect.find(':selected').text());
+            
+              $.getJSON('<%= settlements_addresses_path %>?municipality_id=' + municipalitySelect.val(), function(data) {
+                  settlementSelect.empty();
+                  
+                  if (data.length > 0) {
+                      settlementSelect.parent('li').show();
+                  } else {
+                      settlementSelect.parent('li').hide();
+                  }
+                  
+                  jQuery.each(data, function(i, m) {
+                      settlementSelect.append($('<option></option>').attr('value', m.id).text(m.name));
+                  });
+              });
+          });
+          
+          settlementSelect.change(function() {
+              codeAddress(settlementSelect.find(':selected').text() + ', ' + municipalitySelect.find(':selected').text() + ', ' + countySelect.find(':selected').text());
+          })
+      });
+    </script>
+    <%= f.input :location_address_street, :input_html => {:rows => 2} %>
+    <li>
+      <div id="map" style="height: 400px; margin-bottom: 20px; margin-left: 25%;"></div>
+    </li>
+    <%= f.input :latitude, :as => :hidden %>
+    <%= f.input :longitude, :as => :hidden %>
     <%= f.input :meta_aim_description, :input_html => {:rows => 4} %>
     <%= f.input :meta_job_description, :input_html => {:rows => 4} %>
     <%= f.input :max_participants %>
@@ -13,20 +65,10 @@
     <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
     <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
     <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>
-    <!--
-      Vahele siia:
-      * Talgujuht, telefon, epost
-      * Keeled mida talgujuht räägib
-    -->
     <%= f.input :gathering_location, :input_html => {:rows => 4} %>
     <%= f.input :gathering_time %>
     <%= f.input :notes, :input_html => {:rows => 4} %>
-    <%= f.input :latitude %>
-    <%= f.input :longitude %>
   <% end %>
-
-  <div id="map" style="height: 400px; margin-bottom: 20px; margin-left: 25%;"></div>
-  
   <%= f.buttons %>
 <% end %>
   
@@ -34,12 +76,14 @@
 <script type="text/javascript" charset="utf-8">
 
   var center = new google.maps.LatLng(58.564, 25.729);
-  var map, marker;
+  var map, marker, geocoder;
 
   function showMap(latitude, longitude) {
       map = new google.maps.Map(document.getElementById('map'), {
           zoom: 7, scrollwheel: false, center: center, mapTypeId: google.maps.MapTypeId.HYBRID
       });
+      
+      geocoder = new google.maps.Geocoder();
       
       marker = new google.maps.Marker({position: center, map: map, draggable: true});
 
@@ -48,18 +92,18 @@
           $('#event_longitude').val(marker.position.lng());
       });
       
-      function centerMap(latlng, zoom) {
-          map.setCenter(latlng);
-          map.setZoom(zoom);
-          marker.setPosition(latlng);
-      }
-
       // Try to determine user location unless it is already known.
       if (latitude && longitude) {
           center.lat = latitude;
           center.lng = longitude;
           centerMap(center);
-      } else if (navigator.geolocation) {
+      } else {
+          locateUser();
+      }
+  }
+  
+  function locateUser() {
+      if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
               centerMap(new google.maps.LatLng(position.coords.latitude, position.coords.longitude), 10);
           }, function() {});
@@ -68,6 +112,27 @@
           geo.getCurrentPosition(function(position) {
               centerMap(new google.maps.LatLng(position.latitude, position.longitude), 10);
           }, function() {});
+      }
+  }
+  
+  function centerMap(latlng, zoom) {
+      if (map && marker) {
+          map.setCenter(latlng);
+          marker.setPosition(latlng);
+          
+          if (zoom) {
+              map.setZoom(zoom);
+          }
+      }
+  }
+  
+  function codeAddress(address) {
+      if (geocoder) {
+          geocoder.geocode({'address': address}, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                  centerMap(results[0].geometry.location, 10);
+              }
+          });
       }
   }
   

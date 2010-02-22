@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   # Before validation, set default status for user. Otherwise this record does not validate.
   before_validation_on_create :set_default_status
   
-  has_many :user_roles
+  has_many :user_roles, :class_name => 'UserRole'
   has_many :roles, :through => :user_roles
   
   validates_presence_of :firstname, :lastname, :email

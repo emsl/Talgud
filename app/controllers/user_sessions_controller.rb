@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-
+  filter_resource_access
   before_filter :require_user, :only => :destroy
   
   def new
@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = "Suksessful login"
+      flash[:notice] = t('user_sessions.create.notice')
       redirect_to events_path
     else
       flash[:error] = t('user_sessions.create.error')
