@@ -247,6 +247,7 @@ et:
       error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
     activate: 
       activation_successful: "Sinu konto aktiveerimine oli edukas"    
+      invalid_activation_code: "Vigane aktiveerimise kood, palun kontrolli mailis olevat linki."
   user_mailer:
     activation_instructions:
       subject: Talgute keskkonna kasutajakonto aktiveerimine
