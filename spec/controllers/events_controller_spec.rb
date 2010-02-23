@@ -2,6 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe EventsController, 'index' do
   it 'should show a list of events'
+  
+  it 'should be accessible by all users'
 end
 
 describe EventsController, 'new' do

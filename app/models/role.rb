@@ -1,4 +1,8 @@
 class Role < ActiveRecord::Base
-  has_many :user_roles
-  has_many :users, :through => :user_roles
+  
+  acts_as_scoped :account
+
+  ROLE = [:guest, :user, :system_administrator, :account_manager, :regional_manager, :event_manager, :event_participant]
+  
+  belongs_to :user
 end
