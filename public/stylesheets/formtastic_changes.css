@@ -1,5 +1,50 @@
 form.formtastic fieldset { display: block; }
 
-form.formtastic fieldset ol li { display: block; }
+form.formtastic fieldset ol li { 
+  margin: 0;
+  padding-bottom: 13px;
+  position: relative;
+  width: 426px;
+}
 
-form.formtastic fieldset ol li p.inline-hints { font-size: 11px; }
+form.formtastic fieldset ol li label {
+  display: block;
+  float: none;
+  width: 100%;
+}
+
+form.formtastic fieldset ol li p.inline-hints { display: none; }
+
+form.formtastic fieldset.buttons {
+  padding: 0;
+}
+
+form.formtastic fieldset ol li.select select {
+  width: 100%;
+  font-size: 16px;
+}
+
+form.formtastic fieldset ol li.string input,
+form.formtastic fieldset ol li.numeric input,
+form.formtastic fieldset ol li.text textarea {
+  width: 408px;
+  border: 1px solid #aaaaaa;
+  padding: 5px 8px 5px;
+  min-height: 18px;
+  background: white url('../images/textbox.gif') repeat-x top left;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+form.formtastic div.form-extra fieldset ol li {
+  padding: 0;
+}
+
+form.formtastic div.form-extra fieldset ol li.string input,
+form.formtastic div.form-extra fieldset ol li.numeric input,
+form.formtastic div.form-extra fieldset ol li.text textarea {
+  width: 378px;
+}

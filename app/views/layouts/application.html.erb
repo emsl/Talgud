@@ -1,27 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-<html>
-  <head>
-    <%= stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes' %>
-    <%= javascript_include_tag 'jquery.min' %>
-  </head>
-  <body>
-    <% if @current_user %>
-      <%= link_to 'Logi välja', logout_path %>
-    <% else %>
-      <%= link_to 'Registreeru', signup_path %>
-      <%= link_to 'Logi sisse', login_path %>
-    <% end %>
+<head>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="Fraktal" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <%= stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes' %>
+  <!--[if IE]><%= stylesheet_link_tag 'style_ie' %><![endif]-->
+  <%= javascript_include_tag 'jquery.min' %>
+</head>
+
+<body>
+  <div id="wrap">
+    <div id="wrap-inner"> 
+      <div id="header" class="clearfix">
+        <%= render 'shared/logo' %>
+        <%= render 'shared/langmenu' %>
+        <%= render 'shared/mainmenu' %>
+      </div> <!-- //header -->
     
-    <% unless flash.empty? %>
-    <div style="border: 1px solid green">
-      <% flash.each do |key, message| %>
-      <%= message %>
-      <% end %>
-    </div>
-    <% end %>
-    
-    <%= yield %>
-  </body>
+      <div class="container clearfix">
+        <% unless flash.empty? %>
+        <div style="border: 1px solid green">
+          <% flash.each do |key, message| %>
+          <%= message %>
+          <% end %>
+        </div>
+        <% end %>
+        
+        <%= yield %>
+      </div> <!-- //container -->
+      <div class="grass">
+        <a href="http://www.okia.ee" id="okia">Okia</a>
+      </div> <!-- //grass -->
+
+    </div> <!-- //wrap-inner -->
+  </div> <!-- //wrap -->
+  <%= render 'shared/footer' %>
+</body>
 </html>

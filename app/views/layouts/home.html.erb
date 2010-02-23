@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="Fraktal" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Teeme ära! Talgud</title>
+  <%= stylesheet_link_tag 'style' %>
+  <!--[if IE]><%= stylesheet_link_tag 'style_ie' %><![endif]-->
+  <%= javascript_include_tag 'jquery.min' %>
+</head>
+
+<body id="front">
+  <div id="wrap">
+    <div id="wrap-inner">
+      <div id="header" class="clearfix">
+        <%= render 'shared/logo' %>
+        <%= render 'shared/langmenu' %>
+        <%= render 'shared/mainmenu' %>
+      </div>
+    
+      <div class="container clearfix"> 
+        <div class="container-left">
+          <div class="orangebox-border"><div class="orangebox">
+            <p>
+              <b>Teeme Ära tänavuse teona toimub laupäeval, 1. mail üle-eestiline talgupäev.</b>
+            </p>
+            <p>
+              Sel päeval on kõik eestimaalased oodatud korraldama ja osalema erinevatel talgutel, 
+              et vajalikud tööd ühisel jõul ära teha.
+            </p>
+            
+            <div class="pad-10-0">
+              <%= link_to 'Korralda oma talgud', if current_user then new_event_path else login_path end, :class => :bigbtn %>
+              <div class="orangebox-small pending">
+                või <a href="#">Registreeru talgudele</a>
+              </div> <!-- //orangebox-small -->
+            </div> <!-- //clearfix -->
+          </div></div>
+        </div> <!-- //container-left -->
+        <div class="container-right">
+          <div id="map" style="height:310px;"></div>
+          <%= render 'events/map' %>
+        </div> <!-- //container-right -->
+      </div> <!-- //container -->
+      <div class="container clearfix"> 
+        <div class="container-left pending">
+          <div class="videobox">
+            <div class="videobox-video"><img src="images/video.gif" alt="" /></div>
+            <div class="videobox-bottom">
+              <h3>Rainer Nõlvak ja Fred Jüssi</h3>
+              Rahvusvahelistest suhetest keemiku pilgu läbi
+            </div> <!-- //videobox-bottom -->
+          </div> <!-- //videobox -->
+        
+          <div class="pad-15">
+            <h3>Liitu meilinglistiga</h3>
+            Saadame aegajalt kasulikke näpunäiteid kudumisest ja heegeldamisest. 
+            Kui vaja siis ka tikkimisest, aga see on pigem erand.
+          </div> <!-- //pad-15 -->
+          <form action="" class="mailing-form bg-lightgreen round pad-10-15">
+            <div class="clearfix">
+              <div class="textbox round"><input type="text" value="Minu e-posti aadress" onfocus="if(value=='Minu e-posti aadress') value=''" onblur="if(value=='') value='Minu e-posti aadress'" /></div>
+              <input type="submit" class="submit round" value="Liitu!" />
+            </div>
+          </form>
+        </div> <!-- //container-left -->
+        <div class="container-right pending">
+          <div class="two-columns clearfix">
+            <div class="column-1">
+              <h2 class="colored bg-blue">
+                <a href="#" class="right-link">Otsi talgusid</a>
+                Talgud sinu lähedal
+              </h2>
+              <ul class="border-list">
+                <li><a href="#"><b>Muhu Väina reoveest puhastamine Iisakul</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
+                <li><a href="#"><b>Vanade Nõuka Raadiote Parandamine Paslepas</b></a><br /><span class="small">Kraanaküla, Tallinn</span></li>
+                <li><a href="#"><b>Kalade rookimine Aegviidul</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
+                <li><a href="#"><b>Muhu Väina puhastamine</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
+                <li><a href="#"><b>Raadiote Parandamine Paslepas</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
+                <li><a href="#"><b>Muhu Väina reoveest puhastamine</b></a><br /><span class="small">Iisakul Iisaku, Lääne Virumaa</span></li>
+                <li><a href="#"><b>Vanade Nõuka Raadiote Parandamine Paslepas</b></a><br /><span class="small">Kraanaküla, Tallinn</span></li>
+                <li class="last"><a href="#">Näita kõiki</a><br /><a href="#">Vaata viimati lisatuid</a></li>
+              </ul> <!-- //border-list -->
+            </div> <!-- //column-1 -->
+            <div class="column-2 pending">
+              <h2 class="colored bg-green">Värsked teated</h2>
+              <ul class="border-list">
+                <li><a href="#">Teeme Ära talgupäev toimub 1. mail</a> <span class="date">12.03</span></li>
+                <li><a href="#">Talgupäeva ajutine veebileht</a> <span class="date">11.03</span></li>
+                <li><a href="#">Kõigi maade talgulised -- istutage</a> <span class="date">4.03</span></li>
+                <li><a href="#">Rahvusvaheline peedipäev tulekul</a> <span class="date">28.02</span></li>
+                <li><a href="#">Selle aasta parimaks lauljaks kuulutati Irvik</a> <span class="date">27.02</span></li>
+                <li class="last"><a href="#">Näita varasemaid teateid</a></li>
+              </ul> <!-- //border-list -->
+              <h2 class="colored bg-orange">Kajastusi Internetis</h2>
+              <ul class="list">
+                <li>
+                  <a href="#">@albert:</a> Raske uskuda et jälle aasta möödas ja taas tuleb hambad ära pesta, habe patsi siduda 
+                  ja tööle asuda. Ja nii iga esimene mai! Kaua võib... 12.03 Twitteris
+                </li>
+                <li>
+                  <a href="#">@sexykyyzy13:</a> Ma võtaksin hea meelega käsile ja läheksin ise ka. 9.03 Twitteris
+                </li>
+              </ul>
+            </div> <!-- //column-2 -->
+          </div> <!-- //two-columns -->
+        </div> <!-- //container-right -->
+      </div> <!-- //container -->
+      <div class="grass">
+        <a href="http://www.okia.ee" id="okia">Okia</a>
+      </div> <!-- //grass -->
+    </div> <!-- //wrap-inner -->
+  </div> <!-- //wrap -->
+  <%= render 'shared/footer' %>
+</body>
+</html>
