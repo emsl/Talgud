@@ -23,7 +23,7 @@ authorization do
   end
 
   role :user do
-    #has_permission_on [:events], :to => [:logout]
+    has_permission_on [:events], :to => [:new, :create]
   end
 end
 
