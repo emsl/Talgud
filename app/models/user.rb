@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
   # Before validation, set default status for user. Otherwise this record does not validate.
   before_validation_on_create :set_default_status
   
-  has_many :user_roles
-  has_many :roles, :through => :user_roles
+  has_many :roles
   
   validates_presence_of :firstname, :lastname, :email
   validates_uniqueness_of :email
@@ -29,9 +28,10 @@ class User < ActiveRecord::Base
   STATUS = {:created => 'created', :active => 'active'}
   
   def role_symbols
-    roles.map do |role|
+    role_map = roles.map do |role|
       role.name.underscore.to_sym
     end
+    role_map << :user #if #
   end
   
   # Returns full name for given user.
