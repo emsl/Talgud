@@ -36,6 +36,10 @@ Factory.define :event do |e|
   e.association :manager, :factory => :user
 end
 
+Factory.define :role do |r|
+  
+end
+
 Factory.define :user do |u|
   u.firstname 'Admin'
   u.lastname 'User'

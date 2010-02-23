@@ -35,9 +35,12 @@ module Admin::AdminHelper
           [item, request.path_parameters[:controller] == "admin/#{item}"]
         end
 
-        memo << content_tag(:li) do
-          link_to t("admin.#{key}.index.title"), send("admin_#{key}_path"), :class => if selected then 'active' end
-        end if key
+        if key and permitted_to?(:manage, "admin_#{key}".to_sym)
+          memo << content_tag(:li) do
+            link_to t("admin.#{key}.index.title"), send("admin_#{key}_path"), :class => if selected then 'active' end
+          end
+        end
+        memo
       end
     end
   end

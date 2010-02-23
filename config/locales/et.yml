@@ -146,7 +146,8 @@ et:
       update:
         notice: Talgu liigi andmed on uuendatud
         error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
-      
+  common:
+    permission_denied: Sellele lehele juurdepääsuõigus puudub
   events:
     create:
       notice: Talgu andmed on lisatud!

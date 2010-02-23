@@ -5,4 +5,5 @@ class Admin::AdminController < ApplicationController
   layout 'admin'
   
   helper 'admin/admin'
+  
 end
