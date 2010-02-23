@@ -1,0 +1,43 @@
+body {
+  background: white;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, serif;
+  text-shadow: rgba(0,0,0,0.1) 0 0px 1px;
+  font-size: 12px;
+}
+
+input.textfield {
+  color: #333;
+  width: 300px;
+  font-size: 20px;
+  font-family: "Helvetica Neue", Helvetica, serif;
+  margin: 5px 0;
+}
+
+h1 {
+  font-size: 32px;
+  color: #09f;
+}
+
+#fci-login {
+  text-align: left;
+  color: #000;
+  font-weight: bold;
+  width: 305px;
+  background-color: #fff;
+  margin: 150px auto;
+  padding: 15px 50px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 10px solid #ccebff;
+}
+
+#fci-login-top {
+  margin: 0px auto;
+  line-height: 20px;
+}
+
+#fci-login-inner {
+  padding: 16px 0px;
+  text-align: left;
+}

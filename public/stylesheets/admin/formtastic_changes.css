@@ -1,0 +1,27 @@
+form.formtastic p.inline-hints,
+form.formtastic p.inline-errors {
+  font-size: 11px;
+}
+
+form.formtastic p.inline-hints {
+  color: #666;
+}
+
+form.formtastic abbr {
+  color: #f00;
+}
+
+form.formtastic fieldset ol li {
+  margin-bottom: 1em;
+}
+
+form.formtastic fieldset ol li.commit, form.formtastic fieldset ol li.hidden {
+  margin-bottom: 0em;
+}
+
+form.formtastic {
+  border: 1px solid #efefef;
+  padding: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}

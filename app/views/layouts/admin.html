@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-	<title>Talgud &ndash; Admin</title>
-	<%= stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes' %>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title><%= t('admin.common.title') %></title>
+  <%= stylesheet_link_tag 'admin/style', 'admin/formtastic', 'admin/formtastic_changes' %>
 </head>
 
 <body>
-  <%= link_to 'Talgud', admin_events_path %>
-  <%= link_to 'Kasutajad', admin_users_path %>
-  <%= link_to 'Haldusjaotused', admin_counties_path %>
-  <hr/>
-  <%= yield %>
+  <div id="header">
+    <!--
+    <ul id="mainmenu" class="navmenu">
+      <% %w{events users counties}.each do |item| %>
+      <li><%= link_to t("admin.#{item}.index.title"), self.send("admin_#{item}_path"), :class => if request.path_parameters[:controller] == "admin/#{item}" then 'active' end %></li>
+      <% end %>
+    </ul>
+    -->
+    <%= print_navigation_menu %>
+    
+    <div style="text-align: right; margin-top: -2px">
+      <form action="./admin/search" method="get">
+      <input type="search" id="search_field" name="q" style="color: #666" value="Otsi" title="Otsi" />
+      </form>
+    </div>
+  </div>
+  
+  <div id="content">
+    <%= print_flash %>
+    
+    <%= yield %>
+  </div>
+  
+  <div id="footer">
+    <%= t('admin.common.logged_in') %> <b><%= current_user.name %></b>. <%= link_to 'Logi välja', logout_path %>
+    <div style="float: right; text-align: right; color: #999;"><%= t('admin.common.title') %></div>
+  </div>
+  
 </body>
 </html>

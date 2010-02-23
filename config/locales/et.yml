@@ -1,17 +1,136 @@
 --- 
 et:
+  activerecord: 
+    errors: 
+      messages: 
+        accepted: "peab olema aktsepteeritud"
+        blank: "ei tohi olla tühi"
+        confirmation: "ei kattu kinnitusega"
+        empty: "ei tohi olla tühi"
+        equal_to: "peab olema võrdne {{count}}"
+        even: "peab olema paaris"
+        exclusion: "reserveeritud"
+        greater_than: "peab olema suurem kui {{count}}"
+        greater_than_or_equal_to: "peab olema suurem võrdne {{count}}"
+        inclusion: "ei ole nimekirjas"
+        invalid: "on vales formaadis"
+        less_than: "peab olema väiksem kui {{count}}"
+        less_than_or_equal_to: "peab olema väiksem võrdne {{count}}"
+        not_a_number: "ei ole number"
+        odd: "peab olema paaritu"
+        record_invalid: "valideerimine ebaõnnestus: {{errors}}"
+        taken: "{{value}} on juba kasutusel"
+        too_long: "liiga pikk (maksimaalselt {{count}} märki)"
+        too_short: "liiga lühike (vähemalt {{count}} märki)"
+        wrong_length: "vale pikkus (peab olema vähemalt %d märki)"
+        invalid_sec_num: "isikukood ei ole valiidne"
+        email_missing: e-posti aadress ei tohi olla tühi
+        email_taken: e-posti aadress on juba kasutusel
+        invalid_email: vigane e-posti aadress
+        password_missing: parool ei tohi olla tühi
+        password_too_short: salasõna on liiga lühike
+        password_confirmation_do_not_match: salasõna kordus ei klapi
+    models:
+      county: maakond
+      event: talgu
+      municipality: omavalitsus
+      settlement: asula
+      user: kasutaja
+  admin:
+    common:
+      edit: Muuda
+      logged_in: Sisse loginud kasutaja
+      title: Talgute admin
+    counties:
+      create:
+        notice: Maakonna andmed on lisatud
+        error: Maakonna lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+      destroy:
+        notice: Maakond on kustutatud
+        error: Maakonna kustutamine ebaõnnestus
+      edit:
+        title: Maakonna muutmine
+      index:
+        add_county: Lisa maakond
+        title: Haldusalad
+      new:
+        title: Maakonna lisamine
+      update:
+        notice: Maakonna andmed on uuendatud
+        error: Maakonna andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    events:
+      index:
+        title: Talgud
+    municipalities:
+      create:
+        notice: Omavalitsuse andmed on lisatud
+        error: Omavalitsuse lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+      destroy:
+        notice: Omavalitsus on kustutatud
+        error: Omavalitsuse kustutamine ebaõnnestus
+      edit:
+        title: Omavalitsuse muutmine
+      index:
+        title: Omavalitsused
+        add_municipality: Lisa omavalitsus
+      new:
+        title: Omavalitsuse lisamine
+      update:
+        notice: Omavalitsuse andmed on uuendatud
+        error: Omavalitsuse andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    settlements:
+      create:
+        notice: Küla / asula andmed on lisatud
+        error: Küla / asula lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+      destroy:
+        notice: Küla / asula on kustutatud
+        error: Küla / asula kustutamine ebaõnnestus
+      edit:
+        title: Küla / asula muutmine
+      index:
+        title: Külad / asulad
+        add_settlement: Lisa küla või asula
+      new:
+        title: Küla / asula lisamine
+      update:
+        notice: Küla / asula andmed on uuendatud
+        error: Küla / asula andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    users:
+      create:
+        notice: Kasutaja andmed on lisatud
+        error: Kasutaja lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+      destroy:
+        notice: Kasutaja on kustutatud
+        error: Kasutaja kustutamine ebaõnnestus
+      edit:
+        title: Kasutaja muutmine
+      index:
+        add_user: Lisa kasutaja
+        title: Kasutajad
+      new:
+        title: Kasutaja lisamine
+      update:
+        notice: Kasutaja andmed on uuendatud
+        error: Kasutaja andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
   events:
     create:
       notice: Talgu andmed on lisatud!
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
   formtastic:
     labels:
+      county:
+        name: Maakonna nimi
       user:
+        email: E-post
         firstname: Eesnimi
         lastname: Perekonnanimi
-        email: E-post
+        name: Nimi
         password: Salasõna
         password_confirmation: Salasõna kinnitus
+        status: Staatus
+        statuses:
+          created: Uus
+          active: Aktiveeritud
       signup:
         firstname: Eesnimi
         lastname: Perekonnanimi
@@ -38,6 +157,24 @@ et:
         meta_subject_info: Lähem info talguobjekti kohta
         name: Talgute nimi
         notes: Muu info
+        status: Staatus
+        statuses:
+          created: Uus
+      municipality:
+        name: Omavalitsuse nimi
+        kind: Tüüp
+        kinds:
+          linn: Linn
+          vald: Vald
+      settlement:
+        kind: Tüüp
+        kinds:
+          alev: Alev
+          alevik: Alevik
+          kyla: Küla
+          linnaosa: Linnaosa
+          vallasisene_linn: Vallasisene linn
+        name: Küla või asula nimi
     hints:
       event:
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
@@ -111,39 +248,6 @@ et:
     precision: 
       format: 
         delimiter: ""
-  activerecord: 
-    errors: 
-      messages: 
-        accepted: "peab olema aktsepteeritud"
-        blank: "ei tohi olla tühi"
-        confirmation: "ei kattu kinnitusega"
-        empty: "ei tohi olla tühi"
-        equal_to: "peab olema võrdne {{count}}"
-        even: "peab olema paaris"
-        exclusion: "reserveeritud"
-        greater_than: "peab olema suurem kui {{count}}"
-        greater_than_or_equal_to: "peab olema suurem võrdne {{count}}"
-        inclusion: "ei ole nimekirjas"
-        invalid: "on vales formaadis"
-        less_than: "peab olema väiksem kui {{count}}"
-        less_than_or_equal_to: "peab olema väiksem võrdne {{count}}"
-        not_a_number: "ei ole number"
-        odd: "peab olema paaritu"
-        record_invalid: "valideerimine ebaõnnestus: {{errors}}"
-        taken: "{{value}} on juba kasutusel"
-        too_long: "liiga pikk (maksimaalselt {{count}} märki)"
-        too_short: "liiga lühike (vähemalt {{count}} märki)"
-        wrong_length: "vale pikkus (peab olema vähemalt %d märki)"
-        invalid_sec_num: "isikukood ei ole valiidne"
-        email_missing: e-posti aadress ei tohi olla tühi
-        email_taken: e-posti aadress on juba kasutusel
-        invalid_email: vigane e-posti aadress
-        password_missing: parool ei tohi olla tühi
-        password_too_short: salasõna on liiga lühike
-        password_confirmation_do_not_match: salasõna kordus ei klapi
-    models:
-      user: kasutaja
-      event: talgu
   support:
     array:
       words_connector: ', '

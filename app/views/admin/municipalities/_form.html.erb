@@ -1,6 +1,6 @@
 <% semantic_fields_for @municipality do |f| %>
   <% f.inputs do %>
     <%= f.input :name  %>
-    <%= f.input :kind %>
+    <%= f.input :kind, :as => :select, :collection => Municipality::KIND.collect{ |k| [t("formtastic.labels.municipality.kinds.#{k}"), k] }, :include_blank => false %>
   <% end %>
 <% end %>

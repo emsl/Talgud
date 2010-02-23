@@ -1,13 +1,26 @@
-<table border="1">
-<% for county in @counties %>
-<tr>
-  <td><%=h county.name %></td>
-  <td>
-    <%= link_to 'Omavalitsused', admin_county_municipalities_path(county) %>
-    <%= link_to 'Muuda', edit_admin_county_path(county) %>
-  </td>
-</tr>
-<% end %>
-</table>
+<h1><%= t('.title') %></h1>
 
-<%= link_to 'Lisa', new_admin_county_path %>
+<div class="textcontent">
+  <%= link_to t('.add_county'), new_admin_county_path %>
+</div>
+
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%= t('formtastic.labels.county.name') %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <% for county in @counties %>
+  <tr>
+    <td><%=h county.name %></td>
+    <td class="actions">
+      <%= link_to t('admin.municipalities.index.title'), admin_county_municipalities_path(county) %>
+      <%= link_to t('admin.common.edit'), edit_admin_county_path(county) %>
+    </td>
+  </tr>
+  <% end %>
+  </table>
+  
+</div>
