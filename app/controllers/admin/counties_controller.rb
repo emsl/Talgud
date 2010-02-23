@@ -1,4 +1,5 @@
 class Admin::CountiesController < Admin::AdminController
+  filter_resource_access
   
   def index
     @counties = County.all

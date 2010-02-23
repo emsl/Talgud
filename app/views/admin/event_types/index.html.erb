@@ -1,13 +1,25 @@
 <h1><%= t('.title') %></h1>
 
-<table border="1">
-<% for event_type in @event_types %>
-<tr>
-  <td><%= event_type.name %></td>
-  <td><%= event_type.descritpion %></td>
-  <td><%= link_to 'edit', edit_admin_event_type_path(event_type) %></td>
-</tr>
-<% end %>
-</table>
+<div class="textcontent">
+  <%= link_to t('.add_event_type'), new_admin_event_type_path %>
+</div>
 
-<%= link_to 'Lisa uus', new_admin_event_type_path %>
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%= t('formtastic.labels.event_type.name') %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <% for event_type in @event_types %>
+  <tr>
+    <td><%=h event_type.name %></td>
+    <td class="actions">
+      <%= link_to t('admin.common.edit'), edit_admin_event_type_path(event_type) %>
+    </td>
+  </tr>
+  <% end %>
+  </table>
+  
+</div>

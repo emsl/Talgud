@@ -22,7 +22,7 @@ module Admin::AdminHelper
   # Declares navigation menu as a custom array of hashes and things. It should be dynamic since navigation menu contents
   # depend on the user's role.
   def navigation_menu_contents
-    [:events, :users, {:name => :counties, :active_when => [:counties, :municipalities, :settlements]}]
+    [:events, :users, {:name => :counties, :active_when => [:counties, :municipalities, :settlements]}, :event_types, :languages]
   end
   
   def print_navigation_menu

@@ -1,0 +1,25 @@
+<h1><%= t('.title') %></h1>
+
+<div class="textcontent">
+  <%= link_to t('.add_language'), new_admin_language_path %>
+</div>
+
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%= t('formtastic.labels.language.name') %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <% for language in @languages %>
+  <tr>
+    <td><%=h language.name %></td>
+    <td class="actions">
+      <%= link_to t('admin.common.edit'), edit_admin_language_path(language) %>
+    </td>
+  </tr>
+  <% end %>
+  </table>
+  
+</div>

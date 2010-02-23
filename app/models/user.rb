@@ -32,7 +32,9 @@ class User < ActiveRecord::Base
     role_map = roles.map do |role|
       role.name.underscore.to_sym
     end
-    # role_map << :user #if #
+    # TODO
+    role_map << :user
+    role_map << :account_manager
   end
   
   # Returns full name for given user.

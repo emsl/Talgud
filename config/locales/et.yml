@@ -112,6 +112,41 @@ et:
       update:
         notice: Kasutaja andmed on uuendatud
         error: Kasutaja andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    languages:
+      create:
+        notice: Keele andmed on lisatud
+        error: Keele lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+      destroy:
+        notice: Keel on kustutatud
+        error: Keele kustutamine ebaõnnestus
+      edit:
+        title: Keele muutmine
+      index:
+        add_language: Lisa keel
+        title: Keeled
+      new:
+        title: Kasutaja lisamine
+      update:
+        notice: Keele andmed on uuendatud
+        error: Keele andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    event_types:
+      create:
+        notice: Talgu liigi andmed on lisatud
+        error: Talgu liigi lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+      destroy:
+        notice: Talgu liik on kustutatud
+        error: Talgu liigi kustutamine ebaõnnestus
+      edit:
+        title: Talgu liigi muutmine
+      index:
+        add_event_type: Lisa talgu liik
+        title: Talgu liigid
+      new:
+        title: Talgu liigi lisamine
+      update:
+        notice: Talgu liigi andmed on uuendatud
+        error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+      
   events:
     create:
       notice: Talgu andmed on lisatud!
@@ -120,6 +155,11 @@ et:
     labels:
       county:
         name: Maakonna nimi
+      event_type:
+        name: Talgu liigi nimi
+      language:
+        name: Keele nimi
+        code: Keele kood
       user:
         email: E-post
         firstname: Eesnimi
@@ -204,6 +244,8 @@ et:
     create:
       notice: Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile.
       error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
+    activate: 
+      activation_successful: "Sinu konto aktiveerimine oli edukas"    
   user_mailer:
     activation_instructions:
       subject: Talgute keskkonna kasutajakonto aktiveerimine
@@ -222,11 +264,6 @@ et:
       login_required: Palun logige sisse 
     destroy:
       notice: Olete süsteemist välja logitud
-  signups:
-    create:
-      error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
-    activate: 
-      activation_successful: "Sinu konto aktiveerimine oli edukas"    
   number: 
     format: 
       separator: .
