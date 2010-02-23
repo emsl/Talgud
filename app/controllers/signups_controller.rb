@@ -1,5 +1,5 @@
 class SignupsController < ApplicationController
-  filter_resource_access
+  #filter_resource_access :model => :users
   
   def new
     @user = User.new
