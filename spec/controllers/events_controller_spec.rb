@@ -6,10 +6,16 @@ end
 
 describe EventsController, 'new' do
   it 'should not be displayed when user is not logged in' do
-    pending('This needs role management to pass') do
-      get :new
-      response.should redirect_to(events_path)
-    end
+    get :new
+    response.should redirect_to(events_path)
+  end
+  
+  it 'should be displayed when any user is logged in' do
+    activate_authlogic
+    UserSession.create Factory.build(:user)
+    
+    get :new
+    response.should be_success
   end
 end
 

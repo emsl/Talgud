@@ -9,7 +9,7 @@
     <br/>
     
     <ul>
-      <% for event in @events %><li><%= link_to event.name, event_path(event) %></li><% end %>
+      <% for event in @latest %><li><%= link_to event.name, event_path(event) %></li><% end %>
     </ul>
   </td>
 </tr>
