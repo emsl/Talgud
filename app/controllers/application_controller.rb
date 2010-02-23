@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  def permission_denied
+    flash[:error] = "Sorry, you are not allowed to access that page."
+    redirect_to root_url
+  end
+  
   def require_user
     unless current_user
       flash[:notice] = t('user_sessions.new.login_required')

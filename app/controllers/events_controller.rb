@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  
   filter_resource_access
   
   def index
@@ -6,7 +7,6 @@ class EventsController < ApplicationController
   end
   
   def new
-    @event = Event.new
   end
   
   def create
@@ -24,7 +24,12 @@ class EventsController < ApplicationController
   end
   
   def show
-    @event = Event.find_by_url(params[:id])
     @events = Event.all(:origin => [@event.latitude, @event.longitude], :within => 10)
+  end
+  
+  protected
+  
+  def load_event
+    @event = Event.find_by_url(params[:id])
   end
 end
