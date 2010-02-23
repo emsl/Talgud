@@ -1,4 +1,5 @@
 class Admin::SettlementsController < Admin::AdminController
+  filter_resource_access
   
   before_filter :load_parent_resources
   

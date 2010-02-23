@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  filter_resource_access
+  #filter_resource_access
   
   def municipalities
     render :json => Municipality.all(:select => 'id, name', :conditions => {:county_id => params[:county_id].to_i}, :order => :name).collect{ |m| {:id => m.id, :name => m.name}}

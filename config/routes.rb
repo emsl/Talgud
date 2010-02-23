@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :events
     admin.resources :event_types
     admin.resources :users
+    admin.resources :languages
   end
   
   map.resources :addresses, :collection => {:municipalities => :get, :settlements => :get}

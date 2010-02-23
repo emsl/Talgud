@@ -1,6 +1,6 @@
 authorization do
   role :account_manager do
-    has_permission_on [:admin_countries, :admin_event_types, :admin_events, :admin_municipalities, :admin_settelments, :admin_users], :to => [:manage]
+    has_permission_on [:admin_counties, :admin_event_types, :admin_events, :admin_municipalities, :admin_settelments, :admin_users, :admin_languages], :to => [:manage]
   end
 
   role :regional_manager do
@@ -23,6 +23,7 @@ authorization do
   end
 
   role :user do
+    includes :guest
     has_permission_on [:events], :to => [:new, :create]
   end
 end
