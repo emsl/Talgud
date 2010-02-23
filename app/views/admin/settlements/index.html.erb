@@ -1,14 +1,26 @@
 <h1><%= t('.title') %></h1>
 
-<table border="1">
-<% for settlement in @settlements %>
-<tr>
-  <td><%=h settlement.name %></td>
-  <td>
-    <%= link_to 'Muuda', edit_admin_county_municipality_settlement_path(@county, @municipality, settlement) %>
-  </td>
-</tr>
-<% end %>
-</table>
+<div class="textcontent">
+  <%= link_to t('.add_settlement'), new_admin_county_municipality_settlement_path(@county, @municipality) %>
+</div>
 
-<%= link_to 'Lisa', new_admin_county_municipality_settlement_path(@county, @municipality) %>
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%=h t('formtastic.labels.settlement.name') %></th>
+    <th><%=h t('formtastic.labels.settlement.kind') %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <% for settlement in @settlements %>
+  <tr>
+    <td><%=h settlement.name %></td>
+    <td><%=h t("formtastic.labels.settlement.kinds.#{settlement.kind}") %></td>
+    <td class="actions">
+      <%= link_to t('admin.common.edit'), edit_admin_county_municipality_settlement_path(@county, @municipality, settlement) %>
+    </td>
+  </tr>
+  <% end %>
+  </table>
+</div>

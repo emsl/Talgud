@@ -19,10 +19,10 @@ class Admin::CountiesController < Admin::AdminController
   def create
     @county = County.new(params[:county])
     if @county.save
-      flash[:notice] = t('counties.create.notice')
+      flash[:notice] = t('admin.counties.create.notice')
       redirect_to admin_counties_path
     else
-      flash.now[:error] = t('counties.create.error')
+      flash.now[:error] = t('admin.counties.create.error')
       render :action => :new
     end
   end
@@ -30,10 +30,10 @@ class Admin::CountiesController < Admin::AdminController
   def update
     @county = County.find(params[:id])
     if @county.update_attributes(params[:county])
-      flash[:notice] = t('counties.update.notice')
+      flash[:notice] = t('admin.counties.update.notice')
       redirect_to admin_counties_path
     else
-      flash.now[:error] = t('counties.update.error')
+      flash.now[:error] = t('admin.counties.update.error')
       render :action => :edit
     end
   end
@@ -41,9 +41,9 @@ class Admin::CountiesController < Admin::AdminController
   def destroy
     @county = County.find(params[:id])
     if @county.destroy
-      flash[:notice] = t('counties.destroy.notice')
+      flash[:notice] = t('admin.counties.destroy.notice')
     else
-      flash[:error] = t('counties.destroy.error')
+      flash[:error] = t('admin.counties.destroy.error')
     end
     redirect_to admin_counties_path
   end  

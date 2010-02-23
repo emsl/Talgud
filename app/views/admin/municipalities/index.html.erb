@@ -1,15 +1,27 @@
 <h1><%= t('.title') %></h1>
 
-<table border="1">
-<% for municipality in @municipalities %>
-<tr>
-  <td><%=h municipality.name %></td>
-  <td>
-    <%= link_to 'Külad / asulad / linnaosad', admin_county_municipality_settlements_path(@county, municipality) %>
-    <%= link_to 'Muuda', edit_admin_county_municipality_path(@county, municipality) %>
-  </td>
-</tr>
-<% end %>
-</table>
+<div class="textcontent">
+  <%= link_to t('.add_municipality'), new_admin_county_municipality_path(@county) %>
+</div>
 
-<%= link_to 'Lisa', new_admin_county_municipality_path(@county) %>
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%= t('formtastic.labels.municipality.name') %></th>
+    <th><%= t('formtastic.labels.municipality.kind') %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <% for municipality in @municipalities %>
+  <tr>
+    <td><%=h municipality.name %></td>
+    <td><%=h t("formtastic.labels.municipality.kinds.#{municipality.kind}") %></td>
+    <td class="actions">
+      <%= link_to t('admin.settlements.index.title'), admin_county_municipality_settlements_path(@county, municipality) %>
+      <%= link_to t('admin.common.edit'), edit_admin_county_municipality_path(@county, municipality) %>
+    </td>
+  </tr>
+  <% end %>
+  </table>
+</div>

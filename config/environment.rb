@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
 
-  config.gem 'authlogic'
+  config.gem 'authlogic', :version => '2.1.3'
   # config.gem 'url_store'
   config.gem 'formtastic'
   # config.gem 'acts_as_audited'

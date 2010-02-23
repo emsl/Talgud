@@ -21,10 +21,10 @@ class Admin::SettlementsController < Admin::AdminController
   def create
     @settlement = @municipality.settlements.new(params[:settlement])
     if @settlement.save
-      flash[:notice] = t('settlements.create.notice')
+      flash[:notice] = t('admin.settlements.create.notice')
       redirect_to admin_county_municipality_settlements_path(@county, @municipality)
     else
-      flash.now[:error] = t('settlements.create.error')
+      flash.now[:error] = t('admin.settlements.create.error')
       render :action => :new
     end
   end
@@ -32,10 +32,10 @@ class Admin::SettlementsController < Admin::AdminController
   def update
     @settlement = Settlement.find(params[:id])
     if @settlement.update_attributes(params[:settlement])
-      flash[:notice] = t('settlements.update.notice')
+      flash[:notice] = t('admin.settlements.update.notice')
       redirect_to admin_county_municipality_settlements_path(@county, @municipality)
     else
-      flash.now[:error] = t('settlements.create.error')
+      flash.now[:error] = t('admin.settlements.update.error')
       render :action => :edit
     end
   end
@@ -43,9 +43,9 @@ class Admin::SettlementsController < Admin::AdminController
   def destroy
     @settlement = Settlement.find(params[:id])
     if @settlement.destroy
-      flash[:notice] = t('settlements.destroy.notice')
+      flash[:notice] = t('admin.settlements.destroy.notice')
     else
-      flash.now[:error] = t('settlements.destroy.error')
+      flash.now[:error] = t('admin.settlements.destroy.error')
     end
     redirect_to admin_county_municipality_settlements_path(@county, @municipality)
   end

@@ -17,10 +17,10 @@ class Admin::MunicipalitiesController < Admin::AdminController
   def create
     @municipality = @county.municipalities.new(params[:municipality])
     if @municipality.save
-      flash[:notice] = t('municipalities.create.notice')
+      flash[:notice] = t('admin.municipalities.create.notice')
       redirect_to admin_county_municipalities_path(@county)
     else
-      flash.now[:error] = t('municipalities.create.error')
+      flash.now[:error] = t('admin.municipalities.create.error')
       render :action => :new
     end
   end
@@ -28,10 +28,10 @@ class Admin::MunicipalitiesController < Admin::AdminController
   def update
     @municipality = Municipality.find(params[:id])
     if @municipality.update_attributes(params[:municipality])
-      flash[:notice] = t('municipalities.update.notice')
+      flash[:notice] = t('admin.municipalities.update.notice')
       redirect_to admin_county_municipalities_path(@county)
     else
-      flash.now[:error] = t('municipalities.update.error')
+      flash.now[:error] = t('admin.municipalities.update.error')
       render :action => :edit
     end
   end
@@ -39,9 +39,9 @@ class Admin::MunicipalitiesController < Admin::AdminController
   def destroy
     @municipality = Municipality.find(params[:id])
     if @municipality.destroy
-      flash[:notice] = t('municipalities.destroy.notice')
+      flash[:notice] = t('admin.municipalities.destroy.notice')
     else
-      flash[:error] = t('municipalities.destroy.error')
+      flash[:error] = t('admin.municipalities.destroy.error')
     end
     redirect_to admin_county_municipalities_path(@county)
   end

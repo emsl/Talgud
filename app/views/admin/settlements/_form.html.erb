@@ -1,6 +1,6 @@
 <% semantic_fields_for @settlement do |f| %>
   <% f.inputs do %>
-    <%= f.input :name  %>
-    <%= f.input :kind %>
+    <%= f.input :name %>
+    <%= f.input :kind, :as => :select, :collection => Settlement::KIND.collect{ |k| [t("formtastic.labels.settlement.kinds.#{k}"), k] }, :include_blank => false %>
   <% end %>
 <% end %>

@@ -1,0 +1,313 @@
+body {
+  margin: 0 30px;
+  color: #333;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  text-shadow: rgba(255,255,255,0.1) 0 -1px 1px;
+  min-width: 1000px;
+}
+
+/* Links */
+a {
+  color: #09d;
+  text-decoration: none;
+}
+
+a.button, div.textcontent a.button {
+  color: #666;
+  font-size: 12px;
+  background-color: #ccc;
+  border: 1px solid #666;
+  text-decoration: none;
+  padding: 0px 6px 0px 6px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+a.filter_button, a.filter_button_selected {
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  
+}
+
+a.filter_button_selected {
+  color: #fff;
+  background-color: #777;
+  border-top: 1px solid #444;
+  border-left: 1px solid #444;
+  border-right: 1px solid #999;
+  text-shadow: #333 0 1px 1px;
+  padding: 0px 6px 1px 6px;
+}
+
+a.filter_button:hover {
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #666;
+}
+
+a.filter_button {
+  color: #666;
+  padding: 0 5px;
+  padding: 0px 6px 1px 6px;
+  border: 1px solid #fff;
+}
+
+a.button:hover, div.textcontent a.button:hover {
+  color: #09f;
+  background-color: #ccebff;
+  border: 1px solid #09f;
+  opacity: 1;
+}
+
+a.title {
+  color: #09f;
+  font-weight: bold;
+}
+
+/* Clearer */
+div.clearer { clear: both; }
+
+/* Primary page blocks */
+#header {
+  color: #fff;
+  background-color: #09f;
+  -moz-border-radius-bottomleft: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  height: 35px;
+  padding: 15px 15px 0 10px;
+}
+
+div#content h1, div#content h2 {
+  margin: 15px 0 15px 0;
+  padding: 5px 20px 0px 20px;
+}
+
+div#content h1 {
+  font-size: 20px;
+}
+
+div#content h2 {
+  font-size: 16px;
+}
+
+div#datacontent, div.datacontent {
+  margin: 0px 15px;
+}
+
+div#textcontent, div.textcontent {
+  margin: 10px 20px;
+}
+
+div#textcontent a, div.textcontent a {
+  color: #09d;
+}
+
+#footer {
+  border-top: 1px solid #ddd;
+  margin: 15px;
+  padding: 15px;
+  font-size: 11px;
+  background-image: url('../../images/admin/footer_shadow.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  text-shadow: 0px 1px 0px #eee;
+  height: 110px;
+}
+
+#footer a {
+  color: #09f;
+  text-decoration: none;
+}
+
+/* Error and notice messages */
+div.error, div.notice {
+  font-size: 12px;
+  padding: 15px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px;
+}
+
+div.error {
+  color: #fff;
+  background-color: #c52907;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f85230), to(#c52907));
+  text-shadow: #800 0 1px 0;
+}
+
+div.notice {
+  color: rgb(8, 41, 64);
+  background-color: #ffeea8;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff4c8), to(#ffea95));
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px;
+}
+
+
+/* Table listings */
+table.datatable {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.datatable th {
+  text-align: left;
+}
+
+table.repheadertable th {
+  text-align: left;
+}
+
+table.datatable td, table.datatable th {
+  border-bottom: 1px solid #ccc;
+  padding: 4px;
+}
+
+table.datatable a {
+  text-decoration: none;
+}
+
+/** Align amount fields to the right **/
+table.datatable td.amount {
+  text-align: right;
+}
+
+table.datatable td.actions {
+  white-space: nowrap;
+  text-align: right;
+}
+
+table.datatable td.actions a {
+  font-weight: bold;
+  color: #999;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-left: 5px;
+}
+
+/* Navigation menus */
+ul.navmenu {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+ul.navmenu li {
+  float: left;
+  padding: 0px 10px;
+}
+
+ul#mainmenu li a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+ul#mainmenu li a.active {
+  border-bottom: 1px dotted white;
+}
+
+ul#submenu {
+  margin: 5px 10px;
+}
+
+ul#submenu li a {
+  color: #333;
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+ul#submenu li a.active {
+  border-bottom: 1px dotted #999;
+}
+
+/* Pagination links */
+div.pagination {
+  padding: 15px 5px 0px 5px;
+  color: #666;
+}
+
+div.pagination span.links {
+  color: #09f;
+  font-weight: bold;
+}
+
+div.pagination a {
+  text-decoration: none;
+  color: #666;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+/* Forms */
+.formarea {
+  border: 10px solid #ccebff;
+  padding: 20px;
+  margin: 10px;
+  float: left;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.formarea input[type=text], input[type=password], .formarea textarea {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #eee;
+}
+
+.formarea input[type=text].medium, input[type=password].medium, .formarea textarea.medium {
+  width: 500px;
+}
+
+.formarea label {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: block;
+  margin: 10px 0 5px 1px;
+}
+
+.formarea a {
+  color: #09f;
+}
+
+/* Form errors area */
+.formarea .errorExplanation {
+  margin: -20px -20px 20px -20px;
+  padding: 10px 25px;
+  background-color: #ffc;
+  font-size: 12px;
+}
+
+.formarea .errorExplanation h2 {
+  font-size: 16px;
+}
+
+
+/* Misc */
+.small_text {
+  font-size: 12px;
+}
+
+.grey {
+  color: #ccc;
+}
+
+/**
+ * WYSIWYG editor styles overrides
+ */
+div.wysiwyg {
+  float: left;
+}

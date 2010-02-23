@@ -1,14 +1,18 @@
 <h1><%= t('.title') %></h1>
 
-<table border="1">
-<tr>
-  <th>Talgu nimetus</th>
-  <th>Staatus</th>
-</tr>
-<% for event in @events %>
-<tr>
-  <td><%= event.name %></td>
-  <td><%= event.status %></td>
-</tr>
-<% end %>
-</table>
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%=h t('formtastic.labels.event.name') %></th>
+    <th><%=h t('formtastic.labels.event.status') %></th>
+  </tr>
+  </thead>
+  <% for event in @events %>
+  <tr>
+    <td><%=h truncate(event.name) %></td>
+    <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
+  </tr>
+  <% end %>
+  </table>
+</div>
