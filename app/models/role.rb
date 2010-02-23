@@ -1,4 +1,5 @@
 class Role < ActiveRecord::Base
-  has_many :user_roles
-  has_many :users, :through => :user_roles
+  acts_as_scoped :account
+  
+  belongs_to :user
 end
