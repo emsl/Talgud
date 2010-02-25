@@ -1,7 +1,12 @@
 <div id="submenu">
   <div class="submenu-border">
   <ul>
-    <li<%= ' class="active"' if %w{create new}.include?(action_name) %>><%= link_to 'Registreeri talgud', if current_user then new_event_path else signup_path end %><span class="arrow"></span></li>
+    <% if current_user %>
+    <li<%= ' class="active"' if %w{create new}.include?(action_name) %>><%= link_to 'Registreeri talgud', new_event_path %><span class="arrow"></span></li>
+    <li<%= ' class="active"' if %w{my}.include?(action_name) %>><%= link_to 'Minu talgud', my_events_path %><span class="arrow"></span></li>
+    <% else %>
+    <li<%= ' class="active"' if %w{create new}.include?(action_name) %>><%= link_to 'Registreeri talgud', signup_path %><span class="arrow"></span></li>
+    <% end %>
     <li<%= ' class="active"' if action_name == 'index' %>><%= link_to 'Näita kõiki', events_path %><span class="arrow"></span></li>
     <li class="pending"><a href="#">Viimati lisatud</a><span class="arrow"></span></li>
     <li class="pending"><a href="#">Populaarsemad</a><span class="arrow"></span></li>

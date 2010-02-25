@@ -10,10 +10,12 @@ authorization do
 
   role :event_manager do
     includes :guest
-    has_permission_on [:events], :to => [:manage]
+    has_permission_on [:events], :to => [:manage] do
+      if_attribute :manager_id => is { user.id }
+    end
     has_permission_on [:event_participant], :to => [:manage]
     has_permission_on [:events], :to => [:create, :read]
-    has_permission_on [:my_events], :to => [:read, :update] do
+    has_permission_on [:events], :to => [:read, :update, :my] do
       if_attribute :status => is {'finished'}
       if_attribute :status => is {'new'}
       if_attribute :status => is {'denied'}
@@ -27,7 +29,7 @@ authorization do
   role :guest do
     has_permission_on [:home], :to => [:read]
     has_permission_on [:user_sessions], :to => [:manage]
-    has_permission_on [:events], :to => [:read] do
+    has_permission_on [:events], :to => [:read, :map] do
       if_attribute :status => is {'published'}
       if_attribute :status => is {'registration_open'}
       if_attribute :status => is {'registration_closed'}

@@ -31,6 +31,7 @@ et:
         password_too_short: salasõna on liiga lühike
         password_confirmation_do_not_match: salasõna kordus ei klapi
     models:
+      account: konto
       county: maakond
       event: talgu
       municipality: omavalitsus
@@ -114,6 +115,7 @@ et:
         error: Kasutaja kustutamine ebaõnnestus
       edit:
         title: Kasutaja muutmine
+        roles: Kasutaja rollid
       index:
         add_user: Lisa kasutaja
         title: Kasutajad
@@ -164,6 +166,8 @@ et:
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     index:
       title: Talgud
+    my:
+      title: Minu talgud
   formtastic:
     labels:
       county:
@@ -232,6 +236,14 @@ et:
         kinds:
           linn: Linn
           vald: Vald
+      role:
+        roles:
+          account_manager: Administraator
+          event_manager: Talgu haldur
+          event_participant: Talgul osaleja
+          guest: Tavakasutaja
+          regional_manager: Piirkonna haldur
+          system_administrator: Süsteemi administraator
       settlement:
         kind: Tüüp
         kinds:

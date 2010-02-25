@@ -4,3 +4,24 @@
   <%= render 'form' %>
   <%= f.buttons %>
 <% end %>
+
+<h2><%= t('.roles') %></h2>
+
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th>Rolli nimi</th>
+    <th>Objekti tüüp</th>
+    <th>Objekti nimi</th>
+  </tr>
+  </thead>
+  <% for role in @roles %>
+  <tr>
+    <td><%= t("formtastic.labels.role.roles.#{role.role}") %></td>
+    <td><%= t("activerecord.models.#{role.model_type.downcase}") %></td>
+    <td><%= role.model.try(:name) %></td>
+  </tr>
+  <% end %>
+  </table>
+</div>
