@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   
-  filter_resource_access :additional_collection => [:my_events]
+  filter_resource_access :additional_collection => [:my_events, :map]
   
   def index
     @events = Event.with_permissions_to(:read)
@@ -8,6 +8,9 @@ class EventsController < ApplicationController
   
   def my_events
     @events = Event.with_permissions_to(:manage)
+  
+  def map
+    @events = Event.with_permissions_to(:read)
   end
   
   def new
@@ -24,7 +27,7 @@ class EventsController < ApplicationController
       redirect_to events_path
     else
       render :new
-      flash[:error] = t('events.create.error')
+      flash.now[:error] = t('events.create.error')
     end
   end
   

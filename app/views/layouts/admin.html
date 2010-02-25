@@ -7,6 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title><%= t('admin.common.title') %></title>
   <%= stylesheet_link_tag 'admin/style', 'admin/formtastic', 'admin/formtastic_changes' %>
+  <%= javascript_include_tag 'jquery.min' %>
 </head>
 
 <body>
@@ -22,6 +23,14 @@
   </div>
   
   <div id="content">
+    <% if controller_name == 'events' %>
+    <ul id="submenu" class="navmenu">
+      <li><%= link_to 'Nimekiri', admin_events_path, :class => if action_name != 'map' then :active end %></li>
+      <li><%= link_to 'Kaart', map_admin_events_path, :class => if action_name == 'map' then :active end %></li>
+    </ul>
+    <div class="clearer"></div>
+    <% end %>
+    
     <%= print_flash %>
     
     <%= yield %>

@@ -29,7 +29,7 @@ class CreateEvents < ActiveRecord::Migration
       t.text :meta_provided_for_participiants                   # Talgulistele pakutav
       t.text :meta_subject_info                                 # Info talguobjekti kohta
       t.string :meta_subject_owner                              # Talguobjekti omanik
-      t.boolean :meta_subject_protegee                          # Kas objekt on looduskaitse või muinsuskaitse all
+      t.string :meta_subject_protegee                           # Kas objekt on looduskaitse või muinsuskaitse all
       t.string :meta_subject_heritage_number                    # Muinsuskaitse objekti korral sisestada mäletise number
 
       t.datetime :deleted_at

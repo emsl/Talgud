@@ -38,6 +38,7 @@ et:
       user: kasutaja
   admin:
     common:
+      created_at: Lisatud
       edit: Muuda
       logged_in: Sisse loginud kasutaja
       title: Talgute admin
@@ -60,7 +61,16 @@ et:
         error: Maakonna andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
     events:
       index:
+        filter:
+          new: Uued
+          published: Avalikustatud
+          closed: Suletud
         title: Talgud
+      map:
+        title: Talgute kaart
+      update:
+        notice: Talgu andmed on uuendatud
+        error: Talgu andmete uuendamisel tekkis viga
     municipalities:
       create:
         notice: Omavalitsuse andmed on lisatud
@@ -181,17 +191,19 @@ et:
         password: Salasõna
         password_confirmation: Salasõna kinnitus
       event:
-        begins_at: Toimumise aeg
-        ends_at: Toimumise lõppaeg
+        begins_at: Alguse kellaaeg
+        ends_at: "Lõpu kellaaeg ~"
         event_type: Talgute liik
-        gathering_location: Kogunemiskoht
+        gathering_location: Kogunemine
         gathering_time: Kogunemisaeg
         latitude: Pikkuskraad
+        location_address: Aadress
         location_address_county: Maakond
         location_address_municipality: Linn / vald
         location_address_settlement: Asula / küla
         location_address_street: Talgute toimumiskoht
         longitude: Laiuskraad
+        manager: Talgujuht
         max_participants: Talguliste maksimumarv
         meta_aim_description: Talgute eesmärk ja hüvang
         meta_job_description: Talgutööd
@@ -199,11 +211,21 @@ et:
         meta_provided_for_participiants: Talgulistele pakutav
         meta_subject_heritage_number: Objekti mälestise number
         meta_subject_info: Lähem info talguobjekti kohta
+        meta_subject_owner: Talguobjekti omanik
+        meta_subject_protegee: Kas objekt on kaitsealune?
         name: Talgute nimi
-        notes: Muu info
+        notes: Lisainfo
+        protegee_types:
+          nature_conservation: Objekt on looduskaitse all
+          heritage: Objekt on muinsuskaitse all
         status: Staatus
         statuses:
-          created: Uus
+          new: Uus
+          denied: Tagasi lükatud
+          finished: Suletud
+          published: Avalikustatud
+          registration_open: Registreerumiseks avatud
+          registration_closed: Registreerumine lõpetatud
       municipality:
         name: Omavalitsuse nimi
         kind: Tüüp

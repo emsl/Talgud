@@ -1,0 +1,20 @@
+<div id="fci-login">
+  <h1>Logi sisse</h1>
+
+  <div id="fci-login-top">
+  </div>
+
+  <%- form_for @user_session, :url => admin_user_sessions_path do |f| -%>
+
+    <%= f.label :email, "E-posti aadress" %>
+    <%= f.text_field :email, :class => "textfield" %><br />
+
+    <%= f.label :password, "Salasõna" %>
+    <%= f.password_field :password, :class => "textfield" %><br />
+
+    <%= f.check_box :remember_me %>
+    <%= f.label :remember_me, "Jäta mind meelde" %><br /><br />
+
+    <%= submit_tag "Logi sisse" %>
+  <%- end -%> 
+</div>
