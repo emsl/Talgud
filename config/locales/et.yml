@@ -164,6 +164,8 @@ et:
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     index:
       title: Talgud
+    my_events:
+      title: Minu talgud
   formtastic:
     labels:
       county:

@@ -12,5 +12,13 @@ class Role < ActiveRecord::Base
   
   validates_presence_of :role, :user, :model, :account
   
-  named_scope :for_model, lambda { |m| {:conditions => {:model => m}}}
+  #named_scope :role_for_model, lambda { |r, m| {:conditions => {:model => m, :role => r}}}
+  
+  def self.grant_role(role, user, m)
+    self.new(:role => role, :user => user, :model => m)
+  end
+  
+  def self.has_role?(role, user, m)
+    self.find(:conditions => {:model => m, :role => role, :user => user}).nil?
+  end
 end

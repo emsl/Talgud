@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
       role.role.underscore.to_sym
     end
     role_map << :event_manager if self.class.stamper
+    p role_map
     role_map
   end
   

@@ -3,15 +3,15 @@ class EventsController < ApplicationController
   filter_resource_access :additional_collection => [:my_events, :map]
   
   def index
-    @events = Event.with_permissions_to(:read)
+    @events = Event.published
   end
   
   def my_events
-    @events = Event.with_permissions_to(:manage)
+    @events = Event.my_events(@current_user)
   end
   
   def map
-    @events = Event.with_permissions_to(:read)
+    @events = Event.published
   end
   
   def new
@@ -37,6 +37,6 @@ class EventsController < ApplicationController
   
   protected
   def load_event    
-     Event.find_by_url(params[:id])
+     @event = Event.find_by_url(params[:id])
   end
 end

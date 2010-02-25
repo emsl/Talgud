@@ -3,7 +3,12 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe EventsController, 'index' do
   it 'should show a list of events'
   
-  it 'should be accessible by all users'
+  it 'should be accessible by all users' do
+    event = Factory(:event, :status => Event::STATUS[:new])
+    get :show, {:id => event.url}
+    response.should redirect_to(root_path)
+    #assigns[:event].should eql(event)
+  end
 end
 
 describe EventsController, 'new' do
@@ -33,19 +38,19 @@ end
 
 describe EventsController, 'show' do
   it 'should load event by event URL' do
-    event = Factory(:event)
+    event = Factory(:event, :status => Event::STATUS[:new] )
     get :show, {:id => event.url}
     response.should be_success
     assigns[:event].should eql(event)
   end
   
   it 'should not show unpublished event to public users' do
-    pending 'Vaja teha kui kõht on täis' do
-      event = Factory(:event, :status => Event::STATUS[:new])
-      get :show, {:id => event.url}
-      response.should redirect_to(events_path)
-    end
+    event = Factory(:event, :status => Event::STATUS[:new])
+    get :show, {:id => event.url}
+    response.should redirect_to(root_path)
   end
   
   it 'should show published event to event owner'
+  
+  it 'should show unpublished event to event owner'
 end
