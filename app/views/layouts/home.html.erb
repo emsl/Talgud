@@ -22,6 +22,15 @@
       </div>
     
       <div class="container clearfix"> 
+        <% unless flash.empty? %>
+        <div style="border: 1px solid green">
+          <% flash.each do |key, message| %>
+          <%= message %>
+          <% end %>
+        </div>
+        <br/>
+        <% end %>
+        
         <div class="container-left">
           <div class="orangebox-border"><div class="orangebox">
             <p>

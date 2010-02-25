@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   has_many :roles, :as => :model
 
   before_validation_on_create :set_defaults
-  before_save :grant_manager_role
+  after_save :grant_manager_role
   accepts_nested_attributes_for :roles
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants

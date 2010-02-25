@@ -3,7 +3,7 @@ class Role < ActiveRecord::Base
   acts_as_scoped :account
 
   ROLE = {
-    :guest => 'guest', :user => 'user', :system_administrator => 'system_administrator', :account_manager => 'account_manager',
+    :guest => 'guest', :system_administrator => 'system_administrator', :account_manager => 'account_manager',
     :regional_manager => 'regional_manager', :event_manager => 'event_manager', :event_participant => 'event_participant'
   }
   
@@ -11,14 +11,15 @@ class Role < ActiveRecord::Base
   belongs_to :model, :polymorphic => true
   
   validates_presence_of :role, :user, :model, :account
+  validates_uniqueness_of :role, :scope => [:user_id, :model_type, :model_id, :account_id] 
   
   #named_scope :role_for_model, lambda { |r, m| {:conditions => {:model => m, :role => r}}}
   
   def self.grant_role(role, user, m)
-    self.new(:role => role, :user => user, :model => m)
+    Role.create!(:role => role, :user => user, :model => m, :account => Account.current)
   end
   
-  def self.has_role?(role, user, m)
-    self.find(:conditions => {:model => m, :role => role, :user => user}).nil?
+  def self.has_role?(role, user, m)    
+    not self.first(:conditions => {:model_type => m.class.name, :model_id => m.id, :role => role, :user_id => user}).nil?
   end
 end

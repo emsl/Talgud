@@ -21,3 +21,25 @@ describe Role, 'validations' do
     end
   end
 end
+
+describe Role, 'has_role?, grant_role' do
+  before(:each) do
+    @valid_attributes = Factory.attributes_for(:role_system_administrator)
+    @valid_attributes[:user] = Factory(:user)
+    @valid_attributes[:model] = Factory(:account)
+  end
+
+  it "should return false on non-existing role" do
+    Role.has_role?(@valid_attributes[:role], @valid_attributes[:user], @valid_attributes[:model]).should be_false
+  end
+  
+  it "should grant role and return true on existing role" do
+    role = Role.grant_role(@valid_attributes[:role], @valid_attributes[:user], @valid_attributes[:model])
+    Role.has_role?(role.role, role.user, role.model).should be_true
+  end
+
+  it "should throw and exeption on existing permission" do
+    Role.grant_role(@valid_attributes[:role], @valid_attributes[:user], @valid_attributes[:model])
+    proc {Role.grant_role(@valid_attributes[:role], @valid_attributes[:user], @valid_attributes[:model])}.should raise_error(ActiveRecord::RecordInvalid)
+  end
+end

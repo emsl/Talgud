@@ -38,14 +38,14 @@ end
 
 describe EventsController, 'show' do
   it 'should load event by event URL' do
-    event = Factory(:event, :status => Event::STATUS[:new] )
+    event = Factory(:event)
     get :show, {:id => event.url}
     response.should be_success
     assigns[:event].should eql(event)
   end
   
   it 'should not show unpublished event to public users' do
-    event = Factory(:event, :status => Event::STATUS[:new])
+    event = Factory(:event)
     get :show, {:id => event.url}
     response.should redirect_to(root_path)
   end

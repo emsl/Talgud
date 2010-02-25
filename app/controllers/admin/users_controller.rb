@@ -12,6 +12,7 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def edit
+    @roles = @user.roles.all(:include => :model)
   end
   
   def create

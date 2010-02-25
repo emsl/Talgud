@@ -1,17 +1,17 @@
 class EventsController < ApplicationController
   
-  filter_resource_access :additional_collection => [:my_events, :map]
+  filter_resource_access :additional_collection => [:my, :map], :attribute_check => true
   
   def index
-    @events = Event.published
+    @events = Event.with_permissions_to(:read)
   end
   
-  def my_events
+  def my
     @events = Event.my_events(@current_user)
   end
   
   def map
-    @events = Event.published
+    @events = Event.with_permissions_to(:read)
   end
   
   def new
@@ -32,11 +32,12 @@ class EventsController < ApplicationController
   end
   
   def show
-    @events = Event.all(:origin => [@event.latitude, @event.longitude], :within => 10)
+    @events = Event.with_permissions_to(:read).all(:origin => [@event.latitude, @event.longitude], :within => 10)
   end
   
   protected
+  
   def load_event    
-     @event = Event.find_by_url(params[:id])
+    @event = Event.find_by_url(params[:id])
   end
 end

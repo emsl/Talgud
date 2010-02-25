@@ -2,7 +2,6 @@
   <li<%= ' class="active"' if %w{home}.include?(request.path_parameters[:controller]) %>><%= link_to 'Avaleht', home_path %></li>
   <li<%= ' class="active"' if %w{events}.include?(request.path_parameters[:controller]) && request.path_parameters[:action] == 'index' %>><%= link_to 'Talgud', events_path %></li>
   <% if current_user %>
-  <li<%= ' class="active"' if %w{my_events}.include?(request.path_parameters[:action]) %>><%= link_to 'Minu talgud', my_events_events_path %></li>
   <li><%= link_to 'Logi välja', logout_path %></li>
   <% else %>
   <li<%= ' class="active"' if %w{user_sessions password_reminder}.include?(request.path_parameters[:controller]) %>><%= link_to 'Logi sisse', login_path %></li>
