@@ -47,6 +47,6 @@ class Event < ActiveRecord::Base
 
   def set_defaults
     self.code = ActiveSupport::SecureRandom.base64(6).upcase
-    self.status = 'new'
+    self.status = 'new' if self.status.blank?
   end
 end
