@@ -1,9 +1,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe EventsController, 'index' do
-  it 'should show a list of events'
+  it 'should show a list of events' do
+    events = Array.new(10) { |i| Factory.create(:event) }
+    
+    get :index
+    assigns[:events].each { |e| events.should include(e) }
+  end
   
-  it 'should be accessible by all users'
+  it 'should be accessible by all users' do
+    get :index
+    response.should be_success
+  end
 end
 
 describe EventsController, 'new' do
@@ -12,23 +20,45 @@ describe EventsController, 'new' do
     response.should redirect_to(root_path)
   end
   
-  it 'should be displayed when any user is logged in' do
-    pending 'Tarmo teeb seda veel' do
-      activate_authlogic
-      UserSession.create Factory.build(:user)
+  it 'should be displayed when user is logged in' do
+    activate_authlogic
+    UserSession.create Factory.create(:user)
       
-      get :new
-      response.should be_success
-    end
+    get :new
+    response.should be_success
   end
 end
 
 describe EventsController, 'create' do
-  it 'should create event and assign current user as manager when event is valid'
   
-  it 'should send e-mail notification to region manager'
+  context 'with authenticated users' do
+    before(:each) do
+      @user = Factory.create(:user)
+      activate_authlogic
+      UserSession.create @user
+    end
+    
+    it 'should create event and assign current user as manager when event is valid' do
+      event = Factory.build(:event)
+      post :create, {:event => event.attributes}
+      response.should redirect_to(events_path)
+      assigns[:event].manager.should eql(@user)
+    end
+    
+    it 'should send e-mail notification to region manager'
+    
+    it 'should redisplay event create form when event data is invalid' do
+      event = Factory.build(:event)
+      post :create, {:event => event.attributes.merge(:name => '')}
+      response.should render_template(:new)
+    end
+  end
   
-  it 'should redisplay event create form when event data is invalid'
+  it 'should not be accessible to guests' do
+    event = Factory.build(:event)
+    post :create, {:event => event.attributes}
+    response.should redirect_to(root_path)
+  end
 end
 
 describe EventsController, 'show' do
@@ -40,12 +70,19 @@ describe EventsController, 'show' do
   end
   
   it 'should not show unpublished event to public users' do
-    pending 'Vaja teha kui kõht on täis' do
-      event = Factory(:event, :status => Event::STATUS[:new])
-      get :show, {:id => event.url}
-      response.should redirect_to(events_path)
-    end
+    event = Factory(:event, :status => Event::STATUS[:new])
+    get :show, {:id => event.url}
+    response.should redirect_to(root_path)
   end
   
-  it 'should show published event to event owner'
+  it 'should show unpublished event to event owner' do
+    user = Factory.create(:user)
+    activate_authlogic
+    UserSession.create user
+    
+    event = Factory(:event, :status => Event::STATUS[:new], :manager => user)
+    get :show, {:id => event.url}
+    response.should be_success
+    assigns[:event].should eql(event)
+  end
 end
