@@ -9,15 +9,8 @@ describe EventsController, 'index' do
   end
   
   it 'should be accessible by all users' do
-<<<<<<< HEAD
-    event = Factory(:event, :status => Event::STATUS[:new])
-    get :show, {:id => event.url}
-    response.should redirect_to(root_path)
-    #assigns[:event].should eql(event)
-=======
     get :index
     response.should be_success
->>>>>>> af5713103105d23df8d74164f063f0da8143d32e
   end
 end
 
@@ -77,20 +70,11 @@ describe EventsController, 'show' do
   end
   
   it 'should not show unpublished event to public users' do
-<<<<<<< HEAD
-    event = Factory(:event)
-=======
     event = Factory(:event, :status => Event::STATUS[:new])
->>>>>>> af5713103105d23df8d74164f063f0da8143d32e
     get :show, {:id => event.url}
     response.should redirect_to(root_path)
   end
   
-<<<<<<< HEAD
-  it 'should show published event to event owner'
-  
-  it 'should show unpublished event to event owner'
-=======
   it 'should show unpublished event to event owner' do
     user = Factory.create(:user)
     activate_authlogic
@@ -101,5 +85,4 @@ describe EventsController, 'show' do
     response.should be_success
     assigns[:event].should eql(event)
   end
->>>>>>> af5713103105d23df8d74164f063f0da8143d32e
 end
