@@ -262,6 +262,101 @@ input, textarea { color: #222; font: 13px/15px Arial, Verdana, sans-serif;}
                   * html .two-columns .column-2 {
                     margin-right: -3px;
                   }
+
+                  /* object-left */
+                    .object-left {
+                      float: left;
+                      width: 420px;
+                    }
+
+                  /* object-type */
+                    .object-type {
+                      float: left;
+                      font-size: 14px;
+                      background: #fffdbd;
+                      border: 1px solid #e3dd1d;
+                      padding: 3px 10px;
+                      -moz-border-radius: 3px;
+                      -webkit-border-radius: 3px;
+                      border-radius: 3px;
+                      margin-right: 10px;
+                      margin-bottom: 10px;
+                      width: 100px;
+                      text-align: center;
+                    }
+
+                  /* object-location */
+                    .object-location {
+                      width: 280px;
+                      float: left;
+                      font-size: 20px;
+                      line-height: 24px;
+                      padding-bottom: 10px;
+                    }
+                      .object-location a { text-decoration: none;}
+                      .object-location a:hover { text-decoration: underline; }
+
+                  /* object-info */
+                    .object-info {
+                      font-size: 16px;    
+                      line-height: 22px;
+                    }
+
+                  /* object-right */
+                    .object-right {
+                      float: right;
+                      width: 300px;
+                      margin: 0 0 20px 15px;
+                    }
+                    .object-right .bigbtn {
+                      cursor: pointer; 
+                      font-size: 16px; color: #333; margin-top: 10px; text-decoration: none; display: block; outline: 0; height: 32px; width: 247px; 
+                      padding: 14px 52px 0 0; text-align: center; background: url('../images/big_btn2.gif') no-repeat;
+                      -moz-border-radius: 5px;
+                      -webkit-border-radius: 5px;
+                      border-radius: 5px;
+                      -moz-box-shadow: 0 4px 6px #dedede;
+                      -webkit-box-shadow: 0 4px 6px #dedede;
+                      box-shadow: 0 4px 6px #dedede;
+                    }
+                    .object-right .bigbtn:hover { text-decoration: underline;}
+                    * html .object-right {
+                      margin-right: -3px;
+                    }
+
+                  /* object-detail */
+                    .object-detail {
+                      background: white;
+                      padding: 20px 10px;
+                      border-left: 1px solid #f0f1f2;
+                      border-right: 1px solid #eff1f2;
+                      border-bottom: 1px solid #d7d9d9;
+                      -moz-border-radius: 5px;
+                      -webkit-border-radius: 5px;
+                      border-radius: 5px;
+                      -moz-box-shadow: 1px 1px 1px #f0f0f0;
+                      -webkit-box-shadow: 0 1px 2px #dedede;
+                      box-shadow: 0 1px 2px #dedede;
+                      margin-top: 15px;
+                    }
+                    .object-detail table {
+                      margin: 0;
+                      padding: 0;
+                      border-collapse: collapse;
+                      width: 100%;
+
+                    }
+                      .object-detail td {
+                        vertical-align: top;
+                        padding: 10px 10px;
+                      }
+                      .object-detail td.first {
+                        font-size: 16px;
+                        font-weight: bold;
+                        text-align: right;
+                      }
+
+
           /* submenu */
             #submenu {
               width: 220px;
