@@ -6,7 +6,7 @@
   <meta name="description" content="" />
   <meta name="author" content="Fraktal" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title></title>
+  <title>Teeme ära! Talgud</title>
   <%= stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes' %>
   <!--[if IE]><%= stylesheet_link_tag 'style_ie' %><![endif]-->
   <%= javascript_include_tag 'jquery.min' %>
@@ -19,7 +19,7 @@
         <%= render 'shared/logo' %>
         <%= render 'shared/langmenu' %>
         <%= render 'shared/mainmenu' %>
-      </div> <!-- //header -->
+      </div>
     
       <div class="container clearfix">
         <% unless flash.empty? %>
@@ -28,16 +28,16 @@
           <%= message %>
           <% end %>
         </div>
+        <br/>
         <% end %>
         
         <%= yield %>
-      </div> <!-- //container -->
+      </div>
       <div class="grass">
         <a href="http://www.okia.ee" id="okia">Okia</a>
-      </div> <!-- //grass -->
-
-    </div> <!-- //wrap-inner -->
-  </div> <!-- //wrap -->
+      </div>
+    </div>
+  </div>
   <%= render 'shared/footer' %>
 </body>
 </html>

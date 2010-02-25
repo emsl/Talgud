@@ -2,6 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.activate '/activations/:activation_code', :controller => 'signups', :action => 'activate'
   map.admin 'admin', :controller => 'admin/events'
+  map.admin_login '/admin/login', :controller => 'admin/user_sessions', :action => 'new'
+  map.admin_logout '/admin/logout', :controller => 'admin/user_sessions', :action => 'destroy'
   map.home 'home', :controller => 'home'
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
@@ -14,14 +16,15 @@ ActionController::Routing::Routes.draw do |map|
         municipality.resources :settlements
       end
     end
-    admin.resources :events
+    admin.resources :events, :collection => {:map => :get}
     admin.resources :event_types
+    admin.resources :user_sessions
     admin.resources :users
     admin.resources :languages
   end
   
   map.resources :addresses, :collection => {:municipalities => :get, :settlements => :get}
-  map.resources :events
+  map.resources :events, :collection => {:map => :get}
   map.resources :password_reminders
   map.resources :signups
   map.resources :user_sessions

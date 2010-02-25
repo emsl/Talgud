@@ -266,6 +266,13 @@ input, textarea { color: #222; font: 13px/15px Arial, Verdana, sans-serif;}
             #submenu {
               width: 220px;
             }
+            #submenu .submenu-border {
+              border: 1px solid #ec920b;
+              border-radius: 5px;
+              -moz-border-radius: 5px;
+              -webkit-border-radius: 5px;
+              width: 187px;
+            }
               #submenu ul {
                 min-height: 179px;
                 width: 187px;
@@ -273,10 +280,10 @@ input, textarea { color: #222; font: 13px/15px Arial, Verdana, sans-serif;}
                 padding: 8px 0;
                 list-style-type: none;
                 background: #f7ad32;
-                border: 1px solid #ec920b;
-                border-radius: 5px;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
+                border-top: 1px solid #facf86;
+                border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
                 font-size: 17px;
                 line-height: 24px;
               }
@@ -287,10 +294,11 @@ input, textarea { color: #222; font: 13px/15px Arial, Verdana, sans-serif;}
                   text-align: right;
                   padding: 5px 20px 5px 10px;
                   position: relative;
+                  text-shadow: 0 1px 0 #facf86;
                 }
                   #submenu .arrow { position: absolute;display: none; z-index: 100; width:13px; height: 26px; background: url('../images/submenu_arrow.png') no-repeat top left; top: 5px; right: -13px;}
                   #submenu a { color:#333; text-decoration: none;}
-                  #submenu a:hover { text-decoration: underline;}
+                  #submenu a:hover { text-decoration: underline; }
                   #submenu .active a { font-weight: bold;}
                   #submenu .active .arrow { display: block;}
                   

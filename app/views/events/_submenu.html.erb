@@ -1,0 +1,11 @@
+<div id="submenu">
+  <div class="submenu-border">
+  <ul>
+    <li<%= ' class="active"' if %w{create new}.include?(action_name) %>><%= link_to 'Registreeri talgud', if current_user then new_event_path else signup_path end %><span class="arrow"></span></li>
+    <li<%= ' class="active"' if action_name == 'index' %>><%= link_to 'Näita kõiki', events_path %><span class="arrow"></span></li>
+    <li class="pending"><a href="#">Viimati lisatud</a><span class="arrow"></span></li>
+    <li class="pending"><a href="#">Populaarsemad</a><span class="arrow"></span></li>
+    <li<%= ' class="active"' if action_name == 'map' %>><%= link_to 'Näita kaardil', map_events_path %><span class="arrow"></span></li>
+  </ul>
+  </div>
+</div>

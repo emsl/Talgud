@@ -1,17 +1,31 @@
 <h1><%= t('.title') %></h1>
 
+<%# <div style="text-align: center; margin: 15px 0;"> %>
+  <%# %w{new published closed}.each do |status| %>
+  <%#= link_to t(".filter.#{status}"), admin_events_path(:filter => status), :class => if params[:filter] == status then :filter_button_selected else :filter_button end %>
+  <%# end %>
+<%# </div> %>
+
 <div class="datacontent">
   <table class="datatable">
   <thead>
   <tr>
     <th><%=h t('formtastic.labels.event.name') %></th>
+    <th><%=h t('formtastic.labels.event.manager') %></th>
+    <th><%=h t('formtastic.labels.event.location_address') %></th>
     <th><%=h t('formtastic.labels.event.status') %></th>
+    <th><%=h t('admin.common.created_at') %></th>
+    <th></th>
   </tr>
   </thead>
   <% for event in @events %>
   <tr>
     <td><%=h truncate(event.name) %></td>
+    <td><%=h event.manager.name %></td>
+    <td><%=h event.location_address %></td>
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
+    <td><%=h time_ago_in_words(event.created_at) unless event.created_at.nil? %> tagasi</td>
+    <td class="actions"><%= link_to t('admin.common.edit'), admin_event_path(event.id) %></td>
   </tr>
   <% end %>
   </table>

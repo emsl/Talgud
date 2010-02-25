@@ -29,6 +29,7 @@ Factory.define :event do |e|
   e.ends_at 2.days.from_now
   e.location_address_country_code 'ee'
   e.status Event::STATUS[:published]
+  e.max_participants 10
   
   e.association :event_type
   e.association :location_address_county, :factory => :county

@@ -1,3 +1,5 @@
+form.formtastic abbr, form.formtastic acronym { display: none; }
+
 form.formtastic fieldset { display: block; }
 
 form.formtastic fieldset ol li { 
@@ -14,6 +16,7 @@ form.formtastic fieldset ol li label {
 }
 
 form.formtastic fieldset ol li p.inline-hints { display: none; }
+form.formtastic fieldset ol li p.inline-errors { margin: 0; }
 
 form.formtastic fieldset.buttons {
   padding: 0;
@@ -26,6 +29,7 @@ form.formtastic fieldset ol li.select select {
 
 form.formtastic fieldset ol li.string input,
 form.formtastic fieldset ol li.numeric input,
+form.formtastic fieldset ol li.password input,
 form.formtastic fieldset ol li.text textarea {
   width: 408px;
   border: 1px solid #aaaaaa;
@@ -40,7 +44,11 @@ form.formtastic fieldset ol li.text textarea {
 }
 
 form.formtastic div.form-extra fieldset ol li {
-  padding: 0;
+  padding-bottom: 5px;
+}
+
+form.formtastic div.form-extra fieldset ol li.select select {
+  width: 395px;
 }
 
 form.formtastic div.form-extra fieldset ol li.string input,

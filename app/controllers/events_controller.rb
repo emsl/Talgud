@@ -1,9 +1,13 @@
 class EventsController < ApplicationController
   
-  filter_resource_access
+  filter_resource_access :additional_collection => :map
   
   def index
-    @events = Event.all
+    @events = Event.published
+  end
+  
+  def map
+    @events = Event.published
   end
   
   def new
@@ -19,7 +23,7 @@ class EventsController < ApplicationController
       redirect_to events_path
     else
       render :new
-      flash[:error] = t('events.create.error')
+      flash.now[:error] = t('events.create.error')
     end
   end
   
