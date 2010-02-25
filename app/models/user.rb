@@ -28,13 +28,13 @@ class User < ActiveRecord::Base
   # constants defined here.
   STATUS = {:created => 'created', :active => 'active'}
   
+  # Returns role symbols for current role
   def role_symbols
     role_map = roles.map do |role|
-      role.name.underscore.to_sym
+      role.role.underscore.to_sym
     end
-    # TODO
-    role_map << :user
-    role_map << :account_manager
+    role_map << :event_manager if self.class.stamper
+    role_map
   end
   
   # Returns full name for given user.

@@ -152,6 +152,8 @@ et:
     create:
       notice: Talgu andmed on lisatud!
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
+    index:
+      title: Talgud
   formtastic:
     labels:
       county:

@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality
   
-  named_scope :published, :conditions => {:status => ['published', 'registration_open', 'registration_closed']}
+  #named_scope :published, :conditions => {:status => ['published', 'registration_open', 'registration_closed']}
   named_scope :latest, lambda { |count| {:limit => count, :order => 'created_at DESC'} }
   
   def to_param

@@ -1,12 +1,17 @@
 class EventsController < ApplicationController
   
-  filter_resource_access
+  filter_resource_access :additional_collection => [:my_events]
   
   def index
-    @events = Event.all
+    @events = Event.with_permissions_to(:read)
+  end
+  
+  def my_events
+    @events = Event.with_permissions_to(:manage)
   end
   
   def new
+    
   end
   
   def create
@@ -28,8 +33,7 @@ class EventsController < ApplicationController
   end
   
   protected
-  
-  def load_event
-    @event = Event.find_by_url(params[:id])
+  def load_event    
+     Event.find_by_url(params[:id])
   end
 end

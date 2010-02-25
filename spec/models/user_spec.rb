@@ -44,6 +44,25 @@ describe User, 'activate!' do
   end
 end
 
+describe User, 'role_symbols' do
+  it 'should return no roles for unauthenticated user' do
+    user = Factory(:user)
+    user.role_symbols.should be_empty
+  end
+
+  it 'should return :user role for authenticated user' do
+    user = Factory(:user)
+    user.class.stamper = Factory(:user).id
+    user.role_symbols.should include(:event_manager)
+  end
+
+  it 'should return :system_administrator role if granted' do
+    role = Factory(:role_system_administrator)    
+    role.user.role_symbols.should include(:system_administrator)
+  end
+end
+
+
 describe User, 'reset_password!' do
   it 'should set new password for user' do
     user = Factory(:user)

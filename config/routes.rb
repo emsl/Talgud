@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resources :addresses, :collection => {:municipalities => :get, :settlements => :get}
-  map.resources :events
+  map.resources :events, :collection => {:my_events => :get} 
   map.resources :password_reminders
   map.resources :signups
   map.resources :user_sessions

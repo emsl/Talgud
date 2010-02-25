@@ -1,6 +1,6 @@
 Factory.define :account do |a|
   a.name 'Account'
-  a.domain 'test.local'
+  a.sequence(:domain) { |n| "test#{n}.local" }
 end
 
 Factory.define :county do |c|
@@ -36,8 +36,10 @@ Factory.define :event do |e|
   e.association :manager, :factory => :user
 end
 
-Factory.define :role do |r|
-  
+Factory.define :role_system_administrator, :class => Role do |r|
+  r.role Role::ROLE[:system_administrator]
+  r.association :user
+  r.association :model, :factory => :account
 end
 
 Factory.define :user do |u|

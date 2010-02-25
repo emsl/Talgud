@@ -8,6 +8,9 @@ class Role < ActiveRecord::Base
   }
   
   belongs_to :user
+  belongs_to :model, :polymorphic => true
   
-  validates_presence_of :role, :user, :model
+  validates_presence_of :role, :user, :model, :account
+  
+  named_scope :for_model, lambda { |m| {:conditions => {:model => m}}}
 end

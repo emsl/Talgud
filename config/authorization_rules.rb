@@ -8,8 +8,15 @@ authorization do
   end
 
   role :event_manager do
+    includes :guest
     has_permission_on [:events], :to => [:manage]
     has_permission_on [:event_participant], :to => [:manage]
+    has_permission_on [:events], :to => [:create, :read]
+    has_permission_on [:my_events], :to => [:read, :update] do
+      if_attribute :status => is {'finished'}
+      if_attribute :status => is {'new'}
+      if_attribute :status => is {'denied'}
+    end
   end
 
   role :event_participant do
@@ -17,23 +24,28 @@ authorization do
   end
 
   role :guest do
-    has_permission_on [:home], :to => [:see]
+    has_permission_on [:home], :to => [:read]
     has_permission_on [:user_sessions], :to => [:manage]
-    has_permission_on [:events], :to => [:see]
-  end
-
-  role :user do
-    includes :guest
-    has_permission_on [:events], :to => [:new, :create]
+    has_permission_on [:events], :to => [:read] do
+      if_attribute :status => is {'published'}
+      if_attribute :status => is {'registration_open'}
+      if_attribute :status => is {'registration_closed'}
+    end
   end
 end
 
 privileges do
   privilege :manage do
-    includes :show, :new, :create, :edit, :update, :destroy, :see
+    includes :create, :edit, :destroy, :read
   end
 
-  privilege :see do
+  privilege :create do
+    includes :new, :create
+  end
+  privilege :edit do
+    includes :edit, :update
+  end
+  privilege :read do
     includes :index, :show
   end
 end
