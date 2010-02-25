@@ -8,13 +8,13 @@ class EventsController < ApplicationController
   
   def my_events
     @events = Event.with_permissions_to(:manage)
+  end
   
   def map
     @events = Event.with_permissions_to(:read)
   end
   
   def new
-    
   end
   
   def create
