@@ -102,6 +102,25 @@
   <% end %>
 </div>
 
+<script type="text/javascript" charset="utf-8">
+  jQuery(document).ready(function() {
+      var bubble = document.createElement('div');
+      $(bubble).attr('class', 'bubble').html('<div class="bubble-arrow"></div><div class="bubble-inner"></div>');
+    
+      displayHint = function(list_item) {
+          var hint = $(list_item).find('p.inline-hints')
+          if (hint.length > 0) {
+              $(bubble).find('.bubble-inner').text($(hint[0]).text());
+              list_item.append($(bubble));
+          }
+      }
+    
+      $('form.formtastic fieldset li input, form.formtastic fieldset li select, form.formtastic fieldset li textarea').focus(function() {
+          displayHint($(this).parent('li'));
+      });
+  });
+</script>
+
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8">
 

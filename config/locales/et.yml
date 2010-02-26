@@ -258,15 +258,20 @@ et:
         name: Küla või asula nimi
     hints:
       event:
-        name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
+        begin_time: Talgute alguse kellaaeg
+        end_time: Talgute prognoositav lõpuaeg
+        gathering_location: "Kogunemise koht ja kellaaeg, vajadusel ka kohalejõudmise juhised. Mõistlik on kogunemine leppida kergesti leitavas kohas."
+        location_address_street: Sisesta võimalikult täpne aadress
+        max_participants: "Märgi oodatav talguliste arv, mis on mõistlik ja vajalik tööde tegemiseks ning mida jõuad hallata"
         meta_aim_description: "Kelle või mille hüvanguks talgutöid tehakse, mis on talgute eesmärk või kasu. Või mis on edasised plaanid talguobjektiga."
         meta_job_description: "Märgi kõik kavandatavad talgutööde tüübid (nt võsa saagimine, langetatud võsa ja okste korjamine ning põletamine)"
-        max_participants: "Märgi oodatav talguliste arv, mis on mõistlik ja vajalik tööde tegemiseks ning mida jõuad hallata"
-        begins_at: Talgute alguse kellaaeg ja prognoositav lõpuaeg
         meta_bring_with_you: "Mida osalejatel on vaja kaasa võtta: nt kindad, tööriistad, muud vahendid, piknikukorv, kummikud"
         meta_provided_for_participiants: "Mida korraldajana saad talgulistele pakkuda, väga teretulnud on kohaliku paiga, muinsusväärtuse, looduse või külaseltsi tegemiste lühitutvustus. Siia märgi ka muu talgulise meelehea vastavalt võimalustele: nt soe tee, supp, pillimees, väike meene või saun."
+        meta_subject_heritage_number: Muinsuskaitsealuse objekti puhul sisesta mälestise number
         meta_subject_info: Võimalusel viide objekti puudutavale veebilehele
-        gathering_location: "Kogunemise koht ja kellaaeg, vajadusel ka kohalejõudmise juhised. Mõistlik on kogunemine leppida kergesti leitavas kohas."
+        meta_subject_owner: "Kes on talguobjekti/kinnistu omanik ja rentnik või valdaja, mida korrastatakse või millel talgud toimuvad"
+        meta_subject_protegee: "Kas objekt on äkki looduskaitse all või muinsuskaitse all?"
+        name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
         notes: Vajadusel lisa siia talgulistele oluline muu info
     actions:
       create: "Lisa {{model}}"
