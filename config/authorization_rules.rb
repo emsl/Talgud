@@ -12,9 +12,8 @@ authorization do
   role :event_manager do
     includes :guest
     has_permission_on [:event_participant], :to => [:manage]
-    has_permission_on [:events], :to => [:my, :update], :join_by => :and do
-      if_attribute :roles => {:user => contains {user} }
-      if_attribute :roles => {:role => Role::ROLE[:event_manager] }
+    has_permission_on [:events], :to => [:my, :update] do
+      if_attribute :roles => {:user => contains {user}, :role => Role::ROLE[:event_manager] }
     end
   end
 
