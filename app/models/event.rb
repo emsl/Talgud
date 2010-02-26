@@ -52,6 +52,11 @@ class Event < ActiveRecord::Base
     m = location_address_county.regional_managers if location_address_county and m.empty?
     m
   end
+  
+  # Returns list of users who have permissions to manage this event.
+  def managers
+    self.roles.all(:conditions => {:role => Role::ROLE[:event_manager]}).collect{ |r| r.user }
+  end
 
   private
 

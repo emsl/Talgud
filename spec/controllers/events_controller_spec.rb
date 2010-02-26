@@ -90,6 +90,7 @@ describe EventsController, 'show' do
     UserSession.create user
     
     event = Factory(:event, :status => Event::STATUS[:new], :manager => user)
+    
     get :show, {:id => event.url}
     response.should be_success
     assigns[:event].should eql(event)
