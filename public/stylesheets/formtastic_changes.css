@@ -18,6 +18,10 @@ form.formtastic fieldset ol li label {
 form.formtastic fieldset ol li p.inline-hints { display: none; }
 form.formtastic fieldset ol li p.inline-errors { margin: 0; }
 
+html[xmlns] form.formtastic fieldset ol li.hidden {
+  display: none;
+}
+
 form.formtastic fieldset.buttons {
   padding: 0;
 }

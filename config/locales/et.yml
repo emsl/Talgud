@@ -196,8 +196,10 @@ et:
         password: Salasõna
         password_confirmation: Salasõna kinnitus
       event:
-        begins_at: Alguse kellaaeg
-        ends_at: "Lõpu kellaaeg ~"
+        begin_time: Alguse kellaaeg
+        end_time: "Lõpu kellaaeg ~"
+        begins_at: Algusaeg
+        ends_at: Lõpuaeg
         event_type: Talgute liik
         gathering_location: Kogunemine
         gathering_time: Kogunemisaeg

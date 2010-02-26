@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   acts_as_scoped :account
   acts_as_url :name, :scope => :account_id, :only_when_blank => true
   acts_as_mappable :lat_column_name => :latitude, :lng_column_name => :longitude
-
+  
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :finished => 'finished', :denied => 'denied'}
   PROTEGEE_TYPES = {:nature_conservation => 'nature_conservation', :heritage => 'heritage'}
 
@@ -31,13 +31,37 @@ class Event < ActiveRecord::Base
   def to_param
     url
   end
-
+  
   def location_address
     [location_address_county, location_address_municipality, location_address_settlement].compact.map(&:name).join(', ')
   end
 
   def published?
     [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]].include?(self.status)
+  end
+  
+  def begin_time=(new_time)
+    new_time = new_time.split(':')
+    if self.begins_at
+      self.begins_at = self.begins_at.change(:hour => new_time[0].to_i)
+      self.begins_at = self.begins_at.change(:min => new_time[1].to_i)
+    end
+  end
+  
+  def begin_time
+    begins_at.strftime('%H:%M').gsub(/^0/, '') if begins_at
+  end
+  
+  def end_time=(new_time)
+    new_time = new_time.split(':')
+    if self.ends_at
+      self.ends_at = self.ends_at.change(:hour => new_time[0].to_i)
+      self.ends_at = self.ends_at.change(:min => new_time[1].to_i)
+    end
+  end
+
+  def end_time
+    ends_at.strftime('%H:%M').gsub(/^0/, '') if ends_at
   end
   
   # Tries to find user records that suit best to manage this event. It will be searched through address object. Any
