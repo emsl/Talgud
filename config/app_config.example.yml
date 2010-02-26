@@ -1,2 +1,17 @@
 development:
-  
+  mailer:
+    from_name: From Name
+    from_address: no-reply@example.com
+    manager_locale: en
+
+test:
+  mailer:
+    from_name: From Name
+    from_address: no-reply@example.com
+    manager_locale: en
+
+production:
+  mailer:
+    from_name: From Name
+    from_address: no-reply@example.com
+    manager_locale: en

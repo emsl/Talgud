@@ -9,7 +9,7 @@ deploy.task :after_update, :roles => [:app] do
     note that it is not advised to store configuration files in public code repository.
   DESC
   top.upload('./config/database.yml', "#{release_path}/config/database.yml")
-  # top.upload('./config/app_config.yml', "#{release_path}/config/app_config.yml")
+  top.upload('./config/app_config.yml', "#{release_path}/config/app_config.yml")
 end
 
 deploy.task :after_update_code, :roles => [:app] do
