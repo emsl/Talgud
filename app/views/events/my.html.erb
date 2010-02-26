@@ -1,17 +1,10 @@
-<h1><%= t('.title') %></h1>
+<div class="container-left">
+  <%= render 'submenu' %>
+</div>
+<div class="container-right">
+  <h1><%= t('.title') %></h1>
 
-<p>
-  <%= link_to 'Lisa talgu', new_event_path %>
-  <%= link_to 'Vaata kaarti', '#showmap', :onclick => "$('#show_by_map').show();$('#show_by_list').hide();return false;" %>
-  <%= link_to 'Vaata nimekirjana', '#showlist', :onclick => "$('#show_by_list').show();$('#show_by_map').hide();return false;" %>
-</p>
-
-<div id="show_by_list" style="display: none;">
-  <ul>
   <% for event in @events %>
   <li><%= link_to event.name, event_path(event) %></li>
   <% end %>
-  </ul>
 </div>
-
-<%= render 'map' %>

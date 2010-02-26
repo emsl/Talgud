@@ -7,4 +7,6 @@ class Settlement < ActiveRecord::Base
   belongs_to :municipality
   
   validates_presence_of :name, :kind, :municipality
+  
+  default_scope :conditions => {:deleted_at => nil}
 end

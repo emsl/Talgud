@@ -8,4 +8,6 @@ class Municipality < ActiveRecord::Base
   has_many :settlements
   
   validates_presence_of :name, :kind, :county
+  
+  default_scope :conditions => {:deleted_at => nil}
 end

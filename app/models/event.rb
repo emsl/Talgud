@@ -16,17 +16,17 @@ class Event < ActiveRecord::Base
 
   before_validation_on_create :set_defaults
   after_save :grant_manager_role
-  accepts_nested_attributes_for :roles
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
-    record.errors.add attr, 'peab olema tulevikus' unless record.begins_at < value
+    record.errors.add attr, :in_past, :date => record.begins_at unless record.begins_at < value
   end 
 
-  named_scope :published, :conditions => {:status => ['published', 'registration_open', 'registration_closed']}
+  named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
   named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}} }}
   named_scope :latest, lambda { |count| {:limit => count, :order => 'created_at DESC'} }
+  default_scope :conditions => {:deleted_at => nil}
 
   def to_param
     url
@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
   end
 
   def published?
-    ['published', 'registration_open', 'registration_closed'].include?(self.status)
+    [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]].include?(self.status)
   end
 
   private
