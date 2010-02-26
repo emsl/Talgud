@@ -30,6 +30,7 @@ et:
         password_missing: parool ei tohi olla tühi
         password_too_short: salasõna on liiga lühike
         password_confirmation_do_not_match: salasõna kordus ei klapi
+        in_past: "peab kuupäeva {{date}} suhtes olema tulevikus"
     models:
       account: konto
       county: maakond

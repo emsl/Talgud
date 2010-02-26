@@ -3,6 +3,7 @@ class Admin::UsersController < Admin::AdminController
   
   def index
     @users = User.all
+    #@users = User.with_permissions_to(:manage)
   end
   
   def new

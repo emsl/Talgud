@@ -3,15 +3,16 @@ class EventsController < ApplicationController
   filter_resource_access :additional_collection => [:my, :map], :attribute_check => true
   
   def index
-    @events = Event.with_permissions_to(:read)
+    @events = Event.with_permissions_to(:read).all(:order => 'begins_at ASC')
   end
   
   def my
-    @events = Event.my_events(@current_user)
+    #@events = Event.my_events(@current_user).all(:order => 'begins_at ASC')
+    @events = Event.with_permissions_to(:my).all(:order => 'begins_at ASC')
   end
   
   def map
-    @events = Event.with_permissions_to(:read)
+    @events = Event.with_permissions_to(:read).all(:order => 'begins_at ASC')
   end
   
   def new

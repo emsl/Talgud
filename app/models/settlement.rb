@@ -10,5 +10,7 @@ class Settlement < ActiveRecord::Base
   has_many :regional_managers, :through => :regional_manager_roles, :source => :user
   
   validates_presence_of :name, :kind, :municipality
+  
+  default_scope :conditions => {:deleted_at => nil}
 
 end

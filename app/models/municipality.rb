@@ -12,4 +12,6 @@ class Municipality < ActiveRecord::Base
   
   validates_presence_of :name, :kind, :county
   
+  default_scope :conditions => {:deleted_at => nil}
+
 end
