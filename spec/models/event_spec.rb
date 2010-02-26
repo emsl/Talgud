@@ -21,3 +21,29 @@ describe Event, 'create' do
     @event.roles.collect(&:role).should include(Role::ROLE[:event_manager])
   end
 end
+
+describe Event, 'regional_managers' do
+  before(:each) do
+    @regional_manager = Factory(:user)
+
+    @county = Factory(:county)
+    @municipality = Factory(:municipality)
+    @settlement = Factory(:settlement)
+    @event = Factory(:event, :location_address_settlement => @settlement, :location_address_municipality => @municipality, :location_address_county => @county)
+  end
+  
+  it 'should give list of users associated with event location settlement if available' do
+    Role.grant_role(Role::ROLE[:regional_manager], @regional_manager, @settlement)
+    @event.regional_managers.should include(@regional_manager)
+  end
+  
+  it 'should give list of users associated with event location municipality if available' do
+    Role.grant_role(Role::ROLE[:regional_manager], @regional_manager, @municipality)
+    @event.regional_managers.should include(@regional_manager)
+  end
+  
+  it 'should give list of users associated with event location county if available' do
+    Role.grant_role(Role::ROLE[:regional_manager], @regional_manager, @county)
+    @event.regional_managers.should include(@regional_manager)
+  end
+end

@@ -9,7 +9,7 @@ class SignupsController < ApplicationController
     @user = User.new(params[:signup])
     if @user.valid?
       @user.save_without_session_maintenance
-      UserMailer.deliver_activation_instructions(@user, activate_url(@user.perishable_token))
+      Mailers::UserMailer.deliver_activation_instructions(@user, activate_url(@user.perishable_token))
     else
       flash[:error] = t('signups.create.error')
       render :new

@@ -31,6 +31,15 @@ Factory.define :event do |e|
   e.status Event::STATUS[:published]
   e.max_participants 10
   
+  # Metadata
+  e.gathering_location 'Gathering location'
+  e.notes 'Notes'
+  e.meta_bring_with_you 'Bring with you :)'
+  e.meta_provided_for_participiants 'Provided for participants'
+  e.meta_subject_info 'Subject info'
+  e.meta_aim_description 'Aim description'
+  e.meta_job_description 'Job description'
+  
   e.association :event_type
   e.association :location_address_county, :factory => :county
   e.association :location_address_municipality, :factory => :municipality

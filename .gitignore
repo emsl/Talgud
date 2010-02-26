@@ -1,7 +1,9 @@
 .DS_Store
+config/app_config.yml
 config/database.yml
 config/deploy/staging.rb
 config/deploy/production.rb
+coverage
 db/schema.rb
 log/*.log
 test/*

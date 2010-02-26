@@ -4,7 +4,7 @@ describe PasswordRemindersController, 'create' do
 
   it 'should let user model generate new password and redirect to login screen' do
     user = Factory(:user)
-    UserMailer.should_receive(:deliver_password_reminder)
+    Mailers::UserMailer.should_receive(:deliver_password_reminder)
     
     post :create, {:email => user.email}
     response.should redirect_to(login_path)
@@ -13,7 +13,7 @@ describe PasswordRemindersController, 'create' do
   
   it 'should set a warning message and redirect to login screen when user is not found' do
     user = Factory(:user)
-    UserMailer.should_not_receive(:deliver_password_reminder)
+    Mailers::UserMailer.should_not_receive(:deliver_password_reminder)
     
     post :create, {:email => "not_#{user.email}"}
     response.should redirect_to(login_path)

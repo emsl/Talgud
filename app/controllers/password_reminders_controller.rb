@@ -5,7 +5,7 @@ class PasswordRemindersController < ApplicationController
     if user
       new_pwd = user.reset_password!
       
-      UserMailer.deliver_password_reminder(user, new_pwd, login_url)
+      Mailers::UserMailer.deliver_password_reminder(user, new_pwd, login_url)
       
       flash[:notice] = t('password_reminders.create.notice')
     else

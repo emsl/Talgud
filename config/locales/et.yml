@@ -4,9 +4,9 @@ et:
     errors: 
       messages: 
         accepted: "peab olema aktsepteeritud"
-        blank: "ei tohi olla tühi"
+        blank: "peab olema sisestatud"
         confirmation: "ei kattu kinnitusega"
-        empty: "ei tohi olla tühi"
+        empty: "peab olema sisestatud"
         equal_to: "peab olema võrdne {{count}}"
         even: "peab olema paaris"
         exclusion: "reserveeritud"
@@ -16,7 +16,7 @@ et:
         invalid: "on vales formaadis"
         less_than: "peab olema väiksem kui {{count}}"
         less_than_or_equal_to: "peab olema väiksem võrdne {{count}}"
-        not_a_number: "ei ole number"
+        not_a_number: "peab olema number"
         odd: "peab olema paaritu"
         record_invalid: "valideerimine ebaõnnestus: {{errors}}"
         taken: "{{value}} on juba kasutusel"
@@ -274,6 +274,21 @@ et:
     common:
       hello: Tere!
       footer_text: "Sinu Talgute meeskond."
+    user_mailer:
+      activation_instructions:
+        subject: Talgute keskkonna kasutajakonto aktiveerimine
+        intro: "Aitäh, et registreerusid Talgute keskkonnas kasutajaks. Kasutajakonto aktiveerimiseks klikkige alloleval lingil:"
+        activation_url_usage: "Kui see link ei tööta, proovi see kopeerida oma internetilehitseja aadressireale."
+      password_reminder:
+        subject: Sinu Talgute keskkonna salasõna meeldetuletus
+        intro: Tellisid omale Talgute keskkonnast uue salasõna.
+        your_new_password: "Sinu uus salasõna on: {{password}}"
+        login_at_url: "Sisse saad logida aadressilt {{login_url}}"
+    event_mailer:
+      region_manager_notification:
+        subject: Talgu registreerumise teavitus
+        intro: "Talgute keskkonnas registreeriti uus talgu järgmiste andmetega:"
+        admin_url: Talgu andmeid saab hallata aadressilt
   password_reminders:
     create:
       notice: Uus salasõna on saadetud sinu e-posti aadressile
@@ -285,16 +300,6 @@ et:
     activate: 
       activation_successful: "Sinu konto aktiveerimine oli edukas"    
       invalid_activation_code: "Vigane aktiveerimise kood, palun kontrolli mailis olevat linki."
-  user_mailer:
-    activation_instructions:
-      subject: Talgute keskkonna kasutajakonto aktiveerimine
-      intro: "Aitäh, et registreerusid Talgute keskkonnas kasutajaks. Kasutajakonto aktiveerimiseks klikkige alloleval lingil:"
-      activation_url_usage: "Kui see link ei tööta, proovi see kopeerida oma internetilehitseja aadressireale."
-    password_reminder:
-      subject: Sinu Talgute keskkonna salasõna meeldetuletus
-      intro: Tellisid omale Talgute keskkonnast uue salasõna.
-      your_new_password: "Sinu uus salasõna on: {{password}}"
-      login_at_url: "Sisse saad logida aadressilt {{login_url}}"
   user_sessions:
     create:
       error: Sisestatud kasutajanimi ja salasõna ei klapi

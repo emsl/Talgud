@@ -30,33 +30,42 @@ describe EventsController, 'new' do
 end
 
 describe EventsController, 'create' do
+  before(:each) do
+    @user = Factory.create(:user)
+    @event = Factory.build(:event)
+  end
   
   context 'with authenticated users' do
     before(:each) do
-      @user = Factory.create(:user)
       activate_authlogic
       UserSession.create @user
     end
     
     it 'should create event and assign current user as manager when event is valid' do
-      event = Factory.build(:event)
-      post :create, {:event => event.attributes}
-      response.should redirect_to(events_path)
+      post :create, {:event => @event.attributes}
+      response.should redirect_to(event_path(assigns[:event]))
       assigns[:event].manager.should eql(@user)
     end
     
-    it 'should send e-mail notification to region manager'
+    it 'should send e-mail notification to region manager' do
+      county = Factory(:county)
+      regional_manager = Factory(:user)
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
+      
+      @event.location_address_county = county
+      Mailers::EventMailer.should_receive(:deliver_region_manager_notification)
+      
+      post :create, {:event => @event.attributes}
+    end
     
     it 'should redisplay event create form when event data is invalid' do
-      event = Factory.build(:event)
-      post :create, {:event => event.attributes.merge(:name => '')}
+      post :create, {:event => @event.attributes.merge(:name => '')}
       response.should render_template(:new)
     end
   end
   
   it 'should not be accessible to guests' do
-    event = Factory.build(:event)
-    post :create, {:event => event.attributes}
+    post :create, {:event => @event.attributes}
     response.should redirect_to(root_path)
   end
 end
@@ -84,5 +93,12 @@ describe EventsController, 'show' do
     get :show, {:id => event.url}
     response.should be_success
     assigns[:event].should eql(event)
+  end
+end
+
+describe EventsController, 'map' do
+  it 'should be accessible to all users' do
+    get :map
+    response.should be_success
   end
 end

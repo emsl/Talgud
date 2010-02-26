@@ -21,11 +21,11 @@ class Event < ActiveRecord::Base
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
-    record.errors.add attr, 'peab olema tulevikus' unless record.begins_at < value
+    record.errors.add attr, 'peab olema tulevikus' if not record.begins_at.nil? and record.begins_at > value
   end 
 
   named_scope :published, :conditions => {:status => ['published', 'registration_open', 'registration_closed']}
-  named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}} }}
+  named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}} }
   named_scope :latest, lambda { |count| {:limit => count, :order => 'created_at DESC'} }
 
   def to_param
@@ -38,6 +38,19 @@ class Event < ActiveRecord::Base
 
   def published?
     ['published', 'registration_open', 'registration_closed'].include?(self.status)
+  end
+  
+  # Tries to find user records that suit best to manage this event. It will be searched through address object. Any
+  # address item (county, municipality, settlement) may have a manager associated with it. This method looks for the
+  # smallest region first, thereby starting from settlement and moving up to county level.
+  #
+  # Method always returns an array of users rather than a single record. Please note that empty array may be returned.
+  def regional_managers
+    m = []
+    m = location_address_settlement.regional_managers if location_address_settlement
+    m = location_address_municipality.regional_managers if location_address_municipality and m.empty?
+    m = location_address_county.regional_managers if location_address_county and m.empty?
+    m
   end
 
   private

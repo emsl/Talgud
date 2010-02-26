@@ -11,14 +11,14 @@ end
 describe SignupsController, 'create' do
   it 'should create new user record if it is valid and render validation notify screen' do
     User.should_receive(:new).and_return(mock_model(User, :valid? => true, :save_without_session_maintenance => true, :perishable_token => 'abc'))
-    UserMailer.should_receive(:deliver_activation_instructions)
+    Mailers::UserMailer.should_receive(:deliver_activation_instructions)
     post :create
     response.should render_template(:create)
   end
   
   it 'should send activation message to user after successful signup' do
     User.should_receive(:new).and_return(mock_model(User, :valid? => true, :save_without_session_maintenance => true, :perishable_token => 'abc'))
-    UserMailer.should_receive(:deliver_activation_instructions)
+    Mailers::UserMailer.should_receive(:deliver_activation_instructions)
     post :create
   end
   

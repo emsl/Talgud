@@ -1,0 +1,11 @@
+Autotest.add_hook :initialize do |at|
+
+  at.add_mapping(/app\/models\/mailers\/(.*).rb/, true) do |filename, matchdata|
+    ["spec/mailers/#{matchdata[1]}_spec.rb"]
+  end
+
+  at.add_mapping(/spec\/mailers\/(.*).rb/, true) do |filename, matchdata|
+    ["spec/mailers/#{matchdata[1]}.rb"]
+  end
+
+end

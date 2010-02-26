@@ -7,7 +7,7 @@
   <td><%=h @event.event_type.name %></td>
 </tr>
 <tr>
-  <td><b>Talgujuht</b></td>
+  <td><b><%= t('formtastic.labels.event.manager') %></b></td>
   <td><%=h @event.manager.name %></td>
 </tr>
 <tr>
@@ -53,10 +53,6 @@
 <tr>
   <td><b><%= t('formtastic.labels.event.gathering_location') %></b></td>
   <td><%=h @event.gathering_location %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.gathering_time') %></b></td>
-  <td><%=h @event.gathering_time %></td>
 </tr>
 <tr>
   <td><b><%= t('formtastic.labels.event.notes') %></b></td>
