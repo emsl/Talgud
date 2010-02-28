@@ -166,7 +166,7 @@ et:
       notice: Talgu andmed on lisatud!
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     index:
-      title: Talgud
+      title: Kõik talgud
     my:
       title: Minu talgud
   formtastic:

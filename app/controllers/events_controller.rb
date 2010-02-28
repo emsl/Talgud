@@ -3,16 +3,20 @@ class EventsController < ApplicationController
   filter_resource_access :additional_collection => [:my, :map], :attribute_check => true
   
   def index
-    @events = Event.with_permissions_to(:read).all(:order => 'begins_at ASC')
+    @events = Event.with_permissions_to(:read).all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
   end
   
   def my
-    #@events = Event.my_events(@current_user).all(:order => 'begins_at ASC')
-    @events = Event.with_permissions_to(:my).all(:order => 'begins_at ASC')
+    @events = Event.my_events(@current_user).all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
+    # @events = Event.with_permissions_to(:my).all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
   end
   
   def map
-    @events = Event.with_permissions_to(:read).all(:order => 'begins_at ASC')
+    @events = Event.with_permissions_to(:read).all(:select => 'name, latitude, longitude, url', :order => 'begins_at ASC')
+    respond_to do |format|
+      format.html
+      format.json { render :json => events_json_hash(@events) }
+    end
   end
   
   def new
@@ -42,6 +46,10 @@ class EventsController < ApplicationController
   
   def show
     @events = Event.with_permissions_to(:read).all(:origin => [@event.latitude, @event.longitude], :within => 10)
+    respond_to do |format|
+      format.html
+      format.json { render :json => @event }
+    end
   end
   
   protected
@@ -49,4 +57,13 @@ class EventsController < ApplicationController
   def load_event    
     @event = Event.find_by_url(params[:id])
   end
+  
+  private
+  
+  def events_json_hash(events)
+    events.inject(Array.new) do |memo, e|
+      memo << {:name => e.name, :latitude => e.latitude, :longitude => e.longitude, :url => event_path(e)}
+    end
+  end
+  
 end
