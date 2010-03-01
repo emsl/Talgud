@@ -17,6 +17,11 @@
   <div class="clearfix">
     <div class="object-left">
       <h1><%=h @event.name %> <span class="object-type"><%=h @event.event_type.name %></span></h1>
+      
+      <% if permitted_to?(:edit, @event) %>
+      <%= link_to 'Muuda talgu andmeid', edit_event_path(@event) %><br/><br/>
+      <% end %>
+      
       <div class="object-location">
         <a href="#map" id="map_link"><%= @event.location_address %></a>
       </div>

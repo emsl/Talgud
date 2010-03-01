@@ -1,0 +1,16 @@
+<div class="container-left">
+  <%= render 'submenu' %>
+</div>
+<div class="container-right">
+  <h1><%= t('.title') %></h1>
+
+  <% semantic_form_for @event do |f| %>
+    <%= render 'form' %>
+    
+    <div class="submit-container round">
+      <% f.buttons do %>
+        <%= f.submit 'Muuda talguinfot', :class => 'submit' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
