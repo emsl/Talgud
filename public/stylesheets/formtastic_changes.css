@@ -47,6 +47,18 @@ form.formtastic fieldset ol li.text textarea {
   line-height: 18px;
 }
 
+/** Check boxes **/
+form.formtastic fieldset ol li.check_boxes fieldset ol {
+  padding: 0%;
+  width: 100%;
+}
+
+form.formtastic fieldset ol li fieldset legend, form.formtastic fieldset ol li fieldset legend.label label {
+  position: static;
+  width: 100%;
+}
+
+/** Extra fields on form **/
 form.formtastic div.form-extra fieldset ol li {
   padding-bottom: 5px;
 }

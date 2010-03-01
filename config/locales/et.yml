@@ -31,10 +31,17 @@ et:
         password_too_short: salasõna on liiga lühike
         password_confirmation_do_not_match: salasõna kordus ei klapi
         in_past: "peab kuupäeva {{date}} suhtes olema tulevikus"
+      models:
+        event:
+          attributes:
+            languages:
+              pick_at_least_one: vali nimekirjast vähemalt üks keel
     models:
       account: konto
       county: maakond
       event: talgu
+      event_type: talgu liik
+      language: keel
       municipality: omavalitsus
       settlement: asula
       user: kasutaja
@@ -180,7 +187,7 @@ et:
     permission_denied: Sellele lehele juurdepääsuõigus puudub
   events:
     create:
-      notice: Talgu andmed on lisatud!
+      notice: "Talgu andmed on lisatud ning on saadetud administraatorile ülevaatamiseks."
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     index:
       title: Kõik talgud
@@ -220,6 +227,7 @@ et:
         event_type: Talgute liik
         gathering_location: Kogunemine
         gathering_time: Kogunemisaeg
+        languages: Keeled mida talgujuht räägib
         latitude: Pikkuskraad
         location_address: Aadress
         location_address_county: Maakond

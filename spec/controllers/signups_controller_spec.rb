@@ -40,7 +40,7 @@ describe SignupsController, 'activate' do
   it 'should activate user, create session and redirect to event create screen when user is not yet activated' do
     user = Factory(:user_not_activated)
     get :activate, {:activation_code => user.perishable_token}
-    response.should redirect_to(new_event_path)
+    response.should redirect_to(login_path)
   end
   
   it 'should redirect to login screen when user has already been activated' do

@@ -12,11 +12,13 @@ class Event < ActiveRecord::Base
   belongs_to :location_address_municipality, :class_name => 'Municipality', :foreign_key => :location_address_municipality_id
   belongs_to :location_address_settlement, :class_name => 'Settlement', :foreign_key => :location_address_settlement_id
   has_many :roles, :as => :model
+  has_and_belongs_to_many :languages
 
   before_validation_on_create :set_defaults
   after_save :grant_manager_role
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
+  validates_presence_of :languages, :message => :pick_at_least_one
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
     record.errors.add attr, 'peab olema tulevikus' if not record.begins_at.nil? and record.begins_at > value

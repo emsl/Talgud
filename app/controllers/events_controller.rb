@@ -36,8 +36,8 @@ class EventsController < ApplicationController
     # TODO: date is currently hard coded.
     @event.begins_at = Date.parse('2010-05-01')
     @event.ends_at = Date.parse('2010-05-01')
-    @event.begin_time = params[:event][:begin_time]
-    @event.end_time = params[:event][:end_time]
+    @event.begin_time = params[:event][:begin_time] if params[:event][:begin_time]
+    @event.end_time = params[:event][:end_time] if params[:event][:end_time]
     
     @event.manager = current_user
     @event.location_address_country_code = 'ee'

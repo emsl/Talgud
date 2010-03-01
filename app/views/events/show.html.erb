@@ -40,12 +40,12 @@
         <td class="first"><%= t('formtastic.labels.event.meta_subject_info') %></td>
         <td><%=h @event.meta_subject_info %></td>
       </tr>
-      <!--
+      <% unless @event.languages.empty? %>
       <tr>
-        <td class="first">Töökeeled</td>
-        <td>eesti, vene</td>
+        <td class="first"><%= t('formtastic.labels.event.languages') %></td>
+        <td><%=h @event.languages.collect(&:name) * ', ' %></td>
       </tr>
-      -->
+      <% end %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.manager') %></td>
         <td><%=h @event.manager.name %></td>
