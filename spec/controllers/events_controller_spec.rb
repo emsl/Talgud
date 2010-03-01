@@ -42,7 +42,7 @@ describe EventsController, 'create' do
     end
     
     it 'should create event and assign current user as manager when event is valid' do
-      post :create, {:event => @event.attributes}
+      post :create, {:event => @event.attributes.merge(:language_ids => [Factory(:language).id])}
       response.should redirect_to(event_path(assigns[:event]))
       assigns[:event].manager.should eql(@user)
     end
@@ -55,7 +55,7 @@ describe EventsController, 'create' do
       @event.location_address_county = county
       Mailers::EventMailer.should_receive(:deliver_region_manager_notification)
       
-      post :create, {:event => @event.attributes}
+      post :create, {:event => @event.attributes.merge(:language_ids => [Factory(:language).id])}
     end
     
     it 'should redisplay event create form when event data is invalid' do

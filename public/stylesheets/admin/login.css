@@ -41,3 +41,10 @@ h1 {
   padding: 16px 0px;
   text-align: left;
 }
+
+/* Error and notice messages */
+div.error, div.notice {
+  color: #c52907;
+  font-size: 12px;
+  margin-bottom: 15px;
+}

@@ -5,7 +5,6 @@ class Event < ActiveRecord::Base
   acts_as_mappable :lat_column_name => :latitude, :lng_column_name => :longitude
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :finished => 'finished', :denied => 'denied'}
-  PROTEGEE_TYPES = {:nature_conservation => 'nature_conservation', :heritage => 'heritage'}
 
   belongs_to :event_type
   belongs_to :manager, :class_name => 'User', :foreign_key => :manager_id
@@ -13,11 +12,13 @@ class Event < ActiveRecord::Base
   belongs_to :location_address_municipality, :class_name => 'Municipality', :foreign_key => :location_address_municipality_id
   belongs_to :location_address_settlement, :class_name => 'Settlement', :foreign_key => :location_address_settlement_id
   has_many :roles, :as => :model
+  has_and_belongs_to_many :languages
 
   before_validation_on_create :set_defaults
   after_save :grant_manager_role
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
+  validates_presence_of :languages, :message => :pick_at_least_one
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
     record.errors.add attr, 'peab olema tulevikus' if not record.begins_at.nil? and record.begins_at > value
@@ -80,6 +81,10 @@ class Event < ActiveRecord::Base
   # Returns list of users who have permissions to manage this event.
   def managers
     self.roles.all(:conditions => {:role => Role::ROLE[:event_manager]}).collect{ |r| r.user }
+  end
+
+  def vacancies
+    self.max_participants
   end
 
   private

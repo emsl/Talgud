@@ -4,6 +4,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
 
+  config.load_paths += %W( #{RAILS_ROOT}/app/middleware #{RAILS_ROOT}/app/sweepers )
+
   config.gem 'authlogic', :version => '2.1.3'
   # config.gem 'url_store'
   config.gem 'formtastic'
@@ -18,3 +20,5 @@ Rails::Initializer.run do |config|
   config.time_zone = 'Tallinn'
   config.i18n.default_locale = :et
 end
+
+ActionController::Dispatcher.middleware.use Rack::JSONP

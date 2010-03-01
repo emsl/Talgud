@@ -13,7 +13,7 @@
 </head>
 
 <body id="front">
-  <div id="wrap">
+  <div id="wrap-holder"><div id="wrap">
     <div id="wrap-inner">
       <div id="header" class="clearfix">
         <%= render 'shared/logo' %>
@@ -22,14 +22,7 @@
       </div>
     
       <div class="container clearfix"> 
-        <% unless flash.empty? %>
-        <div style="border: 1px solid green">
-          <% flash.each do |key, message| %>
-          <%= message %>
-          <% end %>
-        </div>
-        <br/>
-        <% end %>
+        <%= print_flash %>
         
         <div class="container-left">
           <div class="orangebox-border"><div class="orangebox">
@@ -43,17 +36,19 @@
             
             <div class="pad-10-0">
               <%= link_to 'Korralda oma talgud', if current_user then new_event_path else signup_path end, :class => :bigbtn %>
+              <%#
               <div class="orangebox-small pending">
                 või <a href="#">Registreeru talgudele</a>
-              </div> <!-- //orangebox-small -->
-            </div> <!-- //clearfix -->
+              </div>
+              %>
+            </div>
           </div></div>
-        </div> <!-- //container-left -->
+        </div>
         <div class="container-right">
           <div id="map" style="height:310px;"></div>
           <%= render 'events/map' %>
-        </div> <!-- //container-right -->
-      </div> <!-- //container -->
+        </div>
+      </div>
       <div class="container clearfix"> 
         <div class="container-left pending">
           <div class="videobox">
@@ -61,21 +56,21 @@
             <div class="videobox-bottom">
               <h3>Rainer Nõlvak ja Fred Jüssi</h3>
               Rahvusvahelistest suhetest keemiku pilgu läbi
-            </div> <!-- //videobox-bottom -->
-          </div> <!-- //videobox -->
+            </div>
+          </div>
         
           <div class="pad-15">
             <h3>Liitu meilinglistiga</h3>
             Saadame aegajalt kasulikke näpunäiteid kudumisest ja heegeldamisest. 
             Kui vaja siis ka tikkimisest, aga see on pigem erand.
-          </div> <!-- //pad-15 -->
+          </div>
           <form action="" class="mailing-form bg-lightgreen round pad-10-15">
             <div class="clearfix">
               <div class="textbox round"><input type="text" value="Minu e-posti aadress" onfocus="if(value=='Minu e-posti aadress') value=''" onblur="if(value=='') value='Minu e-posti aadress'" /></div>
               <input type="submit" class="submit round" value="Liitu!" />
             </div>
           </form>
-        </div> <!-- //container-left -->
+        </div>
         <div class="container-right pending">
           <div class="two-columns clearfix">
             <div class="column-1">
@@ -92,8 +87,8 @@
                 <li><a href="#"><b>Muhu Väina reoveest puhastamine</b></a><br /><span class="small">Iisakul Iisaku, Lääne Virumaa</span></li>
                 <li><a href="#"><b>Vanade Nõuka Raadiote Parandamine Paslepas</b></a><br /><span class="small">Kraanaküla, Tallinn</span></li>
                 <li class="last"><a href="#">Näita kõiki</a><br /><a href="#">Vaata viimati lisatuid</a></li>
-              </ul> <!-- //border-list -->
-            </div> <!-- //column-1 -->
+              </ul>
+            </div>
             <div class="column-2 pending">
               <h2 class="colored bg-green">Värsked teated</h2>
               <ul class="border-list">
@@ -103,7 +98,7 @@
                 <li><a href="#">Rahvusvaheline peedipäev tulekul</a> <span class="date">28.02</span></li>
                 <li><a href="#">Selle aasta parimaks lauljaks kuulutati Irvik</a> <span class="date">27.02</span></li>
                 <li class="last"><a href="#">Näita varasemaid teateid</a></li>
-              </ul> <!-- //border-list -->
+              </ul>
               <h2 class="colored bg-orange">Kajastusi Internetis</h2>
               <ul class="list">
                 <li>
@@ -114,15 +109,15 @@
                   <a href="#">@sexykyyzy13:</a> Ma võtaksin hea meelega käsile ja läheksin ise ka. 9.03 Twitteris
                 </li>
               </ul>
-            </div> <!-- //column-2 -->
-          </div> <!-- //two-columns -->
-        </div> <!-- //container-right -->
-      </div> <!-- //container -->
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="grass">
         <a href="http://www.okia.ee" id="okia">Okia</a>
-      </div> <!-- //grass -->
-    </div> <!-- //wrap-inner -->
-  </div> <!-- //wrap -->
+      </div>
+    </div>
+  </div></div>
   <%= render 'shared/footer' %>
 </body>
 </html>

@@ -1,9 +1,13 @@
 class Mailers::Base < ActionMailer::Base
   
-  private
+  protected
   
   def full_from_address
     "#{Talgud.config.mailer.from_name} <#{Talgud.config.mailer.from_address}>"
+  end
+  
+  def from_address
+    Talgud.config.mailer.from_address
   end
 
   # Runs a block of code with given Rails locale. After the block has been finished, previously used locale will be set

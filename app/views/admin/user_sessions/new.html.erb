@@ -2,10 +2,10 @@
   <h1>Logi sisse</h1>
 
   <div id="fci-login-top">
+    <%= print_flash %>
   </div>
 
   <%- form_for @user_session, :url => admin_user_sessions_path do |f| -%>
-
     <%= f.label :email, "E-posti aadress" %>
     <%= f.text_field :email, :class => "textfield" %><br />
 

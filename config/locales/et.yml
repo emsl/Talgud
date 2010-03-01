@@ -5,7 +5,7 @@ et:
       messages: 
         accepted: "peab olema aktsepteeritud"
         blank: "peab olema sisestatud"
-        confirmation: "ei kattu kinnitusega"
+        confirmation: "ei kattu salasõna kinnitusega"
         empty: "peab olema sisestatud"
         equal_to: "peab olema võrdne {{count}}"
         even: "peab olema paaris"
@@ -21,7 +21,7 @@ et:
         record_invalid: "valideerimine ebaõnnestus: {{errors}}"
         taken: "{{value}} on juba kasutusel"
         too_long: "liiga pikk (maksimaalselt {{count}} märki)"
-        too_short: "liiga lühike (vähemalt {{count}} märki)"
+        too_short: "peab olema vähemalt {{count}} tähemärgi pikkune"
         wrong_length: "vale pikkus (peab olema vähemalt %d märki)"
         invalid_sec_num: "isikukood ei ole valiidne"
         email_missing: e-posti aadress ei tohi olla tühi
@@ -31,10 +31,17 @@ et:
         password_too_short: salasõna on liiga lühike
         password_confirmation_do_not_match: salasõna kordus ei klapi
         in_past: "peab kuupäeva {{date}} suhtes olema tulevikus"
+      models:
+        event:
+          attributes:
+            languages:
+              pick_at_least_one: vali nimekirjast vähemalt üks keel
     models:
       account: konto
       county: maakond
       event: talgu
+      event_type: talgu liik
+      language: keel
       municipality: omavalitsus
       settlement: asula
       user: kasutaja
@@ -184,14 +191,31 @@ et:
       update:
         notice: Talgu liigi andmed on uuendatud
         error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+  authlogic:
+    error_messages:
+      # login_blank: can not be blank
+      # login_not_found: is not valid
+      # login_invalid: should use only letters, numbers, spaces, and .-_@ please.
+      # consecutive_failed_logins_limit_exceeded: Consecutive failed logins limit exceeded, account is disabled.
+      email_invalid: peab olema korrektne e-posti aadress
+      # password_blank: can not be blank
+      # password_invalid: is not valid
+      # not_active: Your account is not active
+      # not_confirmed: Your account is not confirmed
+      # not_approved: Your account is not approved
+      # no_authentication_details: You did not provide any details for authentication.
+    attributes:
+      user_session:
+        email: E-posti aadress
+        password: Salasõna
   common:
     permission_denied: Sellele lehele juurdepääsuõigus puudub
   events:
     create:
-      notice: Talgu andmed on lisatud!
+      notice: "Talgu andmed on lisatud ning on saadetud administraatorile ülevaatamiseks."
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     index:
-      title: Talgud
+      title: Kõik talgud
     my:
       title: Minu talgud
   formtastic:
@@ -229,6 +253,7 @@ et:
         event_type: Talgute liik
         gathering_location: Kogunemine
         gathering_time: Kogunemisaeg
+        languages: Keeled mida talgujuht räägib
         latitude: Pikkuskraad
         location_address: Aadress
         location_address_county: Maakond
@@ -247,10 +272,7 @@ et:
         meta_subject_owner: Talguobjekti omanik
         meta_subject_protegee: Kas objekt on kaitsealune?
         name: Talgute nimi
-        notes: Lisainfo
-        protegee_types:
-          nature_conservation: Objekt on looduskaitse all
-          heritage: Objekt on muinsuskaitse all
+        notes: Lisainfo talgute kohta
         status: Staatus
         statuses:
           new: Uus
@@ -259,6 +281,7 @@ et:
           published: Avalikustatud
           registration_open: Registreerumiseks avatud
           registration_closed: Registreerumine lõpetatud
+        vacancies: Vabu kohti
       municipality:
         name: Omavalitsuse nimi
         regional_managers: Piirkondlikud haldurid
@@ -334,16 +357,20 @@ et:
   signups:
     create:
       notice: Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile.
-      error: "Registreerumiseks tuleb täita kõik kohustuslikud väljad"
+      error: "Registreerumine ebaõnnestus. Palun täida kõik väljad"
     activate: 
-      activation_successful: "Sinu konto aktiveerimine oli edukas"    
+      activation_successful: "Sinu konto on aktiveeritud. Palun logige sisse."
       invalid_activation_code: "Vigane aktiveerimise kood, palun kontrolli mailis olevat linki."
   user_sessions:
     create:
       error: Sisestatud kasutajanimi ja salasõna ei klapi
       notice: Olete edukalt sisse loginud
     new:
+      login: Logi sisse
+      login_submit: Logi sisse
       login_required: Palun logige sisse 
+      reset_password: Salasõna meeldetuletus
+      send_password: Saada uus salasõna
     destroy:
       notice: Olete süsteemist välja logitud
   number: 

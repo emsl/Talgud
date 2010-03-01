@@ -1,7 +1,7 @@
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8">
 
-  var events = <%= @events.collect{ |e| {:name => e.name, :latitude => e.latitude, :longitude => e.longitude, :url => event_path(e)} }.to_json %>;
+  var event_locations_url = '<%= map_events_url(:format => :json) %>';
   var map, bounds;
 
   function showMap() {
@@ -13,7 +13,7 @@
       
       bounds = new google.maps.LatLngBounds();
       
-      addLocations(events);
+      jQuery.getJSON(event_locations_url, addLocations);
   }
   
   /**
@@ -22,7 +22,14 @@
   function addLocations(data) {
       jQuery.each(data, function(i, point) {
           if (Math.abs(point.latitude) >= 0.1 && Math.abs(point.longitude) >= 0.1) {
-              var cbody = '<b>' + point.name + '</b> &ndash; <a href="' + point.url + '" style="text-decoration: underline;">Vaata</a>'
+              var cbody = '<div class="infowindow">'
+              cbody += '<h3><a href="' + point.url + '">' + point.name + '</a></h3>';
+              cbody += point.event_type;
+              cbody += '<div class="label">Toimumiskoht</div>' + point.address;
+              cbody += '<div class="label">Tööde eesmärk</div>' + point.aim_desc;
+              cbody += '<div class="label">Tööde kirjeldus</div>' + point.job_desc;
+              cbody += '<div class="label">Vabu kohti</div>' + point.vacancies;
+              cbody += '</div>'
             
               var infowindow = new google.maps.InfoWindow({ content: cbody });
               

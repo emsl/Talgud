@@ -13,6 +13,7 @@
 </head>
 
 <body>
+  <div id="wrap-holder">
   <div id="wrap">
     <div id="wrap-inner"> 
       <div id="header" class="clearfix">
@@ -22,21 +23,14 @@
       </div>
     
       <div class="container clearfix">
-        <% unless flash.empty? %>
-        <div style="border: 1px solid green">
-          <% flash.each do |key, message| %>
-          <%= message %>
-          <% end %>
-        </div>
-        <br/>
-        <% end %>
-        
+        <%= print_flash %>
         <%= yield %>
       </div>
       <div class="grass">
         <a href="http://www.okia.ee" id="okia">Okia</a>
       </div>
     </div>
+  </div>
   </div>
   <%= render 'shared/footer' %>
 </body>

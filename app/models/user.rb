@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   
   has_many :roles
   
-  validates_presence_of :firstname, :lastname, :email
+  validates_presence_of :firstname, :lastname
   validates_uniqueness_of :email
   
   # Register all available statuses for this user. Setting status for user record should be only done by using the

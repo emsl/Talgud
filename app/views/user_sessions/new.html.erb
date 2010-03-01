@@ -1,18 +1,18 @@
 <% form_for @user_session, :url => user_sessions_path do |f| %>
-  <h2>Login</h2>
-
-  <%= f.label :email %><br />
+  <h2><%= t('.login') %></h2>
+  
+  <%= f.label t('authlogic.attributes.user_session.email') %><br />
   <%= f.text_field :email %><br />
   <br />
-  <%= f.label :password %><br />
+  <%= f.label t('authlogic.attributes.user_session.password') %><br />
   <%= f.password_field :password %><br />
   <br />
-  <%= f.submit "Login" %>
+  <%= f.submit t('.login_submit') %> või <%= link_to 'registreeru kasutajaks', signup_path %>
 <% end %>
 <hr/>
 <% form_for :password_reminder, :url => password_reminders_path do |f| %>
-  <h2>Reset password</h2>
-  <%= f.label :email %><br />
+  <h2><%= t('.reset_password') %></h2>
+  <%= f.label t('authlogic.attributes.user_session.email') %><br />
   <%= text_field_tag :email %><br />
-  <%= f.submit "Reset password" %>
+  <%= f.submit t('.send_password') %>
 <% end %>

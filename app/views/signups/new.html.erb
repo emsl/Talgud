@@ -1,5 +1,7 @@
 <h1>Registreeru kasutajaks</h1>
 
+või <%= link_to 'logi sisse', login_path %>
+
 <div style="width: 600px;">
 <% semantic_form_for :signup, @user, :url => signups_path do |f| %>
   <% f.inputs do %>

@@ -80,6 +80,7 @@
       <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
       <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
       <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>
+      <%= f.input :languages, :as => :check_boxes %>
       <%= f.input :gathering_location, :input_html => {:rows => 4} %>
       <%= f.input :notes, :input_html => {:rows => 4} %>
     <% end %>
@@ -89,7 +90,7 @@
       
       <% f.inputs do %>
         <%= f.input :meta_subject_owner %>
-        <%= f.input :meta_subject_protegee, :as => :select, :collection => Event::PROTEGEE_TYPES.collect{ |k, v| [t("formtastic.labels.event.protegee_types.#{v}"), v] } %>
+        <%= f.input :meta_subject_protegee %>
         <%= f.input :meta_subject_heritage_number %>
       <% end %>
     </div>

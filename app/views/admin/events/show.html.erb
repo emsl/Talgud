@@ -3,7 +3,7 @@
 <div class="textcontent">
 <table>
 <tr>
-  <td><b><%= t('formtastic.labels.event.event_type') %></b></td>
+  <td style="width: 25%;"><b><%= t('formtastic.labels.event.event_type') %></b></td>
   <td><%=h @event.event_type.name %></td>
 </tr>
 <tr>
@@ -50,6 +50,12 @@
   <td><b><%= t('formtastic.labels.event.meta_subject_info') %></b></td>
   <td><%= urls_to_links(h(@event.meta_subject_info), :target => :blank) %></td>
 </tr>
+<% unless @event.languages.empty? %>
+<tr>
+  <td><b><%= t('formtastic.labels.event.languages') %></b></td>
+  <td><%=h @event.languages.collect(&:name) * ', ' %></td>
+</tr>
+<% end %>
 <tr>
   <td><b><%= t('formtastic.labels.event.gathering_location') %></b></td>
   <td><%=h @event.gathering_location %></td>

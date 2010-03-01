@@ -7,6 +7,11 @@ Factory.define :county do |c|
   c.sequence(:name) { |n| "County #{n}" }
 end
 
+Factory.define :language do |m|
+  m.name 'English'
+  m.sequence(:code) { |n| "lang_#{n}"}
+end
+
 Factory.define :municipality do |m|
   m.sequence(:name) { |n| "Municipality #{n}" }
   m.kind Municipality::KIND.first
@@ -44,6 +49,11 @@ Factory.define :event do |e|
   e.association :location_address_county, :factory => :county
   e.association :location_address_municipality, :factory => :municipality
   e.association :manager, :factory => :user
+  # e.association :languages, :factory => :language
+  
+  e.languages do |event|
+    [event.association(:language)]
+  end
 end
 
 Factory.define :role_system_administrator, :class => Role do |r|
