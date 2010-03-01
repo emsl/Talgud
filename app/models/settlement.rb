@@ -13,4 +13,7 @@ class Settlement < ActiveRecord::Base
   
   default_scope :conditions => {:deleted_at => nil}
 
+  def self.class_role_symbols
+    [:regional_manager]
+  end  
 end

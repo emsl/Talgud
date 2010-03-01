@@ -38,6 +38,7 @@ et:
       municipality: omavalitsus
       settlement: asula
       user: kasutaja
+      role: roll
   admin:
     common:
       created_at: Lisatud
@@ -56,11 +57,31 @@ et:
       index:
         add_county: Lisa maakond
         title: Haldusalad
+        add_role: Lisa haldur
+        edit_role: Muuda haldureid
       new:
         title: Maakonna lisamine
       update:
         notice: Maakonna andmed on uuendatud
         error: Maakonna andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    roles:
+      new:
+        title: Objektiga seotud õigused
+        county:
+          role: "Lisa uus haldur maakonnale {{name}}"
+        settlement:
+          role: "Lisa uus haldur külale / asulale {{name}}"
+        municipality:
+          role: "Lisa uus haldur omavalitsusele {{name}}"
+      create:
+        notice: Uus roll on lisatud
+        error: Rolli lisamisel tekkis viga. Palun kontrolli andmete korrektsust 
+      index:
+        title: Objektidega seotud õigused
+        destroy_role: Kustuta
+      destroy:
+        notice: Roll on kustutatud
+        error: Rolli kustutamine ebaõnnestus
     events:
       index:
         filter:
@@ -85,6 +106,8 @@ et:
       index:
         title: Omavalitsused
         add_municipality: Lisa omavalitsus
+        add_role: Lisa haldur
+        edit_role: Muuda haldureid
       new:
         title: Omavalitsuse lisamine
       update:
@@ -102,6 +125,8 @@ et:
       index:
         title: Külad / asulad
         add_settlement: Lisa küla või asula
+        add_role: Lisa haldur
+        edit_role: Muuda haldureid
       new:
         title: Küla / asula lisamine
       update:
@@ -173,6 +198,7 @@ et:
     labels:
       county:
         name: Maakonna nimi
+        regional_managers: Piirkondlikud haldurid
       event_type:
         name: Talgu liigi nimi
       language:
@@ -235,11 +261,14 @@ et:
           registration_closed: Registreerumine lõpetatud
       municipality:
         name: Omavalitsuse nimi
+        regional_managers: Piirkondlikud haldurid
         kind: Tüüp
         kinds:
           linn: Linn
           vald: Vald
       role:
+        user: Kasutaja
+        role: Roll
         roles:
           account_manager: Administraator
           event_manager: Talgu haldur
@@ -249,6 +278,7 @@ et:
           system_administrator: Süsteemi administraator
       settlement:
         kind: Tüüp
+        regional_managers: Piirkondlikud haldurid
         kinds:
           alev: Alev
           alevik: Alevik

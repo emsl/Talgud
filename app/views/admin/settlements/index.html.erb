@@ -10,6 +10,7 @@
   <tr>
     <th><%=h t('formtastic.labels.settlement.name') %></th>
     <th><%=h t('formtastic.labels.settlement.kind') %></th>
+    <th><%= t('formtastic.labels.settlement.regional_managers') %></th>
     <th></th>
   </tr>
   </thead>
@@ -17,6 +18,7 @@
   <tr>
     <td><%=h settlement.name %></td>
     <td><%=h t("formtastic.labels.settlement.kinds.#{settlement.kind}") %></td>
+    <td><%= regional_managers_for_object(settlement) %></td>
     <td class="actions">
       <%= link_to t('admin.common.edit'), edit_admin_county_municipality_settlement_path(@county, @municipality, settlement) %>
     </td>

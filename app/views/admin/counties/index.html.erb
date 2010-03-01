@@ -9,12 +9,14 @@
   <thead>
   <tr>
     <th><%= t('formtastic.labels.county.name') %></th>
+    <th><%= t('formtastic.labels.county.regional_managers') %></th>
     <th></th>
   </tr>
   </thead>
   <% for county in @counties %>
   <tr>
     <td><%=h county.name %></td>
+    <td><%= regional_managers_for_object(county) %></td>
     <td class="actions">
       <%= link_to t('admin.municipalities.index.title'), admin_county_municipalities_path(county) %>
       <%= link_to t('admin.common.edit'), edit_admin_county_path(county) %>
