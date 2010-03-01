@@ -188,13 +188,18 @@ et:
   events:
     create:
       notice: "Talgu andmed on lisatud ning on saadetud administraatorile ülevaatamiseks."
-      error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
+      error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
+    edit:
+      title: Talguinfo muutmine
     index:
       title: Kõik talgud
     latest:
       title: Viimati lisatud
     my:
       title: Minu talgud
+    update:
+      notice: "Talgu andmed on uuendatud. Olulisemate muudatuste korral palume sellest teavitada ka talgulisi."
+      error: "Talgu andmete muutmisel tekkis viga, palun kontrolli andmete korrektsust."
   formtastic:
     labels:
       county:

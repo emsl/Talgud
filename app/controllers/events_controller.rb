@@ -8,7 +8,6 @@ class EventsController < ApplicationController
   
   def my
     @events = Event.my_events(@current_user).all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
-    # @events = Event.with_permissions_to(:my).all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
   end
   
   def map
@@ -47,6 +46,7 @@ class EventsController < ApplicationController
     @event.end_time = params[:event][:end_time] if params[:event][:end_time]
     
     @event.manager = current_user
+    # TODO: country code is hard coded. Must be configurable
     @event.location_address_country_code = 'ee'
     if @event.valid?
       @event.save
@@ -70,6 +70,21 @@ class EventsController < ApplicationController
         @nearby_events = Event.published.all(:origin => [@event.latitude, @event.longitude], :within => 25, :limit => 10).delete_if{ |e| e == @event }
       end
       format.json { render :json => @event }
+    end
+  end
+  
+  def edit
+  end
+  
+  def update
+    @event.attributes = params[:event]
+    if @event.valid?
+      @event.save
+      flash[:notice] = t('events.update.notice')
+      redirect_to event_path(@event)
+    else
+      render :new
+      flash.now[:error] = t('events.update.error')
     end
   end
   
