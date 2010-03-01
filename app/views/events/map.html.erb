@@ -2,8 +2,24 @@
   <%= render 'submenu' %>
 </div>
 <div class="container-right">
-  <h1>Talgute kaart</h1>
-
-  <div id="map" style="height: 500px;"></div>
+  <div class="map-search">
+    <div id="map" style="height: 500px;"></div>
+    <!-->
+    <div class="map-search-bottom">
+      <div class="map-search-bottom-inn">
+        Näita
+        <% for event_type in @event_types %>
+        <a href="#" class="btn"><%= event_type.name.downcase %></a>
+        <% end %>
+        talgud, mis toimuvad
+        <% for language in @languages %>
+        <a href="#" class="btn"><%= language.name.downcase %></a>
+        <% end %>
+        keeles
+      </div>
+    </div>
+    -->
+  </div>
+  
   <%= render 'map' %>
 </div>

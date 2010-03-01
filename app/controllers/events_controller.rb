@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   
-  filter_resource_access :additional_collection => [:my, :map], :attribute_check => true
+  filter_resource_access :additional_collection => [:my, :map, :latest], :attribute_check => true
   
   def index
-    @events = Event.with_permissions_to(:read).all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
+    @events = Event.published.all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
   end
   
   def my
@@ -13,7 +13,10 @@ class EventsController < ApplicationController
   
   def map
     respond_to do |format|
-      format.html
+      format.html do
+        @event_types = EventType.all
+        @languages = Language.all
+      end
       format.json do
         @events = Event.published.all(
           :select => 'name, latitude, longitude, url, max_participants, meta_aim_description, meta_job_description, event_type_id, location_address_county_id, location_address_municipality_id, location_address_settlement_id, location_address_street',
@@ -23,6 +26,10 @@ class EventsController < ApplicationController
         render :json => events_json_hash(@events)
       end
     end
+  end
+  
+  def latest
+    @events = Event.latest.published.all(:order => 'id DESC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
   end
   
   def new
@@ -57,9 +64,11 @@ class EventsController < ApplicationController
   end
   
   def show
-    @events = Event.with_permissions_to(:read).all(:origin => [@event.latitude, @event.longitude], :within => 10)
     respond_to do |format|
-      format.html
+      format.html do
+        # TODO: nearby distance should be configurable
+        @nearby_events = Event.published.all(:origin => [@event.latitude, @event.longitude], :within => 25, :limit => 10).delete_if{ |e| e == @event }
+      end
       format.json { render :json => @event }
     end
   end

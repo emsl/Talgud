@@ -71,44 +71,24 @@
             </div>
           </form>
         </div>
-        <div class="container-right pending">
+        <div class="container-right">
           <div class="two-columns clearfix">
             <div class="column-1">
-              <h2 class="colored bg-blue">
-                <a href="#" class="right-link">Otsi talgusid</a>
-                Talgud sinu lähedal
-              </h2>
+              <div class="bluebox-border"><h2 class="colored bg-blue"><%= t('events.latest.title') %></h2></div>
               <ul class="border-list">
-                <li><a href="#"><b>Muhu Väina reoveest puhastamine Iisakul</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
-                <li><a href="#"><b>Vanade Nõuka Raadiote Parandamine Paslepas</b></a><br /><span class="small">Kraanaküla, Tallinn</span></li>
-                <li><a href="#"><b>Kalade rookimine Aegviidul</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
-                <li><a href="#"><b>Muhu Väina puhastamine</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
-                <li><a href="#"><b>Raadiote Parandamine Paslepas</b></a><br /><span class="small">Iisaku, Lääne Virumaa</span></li>
-                <li><a href="#"><b>Muhu Väina reoveest puhastamine</b></a><br /><span class="small">Iisakul Iisaku, Lääne Virumaa</span></li>
-                <li><a href="#"><b>Vanade Nõuka Raadiote Parandamine Paslepas</b></a><br /><span class="small">Kraanaküla, Tallinn</span></li>
-                <li class="last"><a href="#">Näita kõiki</a><br /><a href="#">Vaata viimati lisatuid</a></li>
+                <% for event in @latest %>
+                <li><%= link_to event.name, event_path(event), :style => 'font-weight: bold' %><br /><span class="small"><%= event.location_address %></span></li>
+                <% end %>
+                <li class="last">
+                  <%= link_to 'Näita kõiki', events_path %><br />
+                </li>
               </ul>
             </div>
-            <div class="column-2 pending">
-              <h2 class="colored bg-green">Värsked teated</h2>
-              <ul class="border-list">
-                <li><a href="#">Teeme Ära talgupäev toimub 1. mail</a> <span class="date">12.03</span></li>
-                <li><a href="#">Talgupäeva ajutine veebileht</a> <span class="date">11.03</span></li>
-                <li><a href="#">Kõigi maade talgulised -- istutage</a> <span class="date">4.03</span></li>
-                <li><a href="#">Rahvusvaheline peedipäev tulekul</a> <span class="date">28.02</span></li>
-                <li><a href="#">Selle aasta parimaks lauljaks kuulutati Irvik</a> <span class="date">27.02</span></li>
-                <li class="last"><a href="#">Näita varasemaid teateid</a></li>
-              </ul>
-              <h2 class="colored bg-orange">Kajastusi Internetis</h2>
-              <ul class="list">
-                <li>
-                  <a href="#">@albert:</a> Raske uskuda et jälle aasta möödas ja taas tuleb hambad ära pesta, habe patsi siduda 
-                  ja tööle asuda. Ja nii iga esimene mai! Kaua võib... 12.03 Twitteris
-                </li>
-                <li>
-                  <a href="#">@sexykyyzy13:</a> Ma võtaksin hea meelega käsile ja läheksin ise ka. 9.03 Twitteris
-                </li>
-              </ul>
+            <div class="column-2">
+              <div class="orangebox-border"><h2 class="colored bg-orange">Kajastusi Internetis</h2></div>
+              <div id="twitter_div"><ul id="twitter_update_list" class="list"></ul></div>
+              <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js?1"></script>
+              <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/teemeara.json?callback=twitterCallback2&amp;count=5"></script>
             </div>
           </div>
         </div>
@@ -119,5 +99,6 @@
     </div>
   </div></div>
   <%= render 'shared/footer' %>
+  <%= render 'shared/googleanalytics' %>
 </body>
 </html>

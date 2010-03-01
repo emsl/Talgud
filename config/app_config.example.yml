@@ -15,3 +15,8 @@ production:
     from_name: From Name
     from_address: no-reply@example.com
     manager_locale: en
+  #
+  #   Uncomment the line with google_analytics_code and replace it with the code provided by Google Analytics. This
+  #   will turn on the analytics tracking.
+  #
+  # google_analytics_code: UA-XXXXX-X

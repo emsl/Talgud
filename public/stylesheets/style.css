@@ -52,21 +52,40 @@ h2 {
   opacity: 0.4;
 }
 
-  .bg-blue { background: #99b3cb url('../images/bg_blue.gif') repeat-x top left;}
-  .bg-green { background: #bed73c url('../images/bg_green.gif') repeat-x top left;}
-  .bg-orange { background: #fbb040 url('../images/bg_orange.gif') repeat-x top left;}
-  
-  h2.colored {
-    height: 31px;
-    padding: 11px 10px 0;
-    font-weight: bold;
-    border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-  }
-  h2 .right-link {
-    color: white;
-    font-size: 11px;
-    float: right;
-  }
+.bg-blue { border-top: 1px solid #cce6ee; background: #99b3cb url('../images/bg_blue.gif') repeat-x top left; text-shadow: 0 1px 0 #cce6ee; }
+.bg-green { background: #bed73c url('../images/bg_green.gif') repeat-x top left;}
+.bg-orange { border-top: 1px solid #fcefa8; background: #fbb040 url('../images/bg_orange.gif') repeat-x top left; text-shadow: 0 1px 0 #fcefa8; }
+
+.splash-box {
+  background: #fffdbd;
+  border: 1px solid #e3dd1d;
+  font-weight: bold;
+  position: absolute;
+  padding: 10px;
+  text-align: center;
+  -moz-border-radius: 5px;
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  -moz-transform: rotate(-8deg);
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  -webkit-transform: rotate(-8deg);
+}
+
+h2.colored {
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+h2 .right-link {
+  color: white;
+  font-size: 11px;
+  float: right;
+}
+
 h3 {
   margin: 0;
   padding: 0 0 5px;
@@ -74,6 +93,11 @@ h3 {
   line-height: 18px;
   font-weight: bold;
 }
+  h3.colored {
+    border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+    padding: 10px !important;
+    color: #ffffff;
+  }
 p { 
   margin: 0;
   padding: 5px 0;
@@ -200,6 +224,12 @@ input.textbox {
               width: 300px;
               margin-right: 30px;
             }
+            .bluebox-border {
+              border: 1px solid #99b3cb;
+              border-radius: 5px;
+              -moz-border-radius: 5px;
+              -webkit-border-radius: 5px;
+            }
             #front .orangebox {
               height: 268px;
               width: 258px;
@@ -229,6 +259,11 @@ input.textbox {
               .orangebox .bigbtn:hover { text-decoration: underline;}
               .orangebox a { color: white;}
               .orangebox-small { font-size: 13px; text-align: center; padding: 5px 0 0;}
+              
+              
+              .container-left-inner { padding: 15px 30px 15px 0px; text-align: left;}
+              .container-left-inner .textbox input { text-align: left;}
+              .container-left-inner h3 { padding-bottom: 15px;}
               
             /* videobox */
               .videobox-video { width: 300px; height: 170px; overflow: hidden;}
@@ -300,6 +335,28 @@ input.textbox {
                   * html .two-columns .column-2 {
                     margin-right: -3px;
                   }
+                  
+                /* map-search */
+                  .map-search {
+                    height: 500px;
+                    position: relative;
+                  }
+                    .map-search-bottom { position: absolute; left: 0; bottom: 0; width: 100%; background: url('../images/dark.png') repeat;}
+                      .map-search-bottom-inn { padding: 12px 15px; color: white; font-size: 12px; }
+                
+                      .map-search .btn {
+                        margin: 0 1px;
+                        position:relative;
+                        height: 26px;
+                        border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;
+                        display: -moz-inline-stack;display: inline-block;zoom: 1;*display: inline;
+                        vertical-align: center;text-align: center;outline: 0;padding: 0 8px; color: #808080;
+                        font-size: 12px; line-height: 26px; text-decoration: none;
+                        background: #3b3b3b url('../images/btn.gif') repeat-x top left;
+                      }
+                      .map-search .btn:hover { text-decoration: underline;}
+                      .map-search .btn-active { background: #518ba7 url('../images/btn_active.gif') repeat-x top left; color: white;}
+
 
               /* object-left */
                 .object-left {
@@ -309,18 +366,18 @@ input.textbox {
               
               /* object-type */
                 .object-type {
-                  float: left;
-                  font-size: 14px;
+                  white-space: nowrap; 
+                  font-size: 10px; 
+                  padding: 0px 4px; 
+                  text-transform: uppercase;
                   background: #fffdbd;
                   border: 1px solid #e3dd1d;
                   padding: 3px 10px;
                   -moz-border-radius: 3px;
                   -webkit-border-radius: 3px;
                   border-radius: 3px;
-                  margin-right: 10px;
-                  margin-bottom: 10px;
-                  width: 100px;
-                  text-align: center;
+                  font-weight: normal;
+                  vertical-align: middle;
                 }
                 .object-type-green { background: #e9f5ab; border-color: #bed73b;}
                 .object-type-pink { background: #fbd6d4; border-color: #ef837d; }
@@ -328,8 +385,6 @@ input.textbox {
               
               /* object-location */
                 .object-location {
-                  width: 280px;
-                  float: left;
                   font-size: 20px;
                   line-height: 24px;
                   padding-bottom: 10px;
@@ -337,30 +392,39 @@ input.textbox {
                   .object-location a { text-decoration: none;}
                   .object-location a:hover { text-decoration: underline; }
               
-              /* object-info */
-                .object-info {
-                  font-size: 16px;    
-                  line-height: 22px;
-                }
               
               /* object-right */
                 .object-right {
                   float: right;
-                  width: 300px;
-                  margin: 0 0 20px 15px;
+                  width: 302px;
+                  height: 156px;
+                  margin: 0 0 0px 0px;
+                  position: relative;
                 }
-                .object-right .bigbtn {
-                  cursor: pointer; 
-                  font-size: 16px; color: #333; margin-top: 10px; text-decoration: none; display: block; outline: 0; height: 32px; width: 247px; 
-                  padding: 14px 52px 0 0; text-align: center; background: url('../images/big_btn2.gif') no-repeat;
-                  -moz-border-radius: 5px;
-                  -webkit-border-radius: 5px;
-                  border-radius: 5px;
-                  -moz-box-shadow: 0 4px 6px #dedede;
-                  -webkit-box-shadow: 0 4px 6px #dedede;
-                  box-shadow: 0 4px 6px #dedede;
-                }
-                .object-right .bigbtn:hover { text-decoration: underline;}
+                  .object-right .reg-link {
+                    position: absolute;
+                    top: -50px;
+                    right: 0;
+                    width: 279px;
+                    padding: 106px 0 0 23px;
+                    height: 100px;
+                    background: url('../images/regbg.png') no-repeat;
+                  }
+                    .object-right .reg-link a {
+                      display: block;
+                      width: 261px;
+                      height: 32px;
+                      padding: 13px 0 0;
+                      outline: 0;
+                      color: white;
+                      text-align: center;
+                      text-decoration: none;
+                      font-size: 16px;
+                      font-weight: bold;
+                    }
+                    .object-right .reg-link a:hover {
+                      text-decoration: underline;
+                    }
                 * html .object-right {
                   margin-right: -3px;
                 }
@@ -395,7 +459,18 @@ input.textbox {
                     font-size: 16px;
                     font-weight: bold;
                     text-align: right;
-                    width: 33%;
+                    width: 200px;
+                  }
+                  
+                  .object-detail-time {
+                    float: left;
+                    border: 5px solid #c2d97c;
+                    border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    padding: 8px 13px;
                   }
                   
               /* object-listing */
@@ -406,7 +481,6 @@ input.textbox {
                   .object-listing td { padding: 5px 10px;}
                   .object-listing td.first { width: 50px; padding-left: 0px;}
                   .object-listing td.last { color: #7f8080; font-size: 12px; white-space: nowrap; padding-right: 0;}
-                    .object-listing .object-type { margin: 0; width: auto; white-space: nowrap; font-size: 10px; padding: 0px 4px; text-transform: uppercase;}
                     .object-listing a { font-size: 14px; color: #333; font-weight:bold; text-decoration: none;}
                     .object-listing a:hover { text-decoration: underline;}
                   

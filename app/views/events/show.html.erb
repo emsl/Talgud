@@ -1,32 +1,47 @@
 <div class="container-left">
   <%= render 'submenu' %>
+  
+  <% unless @nearby_events.empty? %>
+  <div class="container-left-inner">
+    <div class="bluebox-border"><h2 class="colored bg-blue">Veel talgusid samas piirkonnas</h2></div>
+    <ul class="border-list">
+      <% for event in @nearby_events %>
+      <li><%= link_to event.name, event_path(event), :style => 'font-weight: bold;' %><br /><span class="small"><%= event.location_address %></span></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
 </div>
+
 <div class="container-right">
   <div class="clearfix">
     <div class="object-left">
-      <h1><%=h @event.name %></h1>
-      <div class="clearfix">
-        <div class="object-type"><%=h @event.event_type.name %></div>
-        <div class="object-location">
-          <%= @event.location_address %>
-        </div>
-      </div>
-      <div class="object-info">
-        <%=h @event.meta_aim_description %>
-        <div style="margin-top: 20px;">Talgud toimuvad kell <%= duration_times(@event) %></div>
+      <h1><%=h @event.name %> <span class="object-type"><%=h @event.event_type.name %></span></h1>
+      <div class="object-location">
+        <a href="#map" id="map_link"><%= @event.location_address %></a>
       </div>
     </div>
     <div class="object-right">
-      <div id="map" style="height: 250px;"></div>
-      <%# <a href="#" class="bigbtn">Registreeri end sellele talgule!</a> %>
+      <div class="reg-link">
+        <a href="#" onclick="return false;">Registreeri end sellele talgule!</a>
+      </div>
+      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;">Talgutele registreerumine algab 1. aprillil</div>
     </div>
   </div>
 
   <div class="object-detail">
     <table>
       <tr>
+        <td class="first"><%= t('formtastic.labels.event.meta_aim_description') %></td>
+        <td><%=h @event.meta_aim_description %></td>
+      </tr>
+      <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_job_description') %></td>
         <td><%=h @event.meta_job_description %></td>
+      </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.vacancies') %></td>
+        <td><%=h @event.vacancies %></td>
       </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_bring_with_you') %></td>
@@ -40,16 +55,16 @@
         <td class="first"><%= t('formtastic.labels.event.meta_subject_info') %></td>
         <td><%=h @event.meta_subject_info %></td>
       </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.manager') %></td>
+        <td><%=h @event.manager.name %></td>
+      </tr>
       <% unless @event.languages.empty? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.languages') %></td>
         <td><%=h @event.languages.collect(&:name) * ', ' %></td>
       </tr>
       <% end %>
-      <tr>
-        <td class="first"><%= t('formtastic.labels.event.manager') %></td>
-        <td><%=h @event.manager.name %></td>
-      </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.gathering_location') %></td>
         <td><%=h @event.gathering_location %></td>
@@ -59,52 +74,24 @@
         <td><%=h @event.notes %></td>
       </tr>
       <tr>
-        <td class="first"><%= t('formtastic.labels.event.vacancies') %></td>
-        <td><%=h @event.vacancies %></td>
+        <td></td>
+        <td><div class="object-detail-time">Talgud toimuvad kell <%= duration_times(@event) %></div></td>
       </tr>
     </table> 
   </div>
+  
+  <a name="map" id="map_target"></a>
+  <div id="map" style="margin-top: 20px; height: 500px;"></div>
 </div>
 
-<!--
-<table>
-<tr>
-  <td><b><%= t('formtastic.labels.event.location_address_street') %></b></td>
-  <td><%=h @event.location_address_street %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.max_participants') %></b></td>
-  <td><%=h @event.max_participants %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.begins_at') %></b></td>
-  <td><%=h @event.begins_at %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.ends_at') %></b></td>
-  <td><%=h @event.ends_at %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.meta_subject_info') %></b></td>
-  <td><%= urls_to_links(h(@event.meta_subject_info), :target => :blank) %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.notes') %></b></td>
-  <td><%=h @event.notes %></td>
-</tr>
-</table>
-
-<h2>Selle talgu lähedal on ka need talgud</h2>
-
--->
-
+<%= javascript_include_tag 'jquery.scrollTo-min' %>
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 <script type="text/javascript" charset="utf-8">
   var map, bounds;
 
   function showMap() {
       map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 12, scrollwheel: false,
+          zoom: 8, scrollwheel: false,
           center: new google.maps.LatLng(58.564, 25.729),
           mapTypeId: google.maps.MapTypeId.ROADMAP
       });
@@ -116,4 +103,9 @@
   }
   
   jQuery(document).ready(showMap);
+  
+  jQuery('#map_link').click(function() {
+      $(window).scrollTo('#map_target', 1000);
+      return false;
+  });
 </script>
