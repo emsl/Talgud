@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = t('user_sessions.create.notice')
       redirect_to events_path
     else
-      flash[:error] = t('user_sessions.create.error')
+      flash.now[:error] = t('user_sessions.create.error')
       render :action => :new
     end
   end

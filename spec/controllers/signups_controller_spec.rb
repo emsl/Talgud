@@ -1,5 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
+describe SignupsController, 'index' do
+  it 'should redirect to signup screen' do
+    get :index
+    response.should redirect_to(signup_path)
+  end
+end
+
 describe SignupsController, 'new' do
   it 'should assign new user record to view' do
     get :new

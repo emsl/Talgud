@@ -100,6 +100,30 @@ input, textarea { color: #222; font: 13px/15px Arial, Verdana, sans-serif;}
 .bg-lightgreen { background: #f3f7da;}
 .round { border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
 
+/* Error, notice and note messages */
+div.error, div.notice {
+  font-size: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px;
+}
+
+div.error {
+  color: #fff;
+  background-color: #c52907;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f85230), to(#c52907));
+  text-shadow: #800 0 1px 0;
+}
+
+div.notice {
+  color: rgb(8, 41, 64);
+  background-color: #ffeea8;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff4c8), to(#ffea95));
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px;
+}
+
 /*.textbox {
   border: 1px solid #aaaaaa; padding: 5px 8px 5px; min-height: 18px; background: white url('../images/textbox.gif') repeat-x top left;
   border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
