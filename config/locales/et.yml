@@ -191,6 +191,8 @@ et:
       error: "Talgute andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     index:
       title: Kõik talgud
+    latest:
+      title: Viimati lisatud
     my:
       title: Minu talgud
   formtastic:

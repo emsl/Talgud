@@ -8,8 +8,10 @@
     <li<%= ' class="active"' if %w{create new}.include?(action_name) %>><%= link_to 'Registreeri talgud', signup_path %><span class="arrow"></span></li>
     <% end %>
     <li<%= ' class="active"' if action_name == 'index' %>><%= link_to 'Näita kõiki', events_path %><span class="arrow"></span></li>
-    <li class="pending"><a href="#">Viimati lisatud</a><span class="arrow"></span></li>
+    <li<%= ' class="active"' if action_name == 'latest' %>><%= link_to 'Viimati lisatud', latest_events_path %><span class="arrow"></span></li>
+    <%#
     <li class="pending"><a href="#">Populaarsemad</a><span class="arrow"></span></li>
+    %>
     <li<%= ' class="active"' if action_name == 'map' %>><%= link_to 'Näita kaardil', map_events_path %><span class="arrow"></span></li>
   </ul>
   </div>

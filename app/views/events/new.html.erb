@@ -72,11 +72,11 @@
       <%= f.input :latitude, :as => :hidden %>
       <%= f.input :longitude, :as => :hidden %>
       <%= f.input :location_address_street, :input_html => {:rows => 2} %>
-      <%= f.input :begin_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false %>
-      <%= f.input :end_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false %>
-      <%= f.input :max_participants %>
       <%= f.input :meta_aim_description, :input_html => {:rows => 4} %>
       <%= f.input :meta_job_description, :input_html => {:rows => 4} %>
+      <%= f.input :max_participants %>
+      <%= f.input :begin_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false %>
+      <%= f.input :end_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false %>
       <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
       <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
       <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>
