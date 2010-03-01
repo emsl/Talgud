@@ -1,0 +1,10 @@
+<h1><%= t(".#{@target_model.class.name.downcase}.role", :name => @target_model.try(:name)) %></h1>
+
+<% semantic_form_for @role, :url => admin_roles_path(:model_type => @target_model.class.name, :model_id => @target_model) do |f| %>
+  <%= render 'form' %>
+  <%= f.buttons %>
+<% end %>
+
+<h2><%= t('.title') %></h2>
+
+<%= render :partial => 'index' %>

@@ -1,0 +1,22 @@
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th>Kasutaja</th>
+    <th>Rolli nimi</th>
+    <th>Objekti tüüp</th>
+    <th>Objekti nimi</th>
+    <th></th>
+  </tr>
+  </thead>
+  <% for role in @roles %>
+  <tr>
+    <td><%= label_for_user(role.user) %></td>
+    <td><%= t("formtastic.labels.role.roles.#{role.role}") %></td>
+    <td><%= t("activerecord.models.#{role.model_type.downcase}") %></td>
+    <td><%= role.model.try(:name) %></td>
+    <td class="actions"><%= link_to t('.destroy_role'), admin_role_path(role, :model_type => @target_model.class.name, :model_id => @target_model), :confirm => 'Oled ikka kustutamises kindel?', :method => :delete %></td>
+  </tr>
+  <% end %>
+  </table>
+</div>
