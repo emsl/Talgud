@@ -24,7 +24,7 @@ class SignupsController < ApplicationController
     if @user and not @user.active?
       @user.activate!
       flash[:notice] = t('signups.activate.activation_successful')
-      redirect_to new_event_path
+      redirect_to login_path
     elsif @user and @user.active?
       flash[:error] = t('signups.activate.user_has_been_activated')
       redirect_to login_path

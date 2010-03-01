@@ -321,7 +321,7 @@ et:
       notice: Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile.
       error: "Registreerumine ebaõnnestus. Palun täida kõik väljad"
     activate: 
-      activation_successful: "Sinu konto aktiveerimine oli edukas"    
+      activation_successful: "Sinu konto on aktiveeritud. Palun logige sisse."
       invalid_activation_code: "Vigane aktiveerimise kood, palun kontrolli mailis olevat linki."
   user_sessions:
     create:

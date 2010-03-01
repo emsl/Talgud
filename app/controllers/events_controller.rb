@@ -26,13 +26,19 @@ class EventsController < ApplicationController
   end
   
   def new
-    # TODO: date is currenlty hard coded
+    # TODO: date is currenlty hard coded.
     @event.attributes = {:begins_at => DateTime.parse('2010-05-01 10:00'), :ends_at => DateTime.parse('2010-05-01 18:00')}
     @event.attributes = {:begin_time => '10:00', :end_time => '18:00'}
   end
   
   def create
-    @event = Event.new(params[:event].merge(:begins_at => Date.parse('2010-05-01'), :ends_at => Date.parse('2010-05-01')))
+    @event = Event.new(params[:event])
+    # TODO: date is currently hard coded.
+    @event.begins_at = Date.parse('2010-05-01')
+    @event.ends_at = Date.parse('2010-05-01')
+    @event.begin_time = params[:event][:begin_time]
+    @event.end_time = params[:event][:end_time]
+    
     @event.manager = current_user
     @event.location_address_country_code = 'ee'
     if @event.valid?

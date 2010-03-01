@@ -13,7 +13,7 @@
       </div>
       <div class="object-info">
         <%=h @event.meta_aim_description %>
-        <br/>Talgud toimuvad kell <%= duration_times(@event) %>
+        <div style="margin-top: 20px;">Talgud toimuvad kell <%= duration_times(@event) %></div>
       </div>
     </div>
     <div class="object-right">
@@ -38,7 +38,7 @@
       </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_subject_info') %></td>
-        <td><%= urls_to_links(h(@event.meta_subject_info), :target => :blank) %></td>
+        <td><%=h @event.meta_subject_info %></td>
       </tr>
       <!--
       <tr>
