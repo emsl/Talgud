@@ -36,6 +36,10 @@
         <td class="first"><%= t('formtastic.labels.event.meta_provided_for_participiants') %></td>
         <td><%=h @event.meta_provided_for_participiants %></td>
       </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.meta_subject_info') %></td>
+        <td><%= urls_to_links(h(@event.meta_subject_info), :target => :blank) %></td>
+      </tr>
       <!--
       <tr>
         <td class="first">Töökeeled</td>
@@ -49,6 +53,14 @@
       <tr>
         <td class="first"><%= t('formtastic.labels.event.gathering_location') %></td>
         <td><%=h @event.gathering_location %></td>
+      </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.notes') %></td>
+        <td><%=h @event.notes %></td>
+      </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.vacancies') %></td>
+        <td><%=h @event.vacancies %></td>
       </tr>
     </table> 
   </div>

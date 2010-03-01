@@ -22,7 +22,14 @@
   function addLocations(data) {
       jQuery.each(data, function(i, point) {
           if (Math.abs(point.latitude) >= 0.1 && Math.abs(point.longitude) >= 0.1) {
-              var cbody = '<b>' + point.name + '</b> &ndash; <a href="' + point.url + '" style="text-decoration: underline;">Vaata</a>'
+              var cbody = '<div class="infowindow">'
+              cbody += '<h3><a href="' + point.url + '">' + point.name + '</a></h3>';
+              cbody += point.event_type;
+              cbody += '<div class="label">Toimumiskoht</div>' + point.address;
+              cbody += '<div class="label">Tööde eesmärk</div>' + point.aim_desc;
+              cbody += '<div class="label">Tööde kirjeldus</div>' + point.job_desc;
+              cbody += '<div class="label">Vabu kohti</div>' + point.vacancies;
+              cbody += '</div>'
             
               var infowindow = new google.maps.InfoWindow({ content: cbody });
               

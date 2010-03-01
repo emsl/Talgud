@@ -238,10 +238,7 @@ et:
         meta_subject_owner: Talguobjekti omanik
         meta_subject_protegee: Kas objekt on kaitsealune?
         name: Talgute nimi
-        notes: Lisainfo
-        protegee_types:
-          nature_conservation: Objekt on looduskaitse all
-          heritage: Objekt on muinsuskaitse all
+        notes: Lisainfo talgute kohta
         status: Staatus
         statuses:
           new: Uus
@@ -250,6 +247,7 @@ et:
           published: Avalikustatud
           registration_open: Registreerumiseks avatud
           registration_closed: Registreerumine lõpetatud
+        vacancies: Vabu kohti
       municipality:
         name: Omavalitsuse nimi
         kind: Tüüp

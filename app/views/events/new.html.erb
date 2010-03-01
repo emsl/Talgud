@@ -89,7 +89,7 @@
       
       <% f.inputs do %>
         <%= f.input :meta_subject_owner %>
-        <%= f.input :meta_subject_protegee, :as => :select, :collection => Event::PROTEGEE_TYPES.collect{ |k, v| [t("formtastic.labels.event.protegee_types.#{v}"), v] } %>
+        <%= f.input :meta_subject_protegee %>
         <%= f.input :meta_subject_heritage_number %>
       <% end %>
     </div>

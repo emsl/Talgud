@@ -12,10 +12,16 @@ class EventsController < ApplicationController
   end
   
   def map
-    @events = Event.with_permissions_to(:read).all(:select => 'name, latitude, longitude, url', :order => 'begins_at ASC')
     respond_to do |format|
       format.html
-      format.json { render :json => events_json_hash(@events) }
+      format.json do
+        @events = Event.published.all(
+          :select => 'name, latitude, longitude, url, max_participants, meta_aim_description, meta_job_description, event_type_id, location_address_county_id, location_address_municipality_id, location_address_settlement_id, location_address_street',
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+        )
+        
+        render :json => events_json_hash(@events)
+      end
     end
   end
   
@@ -62,7 +68,11 @@ class EventsController < ApplicationController
   
   def events_json_hash(events)
     events.inject(Array.new) do |memo, e|
-      memo << {:name => e.name, :latitude => e.latitude, :longitude => e.longitude, :url => event_path(e)}
+      memo << {
+        :name => e.name, :latitude => e.latitude, :longitude => e.longitude, :url => event_url(e),
+        :event_type => e.event_type.name, :address => e.location_address, :vacancies => e.vacancies,
+        :aim_desc => e.meta_aim_description, :job_desc => e.meta_job_description
+      }
     end
   end
   

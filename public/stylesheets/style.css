@@ -100,7 +100,7 @@ input, textarea { color: #222; font: 13px/15px Arial, Verdana, sans-serif;}
 .bg-lightgreen { background: #f3f7da;}
 .round { border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
 
-/* Error, notice and note messages */
+/* Error and notice messages */
 div.error, div.notice {
   font-size: 12px;
   padding: 15px;
@@ -395,6 +395,7 @@ input.textbox {
                     font-size: 16px;
                     font-weight: bold;
                     text-align: right;
+                    width: 33%;
                   }
                   
               /* object-listing */
@@ -600,3 +601,13 @@ input.textbox {
       }
       #login h2 { font-weight: bold; padding-top: 5px; padding-bottom: 10px;}
       #login .textbox { width: 200px;}
+
+/** Map **/
+div.infowindow h3 { margin: 0px; padding: 0px; }
+div.infowindow h3 a { color: black; }
+div.infowindow div.label {
+  color: #999;
+  font-size: 10px;
+  margin-top: 5px;
+  text-transform: uppercase;
+}

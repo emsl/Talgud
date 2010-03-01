@@ -5,7 +5,6 @@ class Event < ActiveRecord::Base
   acts_as_mappable :lat_column_name => :latitude, :lng_column_name => :longitude
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :finished => 'finished', :denied => 'denied'}
-  PROTEGEE_TYPES = {:nature_conservation => 'nature_conservation', :heritage => 'heritage'}
 
   belongs_to :event_type
   belongs_to :manager, :class_name => 'User', :foreign_key => :manager_id
@@ -80,6 +79,10 @@ class Event < ActiveRecord::Base
   # Returns list of users who have permissions to manage this event.
   def managers
     self.roles.all(:conditions => {:role => Role::ROLE[:event_manager]}).collect{ |r| r.user }
+  end
+
+  def vacancies
+    self.max_participants
   end
 
   private

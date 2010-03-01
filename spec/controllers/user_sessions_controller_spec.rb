@@ -6,7 +6,6 @@ describe UserSessionsController, 'login' do
     user = Factory(:user_not_activated)
     post :create, {:user_session => {:email => user.email, :password => user.password}}
     response.should render_template(:new)
-    flash[:error].should_not be_empty
   end
 
 end
