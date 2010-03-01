@@ -2,19 +2,35 @@
 
 <%= t('.intro') %>
 
+=======================================
+
 <%= t('formtastic.labels.event.name') %>: <%=h @event.name %>
+
 <%= t('formtastic.labels.event.manager') %>: <%=h @event.manager.try(:name) %> (<%= @event.manager.try(:email) %>)
+
 <%= t('formtastic.labels.event.location_address') %>: <%=h @event.location_address %>
+
 <%= t('formtastic.labels.event.event_type') %>: <%=h @event.event_type.name %>
+
 <%= t('formtastic.labels.event.meta_aim_description') %>: <%=h @event.meta_aim_description %>
+
 <%= t('formtastic.labels.event.meta_job_description') %>: <%=h @event.meta_job_description %>
+
 <%= t('formtastic.labels.event.max_participants') %>: <%=h @event.max_participants %>
+
 <%= t('formtastic.labels.event.begins_at') %>: <%=h I18n.l(@event.begins_at) %>
+
 <%= t('formtastic.labels.event.meta_bring_with_you') %>: <%=h @event.meta_bring_with_you %>
+
 <%= t('formtastic.labels.event.meta_provided_for_participiants') %>: <%=h @event.meta_provided_for_participiants %>
+
 <%= t('formtastic.labels.event.meta_subject_info') %>: <%=h @event.meta_subject_info %>
+
 <%= t('formtastic.labels.event.gathering_location') %>: <%=h @event.gathering_location %>
+
 <%= t('formtastic.labels.event.notes') %>: <%=h @event.notes %>
+
+=======================================
 
 <%= t('.admin_url') %>: <%= @event_admin_url %>
 
