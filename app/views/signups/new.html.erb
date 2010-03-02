@@ -1,19 +1,24 @@
-<h1>Registreeru kasutajaks</h1>
-
-või <%= link_to 'logi sisse', login_path %>
-
-<div style="width: 600px;">
-<% semantic_form_for :signup, @user, :url => signups_path do |f| %>
-  <% f.inputs do %>
-    <%= f.input :firstname %>
-    <%= f.input :lastname %>
-    <%= f.input :email %>
-    <%= f.input :phone %>
-    <%= f.input :password, :as => :password %>
-    <%= f.input :password_confirmation, :as => :password %>
+<div class="container-right" style="margin-left: 220px; width: 430px;">
+  <h1>Registreeru kasutajaks</h1>
+  
+  <p style="margin-bottom: 20px;">
+    Talgu lisamiseks pead end registreeruma kasutajaks ning see võtab vaid hetke. Kui sul on kasutajakonto siin juba
+    olemas, siis <%= link_to 'logi sisse', login_path %>.
+  </p>
+  
+  <div style="width: 600px;">
+  <% semantic_form_for :signup, @user, :url => signups_path do |f| %>
+    <% f.inputs do %>
+      <%= f.input :firstname %>
+      <%= f.input :lastname %>
+      <%= f.input :email %>
+      <%= f.input :phone %>
+      <%= f.input :password, :as => :password %>
+      <%= f.input :password_confirmation, :as => :password %>
+    <% end %>
+    <% f.buttons do %>
+      <%= f.commit_button :signup %>
+    <% end %>
   <% end %>
-  <% f.buttons do %>
-    <%= f.commit_button :signup %>
-  <% end %>
-<% end %>
+  </div>
 </div>

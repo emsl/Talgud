@@ -73,6 +73,6 @@ class User < ActiveRecord::Base
   end
 
   def sanitize_phone
-    write_attribute(:phone,  read_attribute(:phone).gsub(/[^+0-9]/, "")) if read_attribute(:phone)
+    write_attribute(:phone, read_attribute(:phone).gsub(/[^+0-9]/, "")) if read_attribute(:phone)
   end
 end

@@ -64,6 +64,18 @@
         <td class="first"><%= t('formtastic.labels.event.manager') %></td>
         <td><%=h @event.manager.name %></td>
       </tr>
+      <% unless @event.manager.phone.blank? %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.manager_phone') %></td>
+        <td><%=h @event.manager.phone %></td>
+      </tr>
+      <% end %>
+      <% unless @event.manager.email.blank? %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.manager_email') %></td>
+        <td><%=h @event.manager.email %></td>
+      </tr>
+      <% end %>
       <% unless @event.languages.empty? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.languages') %></td>

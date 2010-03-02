@@ -7,16 +7,8 @@
   <td><%=h @event.event_type.name %></td>
 </tr>
 <tr>
-  <td><b><%= t('formtastic.labels.event.manager') %></b></td>
-  <td><%=h @event.manager.name %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.name') %></b></td>
-  <td><%=h @event.name %></td>
-</tr>
-<tr>
   <td><b><%= t('formtastic.labels.event.location_address_street') %></b></td>
-  <td><%=h @event.location_address_street %></td>
+  <td><%=h @event.location_address %></td>
 </tr>
 <tr>
   <td><b><%= t('formtastic.labels.event.meta_aim_description') %></b></td>
@@ -48,7 +40,19 @@
 </tr>
 <tr>
   <td><b><%= t('formtastic.labels.event.meta_subject_info') %></b></td>
-  <td><%= urls_to_links(h(@event.meta_subject_info), :target => :blank) %></td>
+  <td><%= auto_link(@event.meta_subject_info) %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.manager') %></b></td>
+  <td><%=h @event.manager.name %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.manager_phone') %></b></td>
+  <td><%=h @event.manager.phone %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.manager_email') %></b></td>
+  <td><%=h @event.manager.email %></td>
 </tr>
 <% unless @event.languages.empty? %>
 <tr>
