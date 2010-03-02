@@ -1,9 +1,9 @@
 class Admin::UsersController < Admin::AdminController
-  filter_resource_access
+  
+  filter_resource_access :attribute_check => true
   
   def index
-    @users = User.all
-    #@users = User.with_permissions_to(:manage)
+    @users = User.with_permissions_to(:manage, :context => :admin_users).all
   end
   
   def new

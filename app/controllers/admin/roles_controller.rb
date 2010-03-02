@@ -1,20 +1,21 @@
 class Admin::RolesController < Admin::AdminController
-  filter_resource_access
+  
+  filter_resource_access :attribute_check => true
+  
   before_filter :load_target_model, :except => :index
 
   def index
-    @roles = Role.all
+    @roles = Role.with_permission_to(:manage, :context => :admin_users).all
   end
 
   def new
     @role.model = @target_model
-    # todo: exclude users
-    @users = User.all#(:include => [:roles], :conditions => {:roles => {:model_type => @target_model.class.name, :model_id => @target_model.id}})
+    @users = User.all(:include => [:roles])
   end
 
   def create
     @role.model = @target_model
-    @users = User.all#(:include => [:roles], :conditions => {:roles => {:model_type => @target_model.class.name, :model_id => @target_model.id}})
+    @users = User.all(:include => [:roles])
     if @role.save
       flash[:notice] = t('admin.roles.create.notice')
       redirect_to new_admin_role_path(:model_type => @target_model.class.name, :model_id => @target_model)
