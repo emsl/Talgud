@@ -230,9 +230,7 @@ input.textbox {
               -moz-border-radius: 5px;
               -webkit-border-radius: 5px;
             }
-            #front .orangebox {
-              height: 268px;
-              width: 258px;
+            .orangebox {
               padding: 20px;
               background: #f38e21 url('../images/orangebox.gif') repeat-x top left;
               border-top: 1px solid #facf86;
@@ -242,10 +240,16 @@ input.textbox {
               font-size: 17px;
               line-height: 24px;
             }
-            #front .orangebox p {
+            
+            #front .orangebox {
+              height: 268px;
+              width: 258px;
+            }
+            
+            .orangebox p {
               text-shadow: 0 1px 0 #facf86;
             }
-            #front .orangebox-border {
+            .orangebox-border {
               border: 1px solid #ec920b;
               border-radius: 5px;
               -moz-border-radius: 5px;
@@ -509,7 +513,6 @@ input.textbox {
               width: 187px;
             }
               #submenu ul {
-                min-height: 179px;
                 width: 187px;
                 margin: 0;
                 padding: 8px 0;
@@ -596,7 +599,7 @@ input.textbox {
               background: #ebf3c4;
               text-align: center;
             }
-              .submit-container .submit {
+/*              .submit-container .submit {
                 width: 253px;
                 height: 46px;
                 border:none;
@@ -606,9 +609,26 @@ input.textbox {
                 line-height: 18px;
                 background: url('../images/submit.gif') no-repeat;
                 cursor: pointer;
+              }*/            
+              
+              .submit-container .submit {
+                color: #fff;
+                background: #caea5f;
+/*                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#caea5f), to(#86b105));*/
+                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a8c83e), to(#649003));
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                border: 1px solid #648801;
+                padding: 8px 28px;
+                -webkit-border-radius: 4px;
+                -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px;
+                -moz-border-radius: 3px;
+                -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px;
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
               }
-            
-  /* footer */
+              
+    /* footer */
     #footer {
       border-top: 2px solid #533824;
       /*background: url("../images/footer_bg.png?1") repeat scroll center center transparent*/

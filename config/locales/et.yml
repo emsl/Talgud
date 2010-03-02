@@ -390,6 +390,9 @@ et:
   users:
     edit:
       title: Minu andmete muutmine
+    update:
+      error: "Andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust"
+      notice: Andmed on muudetud
   number: 
     format: 
       separator: .
