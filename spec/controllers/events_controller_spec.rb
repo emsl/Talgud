@@ -141,7 +141,7 @@ describe EventsController do
       response.should redirect_to(event_path(event))
     end
     
-    it 'should not update event with valid attributes and render edit view again' do
+    it 'should not update event with invalid attributes and render edit view again' do
       event = Factory(:event, :manager => @user)
       post :update, {:id => event.url, :event => event.attributes.merge(:name => '')}
       response.should render_template(:new)

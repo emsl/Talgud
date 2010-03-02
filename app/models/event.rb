@@ -73,7 +73,7 @@ class Event < ActiveRecord::Base
   #
   # Method always returns an array of users rather than a single record. Please note that empty array may be returned.
   def regional_managers
-    m = []
+    m = []    
     m = location_address_settlement.regional_managers if location_address_settlement
     m = location_address_municipality.regional_managers if location_address_municipality and m.empty?
     m = location_address_county.regional_managers if location_address_county and m.empty?
