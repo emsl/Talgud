@@ -28,18 +28,12 @@ authorization do
 
   role :regional_manager do
     includes :guest
-    has_permission_on [:admin_events], :to => [:manage, :map] do 
-       if_attribute :location_address_settlement => {:roles => {:user => contains {user}, :role => Role::ROLE[:regional_manager]}}
-       if_attribute :location_address_municipality => {:roles => {:user => contains {user}, :role => Role::ROLE[:regional_manager]}}
-       if_attribute :location_address_county => {:roles => {:user => contains {user}, :role => Role::ROLE[:regional_manager]}}
-    end
+    has_permission_on [:admin_events], :to => [:manage, :map]
   end
 
   role :account_manager do
     includes :guest
-    has_permission_on [:admin_roles, :admin_counties, :admin_event_types, :admin_municipalities, :admin_settlements, :admin_users, :admin_languages, :admin_events], :to => [:manage, :map] do
-      if_attribute :account => {:roles => {:user => contains {user}, :role => Role::ROLE[:account_manager]}}
-    end
+    has_permission_on [:admin_roles, :admin_counties, :admin_event_types, :admin_municipalities, :admin_settlements, :admin_users, :admin_languages, :admin_events], :to => [:manage, :map]
   end
 end
 
