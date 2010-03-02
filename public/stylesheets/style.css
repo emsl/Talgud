@@ -599,17 +599,6 @@ input.textbox {
               background: #ebf3c4;
               text-align: center;
             }
-/*              .submit-container .submit {
-                width: 253px;
-                height: 46px;
-                border:none;
-                padding: 0 47px 0 0;
-                margin: 0;
-                font-size: 18px;
-                line-height: 18px;
-                background: url('../images/submit.gif') no-repeat;
-                cursor: pointer;
-              }*/            
               
               .submit-container .submit {
                 color: #fff;
@@ -695,9 +684,27 @@ input.textbox {
       #login h2 { font-weight: bold; padding-top: 5px; padding-bottom: 10px;}
       #login .textbox { width: 200px;}
 
-/** Map **/
-div.infowindow h3 { margin: 0px; padding: 0px; }
-div.infowindow h3 a { color: black; }
+/* Front page map */
+#front #map {
+  background-color: #ccc;
+}
+
+/* Map */
+div.infowindow {
+  width: 300px;
+  margin-right: 10px;
+}
+
+div.infowindow h3 {
+  margin: 0px;
+  padding: 0px;
+}
+
+div.infowindow h3 a {
+  color: black;
+  text-decoration: none;
+}
+
 div.infowindow div.label {
   color: #999;
   font-size: 10px;

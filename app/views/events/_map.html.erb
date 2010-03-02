@@ -2,7 +2,7 @@
 <script type="text/javascript" charset="utf-8">
 
   var event_locations_url = '<%= map_events_url(:format => :json) %>';
-  var map, bounds;
+  var map, bounds, infowindow;
 
   function showMap() {
       map = new google.maps.Map(document.getElementById('map'), {
@@ -12,6 +12,7 @@
       });
       
       bounds = new google.maps.LatLngBounds();
+      infowindow = new google.maps.InfoWindow();
       
       jQuery.getJSON(event_locations_url, addLocations);
   }
@@ -22,23 +23,28 @@
   function addLocations(data) {
       jQuery.each(data, function(i, point) {
           if (Math.abs(point.latitude) >= 0.1 && Math.abs(point.longitude) >= 0.1) {
-              var cbody = '<div class="infowindow">'
-              cbody += '<h3><a href="' + point.url + '">' + point.name + '</a></h3>';
-              cbody += point.event_type;
-              cbody += '<div class="label">Toimumiskoht</div>' + point.address;
-              cbody += '<div class="label">Tööde eesmärk</div>' + point.aim_desc;
-              cbody += '<div class="label">Tööde kirjeldus</div>' + point.job_desc;
-              cbody += '<div class="label">Vabu kohti</div>' + point.vacancies;
-              cbody += '</div>'
-            
-              var infowindow = new google.maps.InfoWindow({ content: cbody });
-              
               var position = new google.maps.LatLng(point.latitude, point.longitude);
               bounds.extend(position);
               
               var marker = new google.maps.Marker({position: position, map: map, title: point.name});
               
               google.maps.event.addListener(marker, 'click', function() {
+                  var cbody = '<div class="infowindow">';
+                  cbody += '<h3><a href="' + point.url + '">' + point.name + '</a></h3>';
+                  cbody += '<span class="object-type">' + point.event_type + '</span> ' + point.address;
+                  if (point.aim_desc && point.aim_desc != '') {
+                    cbody += '<div class="label">Tööde eesmärk</div>' + point.aim_desc;
+                  }
+                  if (point.job_desc && point.job_desc != '') {
+                    cbody += '<div class="label">Tööde kirjeldus</div>' + point.job_desc;
+                  }
+                  if (point.vacancies && point.vacancies != '') {
+                    cbody += '<div class="label">Vabu kohti</div>' + point.vacancies;
+                  }
+                  cbody += '<div style="margin-top: 10px;"><a href="' + point.url + '">Vaata lähemalt &raquo;</a></a>';
+                  cbody += '</div>';
+                
+                  infowindow.setContent(cbody);
                   infowindow.open(map, marker);
               });
           }

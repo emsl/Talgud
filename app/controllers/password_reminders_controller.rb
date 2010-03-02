@@ -1,7 +1,7 @@
 class PasswordRemindersController < ApplicationController
   
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:password_reminder][:email])
     if user
       new_pwd = user.reset_password!
       

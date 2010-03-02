@@ -213,7 +213,7 @@ et:
     permission_denied: Sellele lehele juurdepääsuõigus puudub
   events:
     create:
-      notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks need nii pea, kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
+      notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
       error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     edit:
       title: Talguinfo muutmine
