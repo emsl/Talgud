@@ -10,6 +10,7 @@
   <tr>
     <th><%= t('formtastic.labels.user.name') %></th>
     <th><%= t('formtastic.labels.user.email') %></th>
+    <th><%= t('formtastic.labels.user.phone') %></th>
     <th><%= t('formtastic.labels.user.status') %></th>
     <th></th>
   </tr>
@@ -18,6 +19,7 @@
   <tr>
     <td><%=h user.name %></td>
     <td><%=h user.email %></td>
+    <td><%=h user.phone %></td>
     <td><%=h t("formtastic.labels.user.statuses.#{user.status}") %></td>
     <td class="actions"><%= link_to t('admin.common.edit'), edit_admin_user_path(user) %></td>
   </tr>

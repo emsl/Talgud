@@ -33,6 +33,28 @@ describe User, 'validations' do
     User.create!(@valid_attributes)
     User.new(@valid_attributes).should have(2).errors_on(:email)
   end
+
+  it 'should validate minimum length phone' do
+    user = Factory.build(:user, :phone => '12')
+    user.should have(1).error_on(:phone)
+  end
+
+  it 'should validate maximum length phone' do
+    user = Factory.build(:user, :phone => '1234567890123456789012345678901234567890')
+    user.should have(1).error_on(:phone)
+  end
+
+  it 'should sanitaze phone' do
+    user = Factory(:user, :phone => ' +372 (712 1490)')
+    user.phone.should eql('+3727121490')
+  end
+
+  it 'should validate blank phone' do
+    user = Factory.build(:user, :phone => nil)
+    user.should be_valid
+    user = Factory.build(:user, :phone => '')
+    user.should be_valid
+  end
 end
 
 describe User, 'activate!' do

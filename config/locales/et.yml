@@ -240,6 +240,7 @@ et:
         firstname: Eesnimi
         lastname: Perekonnanimi
         name: Nimi
+        phone: Telefon
         password: Salasõna
         password_confirmation: Salasõna kinnitus
         status: Staatus
