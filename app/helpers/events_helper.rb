@@ -5,5 +5,9 @@ module EventsHelper
   def duration_times(event)
     [event.begins_at.try(:hour), event.ends_at.try(:hour)].compact * '-'
   end
-  
+
+  # Returns language names associated with event as sentence.
+  def languages_label(event)
+    event.languages.collect(&:name) * ', '
+  end
 end

@@ -5,57 +5,8 @@
     <%= f.input :location_address_county %>
     <%= f.input :location_address_municipality, :collection => @event.location_address_county.try(:municipalities), :wrapper_html => {:style => unless @event.location_address_county then 'display: none;' end } %>
     <%= f.input :location_address_settlement, :collection => @event.location_address_municipality.try(:settlements), :required => false, :wrapper_html => {:style => unless @event.location_address_municipality then 'display: none;' end } %>
-    <script type="text/javascript" charset="utf-8">
-      jQuery(document).ready(function() {
-          var countySelect = $('#event_location_address_county_id'),
-              municipalitySelect = $('#event_location_address_municipality_id'),
-              settlementSelect = $('#event_location_address_settlement_id');
-  
-          countySelect.change(function() {
-              var countySelect = $(this);
-  
-              showMap();
-  
-              $.getJSON('<%= municipalities_addresses_path %>?county_id=' + countySelect.val(), function(data) {
-                  municipalitySelect.empty();
-                  settlementSelect.empty();
-  
-                  municipalitySelect.parent('li').show();
-  
-                  jQuery.each(data, function(i, m) {
-                      municipalitySelect.append($('<option></option>').attr('value', m.id).text(m.name));
-                  });
-              });
-          });
-  
-          municipalitySelect.change(function() {
-              codeAddress(municipalitySelect.find(':selected').text() + ', ' + countySelect.find(':selected').text());
-  
-              showMap();
-  
-              $.getJSON('<%= settlements_addresses_path %>?municipality_id=' + municipalitySelect.val(), function(data) {
-                  settlementSelect.empty();
-  
-                  if (data.length > 0) {
-                      settlementSelect.parent('li').show();
-                  } else {
-                      settlementSelect.parent('li').hide();
-                  }
-  
-                  jQuery.each(data, function(i, m) {
-                      settlementSelect.append($('<option></option>').attr('value', m.id).text(m.name));
-                  });
-              });
-          });
-  
-          settlementSelect.change(function() {
-              showMap();
-              codeAddress(settlementSelect.find(':selected').text() + ', ' + municipalitySelect.find(':selected').text() + ', ' + countySelect.find(':selected').text());
-          })
-      });
-    </script>
     <li id="map_row" style="display: none">
-      <label>Palun täpsusta asukohta kaardil</label>
+      <label>Palun vajadusel täpsusta asukohta kaardil (selleks vea punast nuppu mööda kaarti õigesse kohta).</label>
       <div id="map" style="height: 400px;"></div>
     </li>
     <%= f.input :latitude, :as => :hidden %>
@@ -87,13 +38,61 @@
 
 <script type="text/javascript" charset="utf-8">
   jQuery(document).ready(function() {
+      var countySelect = $('#event_location_address_county_id'),
+          municipalitySelect = $('#event_location_address_municipality_id'),
+          settlementSelect = $('#event_location_address_settlement_id');
+
+      countySelect.change(function() {
+          var countySelect = $(this);
+
+          showMap();
+
+          $.getJSON('<%= municipalities_addresses_path %>?county_id=' + countySelect.val(), function(data) {
+              municipalitySelect.empty();
+              settlementSelect.empty();
+
+              municipalitySelect.parent('li').show();
+
+              jQuery.each(data, function(i, m) {
+                  municipalitySelect.append($('<option></option>').attr('value', m.id).text(m.name));
+              });
+          });
+      });
+
+      municipalitySelect.change(function() {
+          codeAddress(municipalitySelect.find(':selected').text() + ', ' + countySelect.find(':selected').text());
+
+          showMap();
+
+          $.getJSON('<%= settlements_addresses_path %>?municipality_id=' + municipalitySelect.val(), function(data) {
+              settlementSelect.empty();
+
+              if (data.length > 0) {
+                  settlementSelect.parent('li').show();
+              } else {
+                  settlementSelect.parent('li').hide();
+              }
+
+              jQuery.each(data, function(i, m) {
+                  settlementSelect.append($('<option></option>').attr('value', m.id).text(m.name));
+              });
+          });
+      });
+
+      settlementSelect.change(function() {
+          showMap();
+          codeAddress(settlementSelect.find(':selected').text() + ', ' + municipalitySelect.find(':selected').text() + ', ' + countySelect.find(':selected').text());
+      })
+  });
+
+  jQuery(document).ready(function() {
       var bubble = document.createElement('div');
       $(bubble).attr('class', 'bubble').html('<div class="bubble-arrow"></div><div class="bubble-inner"></div>');
     
       displayHint = function(list_item) {
           var hint = $(list_item).find('p.inline-hints')
           if (hint.length > 0) {
-              $(bubble).find('.bubble-inner').text($(hint[0]).text());
+              $(bubble).find('.bubble-inner').html($(hint[0]).html());
               list_item.append($(bubble));
           }
       }
