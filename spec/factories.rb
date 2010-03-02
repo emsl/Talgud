@@ -66,6 +66,7 @@ Factory.define :user do |u|
   u.firstname 'Admin'
   u.lastname 'User'
   u.sequence(:email) { |n| "admin#{n}@example.com" }
+  u.phone '+232322323'
   u.password 'admin'
   u.password_confirmation 'admin'
   u.status User::STATUS[:active]
