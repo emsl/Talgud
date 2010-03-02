@@ -591,7 +591,7 @@ input.textbox {
             }
               .bubble-arrow { position: absolute; top: 8px; left: 0; z-index: 100; width:13px; height: 27px; background: url('../images/bubble_arrow.png') no-repeat;}
               .bubble-inner { margin-left: 12px;width: 270px; padding: 11px; background: #fffdbd; border: 1px solid #e3dd1d;border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
-          /* submit-container */
+
             .submit-container {
               margin-top: 13px;
               padding: 20px 0;
@@ -614,7 +614,6 @@ input.textbox {
               .submit-container .submit {
                 color: #fff;
                 background: #caea5f;
-/*                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#caea5f), to(#86b105));*/
                 background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a8c83e), to(#649003));
                 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
                 font-size: 14px;

@@ -209,6 +209,7 @@ et:
         email: E-posti aadress
         password: Salasõna
   common:
+    loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
   events:
     create:

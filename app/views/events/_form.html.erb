@@ -47,15 +47,28 @@
 
           showMap();
 
-          $.getJSON('<%= municipalities_addresses_path %>?county_id=' + countySelect.val(), function(data) {
-              municipalitySelect.empty();
-              settlementSelect.empty();
+          $.ajax({
+              type: 'GET', dataType: 'json',
+              url: '<%= municipalities_addresses_path %>?county_id=' + countySelect.val(),
+              beforeSend: function(request) {
+                  municipalitySelect.empty();
+                  municipalitySelect.parent('li').show();
+                  municipalitySelect.attr('disabled', 'disabled');
+                  municipalitySelect.append($('<option></option>').text('<%= t('common.loading') %>'));
+              },
+              success: function(data) {
+                  municipalitySelect.empty();
+                  settlementSelect.empty();
+                  
+                  municipalitySelect.empty();
+                  municipalitySelect.parent('li').show();
+                  municipalitySelect.removeAttr('disabled');
+                  municipalitySelect.append($('<option></option>'));
 
-              municipalitySelect.parent('li').show();
-
-              jQuery.each(data, function(i, m) {
-                  municipalitySelect.append($('<option></option>').attr('value', m.id).text(m.name));
-              });
+                  jQuery.each(data, function(i, m) {
+                      municipalitySelect.append($('<option></option>').attr('value', m.id).text(m.name));
+                  });
+              }
           });
       });
 
@@ -64,18 +77,30 @@
 
           showMap();
 
-          $.getJSON('<%= settlements_addresses_path %>?municipality_id=' + municipalitySelect.val(), function(data) {
-              settlementSelect.empty();
-
-              if (data.length > 0) {
+          $.ajax({
+              type: 'GET', dataType: 'json',
+              url: '<%= settlements_addresses_path %>?municipality_id=' + municipalitySelect.val(),
+              beforeSend: function(request) {
+                  settlementSelect.empty();
                   settlementSelect.parent('li').show();
-              } else {
-                  settlementSelect.parent('li').hide();
-              }
+                  settlementSelect.attr('disabled', 'disabled');
+                  settlementSelect.append($('<option></option>').text('<%= t('common.loading') %>'));
+              },
+              success: function(data) {
+                  settlementSelect.empty();
+                  settlementSelect.removeAttr('disabled');
+                  settlementSelect.append($('<option></option>'));
 
-              jQuery.each(data, function(i, m) {
-                  settlementSelect.append($('<option></option>').attr('value', m.id).text(m.name));
-              });
+                  if (data.length > 0) {
+                      settlementSelect.parent('li').show();
+                  } else {
+                      settlementSelect.parent('li').hide();
+                  }
+
+                  jQuery.each(data, function(i, m) {
+                      settlementSelect.append($('<option></option>').attr('value', m.id).text(m.name));
+                  });
+              }
           });
       });
 
