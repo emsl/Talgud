@@ -14,7 +14,10 @@ authorization do
     has_permission_on [:event_participant], :to => [:manage]
     has_permission_on [:events], :to => [:create]
     has_permission_on [:events], :to => [:my, :show, :update] do
-      if_attribute :managers => contains { user }
+      if_attribute :managers => contains {user}
+    end
+    has_permission_on [:users], :to => [:update] do
+      if_attribute :id => is {user.id}
     end
   end
 

@@ -29,4 +29,5 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :password_reminders
   map.resources :signups
   map.resources :user_sessions
+  map.resources :users
 end

@@ -1,0 +1,16 @@
+<div class="container-right" style="margin-left: 220px; width: 430px;">
+  <h1><%= t('.title') %></h1>
+  
+  <% semantic_form_for @user, :url => user_path(@user) do |f| %>
+    <% f.inputs do %>
+      <%= f.input :firstname %>
+      <%= f.input :lastname %>
+      <%= f.input :phone %>
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
+    <% end %>
+    <% f.buttons do %>
+      <%= f.commit_button :save_my_settings %>
+    <% end %>
+  <% end %>
+</div>

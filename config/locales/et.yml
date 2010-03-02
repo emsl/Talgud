@@ -193,13 +193,13 @@ et:
         error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
   authlogic:
     error_messages:
-      # login_blank: can not be blank
+      login_blank: palun sisesta e-posti aadress
       # login_not_found: is not valid
       # login_invalid: should use only letters, numbers, spaces, and .-_@ please.
       # consecutive_failed_logins_limit_exceeded: Consecutive failed logins limit exceeded, account is disabled.
       email_invalid: peab olema korrektne e-posti aadress
-      # password_blank: can not be blank
-      # password_invalid: is not valid
+      password_blank: palun sisesta salasõna
+      password_invalid: salasõna ei ole õige
       # not_active: Your account is not active
       # not_confirmed: Your account is not confirmed
       # not_approved: Your account is not approved
@@ -343,6 +343,7 @@ et:
       create: "Lisa {{model}}"
       update: "Salvesta {{model}}"
       signup: Registreeru
+      save_my_settings: Salvesta minu andmed
     submit: "Salvesta"
   mailers:
     common:
@@ -386,6 +387,9 @@ et:
       send_password: Saada uus salasõna
     destroy:
       notice: Olete süsteemist välja logitud
+  users:
+    edit:
+      title: Minu andmete muutmine
   number: 
     format: 
       separator: .
