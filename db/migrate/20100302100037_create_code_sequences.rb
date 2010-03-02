@@ -12,7 +12,7 @@ class CreateCodeSequences < ActiveRecord::Migration
       t.references :account, :null => false
     end
     
-    add_index :code_sequences, [:account_id, :code, :sequence, :deleted_at], :unique => true
+    add_index :code_sequences, [:account_id, :code, :sequence, :deleted_at], :name => :index_code_sequences, :unique => true
   end
 
   def self.down

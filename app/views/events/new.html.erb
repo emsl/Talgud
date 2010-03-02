@@ -3,16 +3,22 @@
 </div>
 <div class="container-right">
   <h1>Registreeri oma talgud</h1>
-  <h2>
-    Uue talgu lisamine võtab kõigest 10 minutit, kuid esimesel mail võid saada terve 
-    taluhoovi-täie abilisi, kas pole tore? Ainult suppi ja simmanit pead neile pakkuma. 
-    Napsutamine on seejuures halb komme.
-  </h2>
+  
+  <p>
+    Siin saad registreerida oma talgukoha ja kirjeldada talgulistele, mida tegema hakatakse ja mida igaühel kaasa tuleks
+    võtta. Kuigi talgute andmeid saab ka hiljem muuta, püüa juba praegu kõik hoolega läbi mõelda. Sisestatud andmed
+    jõuavad kodulehele mõne päeva jooksul.
+  </p>
 
   <% semantic_form_for @event do |f| %>
     <%= render 'form' %>
     
     <div class="submit-container round">
+      <div style="padding: 0 20px 20px; text-align: left;">
+        Talgukoha registreerimisega kinnitad, et oled vähemalt 18 aastat vana ning oled nõus saama talgupäeva
+        toimkonnalt e-posti teel infot talgupäeva kohta.
+      </div>
+      
       <% f.buttons do %>
         <%= f.submit 'Salvesta talgu', :class => 'submit' %>
       <% end %>

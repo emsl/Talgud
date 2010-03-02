@@ -91,6 +91,10 @@
         <td><%=h @event.notes %></td>
       </tr>
       <tr>
+        <td class="first"><%= t('formtastic.labels.event.code') %></td>
+        <td><%=h @event.code %></td>
+      </tr>
+      <tr>
         <td></td>
         <td><div class="object-detail-time">Talgud toimuvad kell <%= duration_times(@event) %></div></td>
       </tr>
