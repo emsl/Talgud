@@ -296,6 +296,8 @@ et:
         kinds:
           linn: Linn
           vald: Vald
+      password_reminder:
+        email: E-posti aadress
       role:
         user: Kasutaja
         role: Roll

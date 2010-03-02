@@ -1,18 +1,55 @@
-<% form_for @user_session, :url => user_sessions_path do |f| %>
-  <h2><%= t('.login') %></h2>
-  
-  <%= f.label t('authlogic.attributes.user_session.email') %><br />
-  <%= f.text_field :email %><br />
-  <br />
-  <%= f.label t('authlogic.attributes.user_session.password') %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.submit t('.login_submit') %> või <%= link_to 'registreeru kasutajaks', signup_path %>
-<% end %>
-<hr/>
-<% form_for :password_reminder, :url => password_reminders_path do |f| %>
-  <h2><%= t('.reset_password') %></h2>
-  <%= f.label t('authlogic.attributes.user_session.email') %><br />
-  <%= text_field_tag :email %><br />
-  <%= f.submit t('.send_password') %>
-<% end %>
+<div class="container-right" style="margin-left: 220px;">
+  <div id="container-login">
+    <h1><%= t('.login') %></h1>
+    
+    <% semantic_form_for :user_session, @user_session, :url => user_sessions_path do |f| %>
+      <% f.inputs do %>
+        <%= f.input :email %>
+        <%= f.input :password, :wrapper_html => {:style => 'padding-bottom: 0px;'} %>
+        <li>
+          <%= link_to 'Unustasid salasõna?', '#reset-password', :id => 'reset_password_link' %>
+        </li>
+      <% end %>
+      <ol>
+        <li class="commit">
+          <%= f.submit t('.login_submit') %>
+          või <%= link_to 'registreeru kasutajaks', signup_path %>
+        </li>
+      </ol>
+    <% end %>
+  </div>
+
+  <div id="container-resetpassword" style="display: none;">
+    <h1><%= t('.reset_password') %></h1>
+    
+    <p style="padding-bottom: 20px;">Sisesta oma e-posti aadress ning me saadame sulle uue salasõna.</p>
+    
+    <% semantic_form_for :password_reminder, :url => password_reminders_path do |f| %>
+      <% f.inputs do %>
+        <%= f.input :email %>
+      <% end %>
+      <ol>
+        <li class="commit">
+          <%= f.submit t('.send_password') %>
+          või <%= link_to 'siiski mitte, tuli meelde juba', '#login', :id => 'login_link' %>
+        </li>
+      </ol>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  jQuery(document).ready(function() {
+      $('#reset_password_link').click(function() {
+          $('#container-login').hide();
+          $('#container-resetpassword').show();
+          return false;
+      });
+      
+      $('#login_link').click(function() {
+          $('#container-resetpassword').hide();
+          $('#container-login').show();
+          return false;
+      });
+  });
+</script>
