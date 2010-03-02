@@ -13,6 +13,8 @@ class Event < ActiveRecord::Base
   belongs_to :location_address_settlement, :class_name => 'Settlement', :foreign_key => :location_address_settlement_id
   has_many :roles, :as => :model
   has_and_belongs_to_many :languages
+  
+  validates_uniqueness_of :code, :scope => :account_id
 
   before_validation_on_create :set_defaults
   after_save :grant_manager_role
@@ -96,7 +98,7 @@ class Event < ActiveRecord::Base
   end
 
   def set_defaults
-    self.code = ActiveSupport::SecureRandom.base64(6).upcase
+    self.code = CodeSequence.next_value(self).label if self.code.blank?
     self.status = 'new' if self.status.blank?
   end
 end

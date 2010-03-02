@@ -55,7 +55,7 @@ class EventsController < ApplicationController
         Mailers::EventMailer.deliver_region_manager_notification(rm, @event, admin_event_url(@event.id))
       end
       
-      flash[:notice] = t('events.create.notice')
+      flash[:notice] = t('events.create.notice', :code => @event.code)
       redirect_to event_path(@event)
     else
       render :new

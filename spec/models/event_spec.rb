@@ -45,6 +45,22 @@ describe Event, 'start and end time changing' do
   end
 end
 
+describe Event, 'event code generation' do
+  it 'should generate event code' do
+    @event = Factory(:event)
+    @event.code.should_not be_nil
+  end
+
+  it 'should validate dublicate event code' do
+    @event = Factory(:event)
+    @event.code.should_not be_nil
+    
+    @event = Factory.build(:event, :code => @event.code)
+    @event.should be_invalid
+    @event.should have(1).error_on(:code)
+  end
+end
+
 describe Event, 'regional_managers' do
   before(:each) do
     @regional_manager = Factory(:user)

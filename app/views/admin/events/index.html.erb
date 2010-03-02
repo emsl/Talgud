@@ -10,6 +10,7 @@
   <table class="datatable">
   <thead>
   <tr>
+    <th><%=h t('formtastic.labels.event.code') %></th>
     <th><%=h t('formtastic.labels.event.name') %></th>
     <th><%=h t('formtastic.labels.event.manager') %></th>
     <th><%=h t('formtastic.labels.event.location_address') %></th>
@@ -20,6 +21,7 @@
   </thead>
   <% for event in @events %>
   <tr>
+    <td><%=h event.code %></td>
     <td><%=h truncate(event.name) %></td>
     <td><%=h event.manager.name %></td>
     <td><%=h event.location_address %></td>

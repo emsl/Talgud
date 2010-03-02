@@ -3,7 +3,11 @@
 <div class="textcontent">
 <table>
 <tr>
-  <td style="width: 25%;"><b><%= t('formtastic.labels.event.event_type') %></b></td>
+  <td style="width: 25%;"><b><%= t('formtastic.labels.event.code') %></b></td>
+  <td><%=h @event.code %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.event_type') %></b></td>
   <td><%=h @event.event_type.name %></td>
 </tr>
 <tr>

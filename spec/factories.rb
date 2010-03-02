@@ -72,6 +72,11 @@ Factory.define :user do |u|
   u.status User::STATUS[:active]
 end
 
+Factory.define :code_sequence do |c|
+  c.sequence(:code) { |n| "code#{n}" }
+  c.sequence(:sequence) { |n| "sequence#{n}" }
+end
+
 Factory.define :user_not_activated, :parent => :user do |u|
   u.perishable_token 'perishable_token'
   u.status User::STATUS[:created]
