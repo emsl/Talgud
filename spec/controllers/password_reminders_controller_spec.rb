@@ -6,7 +6,7 @@ describe PasswordRemindersController, 'create' do
     user = Factory(:user)
     Mailers::UserMailer.should_receive(:deliver_password_reminder)
     
-    post :create, {:email => user.email}
+    post :create, {:password_reminder => {:email => user.email}}
     response.should redirect_to(login_path)
     flash[:notice].should_not be_blank
   end
@@ -15,7 +15,7 @@ describe PasswordRemindersController, 'create' do
     user = Factory(:user)
     Mailers::UserMailer.should_not_receive(:deliver_password_reminder)
     
-    post :create, {:email => "not_#{user.email}"}
+    post :create, {:password_reminder => {:email => "not_#{user.email}"}}
     response.should redirect_to(login_path)
     flash[:error].should_not be_blank
   end
