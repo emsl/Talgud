@@ -214,7 +214,7 @@ et:
   events:
     create:
       notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
-      error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
+      error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
     edit:
       title: Talguinfo muutmine
     index:
@@ -225,7 +225,7 @@ et:
       title: Minu talgud
     update:
       notice: "Talgu andmed on uuendatud. Olulisemate muudatuste korral palume sellest teavitada ka talgulisi."
-      error: "Talgu andmete muutmisel tekkis viga, palun kontrolli andmete korrektsust."
+      error: "Talgu andmete muutmisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
   formtastic:
     labels:
       county:

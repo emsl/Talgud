@@ -42,7 +42,7 @@ describe EventsController do
       end
       
       it 'should create event and assign current user as manager when event is valid' do
-        post :create, {:event => @event.attributes.merge(:language_ids => [Factory(:language).id])}
+        post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}
         response.should redirect_to(event_path(assigns[:event]))
         assigns[:event].manager.should eql(@user)
       end
@@ -55,11 +55,11 @@ describe EventsController do
         @event.location_address_county = county
         Mailers::EventMailer.should_receive(:deliver_region_manager_notification)
         
-        post :create, {:event => @event.attributes.merge(:language_ids => [Factory(:language).id])}
+        post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}
       end
       
       it 'should redisplay event create form when event data is invalid' do
-        post :create, {:event => @event.attributes.merge(:name => '')}
+        post :create, {:event => @event.attributes.merge('name' => '')}
         response.should render_template(:new)
       end
     end
@@ -143,7 +143,7 @@ describe EventsController do
     
     it 'should not update event with invalid attributes and render edit view again' do
       event = Factory(:event, :manager => @user)
-      post :update, {:id => event.url, :event => event.attributes.merge(:name => '')}
+      post :update, {:id => event.url, :event => event.attributes.merge('name' => '')}
       response.should render_template(:new)
     end
   end

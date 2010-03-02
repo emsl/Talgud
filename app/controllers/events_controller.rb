@@ -58,8 +58,8 @@ class EventsController < ApplicationController
       flash[:notice] = t('events.create.notice', :code => @event.code)
       redirect_to event_path(@event)
     else
-      render :new
       flash.now[:error] = t('events.create.error')
+      render :new
     end
   end
   
