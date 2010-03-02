@@ -2,15 +2,24 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 require 'rake'
 
 describe "talgud rake tasks" do
-  before do
+  
+  before(:each) do
+    @stdout = $stdout
+    # Rake tasks generate standard output just a little bit. It's okay but we do not want to see it on screen.
+    $stdout = StringIO.new
     @rake = Rake::Application.new
     Rake.application = @rake
     Rake.application.rake_require "lib/tasks/talgud"
     Rake::Task.define_task(:environment)
   end
-
+  
+  after(:each) do
+    # Restore previous STDOUT
+    $stdout = @stdout
+  end
+  
   describe "rake talgud:account:create" do
-    before do
+    before(:each) do
       @task_name = "talgud:account:create"
     end
     

@@ -212,7 +212,7 @@ et:
     permission_denied: Sellele lehele juurdepääsuõigus puudub
   events:
     create:
-      notice: "Talgu andmed on lisatud ning on saadetud administraatorile ülevaatamiseks."
+      notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks need nii pea, kui maakondlik koordinaator on saanud andmed üle vaadata."
       error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust."
     edit:
       title: Talguinfo muutmine
@@ -327,7 +327,7 @@ et:
         meta_job_description: "Märgi kõik kavandatavad talgutööde tüübid (nt võsa saagimine, langetatud võsa ja okste korjamine ning põletamine)"
         meta_bring_with_you: "Mida osalejatel on vaja kaasa võtta: nt kindad, tööriistad, muud vahendid, piknikukorv, kummikud"
         meta_provided_for_participiants: "Mida korraldajana saad talgulistele pakkuda, väga teretulnud on kohaliku paiga, muinsusväärtuse, looduse või külaseltsi tegemiste lühitutvustus. Siia märgi ka muu talgulise meelehea vastavalt võimalustele: nt soe tee, supp, pillimees, väike meene või saun."
-        meta_subject_heritage_number: Muinsuskaitsealuse objekti puhul sisesta mälestise number
+        meta_subject_heritage_number: Muinsuskaitsealuse objekti puhul sisesta mälestise number. Otsi number mälestiste registrist <a href="http://register.muinas.ee" target="blank">http://register.muinas.ee</a>
         meta_subject_info: Võimalusel viide objekti puudutavale veebilehele
         meta_subject_owner: "Kes on talguobjekti/kinnistu omanik ja rentnik või valdaja, mida korrastatakse või millel talgud toimuvad"
         meta_subject_protegee: "Kas objekt on äkki looduskaitse all või muinsuskaitse all?"
@@ -359,7 +359,7 @@ et:
         admin_url: Talgu andmeid saab hallata aadressilt
   password_reminders:
     create:
-      notice: Uus salasõna on saadetud sinu e-posti aadressile
+      notice: Uus salasõna saadeti sulle e-mailile
       error: Sellist e-posti aadressiga kontot ei ole registreeritud. Palun kontrolli aadressi korrektsust.
   signups:
     create:

@@ -3,9 +3,9 @@ authorization do
     has_permission_on [:home], :to => [:read]
     has_permission_on [:user_sessions, :admin_user_sessions], :to => [:manage]
     has_permission_on [:events], :to => [:read, :map, :latest] do 
-      if_attribute :status => is { Event::STATUS[:published] }
-      if_attribute :status => is { Event::STATUS[:registration_opened] }
-      if_attribute :status => is { Event::STATUS[:registration_closed] }
+      if_attribute :status => Event::STATUS[:published]
+      if_attribute :status => Event::STATUS[:registration_open]
+      if_attribute :status => Event::STATUS[:registration_closed]
     end
   end
 
