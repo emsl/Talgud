@@ -60,7 +60,6 @@ describe UsersController do
       
       it 'should render edit form when user data is invalid' do
         post :update, {:id => @user.id, :user => @user.attributes.merge('firstname' => '', 'lastname' => '')}
-        puts response.inspect
         response.should render_template(:edit)
       end
     end

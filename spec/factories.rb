@@ -35,7 +35,8 @@ Factory.define :event do |e|
   e.location_address_country_code 'ee'
   e.status Event::STATUS[:published]
   e.max_participants 10
-  
+  e.location_address_street 'Location address'
+
   # Metadata
   e.gathering_location 'Gathering location'
   e.notes 'Notes'
