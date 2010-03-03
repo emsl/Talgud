@@ -18,7 +18,6 @@ class EventsController < ApplicationController
       end
       format.json do
         @events = Event.published.all(
-          :select => 'name, latitude, longitude, url, max_participants, meta_aim_description, meta_job_description, event_type_id, location_address_county_id, location_address_municipality_id, location_address_settlement_id, location_address_street',
           :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
         )
         

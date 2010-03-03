@@ -36,6 +36,8 @@ et:
           attributes:
             languages:
               pick_at_least_one: vali nimekirjast vähemalt üks keel
+            end_time:
+              must_be_after_begin_time: peab olema hilisem algusajast
     models:
       account: konto
       county: maakond

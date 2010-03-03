@@ -50,7 +50,6 @@ Factory.define :event do |e|
   e.association :location_address_county, :factory => :county
   e.association :location_address_municipality, :factory => :municipality
   e.association :manager, :factory => :user
-  # e.association :languages, :factory => :language
   
   e.languages do |event|
     [event.association(:language)]

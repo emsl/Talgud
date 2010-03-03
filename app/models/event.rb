@@ -24,7 +24,10 @@ class Event < ActiveRecord::Base
   validates_presence_of :languages, :message => :pick_at_least_one
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
-    record.errors.add attr, 'peab olema tulevikus' if not record.begins_at.nil? and record.begins_at > value
+    if not record.begins_at.nil? and record.begins_at > value
+      record.errors.add :ends_at, :must_be_after_begin_time
+      record.errors.add :end_time, :must_be_after_begin_time
+    end
   end 
 
   named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
