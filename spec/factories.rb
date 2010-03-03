@@ -43,6 +43,7 @@ Factory.define :event do |e|
   e.meta_bring_with_you 'Bring with you :)'
   e.meta_provided_for_participiants 'Provided for participants'
   e.meta_subject_info 'Subject info'
+  e.meta_subject_owner 'Subject owner'
   e.meta_aim_description 'Aim description'
   e.meta_job_description 'Job description'
   

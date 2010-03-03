@@ -370,9 +370,9 @@ input.textbox {
               
               /* object-type */
                 .object-type {
-                  white-space: nowrap; 
+                  white-space: nowrap;
                   font-size: 10px; 
-                  padding: 0px 4px; 
+                  padding: 0px 4px;
                   text-transform: uppercase;
                   background: #fffdbd;
                   border: 1px solid #e3dd1d;

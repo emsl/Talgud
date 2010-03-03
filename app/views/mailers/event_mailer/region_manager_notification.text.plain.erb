@@ -6,11 +6,11 @@
 
 <%= t('formtastic.labels.event.name') %>: <%=h @event.name %>
 
-<%= t('formtastic.labels.event.manager') %>: <%=h @event.manager.try(:name) %> (<%= @event.manager.try(:email) %>)
-
-<%= t('formtastic.labels.event.location_address') %>: <%=h @event.location_address %>
+<%= t('formtastic.labels.event.code') %>: <%=h @event.code %>
 
 <%= t('formtastic.labels.event.event_type') %>: <%=h @event.event_type.name %>
+
+<%= t('formtastic.labels.event.location_address') %>: <%=h @event.location_address %>
 
 <%= t('formtastic.labels.event.meta_aim_description') %>: <%=h @event.meta_aim_description %>
 
@@ -25,6 +25,8 @@
 <%= t('formtastic.labels.event.meta_provided_for_participiants') %>: <%=h @event.meta_provided_for_participiants %>
 
 <%= t('formtastic.labels.event.meta_subject_info') %>: <%=h @event.meta_subject_info %>
+
+<%= t('formtastic.labels.event.manager') %>: <%=h @event.manager.try(:name) %> (<%= @event.manager.try(:email) %>, <%= @event.manager.try(:phone) %>)
 
 <%= t('formtastic.labels.event.gathering_location') %>: <%=h @event.gathering_location %>
 

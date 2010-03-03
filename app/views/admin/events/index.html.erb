@@ -27,7 +27,10 @@
     <td><%=h event.location_address %></td>
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
     <td><%=h time_ago_in_words(event.created_at) unless event.created_at.nil? %> tagasi</td>
-    <td class="actions"><%= link_to t('admin.common.edit'), edit_admin_event_path(event.id) %></td>
+    <td class="actions">
+      <%= link_to t('admin.common.view'), admin_event_path(event.id) %>
+      <%= link_to t('admin.common.edit'), edit_admin_event_path(event.id) %>
+    </td>
   </tr>
   <% end %>
   </table>

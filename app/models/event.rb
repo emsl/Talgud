@@ -19,8 +19,8 @@ class Event < ActiveRecord::Base
   before_validation_on_create :set_defaults
   after_save :grant_manager_role
 
-  validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :location_address_street, :max_participants
-  validates_presence_of :meta_aim_description, :meta_job_description, :meta_bring_with_you, :meta_provided_for_participiants, :meta_subject_info, :gathering_location
+  validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
+  validates_presence_of :meta_aim_description, :meta_job_description, :meta_bring_with_you, :meta_provided_for_participiants, :meta_subject_owner, :gathering_location
   validates_presence_of :languages, :message => :pick_at_least_one
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
@@ -40,7 +40,9 @@ class Event < ActiveRecord::Base
   end
   
   def location_address
-    [location_address_county, location_address_municipality, location_address_settlement].compact.map(&:name).join(', ')
+    a = [location_address_county, location_address_municipality, location_address_settlement].compact.map(&:name)
+    a << location_address_street unless location_address_street.blank?
+    a.join(', ')
   end
 
   def published?

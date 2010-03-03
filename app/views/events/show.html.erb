@@ -19,7 +19,7 @@
       <h1><%=h @event.name %> <span class="object-type"><%=h @event.event_type.name %></span></h1>
       
       <% if permitted_to?(:edit, @event) %>
-      <%= link_to 'Muuda talgu andmeid', edit_event_path(@event) %><br/><br/>
+      <%= link_to 'Muuda talgute andmeid', edit_event_path(@event) %><br/><br/>
       <% end %>
       
       <div class="object-location">
@@ -92,7 +92,9 @@
       </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.code') %></td>
-        <td><%=h @event.code %></td>
+        <td>
+          <%=h @event.code %> <a href="http://www.teemeara.ee/loo-kaasa/toeta-talguid" target="blank">Toeta neid talguid!</a>
+        </td>
       </tr>
       <tr>
         <td></td>

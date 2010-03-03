@@ -54,6 +54,7 @@ et:
       edit: Muuda
       logged_in: Sisse loginud kasutaja
       title: Talgute admin
+      view: Vaata
     counties:
       create:
         notice: Maakonna andmed on lisatud
@@ -257,7 +258,7 @@ et:
         password: Salasõna
         password_confirmation: Salasõna kinnitus
       event:
-        code: Talgu kood
+        code: Talgukood
         begin_time: Alguse kellaaeg
         end_time: "Lõpu kellaaeg ~"
         begins_at: Algusaeg
@@ -265,13 +266,13 @@ et:
         event_type: Talgute liik
         gathering_location: Kogunemine
         gathering_time: Kogunemisaeg
-        languages: Keeled mida talgujuht räägib
+        languages: "Keeled mida talgujuht räägib (vali kõik keeled, milles talgujuht asjad aetud saab)"
         latitude: Pikkuskraad
         location_address: Aadress
         location_address_county: Maakond
         location_address_municipality: Linn / vald
         location_address_settlement: Asula / küla
-        location_address_street: Talgute toimumiskoht
+        location_address_street: "Tänav, maja"
         longitude: Laiuskraad
         manager: Talgujuht
         manager_email: Talgujuhi e-mail
@@ -351,7 +352,7 @@ et:
   mailers:
     common:
       hello: Tere!
-      footer_text: "Sinu Talgute meeskond."
+      footer_text: "Teeme Ära talgupäeva meeskond"
     user_mailer:
       activation_instructions:
         subject: Talgute keskkonna kasutajakonto aktiveerimine

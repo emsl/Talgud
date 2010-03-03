@@ -9,7 +9,7 @@ describe Event, 'validations' do
   
   it 'should validate that begin time is before end time' do
     time = 1.day.from_now
-    Factory.build(:event, :begins_at => time, :ends_at => time, :begin_time => '10:00', :end_time => '11:00').should be_valid
+    Factory.build(:event, :begins_at => time, :ends_at => time).should be_valid
     # TODO: mutating start and end time should be possible by simply declaring them as create attributes
     f = Factory.build(:event, :begins_at => time, :ends_at => time)
     f.begin_time = '11:00'

@@ -6,7 +6,7 @@
   <table class="object-listing">
   <% for event in @events %>
   <tr>
-    <td class="first"><div class="object-type"><%= event.event_type.name %></div></td>
+    <td class="first"><span class="object-type"><%= event.event_type.name %></span></td>
     <td><%= link_to event.name, event_path(event) %></td>
     <td class="last"><%= event.location_address %></td>
   </tr>

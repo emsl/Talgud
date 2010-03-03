@@ -28,6 +28,12 @@ class EventsController < ApplicationController
   
   def latest
     @events = Event.latest.published.all(:order => 'id DESC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
+    respond_to do |format|
+      format.html
+      format.json do
+        render :json => events_json_hash(@events)
+      end
+    end
   end
   
   def new
