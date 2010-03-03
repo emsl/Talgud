@@ -10,6 +10,7 @@ deploy.task :after_update, :roles => [:app] do
   DESC
   top.upload('./config/database.yml', "#{release_path}/config/database.yml")
   top.upload('./config/app_config.yml', "#{release_path}/config/app_config.yml")
+  top.upload('./config/newrelic.yml', "#{release_path}/config/newrelic.yml")
 end
 
 deploy.task :after_update_code, :roles => [:app] do

@@ -3,8 +3,10 @@ config/app_config.yml
 config/database.yml
 config/deploy/staging.rb
 config/deploy/production.rb
+config/newrelic.yml
 coverage
 db/schema.rb
+doc/server-install.txt
 log/*.log
 test/*
 tmp/*
