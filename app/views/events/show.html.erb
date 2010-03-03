@@ -121,7 +121,7 @@
       
       var position = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>);
       var marker = new google.maps.Marker({position: position, map: map, title: '<%= @event.name %>'});
-      var infowindow = new google.maps.InfoWindow();
+      var infowindow = new google.maps.InfoWindow({maxwidth: 350});
       
       var cbody = '<div class="infowindow" style="margin-top: 10px;">';
       cbody += '<h3><%=h @event.name %></a></h3>';

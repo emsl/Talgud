@@ -12,7 +12,7 @@
       });
       
       bounds = new google.maps.LatLngBounds();
-      infowindow = new google.maps.InfoWindow();
+      infowindow = new google.maps.InfoWindow({maxWidth: 350});
       
       jQuery.getJSON(event_locations_url, addLocations);
   }
