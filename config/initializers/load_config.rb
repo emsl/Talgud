@@ -20,3 +20,16 @@ module Talgud
 end
 
 Talgud.config = NestedOpenStruct.new(YAML.load_file(RAILS_ROOT + "/config/app_config.yml")[RAILS_ENV])
+
+if Talgud.config.mailer.delivery_method == 'smtp'
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address => Talgud.config.mailer.smtp_address,
+    :port => Talgud.config.mailer.smtp_port, 
+    :domain => Talgud.config.mailer.smtp_domain,
+    :user_name => Talgud.config.mailer.smtp_username,
+    :password => Talgud.config.mailer.smtp_password,
+    :enable_starttls_auto => true,
+    :authentication => :plain
+  }
+end
