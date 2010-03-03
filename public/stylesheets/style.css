@@ -544,7 +544,7 @@ input.textbox {
             .grass { 
               height: 58px;
               position: relative;
-              background: url("../images/grassland-2.png?1") no-repeat scroll left top transparent !important;
+              background: url("../images/grassland-2.png?2") no-repeat scroll left top transparent !important;
             }
             #info .grass {
               background: url("../images/grassland-3.png?1") no-repeat scroll left top transparent !important;

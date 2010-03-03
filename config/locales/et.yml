@@ -330,6 +330,7 @@ et:
       event:
         begin_time: Talgute alguse kellaaeg
         end_time: Talgute prognoositav lõpuaeg
+        event_type: "Vali üks kategooria, mis tundub kõige paremini sobivat"
         gathering_location: "Kogunemise koht ja kellaaeg, vajadusel ka kohalejõudmise juhised. Mõistlik on kogunemine leppida kergesti leitavas kohas."
         location_address_street: Sisesta võimalikult täpne aadress
         max_participants: "Märgi oodatav talguliste arv, mis on mõistlik ja vajalik tööde tegemiseks ning mida jõuad hallata"
