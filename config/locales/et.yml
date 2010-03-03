@@ -266,7 +266,7 @@ et:
         event_type: Talgute liik
         gathering_location: Kogunemine
         gathering_time: Kogunemisaeg
-        languages: "Keeled mida talgujuht räägib (vali kõik keeled, milles talgujuht asjad aetud saab)"
+        languages: Keeled mida talgujuht räägib
         latitude: Pikkuskraad
         location_address: Aadress
         location_address_county: Maakond
