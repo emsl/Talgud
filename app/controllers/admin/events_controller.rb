@@ -14,14 +14,16 @@ class Admin::EventsController < Admin::AdminController
     @event = Event.with_permissions_to(:manage, :context => :admin_events).find(params[:id].to_i)
   end
   
+  def edit
+  end
+  
   def update
-    @event.status = params[:event][:status]
-    if @event.save
+    if @event.update_attributes(params[:event])
       flash[:notice] = t('admin.events.update.notice')
       redirect_to admin_event_path(@event.id)
     else
       flash.now[:error] = t('admin.events.update.error')
-      render :action => :show
+      render :action => :edit
     end
   end
 end

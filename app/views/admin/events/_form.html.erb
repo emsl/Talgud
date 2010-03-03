@@ -1,0 +1,37 @@
+<% semantic_fields_for @event do |f| %>
+  <% f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :event_type, :include_blank => false %>
+    <%= f.input :location_address_county %>
+    <%= f.input :location_address_municipality, :collection => @event.location_address_county.try(:municipalities), :wrapper_html => {:style => unless @event.location_address_county then 'display: none;' end } %>
+    <%= f.input :location_address_settlement, :collection => @event.location_address_municipality.try(:settlements), :required => false, :wrapper_html => {:style => unless @event.location_address_municipality then 'display: none;' end } %>
+    <%= f.input :latitude, :as => :hidden %>
+    <%= f.input :longitude, :as => :hidden %>
+    <%= f.input :location_address_street, :input_html => {:rows => 2} %>
+    <%= f.input :meta_aim_description, :input_html => {:rows => 4} %>
+    <%= f.input :meta_job_description, :input_html => {:rows => 4} %>
+    <%= f.input :max_participants %>
+    <%= f.input :begin_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false %>
+    <%= f.input :end_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false %>
+    <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
+    <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
+    <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>
+    <%= f.input :languages, :as => :check_boxes %>
+    <%= f.input :gathering_location, :input_html => {:rows => 4} %>
+    <%= f.input :notes, :input_html => {:rows => 4} %>
+  <% end %>
+  
+  <div class="form-extra round">
+    <h3>Lisaküsimused, ei avalikustata</h3>
+    
+    <% f.inputs do %>
+      <%= f.input :meta_subject_owner %>
+      <%= f.input :meta_subject_protegee %>
+      <%= f.input :meta_subject_heritage_number %>
+    <% end %>
+  </div>
+  
+  <% f.inputs do %>
+    <%= f.input :status, :as => :select, :collection => Event::STATUS.keys.collect{ |s| [t("formtastic.labels.event.statuses.#{s}"), s.to_s] }, :include_blank => false %>
+  <% end %>  
+<% end %>
