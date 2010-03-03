@@ -102,7 +102,7 @@
   </div>
   
   <a name="map" id="map_target"></a>
-  <div id="map" style="margin-top: 20px; height: 500px;"></div>
+  <div id="event_map" style="margin-top: 20px; height: 500px;"></div>
 </div>
 
 <%= javascript_include_tag 'jquery.scrollTo-min' %>
@@ -111,7 +111,7 @@
   var map, bounds;
 
   function showMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
+      map = new google.maps.Map(document.getElementById('event_map'), {
           zoom: 8, scrollwheel: false,
           center: new google.maps.LatLng(58.564, 25.729),
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -125,7 +125,7 @@
       cbody += '<h3><%=h @event.name %></a></h3>';
       cbody += '<span class="object-type"><%=h @event.event_type.name %></span> <%=h @event.location_address %>';
       cbody += '</div>';
-    
+          
       infowindow.setContent(cbody);
       infowindow.open(map, marker);
       

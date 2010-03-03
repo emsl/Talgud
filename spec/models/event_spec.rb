@@ -6,6 +6,16 @@ describe Event, 'validations' do
     Factory.build(:event, :begins_at => 1.day.ago, :ends_at => 2.days.ago).should be_invalid
     Factory.build(:event, :begins_at => 1.day.ago, :ends_at => 1.days.ago).should be_valid
   end
+  
+  it 'should validate that begin time is before end time' do
+    time = 1.day.from_now
+    Factory.build(:event, :begins_at => time, :ends_at => time, :begin_time => '10:00', :end_time => '11:00').should be_valid
+    # TODO: mutating start and end time should be possible by simply declaring them as create attributes
+    f = Factory.build(:event, :begins_at => time, :ends_at => time)
+    f.begin_time = '11:00'
+    f.end_time = '10:00'
+    f.should be_invalid
+  end
 
   it 'should validate that number of participants is a positive number' do
     Factory(:event, :max_participants => 1).should be_valid
