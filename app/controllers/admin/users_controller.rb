@@ -18,6 +18,7 @@ class Admin::UsersController < Admin::AdminController
   
   def create
     if @user.save
+      @user.activate!
       flash[:notice] = t('admin.users.create.notice')
       redirect_to admin_users_path
     else

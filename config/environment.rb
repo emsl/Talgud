@@ -7,13 +7,12 @@ Rails::Initializer.run do |config|
   config.load_paths += %W( #{RAILS_ROOT}/app/middleware #{RAILS_ROOT}/app/sweepers )
 
   config.gem 'authlogic', :version => '2.1.3'
-  # config.gem 'url_store'
   config.gem 'formtastic'
-  # config.gem 'acts_as_audited'
   config.gem 'declarative_authorization'
   # config.gem 'will_paginate'
   config.gem 'stringex'
   config.gem 'geokit'
+  config.gem 'newrelic_rpm'
   
   config.frameworks -= [:active_resource]
 
