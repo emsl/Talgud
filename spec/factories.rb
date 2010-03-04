@@ -63,6 +63,12 @@ Factory.define :role_system_administrator, :class => Role do |r|
   r.association :model, :factory => :account
 end
 
+Factory.define :role do |r|
+  r.association :user
+  r.role Role::ROLE[:regional_manager]
+  r.association :model, :factory => :county
+end
+
 Factory.define :user do |u|
   u.firstname 'Admin'
   u.lastname 'User'

@@ -1,8 +1,9 @@
 class Admin::EventTypesController < Admin::AdminController
   filter_resource_access
+  filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
 
   def index
-    @event_types = EventType.all
+    @event_types = EventType.with_permissions_to(:manage, :context => :admin_event_types).all
   end
   
   def show

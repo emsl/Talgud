@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Admin::CountiesController do
+describe Admin::EventTypesController do
   before(:each) do
     @user = Factory.create(:user)
     Role.grant_role(Role::ROLE[:account_manager], @user, Account.current)
@@ -8,16 +8,16 @@ describe Admin::CountiesController do
   
   describe 'index' do
     it 'should be denied for public users' do
-      counties = Array.new(10) { |i| Factory.create(:county) }
+      event_types = Array.new(10) { |i| Factory.create(:event_type) }
       get :index
       response.should redirect_to(admin_login_path)
     end
 
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      counties = Array.new(10) { |i| Factory.create(:county) }
+      event_types = Array.new(10) { |i| Factory.create(:event_type) }
       get :index
-      assigns[:counties].each { |e| counties.should include(e) }
+      assigns[:event_types].each { |e| event_types.should include(e) }
       response.should be_success
     end
   end
@@ -37,76 +37,76 @@ describe Admin::CountiesController do
 
   describe 'create' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      post :create, {:county => county.attributes}
+      event_type = Factory(:event_type)
+      post :create, {:event_type => event_type.attributes}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      post :create, {:county => county.attributes}
-      response.should redirect_to(admin_counties_path)
+      event_type = Factory(:event_type)
+      post :create, {:event_type => event_type.attributes}
+      response.should redirect_to(admin_event_types_path)
     end
   end
   
   describe 'show' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      get :show, {:id => county.id}
+      event_type = Factory(:event_type)
+      get :show, {:id => event_type.id}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      get :show, {:id => county.id}
+      event_type = Factory(:event_type)
+      get :show, {:id => event_type.id}
       response.should be_success      
     end
   end
    
   describe 'edit' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      get :edit, {:id => county.id}
+      event_type = Factory(:event_type)
+      get :edit, {:id => event_type.id}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      get :edit, {:id => county.id}
+      event_type = Factory(:event_type)
+      get :edit, {:id => event_type.id}
       response.should be_success      
     end
   end
 
   describe 'update' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      post :update, {:id => county.id, :county => county.attributes}
+      event_type = Factory(:event_type)
+      post :update, {:id => event_type.id, :event_type => event_type.attributes}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      post :update, {:id => county.id, :county => county.attributes}
-      response.should redirect_to(admin_counties_path)      
+      event_type = Factory(:event_type)
+      post :update, {:id => event_type.id, :event_type => event_type.attributes}
+      response.should redirect_to(admin_event_types_path)      
     end
   end
   
   describe 'destroy' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      put :destroy, {:id => county.id}
+      event_type = Factory(:event_type)
+      put :destroy, {:id => event_type.id}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      put :destroy, {:id => county.id}
-      response.should redirect_to(admin_counties_path)
+      event_type = Factory(:event_type)
+      put :destroy, {:id => event_type.id}
+      response.should redirect_to(admin_event_types_path)
     end
   end
 end

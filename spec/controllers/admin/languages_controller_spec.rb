@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe Admin::CountiesController do
+describe Admin::LanguagesController do
   before(:each) do
     @user = Factory.create(:user)
     Role.grant_role(Role::ROLE[:account_manager], @user, Account.current)
@@ -8,16 +8,16 @@ describe Admin::CountiesController do
   
   describe 'index' do
     it 'should be denied for public users' do
-      counties = Array.new(10) { |i| Factory.create(:county) }
+      languages = Array.new(10) { |i| Factory.create(:language) }
       get :index
       response.should redirect_to(admin_login_path)
     end
 
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      counties = Array.new(10) { |i| Factory.create(:county) }
+      languages = Array.new(10) { |i| Factory.create(:language) }
       get :index
-      assigns[:counties].each { |e| counties.should include(e) }
+      assigns[:languages].each { |e| languages.should include(e) }
       response.should be_success
     end
   end
@@ -37,76 +37,76 @@ describe Admin::CountiesController do
 
   describe 'create' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      post :create, {:county => county.attributes}
+      language = Factory(:language)
+      post :create, {:language => language.attributes}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      post :create, {:county => county.attributes}
-      response.should redirect_to(admin_counties_path)
+      language = Factory(:language)
+      post :create, {:language => language.attributes}
+      response.should redirect_to(admin_languages_path)
     end
   end
   
   describe 'show' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      get :show, {:id => county.id}
+      language = Factory(:language)
+      get :show, {:id => language.id}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      get :show, {:id => county.id}
+      language = Factory(:language)
+      get :show, {:id => language.id}
       response.should be_success      
     end
   end
    
   describe 'edit' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      get :edit, {:id => county.id}
+      language = Factory(:language)
+      get :edit, {:id => language.id}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      get :edit, {:id => county.id}
+      language = Factory(:language)
+      get :edit, {:id => language.id}
       response.should be_success      
     end
   end
 
   describe 'update' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      post :update, {:id => county.id, :county => county.attributes}
+      language = Factory(:language)
+      post :update, {:id => language.id, :language => language.attributes}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      post :update, {:id => county.id, :county => county.attributes}
-      response.should redirect_to(admin_counties_path)      
+      language = Factory(:language)
+      post :update, {:id => language.id, :language => language.attributes}
+      response.should redirect_to(admin_languages_path)      
     end
   end
   
   describe 'destroy' do
     it 'should be denied for public users' do
-      county = Factory(:county)
-      put :destroy, {:id => county.id}
+      language = Factory(:language)
+      put :destroy, {:id => language.id}
       response.should redirect_to(admin_login_path)
     end
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      county = Factory(:county)
-      put :destroy, {:id => county.id}
-      response.should redirect_to(admin_counties_path)
+      language = Factory(:language)
+      put :destroy, {:id => language.id}
+      response.should redirect_to(admin_languages_path)
     end
   end
 end

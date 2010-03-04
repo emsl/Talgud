@@ -1,8 +1,9 @@
 class Admin::CountiesController < Admin::AdminController
   filter_resource_access
+  filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
   
   def index
-    @counties = County.all
+    @counties = County.with_permissions_to(:manage, :context => :admin_counties).all
   end
   
   def new

@@ -1,6 +1,7 @@
 class Admin::RolesController < Admin::AdminController
   
   filter_resource_access :attribute_check => true
+  filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
   
   before_filter :load_target_model, :except => :index
 

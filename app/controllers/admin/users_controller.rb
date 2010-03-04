@@ -1,6 +1,7 @@
 class Admin::UsersController < Admin::AdminController
   
   filter_resource_access :attribute_check => true
+  filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
   
   def index
     @users = User.with_permissions_to(:manage, :context => :admin_users).all
@@ -10,7 +11,7 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def show
-  end
+  end  
 
   def edit
     @roles = @user.roles.all(:include => :model)
