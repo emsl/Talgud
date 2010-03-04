@@ -3,7 +3,7 @@
   
   <% unless @nearby_events.empty? %>
   <div class="container-left-inner">
-    <div class="bluebox-border"><h2 class="colored bg-blue">Veel talgusid samas piirkonnas</h2></div>
+    <div class="bluebox-border"><h2 class="colored bg-blue">Veel talguid samas piirkonnas</h2></div>
     <ul class="border-list">
       <% for event in @nearby_events %>
       <li><%= link_to event.name, event_path(event), :style => 'font-weight: bold;' %><br /><span class="small"><%= event.location_address %></span></li>
