@@ -1,10 +1,12 @@
 class Admin::SettlementsController < Admin::AdminController
   filter_resource_access
+  # todo: define nested resource
+  filter_access_to [:new, :show, :create, :edit, :update], :require => :manage
   
   before_filter :load_parent_resources
   
   def index
-    @settlements = @municipality.settlements.all
+    @settlements = @municipality.settlements.with_permissions_to(:manage, :context => :admin_settlements).all
   end
   
   def new

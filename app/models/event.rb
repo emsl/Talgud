@@ -33,6 +33,7 @@ class Event < ActiveRecord::Base
   named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
   named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}} }
   named_scope :latest, lambda { |count| {:limit => count, :order => 'created_at DESC'} }
+  #named_scope :can_manage, lambda { |u| {:include => [:manager, :location_address_county, :location_address_municipality, :location_address_settlement]}}
   default_scope :conditions => {:deleted_at => nil}
 
   def to_param

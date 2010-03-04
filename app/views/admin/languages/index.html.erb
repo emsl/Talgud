@@ -9,12 +9,14 @@
   <thead>
   <tr>
     <th><%= t('formtastic.labels.language.name') %></th>
+    <th><%= t('formtastic.labels.language.code') %></th>
     <th></th>
   </tr>
   </thead>
   <% for language in @languages %>
   <tr>
     <td><%=h language.name %></td>
+    <td><%=h language.code %></td>
     <td class="actions">
       <%= link_to t('admin.common.edit'), edit_admin_language_path(language) %>
     </td>

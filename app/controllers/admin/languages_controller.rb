@@ -1,8 +1,9 @@
 class Admin::LanguagesController < Admin::AdminController
   filter_resource_access
+  filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
   
   def index
-    @languages = Language.all
+    @languages = Language.with_permissions_to(:manage, :context => :admin_languages).all
   end
   
   def new
