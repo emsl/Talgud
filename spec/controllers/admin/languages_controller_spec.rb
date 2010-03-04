@@ -44,7 +44,7 @@ describe Admin::LanguagesController do
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      language = Factory(:language)
+      language = Factory.build(:language)
       post :create, {:language => language.attributes}
       response.should redirect_to(admin_languages_path)
     end

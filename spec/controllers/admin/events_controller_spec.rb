@@ -19,16 +19,6 @@ describe Admin::EventsController do
       assigns[:events].each { |e| events.should include(e) }
     end
 
-    it 'should be denied for different account manager' do
-      different_account_manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(different_account_manager)
-      Role.grant_role(Role::ROLE[:account_manager], different_account_manager, Factory.create(:account))
-
-      events = Array.new(10) { |i| Factory.create(:event) }
-      get :index
-      assigns[:events].should be_empty
-    end
-
     it 'should show a list of events for regional manager' do
       regional_manager = Factory.create(:user)
       activate_authlogic and UserSession.create(regional_manager)
@@ -72,16 +62,6 @@ describe Admin::EventsController do
       assigns[:events].each { |e| events.should include(e) }
     end
 
-    it 'should be denied for different account manager' do
-      different_account_manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(different_account_manager)
-      Role.grant_role(Role::ROLE[:account_manager], different_account_manager, Factory.create(:account))
-
-      events = Array.new(10) { |i| Factory.create(:event) }
-      get :map
-      assigns[:events].should be_empty
-    end
-
     it 'should show a list of events for regional manager' do
       regional_manager = Factory.create(:user)
       activate_authlogic and UserSession.create(regional_manager)
@@ -120,19 +100,6 @@ describe Admin::EventsController do
       assigns[:event].should eql(event)
     end
 
-    it 'should deny details if user is different account manager' do
-      pending 'mingi jama on siin, homme vaatab edasi' do
-        different_account_manager = Factory.create(:user)
-        activate_authlogic and UserSession.create(different_account_manager)
-        Role.grant_role(Role::ROLE[:account_manager], different_account_manager, Factory.create(:account))
-
-        event = Factory.create(:event)
-        get :show, {:id => event.id}
-        assigns[:event].should be_nil
-        response.should redirect_to(admin_login_path)
-      end
-    end
-
     it 'should show event details if user is regional manager'
 
     it 'should show event details if user is regional manager'
@@ -157,8 +124,6 @@ describe Admin::EventsController do
 
   describe 'update' do
     it 'should update event if user is account manager'
-
-    it 'should be denied to update event if user is different account manager'
 
     it 'should update event if user is regional manager'
 

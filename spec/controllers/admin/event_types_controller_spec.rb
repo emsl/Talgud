@@ -44,7 +44,7 @@ describe Admin::EventTypesController do
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      event_type = Factory(:event_type)
+      event_type = Factory.build(:event_type)
       post :create, {:event_type => event_type.attributes}
       response.should redirect_to(admin_event_types_path)
     end

@@ -17,6 +17,7 @@ describe Admin::UsersController do
       activate_authlogic and UserSession.create(@session_user)
       users = Array.new(10) { |i| Factory.create(:user) }
       get :index
+      users << @session_user
       assigns[:users].each { |e| users.should include(e) }
       response.should be_success
     end
@@ -44,8 +45,8 @@ describe Admin::UsersController do
     
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@session_user)
-      user = Factory(:user)
-      post :create, {:user => user.attributes}
+      user = Factory.build(:user)
+      post :create, {:user => user.attributes.merge('password' => '123', 'password_confirmation' => '123')}
       response.should redirect_to(admin_users_path)
     end
   end
