@@ -27,7 +27,10 @@ class EventsController < ApplicationController
   end
   
   def latest
-    @events = Event.latest.published.all(:order => 'id DESC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
+    @events = Event.latest.published.all(
+      :order => 'id DESC', :limit => (params[:limit].try(:to_i) || nil),
+      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    )
     respond_to do |format|
       format.html
       format.json do
