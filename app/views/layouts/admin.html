@@ -37,7 +37,7 @@
   </div>
   
   <div id="footer">
-    <%= t('admin.common.logged_in') %> <b><%= current_user.name %></b>. <%= link_to 'Logi välja', logout_path %>
+    <%= t('admin.common.logged_in') %> <b><%= current_user.name %></b>. <%= link_to t('admin.common.logout'), logout_path %>
     <div style="float: right; text-align: right; color: #999;"><%= t('admin.common.title') %></div>
   </div>
 </body>

@@ -3,7 +3,7 @@
   
   <% unless @nearby_events.empty? %>
   <div class="container-left-inner">
-    <div class="bluebox-border"><h2 class="colored bg-blue">Veel talguid samas piirkonnas</h2></div>
+    <div class="bluebox-border"><h2 class="colored bg-blue"><%= t('.more_events_in_area') %></h2></div>
     <ul class="border-list">
       <% for event in @nearby_events %>
       <li><%= link_to event.name, event_path(event), :style => 'font-weight: bold;' %><br /><span class="small"><%= event.location_address %></span></li>
@@ -19,7 +19,7 @@
       <h1><%=h @event.name %> <span class="object-type"><%=h @event.event_type.name %></span></h1>
       
       <% if permitted_to?(:edit, @event) %>
-      <%= link_to 'Muuda talgute andmeid', edit_event_path(@event) %><br/><br/>
+      <%= link_to t('.edit_event'), edit_event_path(@event) %><br/><br/>
       <% end %>
       
       <div class="object-location">
@@ -28,9 +28,9 @@
     </div>
     <div class="object-right">
       <div class="reg-link">
-        <a href="#" onclick="return false;">Registreeri end sellele talgule!</a>
+        <a href="#" onclick="return false;"><%= t('.register_to_this_event') %></a>
       </div>
-      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;">Talgutele registreerumine algab 1. aprillil</div>
+      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at') %></div>
     </div>
   </div>
 
@@ -93,12 +93,12 @@
       <tr>
         <td class="first"><%= t('formtastic.labels.event.code') %></td>
         <td>
-          <%=h @event.code %> <a href="http://www.teemeara.ee/loo-kaasa/toeta-talguid" target="blank">Toeta neid talguid!</a>
+          <%=h @event.code %> <a href="http://www.teemeara.ee/loo-kaasa/toeta-talguid" target="blank"><%= t('.sponsor_this_event') %></a>
         </td>
       </tr>
       <tr>
         <td></td>
-        <td><div class="object-detail-time">Talgud toimuvad kell <%= duration_times(@event) %></div></td>
+        <td><div class="object-detail-time"><%= t('.starts_at') %> <%= duration_times(@event) %></div></td>
       </tr>
     </table> 
   </div>

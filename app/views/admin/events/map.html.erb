@@ -25,7 +25,7 @@
   function addLocations(data) {
       jQuery.each(data, function(i, point) {
           if (Math.abs(point.latitude) >= 0.1 && Math.abs(point.longitude) >= 0.1) {
-              var cbody = '<b>' + point.name + '</b> &ndash; <a href="' + point.url + '" style="text-decoration: underline;">Vaata</a>'
+              var cbody = '<b>' + point.name + '</b> &ndash; <a href="' + point.url + '" style="text-decoration: underline;"><%=  t('.show') %></a>'
             
               var infowindow = new google.maps.InfoWindow({ content: cbody });
               

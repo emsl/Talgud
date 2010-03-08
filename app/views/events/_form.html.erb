@@ -6,7 +6,7 @@
     <%= f.input :location_address_municipality, :collection => @event.location_address_county.try(:municipalities), :wrapper_html => {:style => unless @event.location_address_county then 'display: none;' end } %>
     <%= f.input :location_address_settlement, :collection => @event.location_address_municipality.try(:settlements), :required => false, :wrapper_html => {:style => unless @event.location_address_municipality then 'display: none;' end } %>
     <li id="map_row" style="display: none">
-      <label>Palun vajadusel täpsusta asukohta kaardil (selleks vea punast nuppu mööda kaarti õigesse kohta).</label>
+      <label><%= t('.map_location_hint')%></label>
       <div id="map" style="height: 400px;"></div>
     </li>
     <%= f.input :latitude, :as => :hidden %>
@@ -26,7 +26,7 @@
   <% end %>
   
   <div class="form-extra round">
-    <h3>Lisaküsimused, ei avalikustata</h3>
+    <h3><%= t('.additional_questions') %></h3>
     
     <% f.inputs do %>
       <%= f.input :meta_subject_owner %>

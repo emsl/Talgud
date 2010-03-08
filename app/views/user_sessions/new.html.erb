@@ -7,13 +7,13 @@
         <%= f.input :email %>
         <%= f.input :password, :wrapper_html => {:style => 'padding-bottom: 0px;'} %>
         <li>
-          <%= link_to 'Unustasid salasõna?', '#reset-password', :id => 'reset_password_link' %>
+          <%= link_to t('.forgot_password'), '#reset-password', :id => 'reset_password_link' %>
         </li>
       <% end %>
       <ol>
         <li class="commit">
           <%= f.submit t('.login_submit') %>
-          või <%= link_to 'registreeru kasutajaks', signup_path %>
+          või <%= link_to t('.signup'), signup_path %>
         </li>
       </ol>
     <% end %>
@@ -22,7 +22,7 @@
   <div id="container-resetpassword" style="display: none;">
     <h1><%= t('.reset_password') %></h1>
     
-    <p style="margin-bottom: 20px;">Sisesta oma e-posti aadress ning me saadame sulle uue salasõna.</p>
+    <p style="margin-bottom: 20px;"><%= t('.reset_password_hint')%></p>
     
     <% semantic_form_for :password_reminder, :url => password_reminders_path do |f| %>
       <% f.inputs do %>
@@ -31,7 +31,7 @@
       <ol>
         <li class="commit">
           <%= f.submit t('.send_password') %>
-          või <%= link_to 'siiski mitte, tuli meelde juba', '#login', :id => 'login_link' %>
+          või <%= link_to t('.reset_password_no_thanks'), '#login', :id => 'login_link' %>
         </li>
       </ol>
     <% end %>

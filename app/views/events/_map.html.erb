@@ -41,7 +41,7 @@
                   if (point.vacancies && point.vacancies != '') {
                     cbody += '<div class="label">Vabu kohti</div>' + point.vacancies;
                   }
-                  cbody += '<div style="margin-top: 10px;"><a href="' + point.url + '">Vaata lähemalt &raquo;</a></a>';
+                  cbody += '<div style="margin-top: 10px;"><a href="' + point.url + '"><%= t('.show_link') %></a></a>';
                   cbody += '</div>';
                 
                   infowindow.setContent(cbody);

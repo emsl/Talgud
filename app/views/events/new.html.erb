@@ -5,9 +5,7 @@
   <h1>Registreeri oma talgud</h1>
   
   <p style="margin-bottom: 20px;">
-    Siin saad registreerida oma talgukoha ja kirjeldada talgulistele, mida tegema hakatakse ja mida igaühel kaasa tuleks
-    võtta. Kuigi talgute andmeid saab ka hiljem muuta, püüa juba praegu kõik hoolega läbi mõelda. Sisestatud andmed
-    jõuavad kodulehele mõne päeva jooksul.
+    <%= t('.header_hint') %>
   </p>
 
   <% semantic_form_for @event do |f| %>
@@ -15,12 +13,11 @@
     
     <div class="submit-container round">
       <div style="padding: 0 20px 20px; text-align: left;">
-        Talgukoha registreerimisega kinnitad, et oled vähemalt 18 aastat vana ning oled nõus saama talgupäeva
-        toimkonnalt e-posti teel infot talgupäeva kohta.
+        <%= t('.footer_hint') %>
       </div>
       
       <% f.buttons do %>
-        <%= f.submit 'Salvesta talgud', :class => 'submit' %>
+        <%= f.submit t('formtastic.labels.event.actions.submit'), :class => 'submit' %>
       <% end %>
     </div>
   <% end %>

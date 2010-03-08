@@ -2,8 +2,7 @@
   <h1>Registreeru kasutajaks</h1>
   
   <p style="margin-bottom: 20px;">
-    Talgute lisamiseks pead end kasutajaks registreerima, see võtab vaid hetke. Kui sul on kasutajakonto siin juba
-    olemas, siis <%= link_to 'logi sisse', login_path %>.
+    <%= t('.registration_hint') %> <%= link_to t('.login_submit'), login_path %>.
   </p>
   
   <div style="width: 600px;">

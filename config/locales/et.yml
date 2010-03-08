@@ -55,6 +55,7 @@ et:
       logged_in: Sisse loginud kasutaja
       title: Talgute admin
       view: Vaata
+      logout: Logi välja
     counties:
       create:
         notice: Maakonna andmed on lisatud
@@ -89,6 +90,7 @@ et:
       index:
         title: Objektidega seotud õigused
         destroy_role: Kustuta
+        destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?
       destroy:
         notice: Roll on kustutatud
         error: Rolli kustutamine ebaõnnestus
@@ -101,6 +103,7 @@ et:
         title: Talgud
       map:
         title: Talgute kaart
+        show: Vaata
       update:
         notice: Talgu andmed on uuendatud
         error: Talgu andmete uuendamisel tekkis viga
@@ -194,6 +197,12 @@ et:
       update:
         notice: Talgu liigi andmed on uuendatud
         error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    user_sessions:
+      new:
+        login_submit: Logi sisse
+        remember_me: Jäta mind meelde
+        password: Salasõna
+        email: E-posti aadress
   authlogic:
     error_messages:
       login_blank: palun sisesta e-posti aadress
@@ -211,9 +220,30 @@ et:
       user_session:
         email: E-posti aadress
         password: Salasõna
+  shared:
+    logo: 
+      home_link: Teeme Ära talgupäev
+    footer:
+      facebook: Vaata meid Facebookis
+      twitter: Jälgi meid Twitteris
+      join_us: Liitu korraldustiimiga
+      contact: Kontaktid
+    mainmenu:
+      main: Avaleht
+      events: Talgud
+      settings: Minu konto
+      login: Logi sisse
   common:
     loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
+    title: Teeme ära! Talgud
+  layouts:
+    home:
+      intro: "Teeme Ära tänavuse teona toimub laupäeval, 1. mail üle-eestiline talgupäev."
+      objective: "Sel päeval on kõik eestimaalased oodatud korraldama ja osalema erinevatel talgutel, et vajalikud tööd ühisel jõul ära teha."
+      register_event: Registreeri oma talgud
+      internet_reflections: Kajastusi Internetis
+      show_all_events: Näita kõiki
   events:
     create:
       notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
@@ -226,9 +256,30 @@ et:
       title: Viimati lisatud
     my:
       title: Minu talgud
+    new:
+      header_hint: "Siin saad registreerida oma talgukoha ja kirjeldada talgulistele, mida tegema hakatakse ja mida igaühel kaasa tuleks võtta. Kuigi talgute andmeid saab ka hiljem muuta, püüa juba praegu kõik hoolega läbi mõelda. Sisestatud andmed jõuavad kodulehele mõne päeva jooksul."
+      footer_hint: "Talgukoha registreerimisega kinnitad, et oled vähemalt 18 aastat vana ning oled nõus saama talgupäeva toimkonnalt e-posti teel infot talgupäeva kohta."
     update:
       notice: "Talgu andmed on uuendatud. Olulisemate muudatuste korral palume sellest teavitada ka talgulisi."
       error: "Talgu andmete muutmisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
+    form:
+      map_location_hint: Palun vajadusel täpsusta asukohta kaardil (selleks vea punast nuppu mööda kaarti õigesse kohta).
+      additional_questions: "Lisaküsimused, ei avalikustata"
+    map:
+      show_link: "Vaata lähemalt &raquo;"
+    show: 
+      more_events_in_area: Veel talguid samas piirkonnas
+      edit_event: Muuda talgute andmeid
+      register_to_this_event: Registreeri end sellele talgule!
+      registration_starts_at: Talgutele registreerumine algab 1. aprillil
+      sponsor_this_event: Toeta neid talguid!
+      starts_at: Talgud toimuvad kell
+    submenu:
+      register: Registreeri talgud
+      my_events: Minu talgud
+      show_all: Näita kõiki
+      latest: Viimati lisatud
+      show_on_map: Näita kaardil
   formtastic:
     labels:
       county:
@@ -297,6 +348,8 @@ et:
           registration_open: Registreerumiseks avatud
           registration_closed: Registreerumine lõpetatud
         vacancies: Vabu kohti
+        actions:
+          submit: Salvesta talgud
       municipality:
         name: Omavalitsuse nimi
         regional_managers: Piirkondlikud haldurid
@@ -380,6 +433,9 @@ et:
     activate: 
       activation_successful: "Sinu konto on aktiveeritud. Palun logige sisse."
       invalid_activation_code: "Vigane aktiveerimise kood, palun kontrolli mailis olevat linki."
+    new:
+      registration_hint: "Talgute lisamiseks pead end kasutajaks registreerima, see võtab vaid hetke. Kui sul on kasutajakonto siin juba olemas, siis"
+      login_submit: logi sisse      
   user_sessions:
     create:
       error: Sisestatud kasutajanimi ja salasõna ei klapi
@@ -390,6 +446,10 @@ et:
       login_required: Palun logige sisse 
       reset_password: Salasõna meeldetuletus
       send_password: Saada uus salasõna
+      forgot_password: Unustasid salasõna?
+      signup: registreeru kasutajaks
+      reset_password_hint: Sisesta oma e-posti aadress ning me saadame sulle uue salasõna.      
+      reset_password_no_thanks: 'siiski mitte, tuli meelde juba'
     destroy:
       notice: Olete süsteemist välja logitud
   users:
@@ -398,6 +458,10 @@ et:
     update:
       error: "Andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust"
       notice: Andmed on muudetud
+    submenu:
+      my_events: Minu talgud
+      edit_settings: Muuda seadeid
+      logout: Logi välja
   number: 
     format: 
       separator: .
