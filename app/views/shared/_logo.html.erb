@@ -1,1 +1,1 @@
-<h1 id="logo"><%= link_to t('.home_link'), home_path %></h1>
+<h1 id="logo"><%= link_to 'Teeme Ära talgupäev', if Rails.env == 'production' then 'http://www.teemeara.ee' else home_path end %></h1>
