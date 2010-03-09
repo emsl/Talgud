@@ -63,11 +63,31 @@ describe Event, 'event code generation' do
 
   it 'should validate dublicate event code' do
     @event = Factory(:event)
-    @event.code.should_not be_nil
+    @event.code.should_not be_nil        
     
-    @event = Factory.build(:event, :code => @event.code)
+    @event2 = Factory.build(:event, :code => @event.code)
+    @event2.stub!(:code).and_return @event.code    
+    
+    @event2.should be_invalid
+    @event2.should have(1).error_on(:code)
+  end
+
+  it 'should not miss event code sequence on invalid event' do
+    @event = Factory.build(:event, :name => nil)
     @event.should be_invalid
-    @event.should have(1).error_on(:code)
+    @event.code.length.should eql(24)
+    @event.name = '1234'
+    @event.should be_valid
+    @event.save!    
+    @event.code.length.should eql(7)
+  end
+
+  it 'should not generate new event code on save' do
+    @event = Factory(:event)
+    code = @event.code
+    @event.name = '1234'
+    @event.save!
+    @event.code.should eql(code)
   end
 end
 

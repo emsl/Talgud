@@ -17,6 +17,7 @@ class Event < ActiveRecord::Base
   validates_uniqueness_of :code, :scope => :account_id
 
   before_validation_on_create :set_defaults
+  before_save :set_code
   after_save :grant_manager_role
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
@@ -106,7 +107,11 @@ class Event < ActiveRecord::Base
   end
 
   def set_defaults
-    self.code = CodeSequence.next_value(self).label if self.code.blank?
     self.status = 'new' if self.status.blank?
+    self.code = ActiveSupport::SecureRandom.base64(16).upcase # temporary code
+  end
+  
+  def set_code
+    self.code = CodeSequence.next_value(self).label if new_record?
   end
 end
