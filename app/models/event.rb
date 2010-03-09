@@ -6,6 +6,9 @@ class Event < ActiveRecord::Base
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :finished => 'finished', :denied => 'denied'}
 
+  has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:event_manager]}
+  has_many :managers, :through => :manager_roles, :source => :user
+
   belongs_to :event_type
   belongs_to :manager, :class_name => 'User', :foreign_key => :manager_id
   belongs_to :location_address_county, :class_name => 'County', :foreign_key => :location_address_county_id
@@ -37,6 +40,10 @@ class Event < ActiveRecord::Base
   named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ?)) ',
      u.id, 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager'] }}
   default_scope :conditions => {:deleted_at => nil}
+
+  def self.class_role_symbols
+    [:event_manager]
+  end
 
   def to_param
     url
@@ -83,16 +90,16 @@ class Event < ActiveRecord::Base
   # Method always returns an array of users rather than a single record. Please note that empty array may be returned.
   def regional_managers
     m = []    
-    m = location_address_settlement.regional_managers if location_address_settlement
-    m = location_address_municipality.regional_managers if location_address_municipality and m.empty?
-    m = location_address_county.regional_managers if location_address_county and m.empty?
+    m = location_address_settlement.managers if location_address_settlement
+    m = location_address_municipality.managers if location_address_municipality and m.empty?
+    m = location_address_county.managers if location_address_county and m.empty?
     m
   end
   
   # Returns list of users who have permissions to manage this event.
-  def managers
-    self.roles.all(:conditions => {:role => Role::ROLE[:event_manager]}).collect{ |r| r.user }
-  end
+  # def managers
+  #   self.roles.all(:conditions => {:role => Role::ROLE[:event_manager]}).collect{ |r| r.user }
+  # end
 
   def vacancies
     self.max_participants

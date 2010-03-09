@@ -44,7 +44,8 @@ class Admin::RolesController < Admin::AdminController
       when 'County' then County.find(id)
       when 'Settlement' then Settlement.find(id)
       when 'Municipality' then Municipality.find(id)      
-      when 'Account' then Account.find(id)      
+      when 'Account' then Account.with_permissions_to(:read, :context => :admin_accounts).find(id)      
+      when 'Event' then Event.find_by_url(id)      
       end
 
     if @target_model

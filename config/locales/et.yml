@@ -86,6 +86,8 @@ et:
           role: "Lisa uus haldur omavalitsusele {{name}}"
         account:
           role: "Lisa uus administraator kontole {{name}}"
+        event:
+          role: "Lisa uus juht talgutele {{name}}"
       create:
         notice: Uus roll on lisatud
         error: Rolli lisamisel tekkis viga. Palun kontrolli andmete korrektsust 
@@ -109,6 +111,7 @@ et:
           published: Avalikustatud
           closed: Suletud
         title: Talgud
+        edit_role: Halda
       map:
         title: Talgute kaart
         show: Vaata
@@ -374,8 +377,8 @@ et:
         user: Kasutaja
         role: Roll
         roles:
-          account_manager: Administraator
-          event_manager: Talgu haldur
+          account_manager: Konto haldur
+          event_manager: Talgujuht
           event_participant: Talgul osaleja
           guest: Tavakasutaja
           regional_manager: Piirkonna haldur

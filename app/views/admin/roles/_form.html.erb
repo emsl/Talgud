@@ -1,6 +1,10 @@
 <% semantic_fields_for @role do |f| %>  
   <% f.inputs do %>    
     <%= f.input :user, :as => :select, :collection => @users.collect{ |u| [label_for_user(u), u.id] }, :include_blank => true %>
+    <% if @role_symbols.size > 1 %>
     <%= f.input :role, :as => :select, :collection => @role_symbols.collect{ |u| [t("formtastic.labels.role.roles.#{u.to_s}"), u.to_s] }, :include_blank => true %>
+    <% else %>
+    <%= f.input :role, :as => :select, :collection => @role_symbols.collect{ |u| [t("formtastic.labels.role.roles.#{u.to_s}"), u.to_s] },  :selected => @role_symbols.first.to_s, :input_html => { :disabled => true } %>
+    <% end %>
   <% end %>
 <% end %>

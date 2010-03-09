@@ -1,6 +1,9 @@
 <h1><%= @event.name %></h1>
 
 <div class="textcontent">
+  <div style="margin-bottom:10px;">
+    <%= link_to t('admin.common.edit'), edit_admin_event_path(@event.id) %>
+  </div>
 <table>
 <tr>
   <td style="width: 25%;"><b><%= t('formtastic.labels.event.code') %></b></td>
@@ -71,6 +74,18 @@
 <tr>
   <td><b><%= t('formtastic.labels.event.notes') %></b></td>
   <td><%=h @event.notes %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_subject_owner') %></b></td>
+  <td><%=h @event.meta_subject_owner %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_subject_protegee') %></b></td>
+  <td><%=h @event.meta_subject_protegee %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_subject_heritage_number') %></b></td>
+  <td><%=h @event.meta_subject_heritage_number %></td>
 </tr>
 </table>
 </div>
