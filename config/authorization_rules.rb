@@ -39,7 +39,10 @@ authorization do
     includes :guest
     has_permission_on [:admin_roles, :admin_counties, :admin_event_types, :admin_municipalities, :admin_settlements, :admin_users, :admin_languages, :admin_events], :to => [:manage, :map] do
       #if_attribute :account => {:roles => {:user => contains {user}, :role => Role::ROLE[:account_manager]}}
-    end    
+    end
+    has_permission_on [:admin_accounts], :to => [:manage] do
+      if_attribute :roles => {:user => contains {user}, :role => Role::ROLE[:account_manager]}
+    end
   end
 end
 

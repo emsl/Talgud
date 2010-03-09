@@ -7,8 +7,8 @@ class Municipality < ActiveRecord::Base
   belongs_to :county
   has_many :settlements
   has_many :roles, :as => :model
-  has_many :regional_manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:regional_manager]}
-  has_many :regional_managers, :through => :regional_manager_roles, :source => :user
+  has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:regional_manager]}
+  has_many :managers, :through => :manager_roles, :source => :user
   
   validates_presence_of :name, :kind, :county
   

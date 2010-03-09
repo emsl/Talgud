@@ -39,10 +39,12 @@ class Admin::RolesController < Admin::AdminController
     type = params[:model_type] if params[:model_type]
 
     @target_model =
+      # TODO: find with permissions_to
       case type
       when 'County' then County.find(id)
       when 'Settlement' then Settlement.find(id)
       when 'Municipality' then Municipality.find(id)      
+      when 'Account' then Account.find(id)      
       end
 
     if @target_model

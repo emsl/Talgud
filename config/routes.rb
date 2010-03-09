@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users
     admin.resources :languages
     admin.resources :roles
+    admin.resources :accounts
   end
   
   map.resources :addresses, :collection => {:municipalities => :get, :settlements => :get}

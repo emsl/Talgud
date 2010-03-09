@@ -84,16 +84,24 @@ et:
           role: "Lisa uus haldur külale / asulale {{name}}"
         municipality:
           role: "Lisa uus haldur omavalitsusele {{name}}"
+        account:
+          role: "Lisa uus administraator kontole {{name}}"
       create:
         notice: Uus roll on lisatud
         error: Rolli lisamisel tekkis viga. Palun kontrolli andmete korrektsust 
       index:
-        title: Objektidega seotud õigused
+        title: Objektide õigused
         destroy_role: Kustuta
         destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?
       destroy:
         notice: Roll on kustutatud
         error: Rolli kustutamine ebaõnnestus
+    accounts:
+      index:
+        title: Kontod
+        destroy_role: Kustuta
+        destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?
+        edit_role: Muuda administraatoreid
     events:
       index:
         filter:
@@ -290,6 +298,9 @@ et:
       language:
         name: Keele nimi
         code: Keele kood
+      account:
+        name: Konto nimi
+        domain: Domeen
       user:
         email: E-post
         firstname: Eesnimi

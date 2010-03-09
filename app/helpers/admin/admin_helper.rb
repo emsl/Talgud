@@ -22,7 +22,7 @@ module Admin::AdminHelper
   # Declares navigation menu as a custom array of hashes and things. It should be dynamic since navigation menu contents
   # depend on the user's role.
   def navigation_menu_contents
-    [:events, :users, {:name => :counties, :active_when => [:counties, :municipalities, :settlements]}, :event_types, :languages]
+    [:events, :users, {:name => :counties, :active_when => [:counties, :municipalities, :settlements]}, :event_types, :languages, :roles, :accounts]
   end
 
   def print_navigation_menu
@@ -51,8 +51,8 @@ module Admin::AdminHelper
   end
 
   # Builds list of regional managers for given region model.
-  def regional_managers_for_object(obj)
-    managers = obj.try(:regional_managers)
+  def managers_for_object(obj)
+    managers = obj.try(:managers)
     manager_names = managers.collect(&:name) if managers
     content = []
     content << truncate(manager_names.join(', '), 30) unless manager_names.empty?
