@@ -32,6 +32,6 @@
   </div>
   
   <% f.inputs do %>
-    <%= f.input :status, :as => :select, :collection => Event::STATUS.keys.collect{ |s| [t("formtastic.labels.event.statuses.#{s}"), s.to_s] }, :include_blank => false %>
+    <%= f.input :status, :as => :select, :collection => Event::STATUS.keys.sort{|f,s| t("formtastic.labels.event.statuses.#{f}") <=> t("formtastic.labels.event.statuses.#{s}")}.collect{ |s| [t("formtastic.labels.event.statuses.#{s}"), s.to_s] }, :include_blank => false %>
   <% end %>  
 <% end %>

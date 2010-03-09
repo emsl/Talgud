@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   acts_as_url :name, :scope => :account_id, :only_when_blank => true
   acts_as_mappable :lat_column_name => :latitude, :lng_column_name => :longitude
   
-  STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :finished => 'finished', :denied => 'denied', }
+  STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :closed => 'closed', :took_place => 'took_place', :adjustment => 'adjustment'}
 
   has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:event_manager]}
   has_many :managers, :through => :manager_roles, :source => :user

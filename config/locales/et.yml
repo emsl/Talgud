@@ -357,8 +357,9 @@ et:
         status: Staatus
         statuses:
           new: Uus
-          denied: Tagasi lükatud
-          finished: Suletud
+          adjustment: Täpsustamisel
+          closed: Suletud
+          took_place: Toimunud 
           published: Avalikustatud
           registration_open: Registreerumiseks avatud
           registration_closed: Registreerumine lõpetatud
