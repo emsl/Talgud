@@ -3,11 +3,14 @@ class EventsController < ApplicationController
   filter_resource_access :additional_collection => [:my, :map, :latest], :attribute_check => true
   
   def index
-    @events = Event.published.all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
+    @events = Event.published.paginate(
+      :order => 'begins_at ASC', :page => params[:page],
+      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    )
   end
   
   def my
-    @events = Event.my_events(@current_user).all(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
+    @events = Event.my_events(@current_user).paginate(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement], :page => params[:page])
   end
   
   def map
@@ -17,23 +20,22 @@ class EventsController < ApplicationController
         @languages = Language.all
       end
       format.json do
-        @events = Event.published.all(
-          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-        )
-        
+        @events = Event.published.all(:include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
         render :json => events_json_hash(@events)
       end
     end
   end
   
   def latest
-    @events = Event.latest.published.all(
-      :order => 'id DESC', :limit => (params[:limit].try(:to_i) || nil),
-      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-    )
+    includes = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    limit = (params[:limit].try(:to_i) || nil)
+    
     respond_to do |format|
-      format.html
+      format.html do
+        @events = Event.latest.published.paginate(:order => 'id DESC', :limit => limit, :include => includes, :page => params[:page])
+      end
       format.json do
+        @events = Event.latest.published.all(:order => 'id DESC', :limit => limit, :include => includes)
         render :json => events_json_hash(@events)
       end
     end
@@ -113,5 +115,4 @@ class EventsController < ApplicationController
       }
     end
   end
-  
 end

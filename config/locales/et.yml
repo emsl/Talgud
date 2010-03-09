@@ -248,6 +248,8 @@ et:
     loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
     title: Teeme ära! Talgud
+    paginate_previous: "&laquo; eelmised"
+    paginate_next: "järgmised &raquo;"
   layouts:
     home:
       intro: "Teeme Ära tänavuse teona toimub laupäeval, 1. mail üle-eestiline talgupäev."
@@ -356,7 +358,7 @@ et:
         status: Staatus
         statuses:
           new: Uus
-          denied: Tagasi lükatud
+          denied: Täpsustamisel
           finished: Suletud
           published: Avalikustatud
           registration_open: Registreerumiseks avatud

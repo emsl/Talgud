@@ -477,19 +477,28 @@ input.textbox {
                     padding: 8px 13px;
                   }
                   
-              /* object-listing */
-                .object-listing {
-                  width: 100%;
-                  border-collapse: collapse;
-                }
-                  .object-listing td { padding: 5px 10px;}
-                  .object-listing td.first { width: 50px; padding-left: 0px;}
-                  .object-listing td.last { color: #7f8080; font-size: 12px; white-space: nowrap; padding-right: 0;}
-                    .object-listing a { font-size: 14px; color: #333; font-weight:bold; text-decoration: none;}
-                    .object-listing a:hover { text-decoration: underline;}
-                  
-          
-            
+/* Event listing */
+.event_item {
+  margin-bottom: 15px;
+}
+
+.event_item a.event_title {
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.event_item a.event_title:hover {
+  text-decoration: underline;
+}
+
+.event_item .event_address {
+   color: #7f8080;
+   font-size: 12px;
+   margin-left: 5px;
+}
+
           /* info-inner */
             .info-inner { text-align: center; padding-bottom: 40px;}
               #dead-bird { height: 77px; width: 118px; background: url('../images/m6ttetu_tibu.png') no-repeat center center; margin: 0 auto;}
@@ -709,4 +718,39 @@ div.infowindow div.label {
   font-size: 10px;
   margin-top: 5px;
   text-transform: uppercase;
+}
+
+/* Pagination */
+.pagination {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.pagination span, .pagination a {
+  display: block;
+  float: left;
+  margin-right: 1px;
+  padding: 2px 8px;
+}
+
+.pagination .disabled {
+  color: #999;
+}
+
+.pagination a {
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+.pagination .current {
+  background-color: #fff;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }

@@ -9,10 +9,10 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic', :version => '2.1.3'
   config.gem 'formtastic'
   config.gem 'declarative_authorization'
-  # config.gem 'will_paginate'
   config.gem 'stringex'
   config.gem 'geokit'
   config.gem 'newrelic_rpm'
+  config.gem 'will_paginate'
   
   config.frameworks -= [:active_resource]
 

@@ -6,7 +6,7 @@
 
   function showMap() {
       map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 6, scrollwheel: false,
+          zoom: 7, scrollwheel: false,
           center: new google.maps.LatLng(58.564, 25.729),
           mapTypeId: google.maps.MapTypeId.ROADMAP
       });
@@ -51,7 +51,6 @@
       });
       
       map.setCenter(bounds.getCenter());
-      map.fitBounds(bounds);
   }
   
   jQuery(document).ready(showMap);

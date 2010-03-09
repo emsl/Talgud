@@ -3,13 +3,6 @@
 </div>
 <div class="container-right">
   <h1><%= t('.title') %></h1>
-  <table class="object-listing">
-  <% for event in @events %>
-  <tr>
-    <td class="first"><div class="object-type"><%= event.event_type.name %></div></td>
-    <td><%= link_to event.name, event_path(event) %></td>
-    <td class="last"><%= event.location_address %></td>
-  </tr>
-  <% end %>
-  </table>
+
+  <%= render @events %>
 </div>

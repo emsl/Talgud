@@ -1,0 +1,5 @@
+<div class="event_item">
+<%= link_to event.name, event_path(event), :class => 'event_title' %><br/>
+<span class="object-type"><%= event.event_type.name %></span>
+<span class="event_address"><%= event.location_address %></span>
+</div>
