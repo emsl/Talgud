@@ -4,7 +4,7 @@
     <% if @role_symbols.size > 1 %>
     <%= f.input :role, :as => :select, :collection => @role_symbols.collect{ |u| [t("formtastic.labels.role.roles.#{u.to_s}"), u.to_s] }, :include_blank => true %>
     <% else %>
-    <%= f.input :role, :as => :select, :collection => @role_symbols.collect{ |u| [t("formtastic.labels.role.roles.#{u.to_s}"), u.to_s] },  :selected => @role_symbols.first.to_s, :input_html => { :disabled => true } %>
+    <%= f.input :role, :as => :select, :collection => @role_symbols.collect{ |u| [t("formtastic.labels.role.roles.#{u.to_s}"), u.to_s] },  :selected => @role_symbols.first.to_s, :input_html => { :editable => false }, :include_blank => false %>
     <% end %>
   <% end %>
 <% end %>

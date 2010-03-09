@@ -54,16 +54,15 @@ module Admin::AdminHelper
   def managers_for_object(obj)
     managers = obj.try(:managers)
     manager_names = managers.collect(&:name) if managers
-    content = []
-    content << truncate(manager_names.join(', '), 30) unless manager_names.empty?
-    content << if manager_names.empty?
+    content =
+    if manager_names.empty?
       link_to t(".add_role"), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action
-    else
-      link_to t(".edit_role"), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action
+    else     
+     link_to truncate(manager_names.join(', '), 20), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action, :title => t(".edit_role")
     end
     
     content_tag :div do
-      content.join(' ')
+      content
     end
   end
 end
