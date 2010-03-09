@@ -111,7 +111,8 @@ et:
           published: Avalikustatud
           closed: Suletud
         title: Talgud
-        edit_role: Halda
+        edit_role: Muuda haldureid
+        add_role: Lisa haldur
       map:
         title: Talgute kaart
         show: Vaata
