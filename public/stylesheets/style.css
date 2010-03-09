@@ -198,18 +198,44 @@ input.textbox {
             #langmenu li { display: inline; font-size: 10px; font-weight: bold; padding: 0 0 0 5px;}
               #langmenu li a { font-weight: normal;}
 
-          #mainmenu {float: right; margin: 0; padding: 45px 0 0 0; list-style-type: none; }
-            #mainmenu li { float: left; font-size: 15px; padding: 4px 8px; margin: 0 0 0 15px;}
-              #mainmenu li a { color: #333; text-decoration: none;}
-              #mainmenu li a:hover { text-decoration:underline;}
-            #mainmenu li.active {
-              border: 1px solid #b8e3f0;
-              border-radius: 3px;
-              -moz-border-radius: 3px;
-              -webkit-border-radius: 3px;
-              font-weight: bold;
-              background: white;
-            }
+#mainmenu {
+  float: right;
+  margin: 0;
+  padding: 45px 0 0 0;
+  list-style-type: none;
+}
+
+#mainmenu li {
+  float: left;
+  font-size: 15px;
+  padding: 4px 8px;
+  margin: 0 0 0 15px;
+}
+
+#mainmenu li a {
+  color: #333;
+  text-decoration: none;
+}
+
+#mainmenu li a:hover {
+  text-decoration: underline;
+}
+
+#mainmenu li.active {
+  background: rgb(139, 93, 59);
+  border-radius: 3px;
+  font-weight: bold;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#mainmenu li.active a {
+  color: #fff;
+}
+
+#mainmenu li.active a:hover {
+  text-decoration: none;
+}
             
       /* container */
         .container {
