@@ -14,6 +14,7 @@
     <th><%=h t('formtastic.labels.event.code') %></th>
     <th><%=h t('formtastic.labels.event.event_type') %></th>    
     <th><%=h t('formtastic.labels.event.manager') %></th>
+    <th><%=h t('formtastic.labels.event.max_participants_short') %></th>
     <th><%=h t('formtastic.labels.event.location_address') %></th>
     <th><%=h t('formtastic.labels.event.status') %></th>
     <th><%=h t('admin.common.created_at') %></th>
@@ -26,6 +27,7 @@
     <td><%=h event.code %></td>
     <td><%=h event.event_type.name %></td>    
     <td><%= managers_for_object(event) %></td>
+    <td><%=h event.max_participants %></td>
     <td><%=h event.location_address %></td>
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
     <td><%=h time_ago_in_words(event.created_at) unless event.created_at.nil? %> tagasi</td>

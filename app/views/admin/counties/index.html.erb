@@ -16,7 +16,7 @@
   <% for county in @counties %>
   <tr>
     <td><%=h county.name %></td>
-    <td><%= managers_for_object(county) %></td>
+    <td><%= managers_for_object(county, 60) %></td>
     <td class="actions">
       <%= link_to t('admin.municipalities.index.title'), admin_county_municipalities_path(county) %>
       <%= link_to t('admin.common.edit'), edit_admin_county_path(county) %>

@@ -119,6 +119,10 @@ et:
       update:
         notice: Talgu andmed on uuendatud
         error: Talgu andmete uuendamisel tekkis viga
+      show:
+        roles: Talgujuhid
+      edit:
+        roles: Talgujuhid
     municipalities:
       create:
         notice: Omavalitsuse andmed on lisatud
@@ -166,6 +170,9 @@ et:
         error: Kasutaja kustutamine ebaõnnestus
       edit:
         title: Kasutaja muutmine
+        roles: Kasutaja rollid
+      show:
+        title: Kasutaja andmed
         roles: Kasutaja rollid
       index:
         add_user: Lisa kasutaja
@@ -346,6 +353,7 @@ et:
         manager_email: Talgujuhi e-mail
         manager_phone: Talgujuhi telefon
         max_participants: Talguliste maksimumarv
+        max_participants_short: Max
         meta_aim_description: Talgute eesmärk ja hüvang
         meta_job_description: Talgutööd
         meta_bring_with_you: Kaasa võtta
@@ -380,6 +388,8 @@ et:
       role:
         user: Kasutaja
         role: Roll
+        model_type: Objekti tüüp
+        model_name: Objekti nimi
         roles:
           account_manager: Konto haldur
           event_manager: Talgujuht

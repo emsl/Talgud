@@ -49,18 +49,6 @@
   <td><b><%= t('formtastic.labels.event.meta_subject_info') %></b></td>
   <td><%= auto_link(@event.meta_subject_info) %></td>
 </tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.manager') %></b></td>
-  <td><%=h @event.manager.name %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.manager_phone') %></b></td>
-  <td><%=h @event.manager.phone %></td>
-</tr>
-<tr>
-  <td><b><%= t('formtastic.labels.event.manager_email') %></b></td>
-  <td><%=h @event.manager.email %></td>
-</tr>
 <% unless @event.languages.empty? %>
 <tr>
   <td><b><%= t('formtastic.labels.event.languages') %></b></td>
@@ -96,3 +84,7 @@
   <% end %>
   <%= f.buttons %>
 <% end %>
+
+<h2><%= t('.roles') %></h2>
+
+<%= render :partial => 'shared/object_roles' %>

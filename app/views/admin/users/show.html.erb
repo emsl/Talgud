@@ -1,0 +1,29 @@
+<h1><%= @user.name %></h1>
+
+<div class="textcontent">
+  <div style="margin-bottom:10px;">
+    <%= link_to t('admin.common.edit'), edit_admin_user_path(@user.id) %>
+  </div>
+<table>
+<tr>
+  <td style="width: 25%;"><b><%= t('formtastic.labels.user.firstname') %></b></td>
+  <td><%=h @user.firstname %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.user.lastname') %></b></td>
+  <td><%=h @user.lastname %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.user.email') %></b></td>
+  <td><%=h @user.email %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.user.phone') %></b></td>
+  <td><%=h @user.phone %></td>
+</tr>
+</table>
+</div>
+
+<h2><%= t('.roles') %></h2>
+
+<%= render :partial => 'shared/object_roles' %>

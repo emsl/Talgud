@@ -13,9 +13,11 @@ class Admin::EventsController < Admin::AdminController
   end
   
   def show
+    @roles = @event.roles.all(:include => :model)
   end
   
   def edit
+    @roles = @event.roles.all(:include => :model)
   end
   
   def update

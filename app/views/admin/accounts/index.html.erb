@@ -13,7 +13,7 @@
   <tr>
     <td><%=h account.name %></td>
     <td><%=h account.domain %></td>
-    <td><%= managers_for_object(account) %></td>
+    <td><%= managers_for_object(account, 60) %></td>
   </tr>
   <% end %>
   </table>

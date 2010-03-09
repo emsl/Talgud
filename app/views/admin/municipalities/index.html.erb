@@ -18,7 +18,7 @@
   <tr>
     <td><%=h municipality.name %></td>
     <td><%=h t("formtastic.labels.municipality.kinds.#{municipality.kind}") %></td>
-    <td><%= managers_for_object(municipality) %></td>
+    <td><%= managers_for_object(municipality, 60) %></td>
     <td class="actions">
       <%= link_to t('admin.settlements.index.title'), admin_county_municipality_settlements_path(@county, municipality) %>
       <%= link_to t('admin.common.edit'), edit_admin_county_municipality_path(@county, municipality) %>
