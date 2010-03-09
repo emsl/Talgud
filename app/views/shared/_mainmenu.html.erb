@@ -3,6 +3,7 @@
   <li<%= ' class="active"' if %w{events}.include?(request.path_parameters[:controller]) and action_name != 'my' %>><%= link_to t('.events'), events_path %></li>
   <% if current_user %>
   <li<%= ' class="active"' if 'users' == request.path_parameters[:controller] or action_name == 'my' %>><%= link_to t('.settings'), my_events_path %></li>
+  <li><%= link_to t('users.submenu.logout'), logout_path %></li>
   <% else %>
   <li<%= ' class="active"' if %w{user_sessions password_reminder}.include?(request.path_parameters[:controller]) %>><%= link_to t('.login'), login_path %></li>
   <% end %>
