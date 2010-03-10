@@ -49,7 +49,7 @@
 </tr>
 <tr>
   <td><b><%= t('formtastic.labels.event.meta_subject_info') %></b></td>
-  <td><%= auto_link(@event.meta_subject_info) %></td>
+  <td><%= auto_link(@event.meta_subject_info, :all, :target => "_blank") %></td>
 </tr>
 <% unless @event.languages.empty? %>
 <tr>

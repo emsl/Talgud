@@ -21,21 +21,6 @@
     <% end %>
   </tr>
   </thead>
-  <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
-    <% semantic_form_for @search, :html => {:class => 'searchform'} do |form| %>
-    <% semantic_fields_for @search do |f| %>
-    <td><%= f.input :user_firstname_like, :label => false, :input_html => {:size => 20}  %></td>
-    <td><%= f.input :user_email_like, :label => false, :input_html => {:size => 20}  %></td>
-    <td><%= f.input :user_phone_like, :label => false, :input_html => {:size => 20}  %></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
-    <% end %>
-    <% end %>
-  </tr>
-  <%= filter_notify(7) %>
-  
   <% for role in @roles %>
   <tr>
     <td>
