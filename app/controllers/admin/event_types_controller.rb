@@ -3,7 +3,7 @@ class Admin::EventTypesController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
 
   def index
-    @event_types = EventType.with_permissions_to(:manage, :context => :admin_event_types).all
+    @event_types = EventType.with_permissions_to(:manage, :context => :admin_event_types).paginate(:page => params[:page])
   end
   
   def show

@@ -21,8 +21,7 @@ module ApplicationHelper
   end
 
   # Will paginate method override.
-  def paginate
-    will_paginate :previous_label => t('common.paginate_previous'), :next_label => t('common.paginate_next')
-  end
-  
+  def paginate(collection = nil)
+    will_paginate collection, :previous_label => t('common.paginate_previous'), :next_label => t('common.paginate_next')
+  end  
 end

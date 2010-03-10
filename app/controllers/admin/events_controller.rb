@@ -4,8 +4,7 @@ class Admin::EventsController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update], :require => :read
   
   def index
-    #@events = Event.with_permissions_to(:manage, :context => :admin_events)#.all(:include => [:manager, :location_address_county, :location_address_municipality, :location_address_settlement])
-    @events = Event.can_manage(@current_user)
+    @events = Event.can_manage(@current_user).paginate(:page => params[:page])
   end
   
   def map

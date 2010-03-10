@@ -311,3 +311,34 @@ div.pagination a {
 div.wysiwyg {
   float: left;
 }
+
+/**
+ * Pagination
+ */
+div.pagination {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 20px auto;
+  text-align: center;
+}
+
+div.pagination a, div.pagination.a:visited, div.pagination span.step, div.pagination span.currentStep {
+  color: #999;
+  padding: 8px 10px;
+  float: both;
+}
+
+div.pagination a, div.pagination.a:visited {
+  text-decoration: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+div.pagination a:hover {
+  background-color: #eee;
+}
+
+div.pagination span.currentStep, div.pagination a.active:visited {
+  color: #2e98e8;
+}
+

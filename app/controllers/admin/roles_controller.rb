@@ -6,7 +6,7 @@ class Admin::RolesController < Admin::AdminController
   before_filter :load_target_model, :except => :index
 
   def index
-    @roles = Role.with_permissions_to(:manage, :context => :admin_users).all
+    @roles = Role.with_permissions_to(:manage, :context => :admin_users).paginate(:page => params[:page])
   end
 
   def new
