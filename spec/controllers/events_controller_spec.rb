@@ -14,6 +14,24 @@ describe EventsController do
       get :index
       response.should be_success
     end
+    
+    it 'should filter events if requested' do
+      e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type))
+      e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
+      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, :event_type => Factory.create(:event_type))
+      
+      get :index, {:county => e2.location_address_county.id, :event_type => e2.event_type.id}
+      assigns[:events].should include(e2)
+      assigns[:events].should_not include(e1, e3)
+      
+      get :index, {:county => e2.location_address_county.id}
+      assigns[:events].should include(e2, e3)
+      assigns[:events].should_not include(e1)
+      
+      get :index, {:event_type => e1.event_type.id}
+      assigns[:events].should include(e1, e2)
+      assigns[:events].should_not include(e3)
+    end
   end
 
   describe 'new' do

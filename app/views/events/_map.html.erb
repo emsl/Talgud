@@ -60,5 +60,12 @@
       map.setCenter(bounds.getCenter());
   }
   
+  function updateLocations(data) {
+      if (markerCluster) {
+          markerCluster.clearMarkers();
+      }
+      addLocations(data);
+  }
+  
   jQuery(document).ready(showMap);
 </script>

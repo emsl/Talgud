@@ -1,5 +1,11 @@
 <div class="container-left">
   <%= render 'submenu' %>
+  
+  <div style="text-align: right; width: 168px; margin-top: 20px;">
+    <% form_tag events_path, :method => :get, :class => :filter do %>
+    <%= render 'filter' %>
+    <% end %>
+  </div>
 </div>
 <div class="container-right">
   <h1><%= t('.title') %></h1>

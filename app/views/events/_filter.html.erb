@@ -1,0 +1,9 @@
+<h3>Otsi täpsemalt</h3>
+
+<label>Maakond</label>
+<%= select_tag :county, options_for_select([['']] + County.all.collect{ |c| [c.name, c.id.to_s] }, :selected => params[:county]) %>
+
+<label>Talgu liik</label>
+<%= select_tag :event_type, options_for_select([['']] + EventType.all.collect{ |c| [c.name, c.id.to_s] }, :selected => params[:event_type]) %>
+
+<%= submit_tag 'Otsi!', :name => '' %>

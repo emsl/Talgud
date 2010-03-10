@@ -4,13 +4,16 @@ class EventsController < ApplicationController
   
   def index
     @events = Event.published.paginate(
-      :order => 'begins_at ASC', :page => params[:page],
+      :order => 'begins_at ASC', :page => params[:page], :conditions => filter_from_params,
       :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
   
   def my
-    @events = Event.my_events(@current_user).paginate(:order => 'begins_at ASC', :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement], :page => params[:page])
+    @events = Event.my_events(@current_user).paginate(
+      :order => 'begins_at ASC', :page => params[:page],
+      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    )
   end
   
   def map
@@ -20,7 +23,10 @@ class EventsController < ApplicationController
         @languages = Language.all
       end
       format.json do
-        @events = Event.published.all(:include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement])
+        @events = Event.published.all(
+          :conditions => filter_from_params,
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+        )
         render :json => events_json_hash(@events)
       end
     end
@@ -32,7 +38,10 @@ class EventsController < ApplicationController
     
     respond_to do |format|
       format.html do
-        @events = Event.latest.published.paginate(:order => 'id DESC', :limit => limit, :include => includes, :page => params[:page])
+        @events = Event.latest.published.paginate(
+          :conditions => filter_from_params, :order => 'id DESC', :limit => limit, :include => includes,
+          :page => params[:page]
+        )
       end
       format.json do
         @events = Event.latest.published.all(:order => 'id DESC', :limit => limit, :include => includes)
@@ -105,6 +114,13 @@ class EventsController < ApplicationController
   end
   
   private
+  
+  def filter_from_params
+    conditions = {}
+    conditions[:location_address_county_id] = params[:county] unless params[:county].blank?
+    conditions[:event_type_id] = params[:event_type] unless params[:event_type].blank?
+    conditions
+  end
   
   def events_json_hash(events)
     events.inject(Array.new) do |memo, e|
