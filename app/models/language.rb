@@ -8,4 +8,5 @@ class Language < ActiveRecord::Base
   validates_uniqueness_of :code, :case_sensitive => false  
   
   default_scope :conditions => {:deleted_at => nil}
+  named_scope :sorted, :order => {:name => ' ASC'}
 end

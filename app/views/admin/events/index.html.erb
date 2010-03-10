@@ -4,17 +4,36 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= order @search, :by => :name, :as => t('formtastic.labels.event.name') %></th>
-    <th><%= order @search, :by => :code, :as => t('formtastic.labels.event.code') %></th>
-    <th><%= order @search, :by => :event_type_name, :as => t('formtastic.labels.event.event_type') %></th>    
+    <th><%= order @search, :by => :name, :as => t('formtastic.labels.event.name'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :code, :as => t('formtastic.labels.event.code'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :event_type_name, :as => t('formtastic.labels.event.event_type'), :params_scope => :order %></th>    
     <th><%= h t('formtastic.labels.event.manager') %></th>
-    <th><%= order @search, :by => :max_participants, :as => t('formtastic.labels.event.max_participants_short') %></th>
-    <th><%= order @search, :by => :location_address_county_name, :as => t('formtastic.labels.event.location_address') %></th>
-    <th><%= order @search, :by => :status, :as => t('formtastic.labels.event.status') %></th>
-    <th><%= order @search, :by => :created_at, :as => t('admin.common.created_at') %></th>
-    <th></th>
+    <th><%= order @search, :by => :max_participants, :as => t('formtastic.labels.event.max_participants_short'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :location_address_county_name, :as => t('formtastic.labels.event.location_address'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :status, :as => t('formtastic.labels.event.status'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :created_at, :as => t('admin.common.created_at'), :params_scope => :order %></th>
+    <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>
+  <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
+    <% semantic_form_for @search, :html => {:class => 'searchform'} do |form| %>
+    <% semantic_fields_for @search do |f| %>
+    <td><%= f.input :name_like, :label => false, :input_html => {:size => 30} %></td>
+    <td><%= f.input :code_like, :label => false, :input_html => {:size => 10} %></td>
+    <td><%= f.input :event_type_id, :as => :select, :collection => EventType.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %></td>
+    <td></td>
+    <td><%= f.input :max_participants, :label => false, :input_html => {:size => 5} %></td>
+    <td>
+      <%= f.input :location_address_county_id, :collection => County.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %>
+      <%= f.input :location_address_municipality_id, :collection => Municipality.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %>
+    </td>
+    <td><%= f.input :status, :as => :select, :collection => Event::STATUS.keys.collect{ |s| [t("formtastic.labels.event.statuses.#{s}"), s.to_s] }, :include_blank => true, :label => false %></td>
+    <td></td>
+    <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
+    <% end %>
+    <% end %>
+  </tr>  
+  <%= filter_notify(9) %>
   <% for event in @events %>
   <tr>
     <td><%=h truncate(event.name) %></td>

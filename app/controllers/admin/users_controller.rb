@@ -4,7 +4,7 @@ class Admin::UsersController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
   
   def index
-    @search = User.with_permissions_to(:manage, :context => :admin_users).search(params[:search])
+    @search = User.with_permissions_to(:manage, :context => :admin_users).search(params[:search]).search(params[:order])
     @users = @search.paginate(:page => params[:page])
   end
   

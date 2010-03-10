@@ -62,9 +62,9 @@ module Admin::AdminHelper
       end
     else
       if permitted_to?(:manage, :admin_roles)
-        link_to(truncate(manager_names.join(', '), truncate_length), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :title => t(".edit_role"))
+        link_to(truncate(manager_names.join(', '), :length => truncate_length), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :title => t(".edit_role"))
       else
-        truncate(manager_names.join(', '), truncate_length)
+        truncate(manager_names.join(', '), :length => truncate_length)
       end
     end
 
@@ -82,4 +82,6 @@ module Admin::AdminHelper
   def filter_notify(colspan)
     render :partial => 'shared/admin/filter_notify', :locals => {:colspan => colspan}
   end
+  
+  
 end

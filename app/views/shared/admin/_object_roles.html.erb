@@ -1,0 +1,57 @@
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <% if @search %>
+    <th><%= order @search, :by => :user_firstname, :as => t('formtastic.labels.role.user'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :user_email, :as => t('formtastic.labels.user.email'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :user_phone, :as => t('formtastic.labels.user.phone'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :role, :as => t('formtastic.labels.role.role'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :model_type, :as => t('formtastic.labels.role.model_type'), :params_scope => :order %></th>
+    <th><%= t('formtastic.labels.role.model_name') %></th>
+    <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
+    <% else %>
+    <th><%=h t('formtastic.labels.role.user') %></th>
+    <th><%=h t('formtastic.labels.user.email') %></th>
+    <th><%=h t('formtastic.labels.user.phone') %></th>
+    <th><%=h t('formtastic.labels.role.role') %></th>
+    <th><%=h t('formtastic.labels.role.model_type') %></th>
+    <th><%=h t('formtastic.labels.role.model_name') %></th>
+    <th></th>
+    <% end %>
+  </tr>
+  </thead>
+  <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
+    <% semantic_form_for @search, :html => {:class => 'searchform'} do |form| %>
+    <% semantic_fields_for @search do |f| %>
+    <td><%= f.input :user_firstname_like, :label => false, :input_html => {:size => 20}  %></td>
+    <td><%= f.input :user_email_like, :label => false, :input_html => {:size => 20}  %></td>
+    <td><%= f.input :user_phone_like, :label => false, :input_html => {:size => 20}  %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
+    <% end %>
+    <% end %>
+  </tr>
+  <%= filter_notify(7) %>
+  
+  <% for role in @roles %>
+  <tr>
+    <td>
+      <% if permitted_to?(:read, :admin_users) %>
+      <%= link_to role.user.name, admin_user_path(role.user) %>
+      <% else %>
+      <%= role.user.name %>
+      <% end %>
+    </td>
+    <td><%= h role.user.email %></td>
+    <td><%= h role.user.phone %></td>
+    <td><%= t("formtastic.labels.role.roles.#{role.role}") %></td>
+    <td><%= t("activerecord.models.#{role.model_type.downcase}").capitalize %></td>
+    <td><%= role.model.try(:label) %></td>
+    <td></td>
+  </tr>
+  <% end %>
+  </table>
+</div>

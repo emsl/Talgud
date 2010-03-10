@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   # Let only certain fields to be set through forms
   # attr_protected :crypted_password, :password_salt, :persistence_token, :perishable_token, :login_count, :failed_login_count, :current_login_at, :last_login_at, :current_login_ip, :last_login_ip, :status, :deleted_at
 
-  default_scope :conditions => {:deleted_at => nil}#, :order => ['firstname, lastname' => ' asc']
+  default_scope :conditions => {:deleted_at => nil}
+  named_scope :sorted, :order => ['firstname, lastname' => ' asc']
 
   # Before validation, set default status for user. Otherwise this record does not validate.
   before_validation_on_create :set_default_status
