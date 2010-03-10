@@ -40,6 +40,7 @@ class Event < ActiveRecord::Base
   named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ?)) ',
      u.id, 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager'] }}
   default_scope :conditions => {:deleted_at => nil}
+  named_scope :sorted, :order => {:name => ' ASC'}
 
   def self.class_role_symbols
     [:event_manager]

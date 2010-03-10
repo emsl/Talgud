@@ -13,6 +13,7 @@ class Municipality < ActiveRecord::Base
   validates_presence_of :name, :kind, :county
   
   default_scope :conditions => {:deleted_at => nil}
+  named_scope :sorted, :order => {:name => ' ASC'}
 
   def self.class_role_symbols
     [:regional_manager]

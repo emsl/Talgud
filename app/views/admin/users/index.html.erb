@@ -8,13 +8,16 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= order @search, :by => :firstname, :as => t('formtastic.labels.user.name') %></th>
-    <th><%= order @search, :by => :email, :as => t('formtastic.labels.user.email') %></th>
-    <th><%= order @search, :by => :phone, :as => t('formtastic.labels.user.phone') %></th>
+    <th><%= order @search, :by => :firstname, :as => t('formtastic.labels.user.name'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :email, :as => t('formtastic.labels.user.email'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :phone, :as => t('formtastic.labels.user.phone'), :params_scope => :order %></th>
     <th><%= t('formtastic.labels.user.status') %></th>
-    <th></th>
+    <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>
+  <tr>
+    
+  </tr>
   <% for user in @users %>
   <tr>
     <td><%=h user.name %></td>

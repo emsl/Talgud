@@ -10,10 +10,20 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= order @search, :by => :name, :as => t('formtastic.labels.event_type.name') %></th>
-    <th></th>
+    <th><%= order @search, :by => :name, :as => t('formtastic.labels.event_type.name'), :params_scope => :order %></th>
+    <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>
+  <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
+    <% semantic_form_for @search, :html => {:class => 'searchform'} do |form| %>
+    <% semantic_fields_for @search do |f| %>
+    <td><%= f.input :name_like, :label => false %></td>
+    <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
+    <% end %>
+    <% end %>
+  </tr>
+  <%= filter_notify(2) %>
+  
   <% for event_type in @event_types %>
   <tr>
     <td><%=h event_type.name %></td>

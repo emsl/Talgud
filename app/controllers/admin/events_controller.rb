@@ -4,7 +4,7 @@ class Admin::EventsController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update], :require => :read
   
   def index
-    @search = Event.can_manage(@current_user).search(params[:search])
+    @search = Event.can_manage(@current_user).search(params[:search]).search(params[:order])
     @events = @search.paginate(:page => params[:page])
   end
   

@@ -8,6 +8,7 @@ class Account < ActiveRecord::Base
   has_many :managers, :through => :manager_roles, :source => :user
 
   default_scope :conditions => {:deleted_at => nil}
+  named_scope :sorted, :order => {:name => ' ASC'}
 
   has_many :roles, :as => :model
 
