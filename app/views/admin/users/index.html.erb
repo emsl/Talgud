@@ -21,7 +21,15 @@
     <td><%=h user.email %></td>
     <td><%=h user.phone %></td>
     <td><%=h t("formtastic.labels.user.statuses.#{user.status}") %></td>
-    <td class="actions"><%= link_to t('admin.common.edit'), edit_admin_user_path(user) %></td>
+    
+    <td class="actions">
+      <% if permitted_to?(:read, :admin_users) %>
+      <%= link_to t('admin.common.view'), admin_user_path(user) %>
+      <% end %>
+      <% if permitted_to?(:edit, :admin_users) %>
+      <%= link_to t('admin.common.edit'), edit_admin_user_path(user) %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
   </table>

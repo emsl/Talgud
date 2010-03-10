@@ -63,7 +63,7 @@ module Admin::AdminHelper
       end
     else
       if permitted_to?(:manage, :admin_roles)
-        link_to truncate(manager_names.join(', '), truncate_lenght), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action, :title => t(".edit_role")
+        link_to truncate(manager_names.join(', '), truncate_lenght), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :title => t(".edit_role")
       else
         truncate(manager_names.join(', '), truncate_lenght)
       end
