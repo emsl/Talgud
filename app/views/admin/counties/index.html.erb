@@ -1,7 +1,9 @@
 <h1><%= t('.title') %></h1>
 
 <div class="textcontent">
+  <% if permitted_to?(:create, :admin_counties) %>
   <%= link_to t('.add_county'), new_admin_county_path %>
+  <% end %>
 </div>
 
 <div class="datacontent">
@@ -18,8 +20,13 @@
     <td><%=h county.name %></td>
     <td><%= managers_for_object(county, 60) %></td>
     <td class="actions">
-      <%= link_to t('admin.municipalities.index.title'), admin_county_municipalities_path(county) %>
+      <% if permitted_to?(:read, :admin_municipalities) %>
+      <%= link_to t('.municipalities'), admin_county_municipalities_path(county) %>
+      <% end %>
+      
+      <% if permitted_to?(:edit, :admin_counties) %>
       <%= link_to t('admin.common.edit'), edit_admin_county_path(county) %>
+      <% end %>
     </td>
   </tr>
   <% end %>

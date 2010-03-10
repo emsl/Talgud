@@ -11,9 +11,13 @@ class Settlement < ActiveRecord::Base
   
   validates_presence_of :name, :kind, :municipality
   
-  default_scope :conditions => {:deleted_at => nil}
+  default_scope :conditions => {:deleted_at => nil}, :order => {:name => ' ASC'}
 
   def self.class_role_symbols
     [:regional_manager]
+  end  
+  
+  def label
+    [municipality.label, self.name].join(' / ')
   end  
 end

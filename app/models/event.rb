@@ -44,6 +44,10 @@ class Event < ActiveRecord::Base
   def self.class_role_symbols
     [:event_manager]
   end
+  
+  def label
+    self.name
+  end
 
   def to_param
     url

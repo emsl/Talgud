@@ -1,9 +1,11 @@
 <h1><%= @event.name %></h1>
 
 <div class="textcontent">
-  <div style="margin-bottom:10px;">
+  <% if permitted_to?(:edit, :admin_events) %>
+  <div style="margin-bottom:10px;">    
     <%= link_to t('admin.common.edit'), edit_admin_event_path(@event.id) %>
   </div>
+  <% end %>
 <table>
 <tr>
   <td style="width: 25%;"><b><%= t('formtastic.labels.event.code') %></b></td>

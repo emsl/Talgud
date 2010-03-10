@@ -32,8 +32,12 @@
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
     <td><%=h time_ago_in_words(event.created_at) unless event.created_at.nil? %> tagasi</td>
     <td class="actions">
+      <% if permitted_to?(:read, :admin_events) %>
       <%= link_to t('admin.common.view'), admin_event_path(event.id) %>
+      <% end %>
+      <% if permitted_to?(:edit, :admin_events) %>
       <%= link_to t('admin.common.edit'), edit_admin_event_path(event.id) %>
+      <% end %>
     </td>
   </tr>
   <% end %>

@@ -1,7 +1,9 @@
-<h1><%= t('.title') %></h1>
+<h1><%= t('.title', :county => @county.label) %></h1>
 
 <div class="textcontent">
+  <% if permitted_to?(:create, :admin_municipalities) %>
   <%= link_to t('.add_municipality'), new_admin_county_municipality_path(@county) %>
+  <% end %>
 </div>
 
 <div class="datacontent">
@@ -20,8 +22,13 @@
     <td><%=h t("formtastic.labels.municipality.kinds.#{municipality.kind}") %></td>
     <td><%= managers_for_object(municipality, 60) %></td>
     <td class="actions">
-      <%= link_to t('admin.settlements.index.title'), admin_county_municipality_settlements_path(@county, municipality) %>
+      <% if permitted_to?(:read, :admin_settlements) %>
+      <%= link_to t('.settlements'), admin_county_municipality_settlements_path(@county, municipality) %>
+      <% end %>
+      
+      <% if permitted_to?(:edit, :admin_municipalities) %>
       <%= link_to t('admin.common.edit'), edit_admin_county_municipality_path(@county, municipality) %>
+      <% end %>
     </td>
   </tr>
   <% end %>

@@ -12,9 +12,14 @@ class Municipality < ActiveRecord::Base
   
   validates_presence_of :name, :kind, :county
   
-  default_scope :conditions => {:deleted_at => nil}
+  default_scope :conditions => {:deleted_at => nil}, :order => {:name => ' ASC'}
 
   def self.class_role_symbols
     [:regional_manager]
   end
+  
+  def label
+    [county.label, self.name].join(' / ')
+  end
+  
 end

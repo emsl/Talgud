@@ -2,7 +2,9 @@
 
 <div class="textcontent">
   <div style="margin-bottom:10px;">
+    <% if permitted_to?(:edit, :admin_users) %>
     <%= link_to t('admin.common.edit'), edit_admin_user_path(@user.id) %>
+    <% end %>
   </div>
 <table>
 <tr>

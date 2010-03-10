@@ -1,4 +1,4 @@
-<h1><%= t('.title') %></h1>
+<h1><%= t('.title', :county => @county.label) %></h1>
 
 <% semantic_form_for @municipality, :url => admin_county_municipalities_path do |f| %>
   <%= render 'form' %>

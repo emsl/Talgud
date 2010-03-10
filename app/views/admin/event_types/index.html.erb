@@ -1,7 +1,9 @@
 <h1><%= t('.title') %></h1>
 
 <div class="textcontent">
+  <% if permitted_to?(:create, :admin_event_types) %>
   <%= link_to t('.add_event_type'), new_admin_event_type_path %>
+  <% end %>
 </div>
 
 <div class="datacontent">
@@ -16,7 +18,9 @@
   <tr>
     <td><%=h event_type.name %></td>
     <td class="actions">
+      <% if permitted_to?(:edit, :admin_event_types) %>
       <%= link_to t('admin.common.edit'), edit_admin_event_type_path(event_type) %>
+      <% end %>
     </td>
   </tr>
   <% end %>

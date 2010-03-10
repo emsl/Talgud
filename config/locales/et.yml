@@ -70,6 +70,7 @@ et:
         title: Haldusalad
         add_role: Lisa haldur
         edit_role: Muuda haldureid
+        municipalities: Omavalitsused
       new:
         title: Maakonna lisamine
       update:
@@ -92,7 +93,7 @@ et:
         notice: Uus roll on lisatud
         error: Rolli lisamisel tekkis viga. Palun kontrolli andmete korrektsust 
       index:
-        title: Objektide õigused
+        title: Õigused
         destroy_role: Kustuta
         destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?
       destroy:
@@ -133,12 +134,13 @@ et:
       edit:
         title: Omavalitsuse muutmine
       index:
-        title: Omavalitsused
+        title: "Omavalitsused maakonnas {{county}}"
         add_municipality: Lisa omavalitsus
         add_role: Lisa haldur
         edit_role: Muuda haldureid
+        settlements: Külad / asulad
       new:
-        title: Omavalitsuse lisamine
+        title: "Omavalitsuse lisamine maakonda {{county}}"
       update:
         notice: Omavalitsuse andmed on uuendatud
         error: Omavalitsuse andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
@@ -152,12 +154,12 @@ et:
       edit:
         title: Küla / asula muutmine
       index:
-        title: Külad / asulad
+        title: "Külad / asulad omavalitsuses {{municipality}}"
         add_settlement: Lisa küla või asula
         add_role: Lisa haldur
         edit_role: Muuda haldureid
       new:
-        title: Küla / asula lisamine
+        title: "Küla / asula lisamine omavalitsusse {{municipality}}"
       update:
         notice: Küla / asula andmed on uuendatud
         error: Küla / asula andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
