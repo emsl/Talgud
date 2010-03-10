@@ -12,16 +12,17 @@
   <tr>
     <th><%= order @search, :by => :name, :as => t('formtastic.labels.county.name') %></th>
     <th><%= t('formtastic.labels.county.regional_managers') %></th>
-    <th></th>
-  </tr>
-  <tr>
-    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
-      <th><%= f.input :name_like, :label => false, :required => false %></th>
-      <th></th>
-      <th><%= f.submit :search %></th>
-    <% end %>
+    <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>
+  <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
+    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
+    <td><%= f.input :name_like, :label => false, :required => false %></td>
+    <td></td>
+    <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
+    <% end %>
+  </tr>
+  <%= filter_notify(3) %>
   <% for county in @counties %>
   <tr>
     <td><%=h county.name %></td>

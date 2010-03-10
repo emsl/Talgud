@@ -73,4 +73,14 @@ module Admin::AdminHelper
       content
     end
   end
+  
+  # Check if view is currently filtered.
+  def filtering?
+    not params[:search].nil?
+  end
+  
+  # Displays notification row that view is currently filtered
+  def filter_notify(colspan)
+    render :partial => 'shared/admin/filter_notify', :locals => {:colspan => colspan}
+  end
 end
