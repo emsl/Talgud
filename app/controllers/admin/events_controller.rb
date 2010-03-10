@@ -4,7 +4,8 @@ class Admin::EventsController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update], :require => :read
   
   def index
-    @events = Event.can_manage(@current_user).paginate(:page => params[:page])
+    @search = Event.can_manage(@current_user).search(params[:search])
+    @events = @search.paginate(:page => params[:page])
   end
   
   def map

@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:account_manager]}
   has_many :managers, :through => :manager_roles, :source => :user
 
-  default_scope :conditions => {:deleted_at => nil}, :order => {:name => ' ASC'}
+  default_scope :conditions => {:deleted_at => nil}
 
   has_many :roles, :as => :model
 

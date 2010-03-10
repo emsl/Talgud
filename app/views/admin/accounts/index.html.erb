@@ -4,8 +4,8 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= t('formtastic.labels.account.name') %></th>
-    <th><%= t('formtastic.labels.account.domain') %></th>
+    <th><%= order @search, :by => :name, :as => t('formtastic.labels.account.name') %></th>
+    <th><%= order @search, :by => :domain, :as => t('formtastic.labels.account.domain') %></th>
     <th></th>
   </tr>
   </thead>

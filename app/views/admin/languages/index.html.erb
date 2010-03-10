@@ -8,8 +8,8 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= t('formtastic.labels.language.name') %></th>
-    <th><%= t('formtastic.labels.language.code') %></th>
+    <th><%= order @search, :by => :name, :as => t('formtastic.labels.language.name') %></th>
+    <th><%= order @search, :by => :code, :as => t('formtastic.labels.language.code') %></th>
     <th></th>
   </tr>
   </thead>

@@ -312,6 +312,18 @@ div.wysiwyg {
   float: left;
 }
 
+/** 
+ * Sorting links, TOOD: Priit vaatab üle
+ */
+a.descending, a.ascending {
+  /*color: rgb(51, 51, 51);*/
+}
+
+table.datatable th a {
+  /*color: rgb(51, 5, 51);*/
+}
+
+
 /**
  * Pagination
  */

@@ -12,7 +12,7 @@ class Role < ActiveRecord::Base
   validates_presence_of :role, :user, :model, :account
   validates_uniqueness_of :role, :scope => [:user_id, :model_type, :model_id, :account_id] 
   
-  default_scope :conditions => {:deleted_at => nil}, :order => {:role => ' ASC'}
+  default_scope :conditions => {:deleted_at => nil}
   
   def self.grant_role(role, user, m)
     Role.create!(:role => role, :user => user, :model => m, :account => Account.current)

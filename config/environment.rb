@@ -13,6 +13,7 @@ Rails::Initializer.run do |config|
   config.gem 'geokit'
   config.gem 'newrelic_rpm'
   config.gem 'will_paginate'
+  config.gem 'searchlogic'
   
   config.frameworks -= [:active_resource]
 

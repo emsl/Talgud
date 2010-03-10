@@ -10,8 +10,8 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%=h t('formtastic.labels.settlement.name') %></th>
-    <th><%=h t('formtastic.labels.settlement.kind') %></th>
+    <th><%= order @search, :by => :name, :as => t('formtastic.labels.settlement.name') %></th>
+    <th><%= order @search, :by => :kind, :as => t('formtastic.labels.settlement.kind') %></th>
     <th><%= t('formtastic.labels.settlement.regional_managers') %></th>
     <th></th>
   </tr>

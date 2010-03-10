@@ -6,7 +6,8 @@ class Admin::SettlementsController < Admin::AdminController
   before_filter :load_parent_resources
   
   def index
-    @settlements = @municipality.settlements.with_permissions_to(:manage, :context => :admin_settlements).paginate(:page => params[:page])
+    @search = @municipality.settlements.with_permissions_to(:manage, :context => :admin_settlements).search(params[:search])
+    @settlements = @search.paginate(:page => params[:page])
   end
   
   def new

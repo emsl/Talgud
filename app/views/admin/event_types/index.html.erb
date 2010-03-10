@@ -10,7 +10,7 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= t('formtastic.labels.event_type.name') %></th>
+    <th><%= order @search, :by => :name, :as => t('formtastic.labels.event_type.name') %></th>
     <th></th>
   </tr>
   </thead>

@@ -7,5 +7,5 @@ class EventType < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
   
-  default_scope :conditions => {:deleted_at => nil}, :order => {:name => ' ASC'}
+  default_scope :conditions => {:deleted_at => nil}
 end

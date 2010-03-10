@@ -2,12 +2,21 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= t('formtastic.labels.role.user') %></th>
-    <th><%= t('formtastic.labels.user.email') %></th>
-    <th><%= t('formtastic.labels.user.phone') %></th>
-    <th><%= t('formtastic.labels.role.role') %></th>
-    <th><%= t('formtastic.labels.role.model_type') %></th>
+    <% if @search %>
+    <th><%= order @search, :by => :user_firstname, :as => t('formtastic.labels.role.user') %></th>
+    <th><%= order @search, :by => :user_email, :as => t('formtastic.labels.user.email') %></th>
+    <th><%= order @search, :by => :user_phone, :as => t('formtastic.labels.user.phone') %></th>
+    <th><%= order @search, :by => :role, :as => t('formtastic.labels.role.role') %></th>
+    <th><%= order @search, :by => :model_type, :as => t('formtastic.labels.role.model_type') %></th>
     <th><%= t('formtastic.labels.role.model_name') %></th>
+    <% else %>
+    <th><%=h t('formtastic.labels.role.user') %></th>
+    <th><%=h t('formtastic.labels.user.email') %></th>
+    <th><%=h t('formtastic.labels.user.phone') %></th>
+    <th><%=h t('formtastic.labels.role.role') %></th>
+    <th><%=h t('formtastic.labels.role.model_type') %></th>
+    <th><%=h t('formtastic.labels.role.model_name') %></th>
+    <% end %>
   </tr>
   </thead>
   <% for role in @roles %>

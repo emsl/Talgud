@@ -10,9 +10,16 @@
   <table class="datatable">
   <thead>
   <tr>
-    <th><%= t('formtastic.labels.county.name') %></th>
+    <th><%= order @search, :by => :name, :as => t('formtastic.labels.county.name') %></th>
     <th><%= t('formtastic.labels.county.regional_managers') %></th>
     <th></th>
+  </tr>
+  <tr>
+    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
+      <th><%= f.input :name_like, :label => false, :required => false %></th>
+      <th></th>
+      <th><%= f.submit :search %></th>
+    <% end %>
   </tr>
   </thead>
   <% for county in @counties %>
