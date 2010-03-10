@@ -3,7 +3,6 @@ body {
   color: #333;
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-  text-shadow: rgba(255,255,255,0.1) 0 -1px 1px;
   min-width: 1000px;
 }
 
@@ -69,6 +68,11 @@ a.button:hover, div.textcontent a.button:hover {
 a.title {
   color: #09f;
   font-weight: bold;
+}
+
+/* Low priority */
+.low_priority {
+  color: #999;
 }
 
 /* Clearer */
@@ -192,6 +196,19 @@ table.datatable td.actions a, a.action {
   text-transform: uppercase;
   font-size: 11px;
   margin-left: 5px;
+}
+
+table.datatable th a {
+  color: #333;
+  border-bottom: 1px dotted #999;
+}
+
+table.datatable th a:hover {
+  border-bottom: 1px dotted #333;
+}
+
+table.datatable th a.ascending, table.datatable th a.descending {
+  background-color: #fffbd4;
 }
 
 table.datatable th.actions img {
@@ -333,18 +350,6 @@ div.pagination a {
 div.wysiwyg {
   float: left;
 }
-
-/** 
- * Sorting links, TOOD: Priit vaatab üle
- */
-a.descending, a.ascending {
-  /*color: rgb(51, 51, 51);*/
-}
-
-table.datatable th a {
-  /*color: rgb(51, 5, 51);*/
-}
-
 
 /**
  * Pagination

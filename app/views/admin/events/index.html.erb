@@ -1,11 +1,5 @@
 <h1><%= t('.title') %></h1>
 
-<%# <div style="text-align: center; margin: 15px 0;"> %>
-  <%# %w{new published closed}.each do |status| %>
-  <%#= link_to t(".filter.#{status}"), admin_events_path(:filter => status), :class => if params[:filter] == status then :filter_button_selected else :filter_button end %>
-  <%# end %>
-<%# </div> %>
-
 <div class="datacontent">
   <table class="datatable">
   <thead>
@@ -28,9 +22,9 @@
     <td><%=h event.event_type.name %></td>    
     <td><%= managers_for_object(event) %></td>
     <td><%=h event.max_participants %></td>
-    <td><%=h event.location_address %></td>
+    <td><%=h truncate(event.location_address, :size => 20) %></td>
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
-    <td><%=h time_ago_in_words(event.created_at) unless event.created_at.nil? %> tagasi</td>
+    <td><%=h event.created_at.strftime('%d.%m') unless event.created_at.nil? %></td>
     <td class="actions">
       <% if permitted_to?(:read, :admin_events) %>
       <%= link_to t('admin.common.view'), admin_event_path(event.id) %>

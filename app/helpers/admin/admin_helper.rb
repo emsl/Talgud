@@ -51,21 +51,20 @@ module Admin::AdminHelper
   end
 
   # Builds list of regional managers for given region model.
-  def managers_for_object(obj, truncate_lenght = 20)
+  def managers_for_object(obj, truncate_length = 20)
     managers = obj.try(:managers)
     manager_names = managers.collect(&:name) if managers
-    content =
-    if manager_names.empty?
+    content = if manager_names.empty?
       if permitted_to?(:manage, :admin_roles)
-        link_to t(".add_role"), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action
+        link_to t(".add_role"), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :low_priority
       else
         ''
       end
     else
       if permitted_to?(:manage, :admin_roles)
-        link_to truncate(manager_names.join(', '), truncate_lenght), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :title => t(".edit_role")
+        link_to(truncate(manager_names.join(', '), truncate_length), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :title => t(".edit_role"))
       else
-        truncate(manager_names.join(', '), truncate_lenght)
+        truncate(manager_names.join(', '), truncate_length)
       end
     end
 

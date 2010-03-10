@@ -31,7 +31,7 @@
     <td><%= h role.user.email %></td>
     <td><%= h role.user.phone %></td>
     <td><%= t("formtastic.labels.role.roles.#{role.role}") %></td>
-    <td><%= t("activerecord.models.#{role.model_type.downcase}") %></td>
+    <td><%= t("activerecord.models.#{role.model_type.downcase}").capitalize %></td>
     <td><%= role.model.try(:label) %></td>
   </tr>
   <% end %>
