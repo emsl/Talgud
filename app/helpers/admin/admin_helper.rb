@@ -56,11 +56,19 @@ module Admin::AdminHelper
     manager_names = managers.collect(&:name) if managers
     content =
     if manager_names.empty?
-      link_to t(".add_role"), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action
-    else     
-     link_to truncate(manager_names.join(', '), truncate_lenght), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action, :title => t(".edit_role")
+      if permitted_to?(:manage, :admin_roles)
+        link_to t(".add_role"), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action
+      else
+        ''
+      end
+    else
+      if permitted_to?(:manage, :admin_roles)
+        link_to truncate(manager_names.join(', '), truncate_lenght), new_admin_role_path(:model_type => obj.class.name, :model_id => obj), :class => :action, :title => t(".edit_role")
+      else
+        truncate(manager_names.join(', '), truncate_lenght)
+      end
     end
-    
+
     content_tag :div do
       content
     end
