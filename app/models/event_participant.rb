@@ -20,4 +20,13 @@ class EventParticipant < ActiveRecord::Base
   def recommend_emails
     []
   end
+
+  private
+
+  def recalculate_event_current_participants
+    self.transaction do
+      self.event.lock!
+      self.event.current_participants = self.event.event_participants.size
+    end
+  end
 end
