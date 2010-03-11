@@ -57,6 +57,16 @@ Factory.define :event do |e|
   end
 end
 
+Factory.define :event_participant do |p|
+  p.association :event
+  p.sequence(:firstname) { |n| "Firstname#{n}" }
+  p.sequence(:lastname) { |n| "Lastname#{n}" }
+  p.sequence(:email) { |n| "admin#{n}@example.com" }
+  p.sequence(:phone) { |n| "12222333#{n}" }
+  p.notes ''
+  p.tellafriend_emails 'mail1@talgud.com,mail2@talgud.ee'
+end
+
 Factory.define :role_system_administrator, :class => Role do |r|
   r.role Role::ROLE[:system_administrator]
   r.association :user

@@ -55,6 +55,18 @@ describe Event, 'start and end time changing' do
   end
 end
 
+describe Event, 'vacancies' do
+  it 'should calculate vacancies' do
+    @event = Factory.build(:event, :max_participants => 10, :current_participants => 2)
+    @event.vacancies.should eql(8)
+  end
+
+  it 'should return 0 vacancies' do
+    @event = Factory.build(:event, :max_participants => 10, :current_participants => 11)
+    @event.vacancies.should eql(0)
+  end
+end
+
 describe Event, 'event code generation' do
   it 'should generate event code' do
     @event = Factory(:event)
