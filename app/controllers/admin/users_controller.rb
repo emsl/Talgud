@@ -19,9 +19,10 @@ class Admin::UsersController < Admin::AdminController
     @roles = @user.roles.all(:include => :model)
   end
   
-  def create
+  def create    
     if @user.save
       @user.activate!
+      Mailers::UserMailer.deliver_registration_notification(@user, params[:user][:password], @current_user, login_url)
       flash[:notice] = t('admin.users.create.notice')
       redirect_to admin_users_path
     else
