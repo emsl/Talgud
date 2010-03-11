@@ -465,6 +465,12 @@ et:
         intro: Tellisid omale Talgute keskkonnast uue salasõna.
         your_new_password: "Sinu uus salasõna on: {{password}}"
         login_at_url: "Sisse saad logida aadressilt {{login_url}}"
+      registration_notification:
+        subject: Oled registreeritud Talgute keskkonna kasutajaks
+        intro: "Tere, Sind on kasutaja '{{creator}}' poolt registreeritud Talgute keskkonna kasutajaks"
+        your_email: "Sinule registreeritud kasutajatunnus: {{email}}"        
+        your_password: "Sulle määratud salasõna: {{password}}"
+        login_at_url: "Sisse saad logida aadressilt {{login_url}}"
     event_mailer:
       region_manager_notification:
         subject: Talgute registreerumise teavitus
