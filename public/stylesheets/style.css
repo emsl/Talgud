@@ -757,11 +757,30 @@ div.infowindow h3 a {
   text-decoration: none;
 }
 
+div.infowindow h3 a {
+  color: black;
+  text-decoration: underline;
+}
+
 div.infowindow div.label {
   color: #999;
   font-size: 10px;
   margin-top: 5px;
   text-transform: uppercase;
+}
+
+div.infowindow div.clustered a {
+  background: url('../images/map_mini_marker.png') no-repeat;
+  color: black;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 3px;
+  padding-left: 12px;
+  text-decoration: none;
+}
+
+div.infowindow div.clustered a:hover {
+  text-decoration: underline;
 }
 
 /* Pagination */

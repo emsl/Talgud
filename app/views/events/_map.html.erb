@@ -1,5 +1,5 @@
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-<%= javascript_include_tag 'markerclusterer_packed' %>
+<%= javascript_include_tag 'markerclusterer', 'datamarker' %>
 <script type="text/javascript" charset="utf-8">
 
   var event_locations_url = '<%= map_events_url(:format => :json) %>';
@@ -29,7 +29,8 @@
               var position = new google.maps.LatLng(point.latitude, point.longitude);
               bounds.extend(position);
               
-              var marker = new google.maps.Marker({position: position, title: point.name});
+              var marker = new DataMarker({position: position, title: point.name, icon: clusterer_red_icon, shadow: clusterer_shadow_icon});
+              marker.setData(point);
               
               google.maps.event.addListener(marker, 'click', function() {
                   var cbody = '<div class="infowindow">';
@@ -55,7 +56,23 @@
           }
       });
       
-      markerCluster = new MarkerClusterer(map, markers, {maxZoom: 13, gridSize: 30, styles: [{url: '/images/map/blue.png', opt_textColor: 'white', height: 32, width: 32}]});
+      markerCluster = new MarkerClusterer(map, markers, {
+        zoomOnClick: false, maxZoom: 13, gridSize: 30
+      });
+      
+      google.maps.event.addListener(markerCluster, 'clusterclick', function(e) {
+          var cluster = e[0], body = '', markers = cluster.getMarkers(), point, marker;
+          
+          body += '<div class="infowindow"><div class="clustered">';
+          for (var i = 0; i < markers.length; i++) {
+              point = markers[i].getData();
+              body += '<a href="' + point.url + '">' + point.name + '</a>';
+          }
+          body += '</div></div>';
+
+          infowindow.setContent(body);
+          infowindow.open(map, cluster.getIcon());
+      });
       
       map.setCenter(bounds.getCenter());
   }

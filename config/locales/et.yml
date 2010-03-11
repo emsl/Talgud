@@ -261,6 +261,7 @@ et:
         destroy_role: Kustuta
         destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?        
   common:
+    filter_all: Kõik
     loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
     title: Teeme ära! Talgud
