@@ -49,7 +49,13 @@
     <td><%= t("formtastic.labels.role.roles.#{role.role}") %></td>
     <td><%= t("activerecord.models.#{role.model_type.downcase}").capitalize %></td>
     <td><%= role.model.try(:label) %></td>
-    <td></td>
+    <td class="actions">
+      <% if @target_model %>
+      <% if permitted_to?(:destroy, :admin_roles) %>
+    <%= link_to t('.destroy_role'), admin_role_path(role, :model_type => @target_model.class.name, :model_id => @target_model), :confirm => t('.destroy_role_confirmation'), :method => :delete %>
+      <% end %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
   </table>

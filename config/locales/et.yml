@@ -98,8 +98,6 @@ et:
         error: Rolli lisamisel tekkis viga. Palun kontrolli andmete korrektsust 
       index:
         title: Õigused
-        destroy_role: Kustuta
-        destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?
       destroy:
         notice: Roll on kustutatud
         error: Rolli kustutamine ebaõnnestus
@@ -258,6 +256,10 @@ et:
       events: Talgud
       settings: Minu konto
       login: Logi sisse
+    admin:
+      object_roles:
+        destroy_role: Kustuta
+        destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?        
   common:
     loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
