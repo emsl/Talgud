@@ -364,6 +364,8 @@ et:
         manager_phone: Talgujuhi telefon
         max_participants: Talguliste maksimumarv
         max_participants_short: Max
+        current_participants: Registreerunute arv
+        current_participants_short: Reg
         meta_aim_description: Talgute eesmärk ja hüvang
         meta_job_description: Talgutööd
         meta_bring_with_you: Kaasa võtta
@@ -432,6 +434,7 @@ et:
         gathering_location: "Kogunemise koht ja kellaaeg, vajadusel ka kohalejõudmise juhised. Mõistlik on kogunemine leppida kergesti leitavas kohas."
         location_address_street: Sisesta võimalikult täpne aadress
         max_participants: "Märgi oodatav talguliste arv, mis on mõistlik ja vajalik tööde tegemiseks ning mida jõuad hallata"
+        current_participants: "Nendele talgutele registreerunud osavõtjate arv, mis arvutatakse registreerumise alusel. Seda välja sa muuta ei saa."
         meta_aim_description: "Kelle või mille hüvanguks talgutöid tehakse, mis on talgute eesmärk või kasu. Või mis on edasised plaanid talguobjektiga."
         meta_job_description: "Märgi kõik kavandatavad talgutööde tüübid (nt võsa saagimine, langetatud võsa ja okste korjamine ning põletamine)"
         meta_bring_with_you: "Mida osalejatel on vaja kaasa võtta: nt kindad, tööriistad, muud vahendid, piknikukorv, kummikud"

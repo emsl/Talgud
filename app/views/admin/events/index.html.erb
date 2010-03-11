@@ -9,6 +9,7 @@
     <th><%= order @search, :by => :event_type_name, :as => t('formtastic.labels.event.event_type'), :params_scope => :order %></th>    
     <th><%= h t('formtastic.labels.event.manager') %></th>
     <th><%= order @search, :by => :max_participants, :as => t('formtastic.labels.event.max_participants_short'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :current_participants, :as => t('formtastic.labels.event.current_participants_short'), :params_scope => :order %></th>
     <th><%= order @search, :by => :location_address_county_name, :as => t('formtastic.labels.event.location_address'), :params_scope => :order %></th>
     <th><%= order @search, :by => :status, :as => t('formtastic.labels.event.status'), :params_scope => :order %></th>
     <th><%= order @search, :by => :created_at, :as => t('admin.common.created_at'), :params_scope => :order %></th>
@@ -34,6 +35,7 @@
     <td><%=h event.event_type.name %></td>    
     <td><%= managers_for_object(event) %></td>
     <td><%=h event.max_participants %></td>
+    <td><%=h event.current_participants %></td>
     <td><%=h truncate(event.location_address, :size => 20) %></td>
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
     <td><%=h event.created_at.strftime('%d.%m') unless event.created_at.nil? %></td>
