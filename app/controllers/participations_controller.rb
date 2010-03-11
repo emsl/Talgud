@@ -11,10 +11,16 @@ class ParticipationsController < ApplicationController
     @event_participant.event = @event
     
     if @event_participant.valid?
-      @event.save
+      @event_participant.save
+      
+      # TODO: send email to registrant
+      # TODO: send email to event managers
+      # TODO: send email to "friends"
+      
+      flash[:notice] = t('participations.create.notice')
       redirect_to event_path(@event)
     else
-      flash[:error] = "Error error"
+      flash[:error] = t('participations.create.error')
       render :new
     end
   end

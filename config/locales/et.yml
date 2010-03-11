@@ -287,6 +287,7 @@ et:
     my:
       title: Minu talgud
     new:
+      title: Registreeri oma talgud
       header_hint: "Siin saad registreerida oma talgukoha ja kirjeldada talgulistele, mida tegema hakatakse ja mida igaühel kaasa tuleks võtta. Kuigi talgute andmeid saab ka hiljem muuta, püüa juba praegu kõik hoolega läbi mõelda. Sisestatud andmed jõuavad kodulehele mõne päeva jooksul."
       footer_hint: "Talgukoha registreerimisega kinnitad, et oled vähemalt 18 aastat vana ning oled nõus saama talgupäeva toimkonnalt e-posti teel infot talgupäeva kohta."
     update:
@@ -448,6 +449,7 @@ et:
       update: "Salvesta {{model}}"
       signup: Registreeru
       save_my_settings: Salvesta minu andmed
+      participate: Registreeru talgutele
     submit: "Salvesta"
   mailers:
     common:
@@ -471,9 +473,15 @@ et:
         login_at_url: "Sisse saad logida aadressilt {{login_url}}"
     event_mailer:
       region_manager_notification:
-        subject: Talgu registreerumise teavitus
+        subject: Talgute registreerumise teavitus
         intro: "Talgute keskkonnas registreeriti uus talgu järgmiste andmetega:"
-        admin_url: Talgu andmeid saab hallata aadressilt
+        admin_url: Talgute andmeid saab hallata aadressilt
+  participations:
+    create:
+      notice: "Tänan, et registreerusid talgutele. Oleme andmed kätte saanud ning saatsime Sinu e-posti aadressile lingi, kus saad vajadusel hiljem registreerumise andmeid muuta."
+      error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
+    new:
+      intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
   password_reminders:
     create:
       notice: Uus salasõna saadeti sulle e-mailile
