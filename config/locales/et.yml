@@ -385,6 +385,13 @@ et:
         vacancies: Vabu kohti
         actions:
           submit: Salvesta talgud
+      event_participant:
+        email: E-mail
+        firstname: Eesnimi
+        lastname: Perekonnanimi
+        notes: Märkused
+        phone: Telefon
+        tellafriend_emails: Soovita ka sõbral osaleda
       municipality:
         name: Omavalitsuse nimi
         regional_managers: Piirkondlikud haldurid
@@ -434,6 +441,8 @@ et:
         meta_subject_protegee: "Kas objekt on äkki looduskaitse all või muinsuskaitse all?"
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
         notes: Vajadusel lisa siia talgulistele oluline muu info
+      event_participant:
+        tellafriend_emails: Sisesta sõbra või sõprade e-posti aadressid eraldades need komadega
     actions:
       create: "Lisa {{model}}"
       update: "Salvesta {{model}}"

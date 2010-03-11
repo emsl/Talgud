@@ -1,6 +1,6 @@
 <ul id="mainmenu" class="clearfix">
   <li<%= ' class="active"' if %w{home}.include?(request.path_parameters[:controller]) %>><%= link_to t('.main'), if Rails.env == 'production' then 'http://www.teemeara.ee' else home_path end %></li>
-  <li<%= ' class="active"' if %w{events}.include?(request.path_parameters[:controller]) and action_name != 'my' %>><%= link_to t('.events'), events_path %></li>
+  <li<%= ' class="active"' if %w{events participations}.include?(request.path_parameters[:controller]) and action_name != 'my' %>><%= link_to t('.events'), events_path %></li>
   <% if current_user %>
   <li<%= ' class="active"' if 'users' == request.path_parameters[:controller] or action_name == 'my' %>><%= link_to t('.settings'), my_events_path %></li>
   <li><%= link_to t('users.submenu.logout'), logout_path %></li>
