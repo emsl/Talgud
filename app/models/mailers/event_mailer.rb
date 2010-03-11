@@ -10,4 +10,16 @@ class Mailers::EventMailer < Mailers::Base
       body :user => user, :event => event, :event_admin_url => event_admin_url
     end
   end
+  
+  def participant_notification(event, event_participation)
+    
+  end
+  
+  def manager_paricipation_notification(event, event_manager, event_participation)
+    
+  end
+  
+  def tell_friend_notification(email, event, event_participation)
+    
+  end
 end

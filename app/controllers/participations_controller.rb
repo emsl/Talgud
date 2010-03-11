@@ -13,9 +13,13 @@ class ParticipationsController < ApplicationController
     if @event_participant.valid?
       @event_participant.save
       
-      # TODO: send email to registrant
-      # TODO: send email to event managers
-      # TODO: send email to "friends"
+      Mailers::EventMailer.deliver_participant_notification(@event, @event_participant)
+      @event.managers.each do |manager|
+        Mailers::EventMailer.deliver_manager_paricipation_notification(@event, manager, @event_participant)
+      end
+      @event_participant.recommend_emails.each do |email|
+        Mailers::EventMailer.deliver_tell_friend_notification(email, @event, @event_participant)
+      end
       
       flash[:notice] = t('participations.create.notice')
       redirect_to event_path(@event)

@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Mailers::EventMailer, :type => :view do
   
   describe 'region_manager_notification' do
-    
     before(:each) do
       @user = Factory(:user)
       @event = Factory(:event)
@@ -28,5 +27,14 @@ describe Mailers::EventMailer, :type => :view do
       @mail.body.should include(@event.notes)
       @mail.body.should include(@url)
     end
+  end
+  
+  describe 'participant_notification' do
+  end
+  
+  describe 'manager_paricipation_notification' do
+  end
+  
+  describe 'tell_friend_notification' do
   end
 end
