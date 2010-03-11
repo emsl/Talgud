@@ -11,10 +11,20 @@ class ParticipationsController < ApplicationController
     @event_participant.event = @event
     
     if @event_participant.valid?
-      @event.save
+      @event_participant.save
+      
+      Mailers::EventMailer.deliver_participant_notification(@event, @event_participant)
+      @event.managers.each do |manager|
+        Mailers::EventMailer.deliver_manager_paricipation_notification(@event, manager, @event_participant)
+      end
+      @event_participant.recommend_emails.each do |email|
+        Mailers::EventMailer.deliver_tell_friend_notification(email, @event, @event_participant)
+      end
+      
+      flash[:notice] = t('participations.create.notice')
       redirect_to event_path(@event)
     else
-      flash[:error] = "Error error"
+      flash[:error] = t('participations.create.error')
       render :new
     end
   end

@@ -17,6 +17,10 @@ class EventParticipant < ActiveRecord::Base
     self.event_participant.nil?
   end
 
+  def recommend_emails
+    []
+  end
+
   private
 
   def recalculate_event_current_participants
@@ -24,5 +28,4 @@ class EventParticipant < ActiveRecord::Base
       self.event.lock!
       self.event.current_participants = self.event.event_participants.size
     end
-  end
 end
