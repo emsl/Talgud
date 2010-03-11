@@ -26,6 +26,7 @@ class Admin::EventsController < Admin::AdminController
       redirect_to admin_event_path(@event.id)
     else
       flash.now[:error] = t('admin.events.update.error')
+      @roles = @event.roles.all(:include => :model)
       render :action => :edit
     end
   end
