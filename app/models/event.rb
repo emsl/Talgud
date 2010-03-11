@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
 
   has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:event_manager]}
   has_many :managers, :through => :manager_roles, :source => :user
+  has_many :event_participants
 
   belongs_to :event_type
   belongs_to :manager, :class_name => 'User', :foreign_key => :manager_id
@@ -16,6 +17,7 @@ class Event < ActiveRecord::Base
   belongs_to :location_address_settlement, :class_name => 'Settlement', :foreign_key => :location_address_settlement_id
   has_many :roles, :as => :model
   has_and_belongs_to_many :languages
+  
   
   validates_uniqueness_of :code, :scope => :account_id
 
@@ -101,13 +103,10 @@ class Event < ActiveRecord::Base
     m
   end
   
-  # Returns list of users who have permissions to manage this event.
-  # def managers
-  #   self.roles.all(:conditions => {:role => Role::ROLE[:event_manager]}).collect{ |r| r.user }
-  # end
-
   def vacancies
-    self.max_participants
+    v = self.max_participants - self.current_participants
+    return 0 if v < 0 
+    v
   end
 
   private
