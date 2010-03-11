@@ -1,0 +1,37 @@
+<div class="container-left">
+  <%= render 'events/submenu' %>
+</div>
+<div class="container-right">
+  <h1>Registreeru talgutele. Hullult kõva</h1>
+
+  <% semantic_form_for :event_participant, @event_participant, :url => event_participations_path(@event) do |f| %>
+    <% f.inputs do %>
+      <%= f.input :firstname %>
+      <%= f.input :lastname %>
+      <%= f.input :email %>
+      <%= f.input :phone %>
+      <%= f.input :notes, :input_html => {:rows => 3} %>
+      <%= f.input :tellafriend_emails, :input_html => {:rows => 3} %>
+    <% end %>
+    <%= f.buttons %>
+  <% end %>
+  
+  <script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function() {
+        var bubble = document.createElement('div');
+        $(bubble).attr('class', 'bubble').html('<div class="bubble-arrow"></div><div class="bubble-inner"></div>');
+
+        displayHint = function(list_item) {
+            var hint = $(list_item).find('p.inline-hints')
+            if (hint.length > 0) {
+                $(bubble).find('.bubble-inner').html($(hint[0]).html());
+                list_item.append($(bubble));
+            }
+        }
+
+        $('form.formtastic fieldset li input, form.formtastic fieldset li select, form.formtastic fieldset li textarea').focus(function() {
+            displayHint($(this).parent('li'));
+        });
+    });
+  </script>
+</div>

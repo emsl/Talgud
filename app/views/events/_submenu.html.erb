@@ -2,10 +2,10 @@
   <div class="submenu-border">
   <ul>
     <% if current_user %>
-    <li<%= ' class="active"' if %w{create new}.include?(action_name) %>><%= link_to t('.register'), new_event_path %><span class="arrow"></span></li>
+    <li<%= ' class="active"' if %w{create new}.include?(action_name) and request.path_parameters[:controller] == 'events' %>><%= link_to t('.register'), new_event_path %><span class="arrow"></span></li>
     <li<%= ' class="active"' if %w{my}.include?(action_name) %>><%= link_to t('.my_events'), my_events_path %><span class="arrow"></span></li>
     <% else %>
-    <li<%= ' class="active"' if %w{create new}.include?(action_name) %>><%= link_to t('.register'), signup_path %><span class="arrow"></span></li>
+    <li<%= ' class="active"' if %w{create new}.include?(action_name) and request.path_parameters[:controller] == 'events' %>><%= link_to t('.register'), signup_path %><span class="arrow"></span></li>
     <% end %>
     <li<%= ' class="active"' if action_name == 'index' %>><%= link_to t('.show_all'), events_path %><span class="arrow"></span></li>
     <li<%= ' class="active"' if action_name == 'latest' %>><%= link_to t('.latest'), latest_events_path %><span class="arrow"></span></li>

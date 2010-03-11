@@ -7,6 +7,8 @@ class EventParticipant < ActiveRecord::Base
   belongs_to :event
   belongs_to :account
   
+  validates_presence_of :firstname, :lastname, :email, :phone
+  
   def parent?
     self.event_participant.nil?
   end
