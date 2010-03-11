@@ -12,4 +12,8 @@ class EventParticipant < ActiveRecord::Base
   def parent?
     self.event_participant.nil?
   end
+  
+  def recommend_emails
+    []
+  end
 end
