@@ -13,7 +13,7 @@ class Admin::UsersController < Admin::AdminController
 
   def show
     @roles = @user.roles.all(:include => :model)
-  end  
+  end
 
   def edit
     @roles = @user.roles.all(:include => :model)
