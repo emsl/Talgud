@@ -28,4 +28,5 @@ class EventParticipant < ActiveRecord::Base
       self.event.lock!
       self.event.current_participants = self.event.event_participants.size
     end
+  end
 end
