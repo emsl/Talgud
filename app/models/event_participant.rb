@@ -34,8 +34,8 @@ class EventParticipant < ActiveRecord::Base
 
   def recalculate_event_current_participants
     self.transaction do
-      self.event.lock!
-      self.event.current_participants = self.event.event_participants.size
+      event.lock!
+      event.update_attribute(:current_participants, event.event_participants.count)
     end
   end
 end

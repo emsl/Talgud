@@ -1,0 +1,7 @@
+<div class="colorbox colorbox-blue" style="width: 187px; margin-top: 10px;"><div class="colorbox-border">
+  <ul class="submenu">
+    <li<%= ' class="active"' if action_name == 'show' %>><%= link_to t('.event_info'), event_path(@event) %></li>
+    <li<%= ' class="active"' if action_name == 'index' %>><%= link_to t('.show_participants'), event_participations_path(@event) %></li>
+    <li<%= ' class="active"' if action_name == 'edit' %>><%= link_to t('.edit_event'), edit_event_path(@event) %></li>
+  </ul>
+</div></div>

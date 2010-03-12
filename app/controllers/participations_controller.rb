@@ -2,6 +2,10 @@ class ParticipationsController < ApplicationController
   
   before_filter :load_event
   
+  def index
+    @event_participants = @event.event_participants
+  end
+  
   def new
     @event_participant = EventParticipant.new(:event => @event)
   end
