@@ -13,7 +13,7 @@ class ParticipationsController < ApplicationController
     if @event_participant.valid?
       @event_participant.save
       
-      Mailers::EventMailer.deliver_participant_notification(@event, @event_participant)
+      Mailers::EventMailer.deliver_participant_notification(@event, @event_participant, 'URL')
       @event.managers.each do |manager|
         Mailers::EventMailer.deliver_manager_paricipation_notification(@event, manager, @event_participant)
       end

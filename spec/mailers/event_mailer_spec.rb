@@ -30,11 +30,53 @@ describe Mailers::EventMailer, :type => :view do
   end
   
   describe 'participant_notification' do
+    before(:each) do
+      @event_participant = Factory(:event_participant)
+      @edit_url = event_participation_url(@event_participant.event, @event_participant)
+      @event_url = event_url(@event_participant.event)
+      @mail = Mailers::EventMailer.create_participant_notification(@event_participant, @event_url, @edit_url)
+    end
+    
+    it 'should contain event info and link to edit participation info' do
+      @mail.body.should include(@event_participant.event.name)
+      @mail.body.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.email)
+      @mail.body.should include(@event_participant.phone)
+      @mail.body.should include(@event_url)
+      @mail.body.should include(@edit_url)
+    end
   end
   
-  describe 'manager_paricipation_notification' do
+  describe 'manager_participation_notification' do
+    before(:each) do
+      @event_participant = Factory(:event_participant)
+      @event_participations_url = event_participations_url(@event_participant.event)
+      @event_manager = Factory(:user)
+      @mail = Mailers::EventMailer.create_manager_participation_notification(@event_manager, @event_participant, @event_participations_url)
+    end
+    
+    it 'should contain event and participant infor and link to participants page' do
+      @mail.subject.should include(@event_participant.event.name)
+      @mail.subject.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.email)
+      @mail.body.should include(@event_participant.phone)
+      @mail.body.should include(@event_participations_url)
+    end
   end
   
   describe 'tell_friend_notification' do
+    before(:each) do
+      @event_participant = Factory(:event_participant)
+      @event_url = event_url(@event_participant.event)
+      @mail = Mailers::EventMailer.create_tell_friend_notification('test@example.com', @event_participant, @event_url)
+    end
+    
+    it 'should countain user name, event name and link to event page' do
+      @mail.subject.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.event.name)
+      @mail.body.should include(@event_url)
+    end
   end
 end

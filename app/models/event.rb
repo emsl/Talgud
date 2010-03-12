@@ -104,9 +104,7 @@ class Event < ActiveRecord::Base
   end
   
   def vacancies
-    v = self.max_participants - self.current_participants
-    return 0 if v < 0 
-    v
+    [self.max_participants - self.current_participants, 0].max
   end
 
   private

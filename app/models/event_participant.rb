@@ -17,8 +17,17 @@ class EventParticipant < ActiveRecord::Base
     self.event_participant.nil?
   end
 
+  def participant_name
+    [firstname, lastname] * ' '
+  end
+
   def recommend_emails
-    []
+    res = tellafriend_emails.split(',').inject(Array.new) do |memo, item|
+      item = item.strip
+      memo << item if item =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/
+      memo
+    end
+    res.uniq
   end
 
   private
