@@ -298,9 +298,8 @@ et:
       additional_questions: "Lisaküsimused, ei avalikustata"
     map:
       show_link: "Vaata lähemalt &raquo;"
-    show: 
+    show:
       more_events_in_area: Veel talguid samas piirkonnas
-      edit_event: Muuda talgute andmeid
       register_to_this_event: Registreeri end sellele talgule!
       registration_starts_at: Talgutele registreerumine algab 1. aprillil
       sponsor_this_event: Toeta neid talguid!
@@ -311,6 +310,10 @@ et:
       show_all: Näita kõiki
       latest: Viimati lisatud
       show_on_map: Näita kaardil
+    submenu_edit:
+      event_info: Talgute info
+      edit_event: Muuda talguid
+      show_participants: Registreerunud
   formtastic:
     labels:
       county:
@@ -503,6 +506,8 @@ et:
     create:
       notice: "Tänan, et registreerusid talgutele. Oleme andmed kätte saanud ning saatsime Sinu e-posti aadressile lingi, kus saad vajadusel hiljem registreerumise andmeid muuta."
       error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
+    index:
+      empty: Sellele talgule ei ole veel registreerunuid.
     new:
       intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
   password_reminders:

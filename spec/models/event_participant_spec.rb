@@ -86,3 +86,13 @@ describe EventParticipant, 'participant_name' do
     @event_participant.participant_name.should eql('John Smith')
   end
 end
+
+describe EventParticipant, 'participant counting' do
+  it 'should update number of participants associated with event after new participant has been registered' do
+    event = Factory(:event, :max_participants => 10)
+    lambda {
+      Factory(:event_participant, :event => event)
+      Factory(:event_participant, :event => event)
+    }.should change(event, :current_participants).by(2)
+  end
+end

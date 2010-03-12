@@ -35,3 +35,12 @@ describe ParticipationsController, 'create' do
     response.should render_template(:new)
   end
 end
+
+describe ParticipationsController, 'index' do
+  it 'should assign list of participants associated with event' do
+    ep = Factory(:event_participant)
+    get :index, {:event_id => ep.event.url}
+    
+    assigns[:event_participants].should include(ep)
+  end
+end

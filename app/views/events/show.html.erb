@@ -1,7 +1,9 @@
 <div class="container-left">
   <%= render 'submenu' %>
   
-  <% unless @nearby_events.empty? %>
+  <% if permitted_to?(:edit, @event) %>
+  <%= render 'submenu_edit' %>
+  <% elsif not @nearby_events.empty? %>
   <div class="container-left-inner">
     <div class="bluebox-border"><h2 class="colored bg-blue"><%= t('.more_events_in_area') %></h2></div>
     <ul class="border-list">
@@ -17,10 +19,6 @@
   <div class="clearfix">
     <div class="object-left">
       <h1><%=h @event.name %> <span class="object-type"><%=h @event.event_type.name %></span></h1>
-      
-      <% if permitted_to?(:edit, @event) %>
-      <%= link_to t('.edit_event'), edit_event_path(@event) %><br/><br/>
-      <% end %>
       
       <div class="object-location">
         <a href="#map" id="map_link"><%= @event.location_address %></a>
@@ -45,6 +43,10 @@
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_job_description') %></td>
         <td><%=h @event.meta_job_description %></td>
+      </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.max_participants') %></td>
+        <td><%=h @event.max_participants %></td>
       </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.vacancies') %></td>

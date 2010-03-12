@@ -1,5 +1,6 @@
 <div class="container-left">
   <%= render 'submenu' %>
+  <%= render 'events/submenu_edit' if permitted_to?(:edit, @event) %>
 </div>
 <div class="container-right">
   <h1><%= t('.title') %></h1>

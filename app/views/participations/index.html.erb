@@ -1,0 +1,22 @@
+<div class="container-left">
+  <%= render 'events/submenu' %>
+  <%= render 'events/submenu_edit' if permitted_to?(:edit, @event) %>
+</div>
+<div class="container-right">
+  <h1><%= @event.name %></h1>
+  
+  <% unless @event_participants.empty? %>
+  <table border="1">
+  <% for event_participant in @event_participants %>
+  <tr>
+    <td><%= event_participant.participant_name %></td>
+    <td><%= event_participant.phone %></td>
+    <td><%= event_participant.email %></td>
+    <td><%= event_participant.notes %></td>
+  </tr>
+  <% end %>
+  </table>
+  <% else %>
+  <%= t('.empty') %>
+  <% end %>
+</div>
