@@ -1,6 +1,7 @@
 class ParticipationsController < ApplicationController
   
   before_filter :load_event
+  before_filter :load_event_participant, :only => [:show, :update]
   
   def index
     @event_participants = @event.event_participants
@@ -29,8 +30,23 @@ class ParticipationsController < ApplicationController
       flash[:notice] = t('participations.create.notice')
       redirect_to event_path(@event)
     else
-      flash[:error] = t('participations.create.error')
+      flash.now[:error] = t('participations.create.error')
       render :new
+    end
+  end
+  
+  def show
+  end
+  
+  def update
+    @event_participant.attributes = params[:event_participant]
+    if @event_participant.valid?
+      @event_participant.save
+      flash[:notice] = t('participations.update.notice')
+      redirect_to event_path(@event)
+    else
+      flash.now[:error] = t('participations.update.error')
+      render :show
     end
   end
   
@@ -38,5 +54,13 @@ class ParticipationsController < ApplicationController
   
   def load_event
     @event = Event.find_by_url(params[:event_id])
+  end
+  
+  def load_event_participant
+    if id = UrlStore.decode(params[:id])
+      @event_participant = EventParticipant.find(id)
+    else
+      redirect_to event_path(@event)
+    end
   end
 end

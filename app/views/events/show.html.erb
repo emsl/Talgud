@@ -102,7 +102,7 @@
       </tr>
       <tr>
         <td></td>
-        <td><div class="object-detail-time"><%= t('.starts_at') %> <%= duration_times(@event) %></div></td>
+        <td><div class="object-detail-time"><%= t('.starts_at', :date => duration_dates(@event), :time => duration_times(@event)) %></div></td>
       </tr>
     </table> 
   </div>

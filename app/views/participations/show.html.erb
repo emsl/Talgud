@@ -4,11 +4,7 @@
 <div class="container-right">
   <h1><%= @event.name %></h1>
 
-  <p style="margin-bottom: 20px;">
-    <%= t('.intro') %>
-  </p>
-
-  <% semantic_form_for :event_participant, @event_participant, :url => event_participations_path(@event) do |f| %>
+  <% semantic_form_for :event_participant, @event_participant, :url => event_participation_path(@event, UrlStore.encode(@event_participant.id)), :html => {:method => :put} do |f| %>
     <%= render 'form' %>
     <% f.buttons do %>
       <%= f.commit_button :participate %>
