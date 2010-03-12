@@ -15,6 +15,8 @@ Rails::Initializer.run do |config|
   config.gem 'will_paginate'
   config.gem 'searchlogic'
   config.gem 'url_store'
+  config.gem 'fastercsv'
+  #config.gem 'spreadsheet-excel'
   
   config.frameworks -= [:active_resource]
 

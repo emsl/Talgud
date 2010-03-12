@@ -2,11 +2,65 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ParticipationsController do
   describe 'index' do
-    it 'should assign list of participants associated with event' do
+    it 'should be denied for public users and redirect to home' do
       ep = Factory(:event_participant)
-      get :index, {:event_id => ep.event.url}
+      get :index, {:event_id => ep.event.url}      
+      response.should redirect_to(root_path)
+    end
+    
+    it 'should assign list of participants associated with event to regional manager' do
+      ep = Factory(:event_participant)
+
+      manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(manager)
+      Role.grant_role(Role::ROLE[:regional_manager], manager, ep.event.location_address_county)
       
+      get :index, {:event_id => ep.event.url}      
+      assigns[:event_participants].should include(ep)      
+    end
+
+    it 'should be denied to see list of participants associated with event to different regional manager' do
+      ep = Factory(:event_participant)
+
+      manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(manager)
+      Role.grant_role(Role::ROLE[:regional_manager], manager, Factory(:county))
+      
+      get :index, {:event_id => ep.event.url}      
+      assigns[:event_participants].should_not include(ep)      
+    end
+    
+    it 'should assign list of participants associated with event to account manager' do
+      ep = Factory(:event_participant)
+
+      manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(manager)
+      Role.grant_role(Role::ROLE[:account_manager], manager, Account.current)
+      
+      get :index, {:event_id => ep.event.url}      
+      assigns[:event_participants].should include(ep)      
+    end
+
+    it 'should assign list of participants associated with event to event manager' do
+      manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(manager)
+      ep = Factory(:event_participant)
+      Role.grant_role(Role::ROLE[:event_manager], manager, ep.event)
+      
+      get :index, {:event_id => ep.event.url}      
       assigns[:event_participants].should include(ep)
+    end
+
+    it 'should not assign list of participants associated with event to different event manager' do
+      manager = Factory.create(:user)
+      manager2 = Factory.create(:user)
+      
+      activate_authlogic and UserSession.create(manager)
+      ep = Factory(:event_participant)
+      Role.grant_role(Role::ROLE[:event_manager], manager2, ep.event)
+      
+      get :index, {:event_id => ep.event.url}      
+      assigns[:event_participants].should_not include(ep)
     end
   end
   
