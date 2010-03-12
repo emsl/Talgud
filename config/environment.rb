@@ -14,6 +14,7 @@ Rails::Initializer.run do |config|
   config.gem 'newrelic_rpm'
   config.gem 'will_paginate'
   config.gem 'searchlogic'
+  config.gem 'url_store'
   
   config.frameworks -= [:active_resource]
 

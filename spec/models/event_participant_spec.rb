@@ -51,3 +51,38 @@ describe EventParticipant, 'create' do
     @event.current_participants.should eql(3)
   end
 end
+
+describe EventParticipant, 'recommend_emails' do
+  before(:each) do
+    @ep = Factory(:event_participant)
+  end
+  
+  it 'should return array of emails stored in tellafriend_emails field' do
+    @ep.tellafriend_emails = 'test@example.com'
+    @ep.recommend_emails.should eql(['test@example.com'])
+    
+    @ep.tellafriend_emails = 'test@example.com,test@example.com'
+    @ep.recommend_emails.should eql(['test@example.com'])
+    
+    @ep.tellafriend_emails = 'test1@example.com,test2@example.com'
+    @ep.recommend_emails.should include('test1@example.com')
+    @ep.recommend_emails.should include('test2@example.com')
+    
+    @ep.tellafriend_emails = 'test1@example.com, test2@example.com'
+    @ep.recommend_emails.should include('test1@example.com')
+    @ep.recommend_emails.should include('test2@example.com')
+    
+    @ep.tellafriend_emails = 'not_an_email'
+    @ep.recommend_emails.should be_empty
+    
+    @ep.tellafriend_emails = 'test@example.com, not_an_email'
+    @ep.recommend_emails.should eql(['test@example.com'])
+  end
+end
+
+describe EventParticipant, 'participant_name' do
+  it 'should glue firstname and lastname together' do
+    @event_participant = Factory(:event_participant, :firstname => 'John', :lastname => 'Smith')
+    @event_participant.participant_name.should eql('John Smith')
+  end
+end

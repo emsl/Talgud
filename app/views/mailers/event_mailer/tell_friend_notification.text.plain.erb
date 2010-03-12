@@ -1,5 +1,5 @@
-Sinu sõber NN kutsub Sind osalema Teeme Ära talgupäeval 1. mail 2010.
+<%= t('.intro', :name => @event_participant.participant_name) %>
 
-NN registreeris ennast just talgutele: TALGUTE NIMI (väli 2).
+<%= t('.event_registrant_info', :name => @event_participant.participant_name, :event_name => @event_participant.event.name) %>.
 
-Vaata lähemalt kodulehelt  HYPERLINK "http://www.teemeara.ee" www.teemeara.ee (siia täpsem talgumooduli URL) ja leia Sulle meelepärased talgud.
+<%= t('.event_info', :event_url => @event_url) %>
