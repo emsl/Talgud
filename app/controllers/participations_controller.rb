@@ -13,12 +13,13 @@ class ParticipationsController < ApplicationController
     if @event_participant.valid?
       @event_participant.save
       
-      Mailers::EventMailer.deliver_participant_notification(@event, @event_participant, 'URL')
+      # Deliver load of emails to all parties that might be interested in such participation
+      Mailers::EventMailer.deliver_participant_notification(@event_participant, event_url(@event), event_participation_url(@event, UrlStore.encode(@event_participant.id)))
       @event.managers.each do |manager|
-        Mailers::EventMailer.deliver_manager_paricipation_notification(@event, manager, @event_participant)
+        Mailers::EventMailer.deliver_manager_participation_notification(manager, @event_participant, event_participations_url(@event))
       end
       @event_participant.recommend_emails.each do |email|
-        Mailers::EventMailer.deliver_tell_friend_notification(email, @event, @event_participant)
+        Mailers::EventMailer.deliver_tell_friend_notification(email, @event_participant, event_url(@event))
       end
       
       flash[:notice] = t('participations.create.notice')

@@ -23,3 +23,5 @@ Rails::Initializer.run do |config|
 end
 
 ActionController::Dispatcher.middleware.use Rack::JSONP
+
+UrlStore.defaults = {:secret => 'gBtMF3qmpXKyDHUFnW14CxYoHspADjntqicwNCl+acuwv+8WpnZkIr/ukv2gtT+4YQQN+vV8dD8b56ytmCoLOQ=='}
