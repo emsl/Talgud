@@ -5,7 +5,10 @@ class Admin::EventsController < Admin::AdminController
   
   def index
     @search = Event.can_manage(@current_user).search(params[:search]).search(params[:order])
-    @events = @search.paginate(:page => params[:page])
+    respond_to do |format|
+      format.html { @events = @search.paginate(:page => params[:page]) }
+      format.xml  { render :xml => @search.all }
+    end    
   end
   
   def map
