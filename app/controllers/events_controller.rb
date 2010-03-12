@@ -3,14 +3,14 @@ class EventsController < ApplicationController
   filter_resource_access :additional_collection => [:my, :map, :latest], :attribute_check => true
 
   def index
-    @events = Event.published(
-    :order => 'begins_at ASC', :conditions => filter_from_params,
+    @search = Event.published(
+    :order => 'begins_at ASC', 
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-    )
+    ).search(filter_from_params)
     
     respond_to do |format|
-      format.html { @events = @events.paginate(:page => params[:page]) }
-      format.xml  { render :xml => @events }
+      format.html { @events = @search.paginate(:page => params[:page]) }
+      format.xml  { render :xml => @search.all }
     end
   end
 

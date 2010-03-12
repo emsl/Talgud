@@ -17,6 +17,10 @@ class Admin::EventsController < Admin::AdminController
   
   def show
     @roles = @event.roles.all(:include => :model)
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @event }
+    end    
   end
   
   def edit
