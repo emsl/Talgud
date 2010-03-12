@@ -22,12 +22,13 @@
     <td><%= f.input :code_like, :label => false, :input_html => {:size => 10} %></td>
     <td colspan="2"><%= f.input :event_type_id, :as => :select, :collection => EventType.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %></td>
     <td><%= f.input :max_participants, :label => false, :input_html => {:size => 5} %></td>
+    <td><%= f.input :current_participants, :label => false, :input_html => {:size => 5} %></td>
     <td><%= f.input :location_address_county_id, :collection => County.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %></td>
     <td colspan="2"><%= f.input :status, :as => :select, :collection => Event::STATUS.keys.collect{ |s| [t("formtastic.labels.event.statuses.#{s}"), s.to_s] }, :include_blank => true, :label => false %></td>
     <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
     <% end %>
   </tr>  
-  <%= filter_notify(9) %>
+  <%= filter_notify(10) %>
   <% for event in @events %>
   <tr>
     <td><%=h truncate(event.name) %></td>
