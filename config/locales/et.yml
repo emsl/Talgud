@@ -303,7 +303,7 @@ et:
       register_to_this_event: Registreeri end sellele talgule!
       registration_starts_at: Talgutele registreerumine algab 1. aprillil
       sponsor_this_event: Toeta neid talguid!
-      starts_at: Talgud toimuvad kell
+      starts_at: "Talgud toimuvad {{date}} kell {{time}}"
     submenu:
       register: Registreeri talgud
       my_events: Minu talgud
@@ -510,6 +510,9 @@ et:
       empty: Sellele talgule ei ole veel registreerunuid.
     new:
       intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
+    update:
+      notice: "Registreerumise andmed on uuendatud"
+      error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
   password_reminders:
     create:
       notice: Uus salasõna saadeti sulle e-mailile
