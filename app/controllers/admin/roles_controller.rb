@@ -1,13 +1,14 @@
 class Admin::RolesController < Admin::AdminController
-  
+
   filter_resource_access :attribute_check => true
   filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
-  
+
   before_filter :load_target_model, :except => :index
 
   def index
     @search = Role.with_permissions_to(:manage, :context => :admin_users).search(params[:search]).search(params[:order])
     @roles = @search.paginate(:page => params[:page])
+    @target_model = Role.new
   end
 
   def new
@@ -30,7 +31,11 @@ class Admin::RolesController < Admin::AdminController
   def destroy
     @role.destroy
     flash[:notice] = t('admin.roles.destroy.notice')
-    redirect_to new_admin_role_path(:model_type => @target_model.class.name, :model_id => @target_model)
+    if params[:model_type] == 'Role'
+      redirect_to admin_roles_path
+    else
+      redirect_to new_admin_role_path(:model_type => @target_model.class.name, :model_id => @target_model)
+    end
   end
 
   protected
@@ -40,14 +45,15 @@ class Admin::RolesController < Admin::AdminController
     type = params[:model_type] if params[:model_type]
 
     @target_model =
-      # TODO: find with permissions_to
-      case type
-      when 'County' then County.find(id)
-      when 'Settlement' then Settlement.find(id)
-      when 'Municipality' then Municipality.find(id)      
-      when 'Account' then Account.with_permissions_to(:read, :context => :admin_accounts).find(id)      
-      when 'Event' then Event.find_by_url(id)      
-      end
+    # TODO: find with permissions_to
+    case type
+    when 'County' then County.find(id)
+    when 'Settlement' then Settlement.find(id)
+    when 'Municipality' then Municipality.find(id)
+    when 'Account' then Account.with_permissions_to(:read, :context => :admin_accounts).find(id)
+    when 'Event' then Event.find_by_url(id)
+    when 'Role' then Role.find(params[:id]).model
+    end
 
     if @target_model
       @role_symbols = @target_model.class.try(:class_role_symbols)

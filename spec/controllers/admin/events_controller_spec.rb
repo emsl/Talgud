@@ -156,7 +156,17 @@ describe Admin::EventsController do
       end
     end
     
-    it 'should show event details if user is regional manager'
+    it 'should show event details if user is regional manager' do
+      county = Factory(:county)
+      regional_manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(regional_manager)
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
+
+      event = Factory.create(:event, :location_address_county => county)
+      get :show, {:id => event.id}
+      response.should be_success
+      assigns[:event].should eql(event)
+    end
 
     it 'should be denied for public users' do
       another_user = Factory.create(:user)
@@ -171,22 +181,48 @@ describe Admin::EventsController do
       activate_authlogic and UserSession.create(user)
       event = Factory(:event, :status => Event::STATUS[:new], :manager => user)
 
-      get :show, {:id => event.id}
-      response.should redirect_to(admin_login_path)
+      proc { get :show, {:id => event.id} }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
   describe 'update' do
-    it 'should update event if user is account manager'
+    it 'should update event if user is account manager' do
+      account_manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(account_manager)
+      Role.grant_role(Role::ROLE[:account_manager], account_manager, Account.current)
 
-    it 'should update event if user is regional manager'
+      event = Factory.create(:event)
+      post :update, {:id => event.id, :event => event.attributes}
+      response.should redirect_to(admin_event_path(event.id))      
+    end
 
-    it 'should be denied to update event if user is different regional manager'
+    it 'should update event if user is regional manager' do
+      county = Factory(:county)
+      regional_manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(regional_manager)
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
+
+      event = Factory.create(:event, :location_address_county => county)
+      post :update, {:id => event.id, :event => event.attributes}
+      response.should redirect_to(admin_event_path(event.id))
+    end
+
+    it 'should be denied to update event if user is different regional manager' do
+      county = Factory(:county)
+      county2 = Factory(:county)
+      
+      regional_manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(regional_manager)
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
+
+      event = Factory.create(:event, :location_address_county => county2)
+      proc { post :update, {:id => event.id, :event => event.attributes} }.should raise_error(ActiveRecord::RecordNotFound)
+    end
 
     it 'should be denied for unauthorized users' do
       user = Factory.create(:user)
       event = Factory(:event, :status => Event::STATUS[:new], :manager => user)
-      post :update, {:id => event.url, :event => event.attributes}
+      post :update, {:id => event.id, :event => event.attributes}
       response.should redirect_to(admin_login_path)
     end
   end
