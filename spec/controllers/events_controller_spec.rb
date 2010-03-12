@@ -32,6 +32,20 @@ describe EventsController do
       assigns[:events].should include(e1, e2)
       assigns[:events].should_not include(e3)
     end
+
+    it 'should filter and list events in xml format' do
+      e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type))
+      e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
+      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, :event_type => Factory.create(:event_type))
+      
+      get :index, {:format => 'xml', :county => e2.location_address_county.id, :event_type => e2.event_type.id}
+      response.content_type.should eql('application/xml')
+      response.should have_tag('events') do
+        with_tag('event') do
+          with_tag('code', e2.code)
+        end
+      end
+    end
   end
 
   describe 'new' do
