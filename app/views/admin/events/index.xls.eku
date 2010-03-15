@@ -30,8 +30,6 @@ sheet1.row(1).concat [t('formtastic.labels.event.code'),
     e.meta_subject_heritage_number, t("formtastic.labels.event.statuses.#{e.status}")    
 end
 
-# we can add some formatting using Spreadsheet::Format object
-
 title_format = Spreadsheet::Format.new(:color => :blue, :weight => :bold, :size => 18)
 sheet1.row(0).set_format(0, title_format)
 

@@ -9,7 +9,8 @@ class Admin::EventParticipantsController < Admin::AdminController
     respond_to do |format|
       format.html { @event_participants = @search.paginate(:page => params[:page]) }
       format.xml  { render :xml => @search.all }
-      format.csv { @event_participants = @search.all; render_csv("event-participans-#{Time.now.strftime("%Y%m%d")}") }
+      format.csv { @event_participants = @search.all; render_csv("event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}") }
+      format.xls { @event_participants = @search.all}
     end
   end
 
