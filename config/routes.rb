@@ -16,7 +16,9 @@ ActionController::Routing::Routes.draw do |map|
         municipality.resources :settlements
       end
     end
-    admin.resources :events, :collection => {:map => :get}
+    admin.resources :events, :collection => {:map => :get} do |event|
+      event.resources :participations, :controller => :event_participants
+    end
     admin.resources :event_types
     admin.resources :user_sessions
     admin.resources :users

@@ -40,7 +40,7 @@ authorization do
 
   role :account_manager do
     includes :guest
-    has_permission_on [:admin_roles, :admin_counties, :admin_event_types, :admin_municipalities, :admin_settlements, :admin_users, :admin_languages, :admin_events], :to => [:manage, :map] do
+    has_permission_on [:admin_roles, :admin_counties, :admin_event_types, :admin_municipalities, :admin_settlements, :admin_users, :admin_languages, :admin_events, :admin_event_participants], :to => [:manage, :map] do
     end
     has_permission_on [:admin_accounts], :to => [:manage] do
       if_attribute :roles => {:user => contains {user}, :role => Role::ROLE[:account_manager]}

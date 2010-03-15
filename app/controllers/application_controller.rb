@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging :password
 
-  rescue_from Authorization::NotAuthorized do |exception|
-    permission_denied
-  end
+  # rescue_from Authorization::NotAuthorized do |exception|
+  #   permission_denied
+  # end
 
   protected
 

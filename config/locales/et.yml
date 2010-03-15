@@ -38,6 +38,10 @@ et:
               pick_at_least_one: vali nimekirjast vähemalt üks keel
             end_time:
               must_be_after_begin_time: peab olema hilisem algusajast
+        event_participant:
+          attributes:
+            firstname:
+              no_vacancies: Nendele talgutele rohkem vabu kohti ei ole
     models:
       account: konto
       county: maakond
@@ -48,6 +52,7 @@ et:
       settlement: asula
       user: kasutaja
       role: roll
+      event_participant: osalemine
   admin:
     common:
       created_at: Lisatud
@@ -55,11 +60,16 @@ et:
       logged_in: Sisse loginud kasutaja
       title: Talgute admin
       view: Vaata
+      destroy: Kustuta
+      destroy_confirmation: Oled Sa ikka kustutamises kindel?
       logout: Logi välja
       search: Otsi
       apply_filter: Filtreeri
       filter_applied: Vaatele on rakendatud filter.
       clear_filter: Tühista filter
+      export_csv: Salvesta CSV
+      export_excel: Salvesta Excel
+      export_xml: XML
     counties:
       create:
         notice: Maakonna andmed on lisatud
@@ -116,6 +126,7 @@ et:
         title: Talgud
         edit_role: Muuda haldureid
         add_role: Lisa haldur
+        show_partipations: Registreerunud
       map:
         title: Talgute kaart
         show: Vaata
@@ -126,6 +137,7 @@ et:
         roles: Talgujuhid
       edit:
         roles: Talgujuhid
+        title: Muuda talguid
     municipalities:
       create:
         notice: Omavalitsuse andmed on lisatud
@@ -220,6 +232,25 @@ et:
       update:
         notice: Talgu liigi andmed on uuendatud
         error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+    event_participants:
+      create:
+        notice: Osaleja andmed on lisatud
+        error: Osaleja lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+      destroy:
+        notice: Osaleja on kustutatud
+        error: Osaleja kustutamine ebaõnnestus
+      edit:
+        title: "Talgutele '{{event_name}}' registreeritud osaleja muutmine"
+      index:
+        add_participant: Lisa talgutel osaleja
+        title: "Talgutele '{{event_name}}' registreeritud osalejad"
+      new:
+        title: Talgutel osaleja lisamine
+      update:
+        notice: Talgutel osaleja andmed on uuendatud
+        error: Talgutel osaleja andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
+      show:
+        title: "Talgutele '{{event_name}}' registreeritud osaleja"
     user_sessions:
       new:
         login_submit: Logi sisse
@@ -301,6 +332,7 @@ et:
     show:
       more_events_in_area: Veel talguid samas piirkonnas
       register_to_this_event: Registreeri end sellele talgule!
+      no_vacancies: Kõik kohad on täidetud!
       registration_starts_at: Talgutele registreerumine algab 1. aprillil
       sponsor_this_event: Toeta neid talguid!
       starts_at: "Talgud toimuvad {{date}} kell {{time}}"
@@ -510,6 +542,7 @@ et:
       empty: Sellele talgule ei ole veel registreerunuid.
     new:
       intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
+      no_vacancies: "Nendele talgutele registreerumine on lõppenud, kuna kõik kohad on täidetud"
     update:
       notice: "Registreerumise andmed on uuendatud"
       error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"

@@ -1,0 +1,56 @@
+<h1><%= t('.title', :event_name => @event.name) %></h1>
+
+<div class="textcontent">
+  <%= link_to t('.add_participant'), new_admin_event_participation_path(@event.id) %><br/>
+  <%= link_to t('admin.common.export_xml'), admin_event_participations_path(@event.id, :format => :xml) %><br/>
+  <%= link_to t('admin.common.export_csv'), admin_event_participations_path(@event.id, :format => :csv) %><br/>
+  <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :excel) %>  
+</div>
+
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%= order @search, :by => :firstname, :as => t('formtastic.labels.event_participant.firstname'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :lastname, :as => t('formtastic.labels.event_participant.lastname'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :email, :as => t('formtastic.labels.event_participant.email'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :phone, :as => t('formtastic.labels.event_participant.phone'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :notes, :as => t('formtastic.labels.event_participant.notes'), :params_scope => :order %></th>
+    <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
+  </tr>
+  </thead>
+  <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
+    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
+    <td><%= f.input :firstname_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :lastname_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :email_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :phone_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :notes, :label => false, :input_html => {:size => 20} %></td>
+    <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
+    <% end %>
+  </tr>
+  <%= filter_notify(6) %>  
+  <% for participation in @event_participants %>
+  <tr>
+    <td><%=h participation.firstname %></td>
+    <td><%=h participation.lastname %></td>
+    <td><%=h participation.email %></td>
+    <td><%=h participation.phone %></td>
+    <td><%=h participation.notes %></td>
+    <td class="actions">
+      <% if permitted_to?(:read, :admin_event_participants) %>
+      <%= link_to t('admin.common.view'), admin_event_participation_path(@event.id, participation) %>
+      <% end %>
+      <% if permitted_to?(:edit, :admin_event_participants) %>
+      <%= link_to t('admin.common.edit'), edit_admin_event_participation_path(@event.id, participation) %>
+      <% end %>
+      <% if permitted_to?(:destroy, :admin_event_participants) %>
+      <%= link_to t('admin.common.destroy'), admin_event_participation_path(@event.id, participation), :confirm => t('admin.common.destroy_confirmation'), :method => :delete %>
+      <% end %>
+    </td>
+
+  </tr>
+  <% end %>
+  </table>
+  <%= paginate @event_participants %>
+</div>

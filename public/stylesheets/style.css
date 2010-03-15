@@ -483,95 +483,95 @@ ul.submenu .active .arrow { display: block; }
 .object-type-pink { background: #fbd6d4; border-color: #ef837d; }
 .object-type-gray { background: #f5f5f5; border-color: #d6d6d6; }
               
-              /* object-location */
-                .object-location {
-                  font-size: 20px;
-                  line-height: 24px;
-                  padding-bottom: 10px;
-                }
-                  .object-location a { text-decoration: none;}
-                  .object-location a:hover { text-decoration: underline; }
-              
-              
-              /* object-right */
-                .object-right {
-                  float: right;
-                  width: 302px;
-                  height: 156px;
-                  margin: 0 0 0px 0px;
-                  position: relative;
-                }
-                  .object-right .reg-link {
-                    position: absolute;
-                    top: -50px;
-                    right: 0;
-                    width: 279px;
-                    padding: 106px 0 0 23px;
-                    height: 100px;
-                    background: url('../images/regbg.png') no-repeat;
-                  }
-                    .object-right .reg-link a {
-                      display: block;
-                      width: 261px;
-                      height: 32px;
-                      padding: 13px 0 0;
-                      outline: 0;
-                      color: white;
-                      text-align: center;
-                      text-decoration: none;
-                      font-size: 16px;
-                      font-weight: bold;
-                    }
-                    .object-right .reg-link a:hover {
-                      text-decoration: underline;
-                    }
-                * html .object-right {
-                  margin-right: -3px;
-                }
-              
-              /* object-detail */
-                .object-detail {
-                  background: white;
-                  padding: 20px 10px;
-                  border-left: 1px solid #f0f1f2;
-                  border-right: 1px solid #eff1f2;
-                  border-bottom: 1px solid #d7d9d9;
-                  -moz-border-radius: 5px;
-                  -webkit-border-radius: 5px;
-                  border-radius: 5px;
-                  -moz-box-shadow: 1px 1px 1px #f0f0f0;
-                  -webkit-box-shadow: 0 1px 2px #dedede;
-                  box-shadow: 0 1px 2px #dedede;
-                  margin-top: 15px;
-                }
-                .object-detail table {
-                  margin: 0;
-                  padding: 0;
-                  border-collapse: collapse;
-                  width: 100%;
-              
-                }
-                  .object-detail td {
-                    vertical-align: top;
-                    padding: 10px 10px;
-                  }
-                  .object-detail td.first {
-                    font-size: 16px;
-                    font-weight: bold;
-                    text-align: right;
-                    width: 200px;
-                  }
-                  
-                  .object-detail-time {
-                    float: left;
-                    border: 5px solid #c2d97c;
-                    border-radius: 10px;
-                    -moz-border-radius: 10px;
-                    -webkit-border-radius: 10px;
-                    font-size: 16px;
-                    font-weight: bold;
-                    padding: 8px 13px;
-                  }
+/* object-location */
+.object-location {
+  font-size: 20px;
+  line-height: 24px;
+  padding-bottom: 10px;
+}
+  .object-location a { text-decoration: none;}
+  .object-location a:hover { text-decoration: underline; }
+
+
+/* object-right */
+.object-right {
+  float: right;
+  width: 302px;
+  height: 156px;
+  margin: 0 0 0px 0px;
+  position: relative;
+}
+  .object-right .reg-link {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 279px;
+    padding: 106px 0 0 23px;
+    height: 100px;
+    background: url('../images/regbg.png') no-repeat;
+  }
+    .object-right .reg-link a {
+      display: block;
+      width: 261px;
+      height: 32px;
+      padding: 13px 0 0;
+      outline: 0;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .object-right .reg-link a:hover {
+      text-decoration: underline;
+    }
+* html .object-right {
+  margin-right: -3px;
+}
+
+/* object-detail */
+.object-detail {
+  background: white;
+  padding: 20px 10px;
+  border-left: 1px solid #f0f1f2;
+  border-right: 1px solid #eff1f2;
+  border-bottom: 1px solid #d7d9d9;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 1px 1px 1px #f0f0f0;
+  -webkit-box-shadow: 0 1px 2px #dedede;
+  box-shadow: 0 1px 2px #dedede;
+  margin-top: 15px;
+}
+.object-detail table {
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  width: 100%;
+
+}
+  .object-detail td {
+    vertical-align: top;
+    padding: 10px 10px;
+  }
+  .object-detail td.first {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: right;
+    width: 200px;
+  }
+  
+  .object-detail-time {
+    float: left;
+    border: 5px solid #c2d97c;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 13px;
+  }
                   
 /* Event listing */
 .event_item {

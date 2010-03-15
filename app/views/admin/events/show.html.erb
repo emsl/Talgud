@@ -1,11 +1,14 @@
 <h1><%= @event.name %></h1>
 
 <div class="textcontent">
-  <% if permitted_to?(:edit, :admin_events) %>
   <div style="margin-bottom:10px;">    
-    <%= link_to t('admin.common.edit'), edit_admin_event_path(@event.id) %>
+    <% if permitted_to?(:edit, :admin_events) %>
+    <%= link_to t('admin.common.edit'), edit_admin_event_path(@event.id) %><br/>
+    <% end %>
+    <%= link_to t('admin.common.export_xml'), admin_event_path(@event.id, :format => :xml) %><br/>
+    <%= link_to t('admin.common.export_csv'), admin_event_path(@event.id, :format => :csv) %><br/>
+    <%= link_to t('admin.common.export_excel'), admin_event_path(@event.id, :format => :excel) %>
   </div>
-  <% end %>
 <table>
 <tr>
   <td style="width: 25%;"><b><%= t('formtastic.labels.event.code') %></b></td>

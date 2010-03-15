@@ -1,0 +1,10 @@
+<% semantic_fields_for @event_participant do |f| %>
+<% f.inputs do %>
+  <%= f.input :firstname %>
+  <%= f.input :lastname %>
+  <%= f.input :email %>
+  <%= f.input :phone %>
+  <%= f.input :notes, :input_html => {:rows => 3} %>
+  <%= f.input :tellafriend_emails, :input_html => {:rows => 3} if @event_participant.new_record? %>
+<% end %>
+<% end %>

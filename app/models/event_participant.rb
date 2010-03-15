@@ -12,6 +12,12 @@ class EventParticipant < ActiveRecord::Base
 
   validates_presence_of :firstname, :lastname, :event
   validates_presence_of :email, :phone, :if => :parent?
+  
+  validates_each :event  do |record, attr, value|
+    if record.event.vacancies == 0 
+      record.errors.add :firstname, :no_vacancies
+    end
+  end 
 
   def parent?
     self.event_participant.nil?

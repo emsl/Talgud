@@ -7,7 +7,7 @@ describe EventParticipant, 'validations' do
     @event_participant.should have(1).error_on(:firstname)
     @event_participant.should have(1).error_on(:lastname)
   end
-     
+
   it "should validate presence of email and phone on parent record" do
     @event_participant = Factory.build(:event_participant, :phone => nil, :email => nil)
     @event_participant.should be_invalid
@@ -33,22 +33,32 @@ describe EventParticipant, 'parent' do
   end
 end
 
-describe EventParticipant, 'create' do  
+describe EventParticipant, 'create' do
   it "should update event current participiants count after save" do
     @event = Factory(:event)
     @event.should be_valid
-    
+
     @event_participant = Factory(:event_participant, :event => @event)
     @event_participant.should be_valid
     @event.current_participants.should eql(1)
 
     @event_participant = Factory(:event_participant, :event => @event)
     @event.current_participants.should eql(2)
-    
+
     @event_participant = Factory.build(:event_participant, :event => @event)
     @event.current_participants.should eql(2)
     @event_participant.save!
     @event.current_participants.should eql(3)
+  end
+
+  it "should not create while event vacancies is zero" do
+    @event = Factory(:event, :max_participants => 1)
+    @event_participant = Factory(:event_participant, :event => @event)
+    @event.vacancies.should eql(0)
+    
+    @event_participant = Factory.build(:event_participant, :event => @event)
+    @event_participant.should be_invalid
+    @event_participant.should have(1).error_on(:firstname)
   end
 end
 
@@ -56,25 +66,25 @@ describe EventParticipant, 'recommend_emails' do
   before(:each) do
     @ep = Factory(:event_participant)
   end
-  
+
   it 'should return array of emails stored in tellafriend_emails field' do
     @ep.tellafriend_emails = 'test@example.com'
     @ep.recommend_emails.should eql(['test@example.com'])
-    
+
     @ep.tellafriend_emails = 'test@example.com,test@example.com'
     @ep.recommend_emails.should eql(['test@example.com'])
-    
+
     @ep.tellafriend_emails = 'test1@example.com,test2@example.com'
     @ep.recommend_emails.should include('test1@example.com')
     @ep.recommend_emails.should include('test2@example.com')
-    
+
     @ep.tellafriend_emails = 'test1@example.com, test2@example.com'
     @ep.recommend_emails.should include('test1@example.com')
     @ep.recommend_emails.should include('test2@example.com')
-    
+
     @ep.tellafriend_emails = 'not_an_email'
     @ep.recommend_emails.should be_empty
-    
+
     @ep.tellafriend_emails = 'test@example.com, not_an_email'
     @ep.recommend_emails.should eql(['test@example.com'])
   end

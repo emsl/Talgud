@@ -176,12 +176,13 @@ describe Admin::EventsController do
       response.should redirect_to(admin_login_path)
     end
 
-    it 'should be denied for event manager' do
+    it 'should show event to event manager' do
       user = Factory.create(:user)
       activate_authlogic and UserSession.create(user)
       event = Factory(:event, :status => Event::STATUS[:new], :manager => user)
 
-      proc { get :show, {:id => event.id} }.should raise_error(ActiveRecord::RecordNotFound)
+      get :show, {:id => event.id} 
+      assigns[:event].should eql(event)
     end
   end
 
