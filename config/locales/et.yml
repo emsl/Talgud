@@ -135,6 +135,7 @@ et:
         error: Talgu andmete uuendamisel tekkis viga
       show:
         roles: Talgujuhid
+        title: "Talgud '{{event_name}}'"
       edit:
         roles: Talgujuhid
         title: Muuda talguid

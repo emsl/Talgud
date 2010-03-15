@@ -1,0 +1,26 @@
+__filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"
+
+sheet1 = xls.create_worksheet
+sheet1[0, 0] = t('.title', :event_name => @event.name)
+
+sheet1.row(1).concat [t('formtastic.labels.event.code'), 
+  t('formtastic.labels.event.name'),
+  t('formtastic.labels.event.max_participants'),        
+  t('formtastic.labels.event.current_participants'),        
+  t('formtastic.labels.event.vacancies'),        
+  t('formtastic.labels.event_participant.firstname'),
+  t('formtastic.labels.event_participant.lastname'),
+  t('formtastic.labels.event_participant.email'),
+  t('formtastic.labels.event_participant.phone'),
+  t('formtastic.labels.event_participant.notes')]
+
+@event_participants.each_with_index do |p, i|
+  sheet1.update_row i+2, p.event.code, p.event.name, p.event.max_participants, p.event.current_participants, p.event.vacancies, 
+    p.firstname, p.lastname, p.email, p.phone, p.notes
+end
+
+title_format = Spreadsheet::Format.new(:color => :blue, :weight => :bold, :size => 18)
+sheet1.row(0).set_format(0, title_format)
+
+bold = Spreadsheet::Format.new(:weight => :bold)
+sheet1.row(1).default_format = bold

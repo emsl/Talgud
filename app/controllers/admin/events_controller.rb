@@ -23,6 +23,7 @@ class Admin::EventsController < Admin::AdminController
       format.html
       format.xml  { render :xml => @event }
       format.csv  { render_csv("event-#{@event.code}") }
+      format.xls
     end
   end
 
