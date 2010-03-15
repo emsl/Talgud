@@ -1,0 +1,35 @@
+<h1><%= t('.title', :event_name => @event.name) %></h1>
+
+<div class="textcontent">
+  <% if permitted_to?(:edit, :admin_event_participants) %>
+  <div style="margin-bottom:10px;">    
+    <%= link_to t('admin.common.edit'), edit_admin_event_participation_path(@event.id, @participation) %>
+  </div>
+  <% end %>
+<table>
+<tr>
+  <td style="width: 25%;"><b><%= t('formtastic.labels.event.code') %></b></td>
+  <td><%=h @event.code %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.firstname') %></b></td>
+  <td><%=h @participation.firstname %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.lastname') %></b></td>
+  <td><%=h @participation.lastname %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.email') %></b></td>
+  <td><%=h @participation.email %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.phone') %></b></td>
+  <td><%=h @participation.phone %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.notes') %></b></td>
+  <td><%=h @participation.notes %></td>
+</tr>
+</table>
+</div>

@@ -21,6 +21,7 @@ class Admin::EventsController < Admin::AdminController
     respond_to do |format|
       format.html
       format.xml  { render :xml => @event }
+      format.csv  { render_csv("event-#{@event.code}") }
     end
   end
 
@@ -59,11 +60,17 @@ class Admin::EventsController < Admin::AdminController
       headers["Content-Type"] ||= 'text/csv'
       headers["Content-Disposition"] = "attachment; filename=\"#{filename}\""
     end
+    
+    if @event
+      @events = Array.new
+      @events << @event
+    end
 
     # todo: add column separator to application config
     events_csv = FasterCSV.generate :col_sep => ';' do |csv|
       # header row
       csv << [t('formtastic.labels.event.code'), 
+        t('formtastic.labels.event.name'),
         t('formtastic.labels.event.event_type'),
         t('formtastic.labels.event.location_address_street'),
         t('formtastic.labels.event.meta_aim_description'),
@@ -85,6 +92,7 @@ class Admin::EventsController < Admin::AdminController
       # data rows
       @events.each do |event|
         csv << [event.code,
+          event.name,
           event.event_type.name,
           event.location_address,
           event.meta_aim_description,

@@ -1,5 +1,12 @@
 <h1><%= t('.title') %></h1>
 
+<div class="textcontent">
+  <%= link_to t('admin.common.export_xml'), admin_events_path(:format => :xml) %><br/>
+  <%= link_to t('admin.common.export_csv'), admin_events_path(:format => :csv) %><br/>
+  <%= link_to t('admin.common.export_excel'), admin_events_path(:format => :excel) %>
+</div>
+
+
 <div class="datacontent">
   <table class="datatable">
   <thead>
@@ -36,7 +43,13 @@
     <td><%=h event.event_type.name %></td>    
     <td><%= managers_for_object(event) %></td>
     <td><%=h event.max_participants %></td>
-    <td><%=h event.current_participants %></td>
+    <td>
+      <% if permitted_to?(:read, :admin_event_participants) %>
+      <%= link_to event.current_participants, admin_event_participations_path(event.id) %>
+      <% else %>
+      <%=h event.current_participants %>
+      <% end %>      
+    </td>
     <td><%=h truncate(event.location_address, :size => 20) %></td>
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
     <td><%=h event.created_at.strftime('%d.%m') unless event.created_at.nil? %></td>

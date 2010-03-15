@@ -39,8 +39,8 @@ class Event < ActiveRecord::Base
   named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
   named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}} }
   named_scope :latest, lambda { |count| {:limit => count, :order => 'created_at DESC'} }
-  named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ?)) ',
-     u.id, 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager'] }}
+  named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ? OR (role = ? AND (model_type = ? AND model_id = events.id))))',
+     u.id, 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:name => ' ASC'}
 
@@ -105,6 +105,10 @@ class Event < ActiveRecord::Base
   
   def vacancies
     [self.max_participants - self.current_participants, 0].max
+  end
+
+  def vacancies?
+    self.vacancies > 0
   end
 
   private
