@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :closed => 'closed', :took_place => 'took_place', :adjustment => 'adjustment'}
 
-  has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:event_manager]}
+  has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:roles => {:role => Role::ROLE[:event_manager]}}
   has_many :managers, :through => :manager_roles, :source => :user
   has_many :event_participants
 

@@ -4,7 +4,7 @@ class ParticipationsController < ApplicationController
   before_filter :load_event_participant, :only => [:show, :update]
   
   def index
-    @event_participants = @event.event_participants
+    @event_participants = @event.event_participants.with_permissions_to(:manage, :context => :event_participants)
   end
   
   def new
