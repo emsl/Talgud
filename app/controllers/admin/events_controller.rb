@@ -9,6 +9,7 @@ class Admin::EventsController < Admin::AdminController
       format.html { @events = @search.paginate(:page => params[:page]) }
       format.xml  { render :xml => @search.all }
       format.csv { @events = @search.all; render_csv("events-#{Time.now.strftime("%Y%m%d")}") }
+      format.xls { @events = @search.all }
     end
   end
 
@@ -87,8 +88,7 @@ class Admin::EventsController < Admin::AdminController
         t('formtastic.labels.event.meta_subject_owner'),
         t('formtastic.labels.event.meta_subject_protegee'),
         t('formtastic.labels.event.meta_subject_heritage_number'),
-        t('formtastic.labels.event.status')
-      ]
+        t('formtastic.labels.event.status')]
       # data rows
       @events.each do |event|
         csv << [event.code,

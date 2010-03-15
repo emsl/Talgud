@@ -17,7 +17,7 @@ authorization do
     has_permission_on [:event_participants], :to => [:manage] do
       if_attribute :event => {:managers => contains {user}}
     end
-    
+
     has_permission_on [:events], :to => [:create]
     has_permission_on [:events], :to => [:my, :show, :update] do
       if_attribute :managers => contains {user}
@@ -36,6 +36,8 @@ authorization do
     includes :guest
     has_permission_on [:admin_events], :to => [:manage, :read, :map] do
     end
+    
+    has_permission_on [:admin_event_participants], :to => [:manage]
   end
 
   role :account_manager do

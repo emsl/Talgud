@@ -4,7 +4,7 @@
   <%= link_to t('.add_participant'), new_admin_event_participation_path(@event.id) %><br/>
   <%= link_to t('admin.common.export_xml'), admin_event_participations_path(@event.id, :format => :xml) %><br/>
   <%= link_to t('admin.common.export_csv'), admin_event_participations_path(@event.id, :format => :csv) %><br/>
-  <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :excel) %>  
+  <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :xls) %>  
 </div>
 
 <div class="datacontent">
