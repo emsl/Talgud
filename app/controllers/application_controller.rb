@@ -53,6 +53,11 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     # if params[:locale] is nil then I18n.default_locale will be used
-    I18n.locale = params[:language].to_sym if params[:language]
-  end  
+    if params[:language]
+      I18n.locale = params[:language].to_sym
+      session[:language] = I18n.locale
+    else
+      I18n.locale = session[:language] if session[:language]
+    end
+  end
 end
