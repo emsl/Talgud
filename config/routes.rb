@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :events, :collection => {:my => :get, :map => :get, :latest => :get} do |event|
     event.resources :participations
   end
+  map.event_participation_redirect 'participation/:id', :controller => :participations, :action => :redirect
   map.resources :password_reminders
   map.resources :signups
   map.resources :user_sessions

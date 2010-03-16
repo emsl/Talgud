@@ -157,8 +157,8 @@ describe Admin::RolesController do
       activate_authlogic and UserSession.create(regional_manager)
       event = Factory(:event)
       role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager2, event.location_address_county)      
-      role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, Factory(:event))
-      put :destroy, {:id => role.id, :model_type => event.class.name, :model_id => event.id}
+      role2 = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, Factory(:event))
+      put :destroy, {:id => role.id, :model_type => role.model.class.name, :model_id => role.model.id}
       response.should redirect_to(admin_login_path)  
     end
   end

@@ -1,7 +1,7 @@
 class ParticipationsController < ApplicationController
 
-  before_filter :load_event
-  before_filter :load_event_participant, :only => [:show, :update]
+  before_filter :load_event, :except => :redirect
+  before_filter :load_event_participant, :only => [:show, :update, :redirect]
 
   def index
     @event_participants = @event.event_participants.all
@@ -23,7 +23,7 @@ class ParticipationsController < ApplicationController
       @event_participant.save
 
       # Deliver load of emails to all parties that might be interested in such participation
-      Mailers::EventMailer.deliver_participant_notification(@event_participant, event_url(@event), event_participation_url(@event, UrlStore.encode(@event_participant.id)))
+      Mailers::EventMailer.deliver_participant_notification(@event_participant, event_url(@event), event_participation_redirect_url(UrlStore.encode(@event_participant.id)))
       @event.managers.each do |manager|
         Mailers::EventMailer.deliver_manager_participation_notification(manager, @event_participant, event_participations_url(@event))
       end
@@ -54,6 +54,14 @@ class ParticipationsController < ApplicationController
     end
   end
 
+  def redirect
+    if @event_participant
+      redirect_to(event_participation_path(@event_participant.event, params[:id]))
+    else
+      redirect_to(root_path)
+    end
+  end
+
   private
 
   def load_event
@@ -74,7 +82,11 @@ class ParticipationsController < ApplicationController
     if id = UrlStore.decode(params[:id])
       @event_participant = EventParticipant.find(id)
     else
-      redirect_to event_path(@event)
+      if @event
+        redirect_to event_path(@event) 
+      else
+        redirect_to root_path
+      end
     end
   end
 end

@@ -1,0 +1,996 @@
+et:
+  activerecord:
+    errors:
+      messages:
+        accepted: "peab olema aktsepteeritud"
+        blank: "peab olema sisestatud"
+        confirmation: "ei kattu salasõna kinnitusega"
+        email_missing: "e-posti aadress ei tohi olla tühi"
+        email_taken: "e-posti aadress on juba kasutusel"
+        empty: "peab olema sisestatud"
+        equal_to: "peab olema võrdne {{count}}"
+        even: "peab olema paaris"
+        exclusion: reserveeritud
+        greater_than: "peab olema suurem kui {{count}}"
+        greater_than_or_equal_to: "peab olema suurem võrdne {{count}}"
+        in_past: "peab kuupäeva {{date}} suhtes olema tulevikus"
+        inclusion: "ei ole nimekirjas"
+        invalid: "on vales formaadis"
+        invalid_email: "vigane e-posti aadress"
+        invalid_sec_num: "isikukood ei ole valiidne"
+        less_than: "peab olema väiksem kui {{count}}"
+        less_than_or_equal_to: "peab olema väiksem võrdne {{count}}"
+        not_a_number: "peab olema number"
+        odd: "peab olema paaritu"
+        password_confirmation_do_not_match: "salasõna kordus ei klapi"
+        password_missing: "parool ei tohi olla tühi"
+        password_too_short: "salasõna on liiga lühike"
+        record_invalid: "valideerimine ebaõnnestus: {{errors}}"
+        taken: "{{value}} on juba kasutusel"
+        too_long: "liiga pikk (maksimaalselt {{count}} märki)"
+        too_short: "peab olema vähemalt {{count}} tähemärgi pikkune"
+        wrong_length: "vale pikkus (peab olema vähemalt %d märki)"
+      models:
+        event:
+          attributes:
+            end_time:
+              must_be_after_begin_time: "конечное время должно быть позже начала"
+            languages:
+              pick_at_least_one: "выберите из списка по меньшей мере один язык"
+        event_participant:
+          attributes:
+            firstname:
+              no_vacancies: "Nendele talgutele rohkem vabu kohti ei ole"
+    models:
+      account: "учетная запись"
+      county: уезд
+      event: "полезное дело"
+      event_participant: osalemine
+      event_type: "тип полезного дела"
+      language: язык
+      municipality: самоуправление
+      role: роль
+      settlement: поселение
+      user: пользователь
+  admin:
+    accounts:
+      index:
+        destroy_role: Kustuta
+        destroy_role_confirmation: "Kas sa oled ikka rolli kustutamises kindel?"
+        edit_role: "Muuda administraatoreid"
+        title: Kontod
+    common:
+      apply_filter: Filtreeri
+      clear_filter: "Tühista filter"
+      created_at: Добавлен
+      destroy: Kustuta
+      destroy_confirmation: "Oled Sa ikka kustutamises kindel?"
+      edit: Изменить
+      export_csv: CSV
+      export_excel: Excel
+      export_xml: XML
+      filter_applied: "Vaatele on rakendatud filter."
+      format: Formaat
+      logged_in: "Пользователь в системе"
+      logout: Выйти
+      search: Otsi
+      title: "Администратор полезного дела"
+      view: Просмотреть
+    counties:
+      create:
+        error: "При добавлении данных уезда произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные уезда добавлены"
+      destroy:
+        error: "Удалить данные уезда из системы не удалось"
+        notice: "Данные уезда удалены"
+      edit:
+        title: "Изменение данных уезда"
+      index:
+        add_county: "Добавить уезд"
+        add_role: "Добавить администратора"
+        edit_role: "Изменить администраторов"
+        municipalities: Omavalitsused
+        title: Привилегии
+      new:
+        title: "Добавление уезда"
+      update:
+        error: "При обновлении данных уезда произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные уезда добавлены"
+    event_participants:
+      create:
+        error: "Osaleja lisamisel tekkis viga. Palun kontrolli andmete korrektsust"
+        notice: "Osaleja andmed on lisatud"
+      destroy:
+        error: "Osaleja kustutamine ebaõnnestus"
+        notice: "Osaleja on kustutatud"
+      edit:
+        title: "Talgutele “{{event_name}}” registreeritud osaleja muutmine"
+      index:
+        add_participant: "Lisa talgutel osaleja"
+        title: "Talgutele “{{event_name}}” registreeritud osalejad"
+      new:
+        title: "Talgutel osaleja lisamine"
+      show:
+        title: "Talgutele “{{event_name}}” registreeritud osaleja"
+      update:
+        error: "Talgutel osaleja andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust"
+        notice: "Talgutel osaleja andmed on uuendatud"
+    event_types:
+      create:
+        error: "При добавлении типа полезного дела произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Тип полезного дела добавлен"
+      destroy:
+        error: "Удаление данных типа полезного дела не удалось"
+        notice: "Данные типа полезного дела удалены"
+      edit:
+        title: "Изменение типа полезного дела"
+      index:
+        add_event_type: "Добавить тип полезного дела"
+        title: "Тип полезного дела"
+      new:
+        title: "Добавление типа полезного дела"
+      update:
+        error: "При обновлении данных типа полезного дела произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные типа полезного дела обновлены"
+    events:
+      edit:
+        roles: Talgujuhid
+        title: "Muuda talguid"
+      index:
+        add_role: "Lisa haldur"
+        edit_role: "Muuda haldureid"
+        filter:
+          closed: Закрытые
+          new: Новые
+          published: Опубликованные
+        show_partipations: Registreerunud
+        title: "Полезные дела"
+      map:
+        show: Просмотр
+        title: "Карта полезных дел"
+      show:
+        roles: Talgujuhid
+        title: "Talgud '{{event_name}}'"
+      update:
+        error: "При изменении данных полезного дела произошла ошибка"
+        notice: "Данные полезного дела обновлены"
+    languages:
+      create:
+        error: "При сохранении данных языка произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Языковые настройки сохранены"
+      destroy:
+        error: "Удаление языка из системы не удалось"
+        notice: "Язык удален из системы"
+      edit:
+        title: "Изменение языковых настроек"
+      index:
+        add_language: "Добавить язык"
+        title: Языки
+      new:
+        title: "Добавить пользователя"
+      update:
+        error: "При обновлении данных языка произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные языка обновлены"
+    municipalities:
+      create:
+        error: "При добавлении данных самоуправления произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные самоуправления добавлены"
+      destroy:
+        error: "Удаление данных самоуправления не удалось"
+        notice: "Данные самоуправления удалены"
+      edit:
+        title: "Изменение данных самоуправления не удалось"
+      index:
+        add_municipality: "Добавить самоуправление"
+        add_role: "Добавить координатора"
+        edit_role: "Изменить данные координаторов"
+        settlements: "Külad / asulad"
+        title: Самоуправления
+      new:
+        title: "Добавление самоуправления"
+      update:
+        error: "При обновлении данных самоуправления произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Omavalitsuse andmed on uuendatud"
+        title: "Данные самоуправления обновлены"
+    roles:
+      create:
+        error: "При добавлении роли произошла ошибка. Пожалуйста, проверьте правильность данных "
+        notice: "Новая роль добавлена"
+      destroy:
+        error: "Не удалось удалить роль из системы"
+        notice: "Роль успешно удалена"
+      index:
+        destroy_role: Стереть
+        destroy_role_confirmation: "Вы уверены, что хотите удалить роль из системы?"
+        title: "Права, связанные с объектами"
+      new:
+        account:
+          role: "Lisa uus administraator kontole {{name}}"
+        county:
+          role: "Добавить нового координатора для уезда {{name}}"
+        event:
+          role: "Lisa uus juht talgutele {{name}}"
+        municipality:
+          role: "Добавить нового координатора для самоуправления {{name}}"
+        settlement:
+          role: "Добавить нового координатора для села/ поселения {{name}}"
+        title: "Права, связанные с объектом"
+    settlements:
+      create:
+        error: "При добавлении села/поселения произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные села/поселения добавлены"
+      destroy:
+        error: "Удаление данных села/поселения не удалось"
+        notice: "Данные села/поселения удалены"
+      edit:
+        title: "Изменение данных села/поселения"
+      index:
+        add_role: "Добавить координатора"
+        add_settlement: "Добавить село/поселение"
+        edit_role: "Изменить данные координатора"
+        title: Села/поселения
+      new:
+        title: "Добавление села/поселения"
+      update:
+        error: "При обновлении данных села/поселения произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные села/поселения обновлены"
+    user_sessions:
+      new:
+        email: E-mail
+        login_submit: Войдите
+        password: Пароль
+        remember_me: "Запомнить меня"
+    users:
+      create:
+        error: "При добавлении пользователя произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные пользователя добавлены"
+      destroy:
+        error: "Удаление учетной записи пользователя не удалось"
+        notice: "Учетная запись пользователя удалена"
+      edit:
+        roles: "Роли пользователя"
+        title: "Изменение учетной записи пользователя"
+      index:
+        add_user: "Добавить пользователя"
+        title: Пользователи
+      new:
+        title: "Добавление пользователя"
+      show:
+        roles: "Kasutaja rollid"
+        title: "Kasutaja andmed"
+      update:
+        error: "При обновлении данных пользователя произошла ошибка. Пожалуйста, проверьте правильность данных"
+        notice: "Данные пользователя обновлены"
+  arrays:
+    to_sentence:
+      connector: ja
+      skip_last_comma: "0"
+  authlogic:
+    attributes:
+      user_session:
+        email: "Адрес электронной почты"
+        password: Пароль
+    error_messages:
+      email_invalid: "адрес эл. почты некорректный"
+      login_blank: "пожалуйста, введите адрес электронной почты"
+      password_blank: "введите пароль"
+      password_invalid: "пароль неверен"
+  common:
+    filter_all: Kõik
+    loading: "Загрузка данных..."
+    paginate_next: "järgmised &raquo;"
+    paginate_previous: "&laquo; eelmised"
+    permission_denied: "Для просмотра этой страницы у Вас нет прав"
+    title: "Сделаем! День полезных дел"
+  countries:
+    ad: Andorra
+    ae: "Araabia Ühendemiraadid"
+    af: Afganistan
+    ag: "Antigua ja Barbuda"
+    ai: Anguilla
+    al: Albaania
+    am: Armeenia
+    an: "Hollandi Antillid"
+    ao: Angola
+    aq: Antarktika
+    ar: Argentina
+    as: "Ameerika Samoa"
+    at: Austria
+    au: Austraalia
+    aw: Aruba
+    az: Aserbaidžaan
+    ba: "Bosnia ja Hertsegoviina"
+    bb: Barbados
+    bd: Bangladesh
+    be: Belgia
+    bf: "Burkina Faso"
+    bg: Bulgaaria
+    bh: Bahrein
+    bi: Burundi
+    bj: Benin
+    bm: Bermuda
+    bn: Brunei
+    bo: Boliivia
+    br: Brasiilia
+    bs: Bahama
+    bt: Bhutan
+    bv: "Bouvet' saar"
+    bw: Botswana
+    by: Valgevene
+    bz: Belize
+    ca: Kanada
+    cc: Kookossaared
+    cd: "Kongo Demokraatlik Vabariik"
+    cf: "Kesk-Aafrika Vabariik"
+    cg: "Kongo Vabariik"
+    ch: Šveits
+    ci: "Côte d'Ivoire"
+    ck: "Cooki saared"
+    cl: Tšiili
+    cm: Kamerun
+    cn: Hiina
+    co: Kolumbia
+    cr: "Costa Rica"
+    cu: Kuuba
+    cv: "Cabo Verde"
+    cx: Jõulusaar
+    cy: Küpros
+    cz: "Tšehhi Vabariik"
+    de: Saksamaa
+    dj: Djibouti
+    dk: Taani
+    dm: Dominica
+    do: "Dominikaani Vabariik"
+    dz: Alžeeria
+    ec: Ecuador
+    ee: Eesti
+    eg: Egiptus
+    eh: Lääne-Sahara
+    er: Eritrea
+    es: Hispaania
+    et: Etioopia
+    fi: Soome
+    fj: Fidži
+    fk: "Falklandi saared"
+    fm: Mikroneesia
+    fo: "Fääri saared"
+    fr: Prantsusmaa
+    ga: Gabon
+    gb: Ühendkuningriik
+    gd: Grenada
+    ge: Gruusia
+    gf: "Prantsuse Guajaana"
+    gh: Ghana
+    gi: Gibraltar
+    gl: Gröönimaa
+    gm: Gambia
+    gn: Guinea
+    gp: Guadeloupe
+    gq: Ekvatoriaal-Guinea
+    gr: Kreeka
+    gs: "Lõuna-Georgia ja Lõuna-Sandwichi saared"
+    gt: Guatemala
+    gu: Guam
+    gw: Guinea-Bissau
+    gy: Guyana
+    hk: "Hong Kong"
+    hm: "Heard ja McDonald"
+    hn: Honduras
+    hr: Horvaatia
+    ht: Haiti
+    hu: Ungari
+    id: Indoneesia
+    ie: Iirimaa
+    il: Iisrael
+    in: India
+    io: "Briti India ookeani ala"
+    iq: Iraak
+    ir: Iraan
+    is: Island
+    it: Itaalia
+    jm: Jamaica
+    jo: Jordaania
+    jp: Jaapan
+    ke: Kenya
+    kg: Kõrgõzstan
+    kh: Kambodža
+    ki: Kiribati
+    km: Komoorid
+    kn: "Saint Kitts ja Nevis"
+    kp: Põhja-Korea
+    kr: Lõuna-Korea
+    kw: Kuveit
+    ky: Kaimanisaared
+    kz: Kasahstan
+    la: Laos
+    lb: Liibanon
+    lc: "Saint Lucia"
+    li: Liechtenstein
+    lk: "Sri Lanka"
+    lr: Libeeria
+    ls: Lesotho
+    lt: Leedu
+    lu: Luksemburg
+    lv: Läti
+    ly: Liibüa
+    ma: Maroko
+    mc: Monaco
+    md: Moldova
+    me: Montenegro
+    mg: Madagaskar
+    mh: "Marshalli Saared"
+    mk: Makedoonia
+    ml: Mali
+    mm: Myanmar
+    mn: Mongoolia
+    mo: Aomen
+    mp: Põhja-Mariaanid
+    mq: Martinique
+    mr: Mauritaania
+    ms: Montserrat
+    mt: Malta
+    mu: Mauritius
+    mv: Maldiivid
+    mw: Malawi
+    mx: Mehhiko
+    my: Malaisia
+    mz: Mosambiik
+    na: Namiibia
+    nc: Uus-Kaledoonia
+    ne: Niger
+    nf: Norfolk
+    ng: Nigeeria
+    ni: Nicaragua
+    nl: Holland
+    ? "no"
+    : Norra
+    np: Nepal
+    nr: Nauru
+    nu: Niue
+    nz: Uus-Meremaa
+    om: Omaan
+    pa: Panama
+    pe: Peruu
+    pf: "Prantsuse Polüneesia"
+    pg: "Paapua Uus-Guinea"
+    ph: Filipiinid
+    pk: Pakistan
+    pl: Poola
+    pm: "Saint-Pierre ja Miquelon"
+    pn: Pitcairn
+    pr: "Puerto Rico"
+    ps: Palestiina
+    pt: Portugal
+    pw: Palau
+    py: Paraguay
+    qa: Katar
+    re: Réunion
+    ro: Rumeenia
+    rs: Serbia
+    ru: Venemaa
+    rw: Ruanda
+    sa: "Saudi Araabia"
+    sb: "Saalomoni Saared"
+    sc: Seišellid
+    sd: Sudaan
+    se: Rootsi
+    sg: Singapur
+    sh: "Saint Helena"
+    si: Sloveenia
+    sj: "Svalbard ja Jan Mayen"
+    sk: Slovakkia
+    sl: "Sierra Leone"
+    sm: "San Marino"
+    sn: Senegal
+    so: Somaalia
+    sr: Suriname
+    st: "São Tomé ja Príncipe"
+    sv: "El Salvador"
+    sy: Süüria
+    sz: Svaasimaa
+    tc: "Turks ja Caicos"
+    td: Tšaad
+    tf: "Prantsuse Lõunaalad"
+    tg: Togo
+    th: Tai
+    tj: Tadžikistan
+    tk: Tokelau
+    tl: Timor-Leste
+    tm: Türkmenistan
+    tn: Tuneesia
+    to: Tonga
+    tr: Türgi
+    tt: "Trinidad ja Tobago"
+    tv: Tuvalu
+    tw: Taiwan
+    tz: Tansaania
+    ua: Ukraina
+    ug: Uganda
+    um: "Ühendriikide hajasaared"
+    us: "Ameerika Ühendriigid"
+    uy: Uruguay
+    uz: Usbekistan
+    va: Vatikan
+    vc: "Saint Vincent ja Grenadiinid"
+    ve: Venezuela
+    vg: "Briti Neitsisaared"
+    vi: Neitsisaared
+    vn: Vietnam
+    vu: Vanuatu
+    wf: "Wallis ja Futuna"
+    ws: Samoa
+    ye: Jeemen
+    yt: Mayotte
+    za: "Lõuna-Aafrika Vabariik"
+    zm: Sambia
+    zw: Zimbabwe
+  date:
+    abbr_day_names:
+      - pühapäev
+      - esmaspäev
+      - teisipäev
+      - kolmapäev
+      - neljapäev
+      - reede
+      - laupäev
+    abbr_month_names:
+      - ~
+      - jaan
+      - veebr
+      - märts
+      - apr
+      - mai
+      - juuni
+      - juuli
+      - aug
+      - sept
+      - okt
+      - nov
+      - dets
+    day_names:
+      - Pühapäev
+      - Esmaspäev
+      - Teisipäev
+      - Kolmapäev
+      - Neljapäev
+      - Reede
+      - Laupäev
+    formats:
+      default: "%d.%m.%Y"
+      long: "%d. %B %Y"
+      short: "%d. %b"
+    month_names:
+      - ~
+      - Jaanuar
+      - Veebruar
+      - Märts
+      - Aprill
+      - Mai
+      - Juuni
+      - Juuli
+      - August
+      - September
+      - Oktoober
+      - November
+      - Detsember
+  dates:
+    date_formats:
+      attributes: "%d/%m/%y"
+      long: "%d.%m.%Y"
+      short: "%d.%m"
+    strftime_overwrites:
+      c: "%a %b %e %H:%M:%S %Y"
+      x: "%H:%M:%S"
+    time_formats:
+      attributes: "%m/%d/%y %H:%M"
+      long: "%d.%m.%Y %H:%M"
+      short: "%d. %b %H:%M"
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        many: "{{count}} h"
+        one: tund
+        other: "{{count}} h"
+      about_x_months:
+        many: "{{count}} k"
+        one: kuu
+        other: "{{count}} k"
+      about_x_years:
+        many: "{{count}} a"
+        one: aasta
+        other: "{{count}} a"
+      half_a_minute: "pool minutit"
+      less_than_x_minutes:
+        many: "{{count}} min"
+        one: minut
+        other: "{{count}} min"
+      less_than_x_seconds:
+        many: "{{count}} s"
+        one: sekund
+        other: "{{count}} s"
+      over_x_years:
+        many: "{{count}} a"
+        one: aasta
+        other: "{{count}} a"
+      x_days:
+        many: "{{count}} p"
+        one: päev
+        other: "{{count}} p"
+      x_minutes:
+        many: "{{count}} min"
+        one: minut
+        other: "{{count}} min"
+      x_months:
+        many: "{{count}} k"
+        one: kuu
+        other: "{{count}} k"
+      x_seconds:
+        many: "{{count}} s"
+        one: sekund
+        other: "{{count}} s"
+  events:
+    create:
+      error: "При сохранении данных полезного дела произошла ошибка. Пожалуйста, проверьте данные и попробуйте снова."
+      notice: "Спасибо, что зарегистрировали свое полезное дело. Мы получили Ваши данные, они станут доступны каждому после того, как уездный координатор их проверит. Код Вашего полезного дела {{code}}."
+    edit:
+      title: "Изменение данных полезного дела"
+    form:
+      additional_questions: "Lisaküsimused, ei avalikustata"
+      map_location_hint: "При необходимости уточните месторасположение на карте (для этого передвиньте красную кнопочку в правильное место на карте).\""
+    index:
+      title: "Все полезные дела"
+    latest:
+      title: "Последние добавленные"
+    map:
+      show_link: "Подробнее &raquo;"
+    my:
+      title: "Мои полезные дела"
+    new:
+      footer_hint: "Регистрацией места проведения полезного дела Вы подтверждаете, что ваш возраст по меньшей мере 18 лет, а также, что Вы согласны получать информацию о мероприятии от организаторов Дня полезных дел на Ваш адрес эл. почты."
+      header_hint: "Здесь можно зарегистрировать место своего полезного дела и описать для добровольцев, что будет сделано, что необходимо иметь с собой и что Вы можете предложить по завершению работ. Хотя данные полезного дела можно изменить и позже, постарайтесь все хорошо продумать уже сейчас. Введенные данные будут опубликованы в течение нескольких дней."
+      title: "Registreeri oma talgud"
+    show:
+      edit_event: "Изменить данные полезного дела"
+      more_events_in_area: "Еще полезные дела в том же регионе"
+      no_vacancies: "Kõik kohad on täidetud!"
+      register_to_this_event: "Зарегистрируйтесь на это поелзное дело!"
+      registration_starts_at: "Регистрация на участие в полезных делах откроется с 1-го апреля."
+      sponsor_this_event: "Поддержать это полезное дело!"
+      starts_at: "Начало толоки в"
+    submenu:
+      latest: "Последние добавленные"
+      my_events: "Мои полезные дела"
+      register: "Зарегистрировать полезное дело"
+      show_all: "Показать все"
+      show_on_map: "Показать на карте"
+    submenu_edit:
+      edit_event: "Muuda talguid"
+      event_info: "Talgute info"
+      show_participants: Registreerunud
+    update:
+      error: "При изменении данных полезного дела произошла ошибка, проверьте данные и попробуйте снова."
+      notice: "Данные полезного дела изменены. При существенных изменениях, пожалуйста уведомите участников."
+  formtastic:
+    actions:
+      create: "Добавить {{model}}"
+      participate: "Registreeru talgutele"
+      save_my_settings: "Сохранить мои данные"
+      signup: Регистрироваться
+      update: "Сохранить {{model}}"
+    hints:
+      event:
+        begin_time: "Время начала толоки"
+        current_participants: "Nendele talgutele registreerunud osavõtjate arv, mis arvutatakse registreerumise alusel. Seda välja sa muuta ei saa."
+        end_time: "Прогнозируемое время завершения"
+        event_type: "Выберите категорию, которая наиболее подходит"
+        gathering_location: "Место и время сборов. При необходимости укажите ориентиры и путь. Место сборов лучше назначить в месте, которое легко найти."
+        location_address_street: "Укажите как можно более точный адрес"
+        max_participants: "Укажите максимальное ожидаемое число помощников, которое необходимо для реализации Вашего полезного дела."
+        meta_aim_description: "В чьих интересах будет организовано полезное дело, его цель и польза от него. И каковы связанные с ним последующие планы."
+        meta_bring_with_you: "Укажите, что необходимо взять с собой участникам. Например, ведра, топор, корзинку для пикника, перчатки и т.д."
+        meta_job_description: "Укажите все планируемые работы (вырубка кустов, собирание и сжигание веток...)"
+        meta_provided_for_participiants: "Что Вы как организатор полезного дела может предложить участникам? Приветствуется любая форма поощрения, которая заинтересует участников: экскурсия по местности, знакомство с местными тайнами и достопримечательстями, сауна, горячие пирожки, сладости, концерт, танцы и т.д."
+        meta_subject_heritage_number: "Если место проведения находится под охраной памятников архитектуры, укажите его номер. База данных памятников находится по ссылке <a href=\"http://register.muinas.ee\" target=\"blank\">http://register.muinas.ee</a>"
+        meta_subject_info: "При возможности укажите ссылку на сайт того места, где будет проводиться толока."
+        meta_subject_owner: "Кто владелец или арендатор места или объекта недвижимости, где будет проводиться толока."
+        meta_subject_protegee: "Находится ли место проведения толоки под охраной памятников архитектуры или природы?"
+        name: "Желательно, чтобы название полезного дела содержало место проведения и характер работы (например \"Приведение в порядок концертной площадки в Сиймусти\" или \"Ремонт народного дома в Кивиыли\"). Помните, что первое знакомство участника с Вашим полезным делом, происходит через название и именно оно отображается в базе данных и в интернете."
+        notes: "При необходимости укажите здесь другую важную информацию"
+      event_participant:
+        tellafriend_emails: "Sisesta sõbra või sõprade e-posti aadressid eraldades need komadega"
+    labels:
+      account:
+        domain: Domeen
+        name: "Konto nimi"
+      county:
+        name: "Название уезда"
+        regional_managers: "Региональные координаторы"
+      event:
+        actions:
+          submit: "Сохранить данные полезного дела"
+        begin_time: "Время начала"
+        begins_at: "Начальное время"
+        code: "Код толоки"
+        current_participants: "Registreerunute arv"
+        current_participants_short: Reg
+        end_time: "время окончания ~"
+        ends_at: "Конечное время"
+        event_type: "Тип полезного дела"
+        gathering_location: Сборы
+        gathering_time: "Время сборов"
+        languages: "Языки, которыми владеет координатор полезного дела"
+        latitude: Широта
+        location_address: Адрес
+        location_address_county: Уезд
+        location_address_municipality: "Город / Волость"
+        location_address_settlement: "Село / Поселение"
+        location_address_street: "Улица, дом"
+        longitude: Долгота
+        manager: "Координатор толоки"
+        manager_email: "Эл. почта координатора"
+        manager_phone: "Телефон координатора"
+        max_participants: "Максимальное количество помощников"
+        max_participants_short: Max
+        meta_aim_description: "Цель полезного дела и благо от него"
+        meta_bring_with_you: "Необходимо иметь с собой"
+        meta_job_description: "Описание работ"
+        meta_provided_for_participiants: "Поощрение для участников"
+        meta_subject_heritage_number: "Номер подохранного объекта"
+        meta_subject_info: "Подробная информация об объекте"
+        meta_subject_owner: "Владелец объекта"
+        meta_subject_protegee: "Находится ли объект под охраной?"
+        name: "Название полезного дела?"
+        notes: "Дополнительная информация"
+        status: Статус
+        statuses:
+          adjustment: Täpsustamisel
+          closed: Suletud
+          denied: Отклонено
+          finished: Закрытое
+          new: Новое
+          published: Опубликованное
+          registration_closed: "Регистрация завершена"
+          registration_open: "Доступно для регистрации"
+          took_place: Toimunud
+        vacancies: "Свободных мест"
+      event_participant:
+        email: E-mail
+        event: Talgud
+        firstname: Eesnimi
+        lastname: Perekonnanimi
+        notes: Märkused
+        participant_name: Nimi
+        phone: Telefon
+        tellafriend_emails: "Soovita ka sõbral osaleda"
+      event_type:
+        name: "Наименование типа полезного дела"
+      language:
+        code: "Код языка"
+        name: "Наименование языка"
+      municipality:
+        kind: Тип
+        kinds:
+          linn: Город
+          vald: Волость
+        name: "Название самоуправления"
+        regional_managers: "Региональные координаторы"
+      password_reminder:
+        email: "Адрес эл. почты"
+      role:
+        model_name: "Objekti nimi"
+        model_type: "Objekti tüüp"
+        role: Роль
+        roles:
+          account_manager: Администратор
+          event_manager: "Координатор толоки"
+          event_participant: "Участник толоки"
+          guest: "Обычный пользователь"
+          regional_manager: "Региональный координатор"
+          system_administrator: "Системный администратор"
+        user: Пользователь
+      settlement:
+        kind: Тип
+        kinds:
+          alev: Поселок
+          alevik: Местечко
+          kyla: Село
+          linnaosa: "Район города"
+          vallasisene_linn: "Волостной город"
+        name: "Название поселения"
+        regional_managers: "Региональные координаторы"
+      signup:
+        email: "Эл. почта"
+        firstname: Имя
+        lastname: Фамилия
+        password: Пароль
+        password_confirmation: "Пароль еще раз"
+      user:
+        email: "Эл. почта"
+        firstname: Имя
+        lastname: Фамилия
+        name: "Имя пользователя"
+        password: Пароль
+        password_confirmation: "Пароль еще раз"
+        phone: Телефон
+        status: Статус
+        statuses:
+          active: Активный
+          created: Новый
+    submit: Сохранить
+  helpers:
+    error_messages_for:
+      description: "Järgmiste väljadega esinesid probleemid:"
+      heading:
+        ? "1"
+        : "Üks viga takistas andmete ({{model}}) salvestamist"
+        ? "n"
+        : "{{value}} errors prohibited this {{model}} from being saved"
+      message: "Järgmiste väljadega esinesid probleemid:"
+    number_to_currency:
+      precision: "2"
+      unit: EEK
+    number_to_phone:
+      area_code: "0"
+      delimiter: "-"
+  layouts:
+    home:
+      internet_reflections: "О нас в интернете"
+      intro: "1 мая состоится очередная акция «Сделаем!» — День полезных дел, всеэстонская толока."
+      objective: "Приглашаем всех жителей Эстонии огранизовать в этот день полезное дело или поучаствовать в нем, чтобы вместе сделать что-то полезное.."
+      register_event: "Зарегистрируйте свою толоку"
+      show_all_events: "Показать все"
+  mailers:
+    common:
+      footer_text: "Команда Дня полезных дел \"Сделаем!\""
+      hello: "Добро пожаловать!"
+    event_mailer:
+      manager_participation_notification:
+        event_participants_address: "Registreerunute andmeid saate hallata aadressilt {{url}}"
+        footer: "Teeme Ära talgupäeva meeskond"
+        intro: "{{name}} registreerus just sinu poolt korraldavatele talgutele"
+        participant_info: "Registreeruja poolt sisestatud andmed on järgmised:"
+        subject: "{{name}} registreerus talgutele {{event_name}}"
+      participant_notification:
+        edit_address: "Registreerumisinfot saate muuta aadressilt {{url}}"
+        event_address: "Vajadusel saatke parandus või täpsustus e-postiga oma talgujuhile. Talgujuhtide kontaktid leiate talgute leheküljelt {{url}}"
+        footer: "Kohtumiseni talgutel!"
+        intro: "Täname registreerumast Teeme Ära talgupäevale!"
+        subject: "Talgupäevale registreerumiskinnitus"
+        verify_data: "Palun kontrollige üle, kas registreerimisel valitud üritus ja alltoodud andmed on õiged:"
+      region_manager_notification:
+        admin_url: "Данные полезного дела можно изменить по адресу"
+        intro: "В системе полезных дел было зарегистрировано новое полезное дело со следующими данными:"
+        subject: "Уведомление о регистрации полезного дела"
+      tell_friend_notification:
+        event_info: "Talgute kohta vaata lähemalt kodulehelt {{event_url}} või www.teemeara.ee ja leia sealt Sulle sobivad talgud."
+        event_registrant_info: "{{name}} registreeris ennast just talgutele: {{event_name}}."
+        intro: "Sinu sõber {{name}} kutsub Sind osalema Teeme Ära talgupäeval 1. mail 2010."
+        subject: "{{name}} kutsub sind talgupäevale"
+    user_mailer:
+      activation_instructions:
+        activation_url_usage: "Если ссылка не сработала, попробуйте скопировать ее и вручную вставить в адресную строку обозревателя."
+        intro: "Спасибо, что зарегистрировалисть в системе Дня полезных дел. Для активации учетной записи нажмите на ссылку:"
+        subject: "Активация учетной записи в системе Дня полезных дел"
+      password_reminder:
+        intro: "Вы заказали себе новый пароль для входа в систему."
+        login_at_url: "Вход в систему можете осуществить по ссылке {{login_url}}"
+        subject: "Восстановление пароля учетной записи"
+        your_new_password: "Ваш новый пароль: {{password}}"
+      registration_notification:
+        intro: "Tere, Sind on kasutaja '{{creator}}' poolt registreeritud Talgute keskkonna kasutajaks"
+        login_at_url: "Sisse saad logida aadressilt {{login_url}}"
+        subject: "Oled registreeritud Talgute keskkonna kasutajaks"
+        your_email: "Sinule registreeritud kasutajatunnus: {{email}}"
+        your_password: "Sulle määratud salasõna: {{password}}"
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        separator: "."
+        unit: EEK
+    format:
+      delimiter: " "
+      separator: "."
+    human:
+      format:
+        delimiter: ""
+      storage_units:
+        format: "%n %u"
+        units:
+          byte: Baiti
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+  numbers:
+    delimiter: ","
+    precision: "3"
+    separator: "."
+  participations:
+    create:
+      error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
+      notice: "Tänan, et registreerusid talgutele. Oleme andmed kätte saanud ning saatsime Sinu e-posti aadressile lingi, kus saad vajadusel hiljem registreerumise andmeid muuta."
+    index:
+      empty: "Sellele talgule ei ole veel registreerunuid."
+    new:
+      intro: "Nendele talgutele registreerumiseks sisestage palun enda andmed."
+      no_vacancies: "Nendele talgutele registreerumine on lõppenud, kuna kõik kohad on täidetud"
+    update:
+      error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
+      notice: "Registreerumise andmed on uuendatud"
+  password_reminders:
+    create:
+      error: "Учетная запись с указаным адресом эл. почты не найдена. Пожалуйста проверьте указанный адрес."
+      notice: "Новый пароль выслан Вам на адрес электронной почты"
+  shared:
+    admin:
+      object_roles:
+        destroy_role: Kustuta
+        destroy_role_confirmation: "Kas sa oled ikka rolli kustutamises kindel?"
+    footer:
+      contact: Контакты
+      facebook: "Следите за информацией на Facebook"
+      join_us: "Присоединяйтесь к команде организаторов"
+      twitter: "Следите за информацией через Twitter"
+    logo:
+      home_link: "Сделаем! День полезных дел"
+    mainmenu:
+      events: Толоки
+      login: Войти
+      main: Главная
+      settings: "Моя учетная запись"
+  signups:
+    activate:
+      activation_successful: "Ваша учетная запись активирована. Пожалуйста, войдите в систему."
+      invalid_activation_code: "Код активации неверен, пожалуйста, проверьте ссылку, которая была вам выслана на адрес эл. почты."
+    create:
+      error: "При регистрации возникла ошибка. Заполните, пожалуйста все поля."
+      notice: "Учетная запись успешно создана. Инструкции по активации высланы Вам на адрес эл. почты."
+    new:
+      login_submit: войдите
+      registration_hint: "Для того, чтобы зарегистрировать свое полезное дело, Вы должны быть зарегистрированы в системе. Регистрация займет всего пару минут. Если у вас уже есть учетная запись, тогда"
+  support:
+    array:
+      last_word_connector: ""
+      two_words_connector: ", "
+      words_connector: ", "
+  time:
+    am: "enne lõunat"
+    formats:
+      default: "%d.%m.%Y %H:%M:%S"
+      long: "%d.%m.%Y %H:%M"
+      short: "%d. %b %H:%M"
+    pm: "pärast lõunat"
+  user_sessions:
+    create:
+      error: "Введенные имя пользователя или пароль неверны"
+      notice: "Вы успешно вошли в систему"
+    destroy:
+      notice: "Вы вышли из системы"
+    new:
+      forgot_password: "Забыли пароль?"
+      login: "Вход в систему"
+      login_required: "Пожалуйста, войдите в систему"
+      login_submit: Войти
+      reset_password: "Восстановление пароля"
+      reset_password_hint: "Введите свой адрес электронной почты и мы отправим Вам новый пароль."
+      reset_password_no_thanks: "Уже не надо, я вспомнил"
+      send_password: "Отправить новый пароль"
+      signup: зарегистрироваться
+  users:
+    edit:
+      title: "Изменение личных данных"
+    submenu:
+      edit_settings: "Изменить настройки"
+      logout: Выйти
+      my_events: "Мои полезные дела"
+    update:
+      error: "При обновлении данных произошла ошибка. Пожалуйста, проверьте правильность данных"
+      notice: "Данные успешно сохранены"

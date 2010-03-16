@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   # Account select before filter must be declared before userstamp, which in turn adds one before filter that depends
   # on selected account.
-  before_filter :select_account_and_user
+  before_filter :set_locale, :select_account_and_user
 
   include Userstamp
 
@@ -50,4 +50,9 @@ class ApplicationController < ActionController::Base
     Account.current = Account.first
     Authorization.current_user = current_user
   end
+
+  def set_locale
+    # if params[:locale] is nil then I18n.default_locale will be used
+    I18n.locale = params[:locale]
+  end  
 end
