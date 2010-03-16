@@ -25,11 +25,16 @@ describe Admin::RolesController do
 
     it 'should be accessible for regional manager' do
       regional_manager = Factory.create(:user)
+      event_manager = Factory.create(:user)
       activate_authlogic and UserSession.create(regional_manager)
       event = Factory(:event)
-      role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, event.location_address_county)
-      role2 = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, Factory(:event).location_address_county)
+      event2 = Factory(:event)
+      
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, event.location_address_county)      
+      role = Role.grant_role(Role::ROLE[:event_manager], event_manager, event)
+      role2 = Role.grant_role(Role::ROLE[:event_manager], event_manager, event2)
       get :index
+      
       response.should be_success
       assigns[:roles].should include(role)
       assigns[:roles].should_not include(role2)
@@ -152,13 +157,16 @@ describe Admin::RolesController do
     end
 
     it 'should be denied for different regional manager' do
-      regional_manager = Factory.create(:user)
-      regional_manager2 = Factory.create(:user)
+      event_manager = Factory.create(:user)      
+      regional_manager = Factory.create(:user)      
+      regional_manager2 = Factory.create(:user)      
       activate_authlogic and UserSession.create(regional_manager)
+      
       event = Factory(:event)
-      role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager2, event.location_address_county)      
-      role2 = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, Factory(:event))
-      put :destroy, {:id => role.id, :model_type => role.model.class.name, :model_id => role.model.id}
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager2, event.location_address_county)
+      role = Role.grant_role(Role::ROLE[:event_manager], event_manager, event)
+      
+      put :destroy, {:id => role.id, :model_type => event.class.name, :model_id => event.id}
       response.should redirect_to(admin_login_path)  
     end
   end
