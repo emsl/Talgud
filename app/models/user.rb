@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   has_many :roles
 
-  validates_presence_of :firstname, :lastname
+  validates_presence_of :firstname, :lastname, :phone
   validates_uniqueness_of :email
   validates_length_of :phone, :within => 3..30, :allow_blank => true
 
