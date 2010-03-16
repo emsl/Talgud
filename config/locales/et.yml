@@ -537,14 +537,20 @@ et:
         event_registrant_info: "{{name}} registreeris ennast just talgutele: {{event_name}}."
         event_info: "Talgute kohta vaata lähemalt kodulehelt {{event_url}} või www.teemeara.ee ja leia sealt Sulle sobivad talgud."
   participations:
+    confirmation:
+      title: Aitäh registreerumast!
+      mail_info: "Registreerumiskinnitus saadeti sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, anna sellest talgujuhile teada."
+      contact_info: Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta!
+      link_to_event: Vaata talguinfot
+      footer: Kohtumiseni talgupäeval!
     create:
-      notice: "Tänan, et registreerusid talgutele. Oleme andmed kätte saanud ning saatsime Sinu e-posti aadressile lingi, kus saad vajadusel hiljem registreerumise andmeid muuta."
       error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
     index:
       empty: Sellele talgule ei ole veel registreerunuid.
     new:
       intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
       no_vacancies: "Nendele talgutele registreerumine on lõppenud, kuna kõik kohad on täidetud"
+      title: Registreeru talgutele
     update:
       notice: "Registreerumise andmed on uuendatud"
       error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"

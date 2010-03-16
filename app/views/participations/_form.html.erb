@@ -12,3 +12,86 @@
 <script type="text/javascript" charset="utf-8">
   jQuery(document).ready(initFormHints);
 </script>
+
+<p>
+  Kui soovid nendel talgutele minna teistega koos, siis palun sisesta siia ka nende nimed ning kontaktandmed.
+</p>
+
+<p>
+  Kui sa lisad siia oma sõprade e-mailid, siis saavad nad info registreerimise kohta ka oma e-mailile.
+  Kui sa siia e-maile ei sisesta, siis palun edasta kogu sulle saadetud info neile ise.
+</p>
+
+<% fields_for @event_participant do |f| %>
+<table width="100%" class="dataentry" style="margin: 15px 0;">
+<thead>
+<tr>
+  <th><%= t('formtastic.labels.event_participant.firstname') %></th>
+  <th><%= t('formtastic.labels.event_participant.lastname') %></th>
+  <th><%= t('formtastic.labels.event_participant.email') %></th>
+  <th><%= t('formtastic.labels.event_participant.phone') %></th>
+</tr>
+</thead>
+<tbody style="display:none;">
+<% f.fields_for :children, EventParticipant.new, :child_index => 'new_children' do |child| %>
+<tr id="event_participant_template">
+  <td class="first"><%= child.text_field :firstname %></td>
+  <td><%= child.text_field :lastname %></td>
+  <td><%= child.text_field :email %></td>
+  <td class="last"><%= child.text_field :phone %></td>
+</tr>
+<% end %>
+</tbody>
+<tbody class="inputs" id="event_participant_inputs">
+<% @event_participant.children.each_with_index do |epc, idx| %>
+<% f.fields_for :children, epc do |child| %>
+<tr<%= ' class="first"' if idx == 0 %>>
+  <td<%= column_class_name(epc, :firstname, 'first') %>><%= child.hidden_field :id %><%= child.text_field :firstname %></td>
+  <td<%= column_class_name(epc, :lastname) %>><%= child.text_field :lastname %></td>
+  <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
+  <td<%= column_class_name(epc, :phone, 'last') %>><%= child.text_field :phone %></td>
+</tr>
+<% end %>
+<% end %>
+</tbody>
+<tbody class="footer">
+<tr>
+  <td colspan="4">
+    <a href="#add-participants" id="add_event_participant">Lisa veel osavõtjaid</a>
+  </td>
+</tr>
+</tbody>
+</table>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+    function addParticipantRow() {
+        var tbl = $(this).parent('table.dataentry'),
+            inputs = document.getElementById('event_participant_inputs'),
+            tpl = document.getElementById('event_participant_template');
+        
+        var newRow = tpl.cloneNode(true);
+        newRow.removeAttribute('id');
+        
+        inputs.appendChild(newRow);
+        
+        var new_id = 'new_' + new Date().getTime();
+        var regexp = new RegExp("new_children", "g");
+        
+        $(newRow).find('input').each(function(input) {
+            this.setAttribute('name', this.getAttribute('name').replace(regexp, new_id));
+        });
+        
+        return false;
+    }
+    
+    jQuery(document).ready(function() {
+        $('#add_event_participant').click(addParticipantRow);
+        $('table.dataentry input').live('focus', function() {
+            $(this).closest('tr').addClass('active');
+        });
+        $('table.dataentry input').live('blur', function() {
+            $(this).closest('tr').removeClass('active');
+        });
+    });
+</script>

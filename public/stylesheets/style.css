@@ -201,8 +201,11 @@ input.textbox {
 /** Cute and shiny colorboxes **/
 .colorbox {
   border-radius: 5px;
+  box-shadow: 0 1px 3px #c4d1d6;
   -moz-border-radius: 5px;
+  -moz-box-shadow: 0 1px 3px #c4d1d6;
   -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px #c4d1d6;
 }
 
 .colorbox-blue {
@@ -329,8 +332,11 @@ ul.submenu .active .arrow { display: block; }
             .bluebox-border {
               border: 1px solid #99b3cb;
               border-radius: 5px;
+              box-shadow: 0 1px 3px #c4d1d6;
               -moz-border-radius: 5px;
+              -moz-box-shadow: 0 1px 3px #c4d1d6;
               -webkit-border-radius: 5px;
+              -webkit-box-shadow: 0 1px 3px #c4d1d6;
             }
             .orangebox {
               padding: 20px;
@@ -354,8 +360,11 @@ ul.submenu .active .arrow { display: block; }
             .orangebox-border {
               border: 1px solid #ec920b;
               border-radius: 5px;
+              box-shadow: 0 1px 3px #c4d1d6;
               -moz-border-radius: 5px;
+              -moz-box-shadow: 0 1px 3px #c4d1d6;
               -webkit-border-radius: 5px;
+              -webkit-box-shadow: 0 1px 3px #c4d1d6;
             }
               .orangebox .bigbtn {
                 cursor: pointer; 
@@ -613,8 +622,11 @@ ul.submenu .active .arrow { display: block; }
             #submenu .submenu-border {
               border: 1px solid #ec920b;
               border-radius: 5px;
+              box-shadow: 0 1px 3px #c4d1d6;
               -moz-border-radius: 5px;
+              -moz-box-shadow: 0 1px 3px #c4d1d6;
               -webkit-border-radius: 5px;
+              -webkit-box-shadow: 0 1px 3px #c4d1d6;
               width: 187px;
             }
               #submenu ul {

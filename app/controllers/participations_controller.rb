@@ -9,6 +9,7 @@ class ParticipationsController < ApplicationController
 
   def new
     @event_participant = EventParticipant.new(:event => @event)
+    @event_participant.children = Array.new(3) { |i| EventParticipant.new }
     unless @event.vacancies?
       flash[:error] = t('participations.new.no_vacancies')
       redirect_to event_path(@event)
@@ -18,8 +19,10 @@ class ParticipationsController < ApplicationController
   def create
     @event_participant = EventParticipant.new(params[:event_participant])
     @event_participant.event = @event
+    # Need to set parent records for validation
+    @event_participant.children.each { |c| c.event_participant = @event_participant }
 
-    if @event_participant.valid?
+    if @event_participant.valid? & @event_participant.children_valid?
       @event_participant.save
 
       # Deliver load of emails to all parties that might be interested in such participation
@@ -31,8 +34,7 @@ class ParticipationsController < ApplicationController
         Mailers::EventMailer.deliver_tell_friend_notification(email, @event_participant, event_url(@event))
       end
 
-      flash[:notice] = t('participations.create.notice')
-      redirect_to event_path(@event)
+      redirect_to confirmation_event_participation_path(@event, UrlStore.encode(@event_participant.id))
     else
       flash.now[:error] = t('participations.create.error')
       render :new
@@ -44,7 +46,7 @@ class ParticipationsController < ApplicationController
 
   def update
     @event_participant.attributes = params[:event_participant]
-    if @event_participant.valid?
+    if @event_participant.valid? & @event_participant.children_valid?
       @event_participant.save
       flash[:notice] = t('participations.update.notice')
       redirect_to event_path(@event)
