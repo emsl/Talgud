@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.resources :addresses, :collection => {:municipalities => :get, :settlements => :get}
-  map.resources :events, :collection => {:my => :get, :map => :get, :latest => :get} do |event|
+  map.resources :events, :collection => {:my => :get, :map => :get, :latest => :get, :stats => :get} do |event|
     event.resources :participations, :member => {:confirmation => :get}
   end
   map.event_participation_redirect 'participation/:id', :controller => :participations, :action => :redirect

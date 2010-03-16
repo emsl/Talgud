@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  filter_resource_access :additional_collection => [:my, :map, :latest], :attribute_check => true
+  filter_resource_access :additional_collection => [:my, :map, :latest, :stats], :attribute_check => true
 
   def index
     @search = Event.published(
@@ -53,6 +53,14 @@ class EventsController < ApplicationController
         render :json => events_json_hash(@events)
       end
     end
+  end
+  
+  def stats
+    @max_participants = Event.published.sum(:max_participants, :conditions => filter_from_params)
+    @current_participants = Event.published.sum(:current_participants, :conditions => filter_from_params)
+    @needed_participants = [(@max_participants - @current_participants), 0].max
+    
+    render :json => {:max_participants => @max_participants, :current_participants => @current_participants, :needed_participants => @needed_participants}
   end
 
   def new
