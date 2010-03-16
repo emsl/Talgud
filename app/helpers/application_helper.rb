@@ -26,7 +26,7 @@ module ApplicationHelper
   end  
   
   def language_menu(code, title)
-    if I18n.locale == code.to_s
+    if I18n.locale == code
       content_tag :span, :class => :active do
         title
       end
