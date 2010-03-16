@@ -31,6 +31,7 @@ describe Mailers::EventMailer, :type => :view do
   
   describe 'participant_notification' do
     before(:each) do
+      activate_authlogic
       @event_participant = Factory(:event_participant)
       @edit_url = event_participation_url(@event_participant.event, @event_participant)
       @event_url = event_url(@event_participant.event)
@@ -39,9 +40,6 @@ describe Mailers::EventMailer, :type => :view do
     
     it 'should contain event info and link to edit participation info' do
       @mail.body.should include(@event_participant.event.name)
-      @mail.body.should include(@event_participant.participant_name)
-      @mail.body.should include(@event_participant.email)
-      @mail.body.should include(@event_participant.phone)
       @mail.body.should include(@event_url)
       @mail.body.should include(@edit_url)
     end

@@ -238,6 +238,7 @@ ru:
       new:
         email: E-mail
         login_submit: Войдите
+        login: "Вход в систему"
         password: Пароль
         remember_me: "Запомнить меня"
     users:

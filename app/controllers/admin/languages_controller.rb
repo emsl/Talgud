@@ -4,9 +4,6 @@ class Admin::LanguagesController < Admin::AdminController
   
   def index
     @search = Language.with_permissions_to(:manage, :context => :admin_languages).search(params[:search]).search(params[:order])
-    p @search
-    p @search.conditions
-    
     @languages = @search.paginate(:page => params[:page])
   end
   

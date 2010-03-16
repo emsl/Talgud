@@ -255,6 +255,7 @@ et:
     user_sessions:
       new:
         login_submit: Logi sisse
+        login: Logi sisse
         remember_me: Jäta mind meelde
         password: Salasõna
         email: E-posti aadress

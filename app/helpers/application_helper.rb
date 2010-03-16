@@ -25,7 +25,7 @@ module ApplicationHelper
     will_paginate collection, :previous_label => t('common.paginate_previous'), :next_label => t('common.paginate_next')
   end  
   
-  def language_menu(code, title)
+  def language_menu(code, title)    
     if I18n.locale == code
       content_tag :span, :class => :active do
         title
