@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.admin 'admin', :controller => 'admin/events'
   map.admin_login '/admin/login', :controller => 'admin/user_sessions', :action => 'new'
   map.admin_logout '/admin/logout', :controller => 'admin/user_sessions', :action => 'destroy'
-  map.home 'home', :controller => 'home'
+  map.home 'home', :controller => 'home', :action => 'index'
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
   map.root :home
