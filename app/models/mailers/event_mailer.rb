@@ -19,6 +19,15 @@ class Mailers::EventMailer < Mailers::Base
     sent_on Time.now
     body :event_participant => event_participant, :event_url => event_url, :manage_url => manage_url
   end
+
+  def invite_participant_notification(event_participant, event_url, manage_url)
+    subject I18n.t('mailers.event_mailer.invite_participant_notification.subject')
+    from full_from_address
+    headers 'return-path' => from_address
+    recipients event_participant.email
+    sent_on Time.now
+    body :event_participant => event_participant, :event_url => event_url, :manage_url => manage_url
+  end
   
   def manager_participation_notification(event_manager, event_participant, event_participations_url)
     subject I18n.t('mailers.event_mailer.manager_participation_notification.subject', :name => event_participant.participant_name, :event_name => event_participant.event.name)

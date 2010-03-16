@@ -7,20 +7,28 @@ class EventParticipant < ActiveRecord::Base
   belongs_to :event
   belongs_to :account
   belongs_to :event_participant
+  has_many :children, :class_name => 'EventParticipant', :foreign_key => :event_participant_id
+  
+  accepts_nested_attributes_for :children, :reject_if => lambda { |c| [:firstname, :lastname, :email, :phone].all?{ |a| c[a].blank? } }
 
+  before_validation_on_create :ensure_event_association
   after_save :recalculate_event_current_participants
 
   validates_presence_of :firstname, :lastname, :event
   validates_presence_of :email, :phone, :if => :parent?
   
-  validates_each :event  do |record, attr, value|
-    if record.event.vacancies == 0 
-      record.errors.add :firstname, :no_vacancies
-    end
-  end 
+  # validates_each :event  do |record, attr, value|
+  #   if record.event.vacancies == 0 and not parent?
+  #     record.errors.add :firstname, :no_vacancies
+  #   end
+  # end 
 
   def parent?
     self.event_participant.nil?
+  end
+  
+  def children_valid?
+    children.all? { |c| c.valid? }
   end
 
   def participant_name
@@ -37,6 +45,10 @@ class EventParticipant < ActiveRecord::Base
   end
 
   private
+  
+  def ensure_event_association
+    self.event = event_participant.event if event.nil? and new_record? and not parent?
+  end
 
   def recalculate_event_current_participants
     self.transaction do

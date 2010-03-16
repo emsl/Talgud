@@ -88,12 +88,18 @@ describe ParticipationsController do
 
     it 'should create event participation record when submitted data is valid' do
       post :create, {:event_id => @event.url, :event_participant => @ep.attributes}
-      response.should redirect_to(event_path(@event))
+      response.should redirect_to(confirmation_event_participation_path(@event, UrlStore.encode(assigns[:event_participant].id)))
     end
 
-    it 'should send e-mail to all registered participants after successful registration' do
+    it 'should send e-mail to registrant after successful registration' do
       Mailers::EventMailer.should_receive(:deliver_participant_notification)
       post :create, {:event_id => @event.url, :event_participant => @ep.attributes}
+    end
+    
+    it 'should send e-mail to invited participants after successful registration' do
+      Mailers::EventMailer.should_receive(:deliver_invite_participant_notification).twice
+      children = {0 => Factory.build(:event_participant).attributes, 1 => Factory.build(:event_participant).attributes}
+      post :create, {:event_id => @event.url, :event_participant => @ep.attributes.merge(:children_attributes => children)}
     end
 
     it 'should send e-mail to event managers after successful registration' do

@@ -2,7 +2,7 @@
   <%= render 'events/submenu' %>
 </div>
 <div class="container-right">
-  <h1><%= @event.name %></h1>
+  <h1><span style="font-weight: normal"><%= t('.title') %></span> <%= @event.name %></h1>
 
   <p style="margin-bottom: 20px;">
     <%= t('.intro') %>

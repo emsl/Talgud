@@ -1,0 +1,13 @@
+<%= t('.intro', :name => @event_participant.participant_name) %>
+
+<%= t('.event_name', :registrant_name => @event_participant.event_participant.participant_name, :event_name => @event_participant.event.name) %>
+
+<%= t('.event_link', :url => @event_url) %>
+
+<%= t('.edit_link', :url => @manage_url) %>
+
+<%= t('.footer') %>
+<%= t('mailers.common.footer_text') %>
+
+
+<%= t('mailers.common.disclaimer') %>

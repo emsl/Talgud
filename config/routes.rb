@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :addresses, :collection => {:municipalities => :get, :settlements => :get}
   map.resources :events, :collection => {:my => :get, :map => :get, :latest => :get} do |event|
-    event.resources :participations
+    event.resources :participations, :member => {:confirmation => :get}
   end
   map.event_participation_redirect 'participation/:id', :controller => :participations, :action => :redirect
   map.resources :password_reminders
