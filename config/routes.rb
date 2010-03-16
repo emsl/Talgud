@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.admin_login '/admin/login', :controller => 'admin/user_sessions', :action => 'new'
   map.admin_logout '/admin/logout', :controller => 'admin/user_sessions', :action => 'destroy'
   map.home 'home', :controller => 'home', :action => 'index'
+  map.language '/:language', :controller => 'home', :action => 'index', :language => /[a-z]{2}/
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
   map.root :home

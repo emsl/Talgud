@@ -31,7 +31,7 @@ module ApplicationHelper
         title
       end
     else
-      link_to title, root_path(:locale => code)
+      link_to title, language_path(:language => code)
     end
   end
 end
