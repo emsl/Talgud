@@ -114,7 +114,7 @@ describe ParticipationsController do
       post :create, {:event_id => @event.url, :event_participant => @ep.attributes}
       response.should render_template(:new)
     end
-  end
+  end  
 
   describe 'editing participation from encoded url' do
     it 'should load participation when encoded url is valid' do
@@ -126,11 +126,19 @@ describe ParticipationsController do
       assigns[:event_participant].should eql(ep)
     end
 
+    it 'should redirect to participation show when encoded url is valid' do
+      ep = Factory(:event_participant)
+      id = UrlStore.encode(ep.id)
+      get :redirect, {:id => id}
+      response.should redirect_to(event_participation_path(ep.event, id))
+    end
+
     it 'should redirect to event view when encoded url invalid' do
       ep = Factory(:event_participant)
 
       get :show, {:event_id => ep.event.url, :id => ep.id}
       response.should redirect_to(event_path(ep.event))
     end
+
   end
 end

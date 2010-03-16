@@ -24,4 +24,14 @@ module ApplicationHelper
   def paginate(collection = nil)
     will_paginate collection, :previous_label => t('common.paginate_previous'), :next_label => t('common.paginate_next')
   end  
+  
+  def language_menu(code, title)
+    if I18n.locale == code.to_s
+      content_tag :span, :class => :active do
+        title
+      end
+    else
+      link_to title, language_path(:language => code)
+    end
+  end
 end

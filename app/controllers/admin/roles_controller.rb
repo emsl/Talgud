@@ -39,12 +39,12 @@ class Admin::RolesController < Admin::AdminController
   end
 
   protected
-  def load_role
-    @role = Role.find(params[:id])
-    if @role.model == 'Event' and not Event.can_manage(@current_user).find(@role.model.id)
-      redirect_to admin_login_path
-    end
-  end
+  # def load_role
+  #   @role = Role.find(params[:id])
+  #   if @role.model == 'Event' and not Event.can_manage(@current_user).find(@role.model.id)
+  #     redirect_to admin_login_path
+  #   end
+  # end
   
   # Tries to detect target role model by parameter. Loads role symbols and all object permissions.
   def load_target_model
