@@ -1,14 +1,15 @@
-<%= t('.intro') %>
+<%= t('.intro', :name => @event_participant.participant_name) %>
+
+<%= t('.event_name', :event_name => @event_participant.event.name) %>
+
+<%= t('.event_link', :url => @event_url) %>
 
 <%= t('.verify_data') %>
 
-<%= t('formtastic.labels.event_participant.event') %>: <%= @event_participant.event.name %>
-<%= t('formtastic.labels.event_participant.participant_name') %>: <%= @event_participant.participant_name %>
-<%= t('formtastic.labels.event_participant.email') %>: <%= @event_participant.email %>
-<%= t('formtastic.labels.event_participant.phone') %>: <%= @event_participant.phone %>
-
 <%= t('.edit_address', :url => @manage_url) %>
 
-<%= t('.event_address', :url => @event_url) %>
-
 <%= t('.footer') %>
+<%= t('mailers.common.footer_text') %>
+
+
+<%= t('mailers.common.disclaimer') %>
