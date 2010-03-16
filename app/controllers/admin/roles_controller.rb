@@ -6,7 +6,7 @@ class Admin::RolesController < Admin::AdminController
   before_filter :load_target_model, :except => :index
 
   def index
-    @search = Role.with_permissions_to(:manage, :context => :admin_users).search(params[:search]).search(params[:order])
+    @search = Role.with_permissions_to(:manage, :context => :admin_roles).search(params[:search]).search(params[:order])
     @roles = @search.paginate(:page => params[:page])
     @target_model = Role.new
   end
@@ -39,6 +39,13 @@ class Admin::RolesController < Admin::AdminController
   end
 
   protected
+  def load_role
+    @role = Role.find(params[:id])
+    if @role.model == 'Event' and not Event.can_manage(@current_user).find(@role.model.id)
+      redirect_to admin_login_path
+    end
+  end
+  
   # Tries to detect target role model by parameter. Loads role symbols and all object permissions.
   def load_target_model
     id = params[:model_id] if params[:model_id]
@@ -59,7 +66,7 @@ class Admin::RolesController < Admin::AdminController
       @role_symbols = @target_model.class.try(:class_role_symbols)
       @roles = @target_model.try(:roles)
     else
-      redirect_to admin_path
+      redirect_to admin_login_path
     end
   end
 end

@@ -22,6 +22,18 @@ describe Admin::RolesController do
       get :index
       roles.each { |e| assigns[:roles].should include(e) }
     end
+
+    it 'should be accessible for regional manager' do
+      regional_manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(regional_manager)
+      event = Factory(:event)
+      role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, event.location_address_county)
+      role2 = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, Factory(:event).location_address_county)
+      get :index
+      response.should be_success
+      assigns[:roles].should include(role)
+      assigns[:roles].should_not include(role2)
+    end
   end
   
   describe 'new' do
@@ -73,7 +85,7 @@ describe Admin::RolesController do
       
       role = Factory(:role)
       get :show, {:id => role.id}
-      response.should redirect_to(admin_path)      
+      response.should redirect_to(admin_login_path)      
     end
   end
    
@@ -91,7 +103,7 @@ describe Admin::RolesController do
       
       role = Factory(:role)
       get :edit, {:id => role.id}
-      response.should redirect_to(admin_path)
+      response.should redirect_to(admin_login_path)
     end    
   end
 
@@ -109,7 +121,7 @@ describe Admin::RolesController do
       
       role = Factory(:role)
       post :update, {:id => role.id, :role => role.attributes}
-      response.should redirect_to(admin_path)
+      response.should redirect_to(admin_login_path)
     end
   end
   
@@ -128,6 +140,26 @@ describe Admin::RolesController do
       role = Factory(:role)
       put :destroy, {:id => role.id, :model_type => role.model.class.name, :model_id => role.model.id}
       response.should redirect_to(new_admin_role_path(:model_type => role.model.class.name, :model_id => role.model.id))  
+    end
+
+    it 'should be accessible for regional manager' do
+      regional_manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(regional_manager)
+      event = Factory(:event)
+      role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, event.location_address_county)
+      put :destroy, {:id => role.id, :model_type => role.model.class.name, :model_id => role.model.id}
+      response.should redirect_to(new_admin_role_path(:model_type => role.model.class.name, :model_id => role.model.id))  
+    end
+
+    it 'should be denied for different regional manager' do
+      regional_manager = Factory.create(:user)
+      regional_manager2 = Factory.create(:user)
+      activate_authlogic and UserSession.create(regional_manager)
+      event = Factory(:event)
+      role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager2, event.location_address_county)      
+      role = Role.grant_role(Role::ROLE[:regional_manager], regional_manager, Factory(:event))
+      put :destroy, {:id => role.id, :model_type => event.class.name, :model_id => event.id}
+      response.should redirect_to(admin_login_path)  
     end
   end
 end

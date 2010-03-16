@@ -49,7 +49,7 @@ class Event < ActiveRecord::Base
   end
   
   def label
-    self.name
+    [self.code, self.name] * ', '
   end
 
   def to_param

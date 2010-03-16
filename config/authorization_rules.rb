@@ -38,6 +38,9 @@ authorization do
     end
     
     has_permission_on [:admin_event_participants], :to => [:manage]
+    has_permission_on [:admin_roles], :to => [:manage] do
+      if_attribute :role => Role::ROLE[:event_manager]
+    end
   end
 
   role :account_manager do
