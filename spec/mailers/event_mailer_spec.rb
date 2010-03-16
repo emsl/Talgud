@@ -47,6 +47,22 @@ describe Mailers::EventMailer, :type => :view do
     end
   end
   
+  describe 'invited_participant_notification' do
+    before(:each) do
+      @event_participant = Factory(:event_participant, :event_participant => Factory(:event_participant))
+      @edit_url = event_participation_url(@event_participant.event, @event_participant)
+      @event_url = event_url(@event_participant.event)
+      @mail = Mailers::EventMailer.create_invite_participant_notification(@event_participant, @event_url, @edit_url)
+    end
+    
+    it 'should contain parent participant name and event information' do
+      @mail.body.should include(@event_participant.event_participant.participant_name)
+      @mail.body.should include(@event_participant.event.name)
+      @mail.body.should include(@event_url)
+      @mail.body.should include(@edit_url)
+    end
+  end
+  
   describe 'manager_participation_notification' do
     before(:each) do
       @event_participant = Factory(:event_participant)
