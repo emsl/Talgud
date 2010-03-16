@@ -62,8 +62,7 @@ class ParticipationsController < ApplicationController
       return
     end
 
-    @event =
-    if @current_user
+    @event = if @current_user
       Event.can_manage(@current_user).find_by_url(params[:event_id])
     else
       Event.find_by_url(params[:event_id])

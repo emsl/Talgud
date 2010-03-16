@@ -1,11 +1,14 @@
-<h1><%= t('.title') %></h1>
-
-<div class="textcontent">
-  <%= link_to t('admin.common.export_xml'), admin_events_path(:format => :xml) %><br/>
-  <%= link_to t('admin.common.export_csv'), admin_events_path(:format => :csv) %><br/>
-  <%= link_to t('admin.common.export_excel'), admin_events_path(:format => :xls) %>
-</div>
-
+<h1>
+  <%= t('.title') %>
+  
+  <div style="float: right;" class="dataformats">
+    <%= t('admin.common.format') %>:
+    <%= link_to t('admin.common.export_excel'), admin_events_path(:format => :xls) %>
+    <%= link_to t('admin.common.export_csv'), admin_events_path(:format => :csv) %>
+    <%= link_to t('admin.common.export_xml'), admin_events_path(:format => :xml) %>
+  </div>
+  
+</h1>
 
 <div class="datacontent">
   <table class="datatable">

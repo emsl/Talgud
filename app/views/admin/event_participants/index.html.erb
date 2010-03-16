@@ -1,10 +1,15 @@
-<h1><%= t('.title', :event_name => @event.name) %></h1>
+<h1>
+  <%= t('.title', :event_name => @event.name) %>
+  <div style="float: right;" class="dataformats">
+    <%= t('admin.common.format') %>:
+    <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :xls) %>
+    <%= link_to t('admin.common.export_csv'), admin_event_participations_path(@event.id, :format => :csv) %>
+    <%= link_to t('admin.common.export_xml'), admin_event_participations_path(@event.id, :format => :xml) %>
+  </div>
+</h1>
 
 <div class="textcontent">
   <%= link_to t('.add_participant'), new_admin_event_participation_path(@event.id) %><br/>
-  <%= link_to t('admin.common.export_xml'), admin_event_participations_path(@event.id, :format => :xml) %><br/>
-  <%= link_to t('admin.common.export_csv'), admin_event_participations_path(@event.id, :format => :csv) %><br/>
-  <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :xls) %>  
 </div>
 
 <div class="datacontent">

@@ -345,10 +345,20 @@ div.pagination a {
 }
 
 /**
- * WYSIWYG editor styles overrides
+ * Data format selectors
  */
-div.wysiwyg {
-  float: left;
+div.dataformats {
+  color: #999;
+  font-size: 12px;
+  font-weight: normal;
+  margin-top: 8px;
+  vertical-align: bottom;
+}
+
+div.dataformats a {
+  color: #999;
+  font-weight: bold;
+  margin-left: 4px;
 }
 
 /**

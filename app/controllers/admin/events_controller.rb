@@ -7,7 +7,7 @@ class Admin::EventsController < Admin::AdminController
     @search = Event.can_manage(@current_user).search(params[:search]).search(params[:order])
     respond_to do |format|
       format.html { @events = @search.paginate(:page => params[:page]) }
-      format.xml  { render :xml => @search.all }
+      format.xml { render :xml => @search.all }
       format.csv { @events = @search.all; render_csv("events-#{Time.now.strftime("%Y%m%d")}") }
       format.xls { @events = @search.all }
     end

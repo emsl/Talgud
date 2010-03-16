@@ -55,21 +55,22 @@ et:
       event_participant: osalemine
   admin:
     common:
+      apply_filter: Filtreeri
       created_at: Lisatud
+      destroy: Kustuta
+      destroy_confirmation: Oled Sa ikka kustutamises kindel?
       edit: Muuda
+      export_csv: CSV
+      export_excel: Excel
+      export_xml: XML
+      format: Formaat
       logged_in: Sisse loginud kasutaja
       title: Talgute admin
       view: Vaata
-      destroy: Kustuta
-      destroy_confirmation: Oled Sa ikka kustutamises kindel?
       logout: Logi välja
       search: Otsi
-      apply_filter: Filtreeri
       filter_applied: Vaatele on rakendatud filter.
       clear_filter: Tühista filter
-      export_csv: Salvesta CSV
-      export_excel: Salvesta Excel
-      export_xml: XML
     counties:
       create:
         notice: Maakonna andmed on lisatud
@@ -241,17 +242,17 @@ et:
         notice: Osaleja on kustutatud
         error: Osaleja kustutamine ebaõnnestus
       edit:
-        title: "Talgutele '{{event_name}}' registreeritud osaleja muutmine"
+        title: "Talgutele “{{event_name}}” registreeritud osaleja muutmine"
       index:
         add_participant: Lisa talgutel osaleja
-        title: "Talgutele '{{event_name}}' registreeritud osalejad"
+        title: "Talgutele “{{event_name}}” registreeritud osalejad"
       new:
         title: Talgutel osaleja lisamine
       update:
         notice: Talgutel osaleja andmed on uuendatud
         error: Talgutel osaleja andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
       show:
-        title: "Talgutele '{{event_name}}' registreeritud osaleja"
+        title: "Talgutele “{{event_name}}” registreeritud osaleja"
     user_sessions:
       new:
         login_submit: Logi sisse
