@@ -29,8 +29,8 @@ class SignupsController < ApplicationController
       flash[:error] = t('signups.activate.user_has_been_activated')
       redirect_to login_path
     else
-      flash[:error] = t('signups.activate.invalid_activation_code')
-      redirect_to signup_path
+      flash[:notice] = t('signups.activate.invalid_activation_code')
+      redirect_to login_path
     end
   end
 end

@@ -469,7 +469,7 @@ et:
       error: "Registreerumine ebaõnnestus. Palun täida kõik väljad"
     activate: 
       activation_successful: "Sinu konto on aktiveeritud. Palun logige sisse."
-      invalid_activation_code: "Vigane aktiveerimise kood, palun kontrolli mailis olevat linki."
+      invalid_activation_code: "Palun logi sisse, kui sisselogimine ebaõnnestub, siis kontrolli kas oled konto aktiveerinud sinu e-posti aadressile saadetud juhiste järgi."
     new:
       registration_hint: "Talgute lisamiseks pead end kasutajaks registreerima, see võtab vaid hetke. Kui sul on kasutajakonto siin juba olemas, siis"
       login_submit: logi sisse      
