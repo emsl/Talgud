@@ -9,7 +9,7 @@ class EventParticipant < ActiveRecord::Base
   belongs_to :event_participant
   has_many :children, :class_name => 'EventParticipant', :foreign_key => :event_participant_id
   
-  accepts_nested_attributes_for :children, :reject_if => lambda { |c| [:firstname, :lastname, :email, :phone].all?{ |a| c[a].blank? } }
+  accepts_nested_attributes_for :children, :reject_if => lambda { |c| [:firstname, :lastname, :email, :phone].all?{ |a| c[a].blank? } }, :allow_destroy => true
 
   before_validation_on_create :ensure_event_association
   after_save :recalculate_event_current_participants

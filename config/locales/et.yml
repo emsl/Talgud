@@ -530,7 +530,7 @@ et:
       invite_participant_notification:
         subject: Talgupäevale registreerumine
         intro: "Tere {{name}}!"
-        event_name: "Oled registreerunud talgutele {{event_name}}.\nSind registreeris {{registrant_name}}."
+        event_name: "Oled registreerunud talgutele {{event_name}}. Sind registreeris {{registrant_name}}."
         event_link: "Sulle ja Sinu meeskonna liikmetele talgupäevaks vajalik informatsioon koos vajalike telefoninumbritega asub aadressil {{url}}. Palun säilita see e-kiri ning kontrolli saadetud linki vahetult enne talgupäeva: võib juhtuda, et informatsiooni osas toimub muudatusi. Talgupäevaks trüki infoleht välja ning võta talgutele kaasa."
         edit_link: "Sinu registreerumisel esitatud andmeid saad vaadata ja muuta siin: {{url}}"
         footer: "Kohtumiseni talgutel!"

@@ -45,6 +45,10 @@ class ParticipationsController < ApplicationController
 
       redirect_to confirmation_event_participation_path(@event, UrlStore.encode(@event_participant.id))
     else
+      while @event_participant.children.size < 3
+        @event_participant.children << EventParticipant.new
+      end
+      
       flash.now[:error] = t('participations.create.error')
       render :new
     end

@@ -7,7 +7,7 @@
   <% semantic_form_for :event_participant, @event_participant, :url => event_participation_path(@event, UrlStore.encode(@event_participant.id)), :html => {:method => :put} do |f| %>
     <%= render 'form' %>
     <% f.buttons do %>
-      <%= f.commit_button :participate %>
+      <%= f.commit_button :save_my_settings %>
     <% end %>
   <% end %>
 </div>

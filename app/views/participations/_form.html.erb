@@ -13,6 +13,7 @@
   jQuery(document).ready(initFormHints);
 </script>
 
+<% if @event_participant.parent? or @event_participant.new_record? %>
 <p><%= t('.invite_1') %></p>
 
 <p><%= t('.invite_2') %></p>
@@ -30,10 +31,13 @@
 <tbody style="display:none;">
 <% f.fields_for :children, EventParticipant.new, :child_index => 'new_children' do |child| %>
 <tr id="event_participant_template">
-  <td class="first"><%= child.text_field :firstname %></td>
+  <td class="first"><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.text_field :firstname %></td>
   <td><%= child.text_field :lastname %></td>
   <td><%= child.text_field :email %></td>
-  <td class="last"><%= child.text_field :phone %></td>
+  <td class="last">
+    <%= child.text_field :phone %>
+    <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
+  </td>
 </tr>
 <% end %>
 </tbody>
@@ -41,10 +45,13 @@
 <% @event_participant.children.each_with_index do |epc, idx| %>
 <% f.fields_for :children, epc do |child| %>
 <tr<%= ' class="first"' if idx == 0 %>>
-  <td<%= column_class_name(epc, :firstname, 'first') %>><%= child.hidden_field :id %><%= child.text_field :firstname %></td>
+  <td<%= column_class_name(epc, :firstname, 'first') %>><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.hidden_field :id %><%= child.text_field :firstname %></td>
   <td<%= column_class_name(epc, :lastname) %>><%= child.text_field :lastname %></td>
   <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
-  <td<%= column_class_name(epc, :phone, 'last') %>><%= child.text_field :phone %></td>
+  <td<%= column_class_name(epc, :phone, 'last') %>>
+    <%= child.text_field :phone %>
+    <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
+  </td>
 </tr>
 <% end %>
 <% end %>
@@ -88,5 +95,11 @@
         $('table.dataentry input').live('blur', function() {
             $(this).closest('tr').removeClass('active');
         });
+        $('a.event_participant_remove').live('click', function() {
+            $(this).closest('tr').hide();
+            $(this).closest('tr').find('input.event_participant_destroy').val(1);
+            return false;
+        });
     });
 </script>
+<% end %>

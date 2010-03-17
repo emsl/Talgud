@@ -113,6 +113,10 @@ table.dataentry tbody.inputs td input {
   width: 170px;
 }
 
+table.dataentry tbody.inputs td.last input {
+  width: 150px;
+}
+
 table.dataentry tbody.inputs td.error input {
   background: url('../images/invalid_line.gif') repeat-x scroll left bottom transparent;
 }
