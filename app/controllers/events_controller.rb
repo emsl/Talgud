@@ -57,7 +57,7 @@ class EventsController < ApplicationController
   
   def stats
     @max_participants = Event.published.sum(:max_participants, :conditions => filter_from_params)
-    @current_participants = Event.published.sum(:current_participants, :conditions => filter_from_params)
+    @current_participants = Event.published.sum('case when current_participants > max_participants then max_participants else current_participants end').to_i
     @needed_participants = [(@max_participants - @current_participants), 0].max
     
     render :json => {:max_participants => @max_participants, :current_participants => @current_participants, :needed_participants => @needed_participants}

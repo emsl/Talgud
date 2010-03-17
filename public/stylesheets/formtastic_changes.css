@@ -97,10 +97,6 @@ table.dataentry tbody.inputs tr.active td {
   background: #f5fcff;
 }
 
-table.dataentry tbody.inputs tr.active.first td {
-  background: url('../images/textbox_blue.gif') repeat-x scroll left top #f5fcff;
-}
-
 table.dataentry tbody.inputs td.first {
   border-left: 1px solid #a9a9aa;
 }

@@ -582,7 +582,7 @@ et:
       title: talgutel osalejad
     new:
       intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
-      no_vacancies: "Nendele talgutele registreerumine on lõppenud, kuna kõik kohad on täidetud"
+      no_vacancies: "Nendele talgutele registreerimine on lõppenud, kuna kõik kohad on täidetud"
       title: Registreeru talgutele
     update:
       notice: "Registreerumise andmed on uuendatud"
