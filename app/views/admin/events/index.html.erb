@@ -27,7 +27,7 @@
   </tr>
   </thead>
   <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
-    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
+    <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
     <td><%= f.input :name_like, :label => false, :input_html => {:size => 30} %></td>
     <td><%= f.input :code_like, :label => false, :input_html => {:size => 10} %></td>
     <td colspan="2"><%= f.input :event_type_id, :as => :select, :collection => EventType.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %></td>

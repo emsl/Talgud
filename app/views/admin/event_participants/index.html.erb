@@ -25,7 +25,7 @@
   </tr>
   </thead>
   <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
-    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
+    <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
     <td><%= f.input :firstname_like, :label => false, :input_html => {:size => 20} %></td>
     <td><%= f.input :lastname_like, :label => false, :input_html => {:size => 20} %></td>
     <td><%= f.input :email_like, :label => false, :input_html => {:size => 20} %></td>
