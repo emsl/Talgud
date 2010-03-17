@@ -17,6 +17,8 @@ class EventParticipant < ActiveRecord::Base
   validates_presence_of :firstname, :lastname, :event
   validates_presence_of :email, :phone, :if => :parent?
   
+  named_scope :ordered_by_name, :order => 'firstname ASC, lastname ASC'
+  
   # validates_each :event  do |record, attr, value|
   #   if record.event.vacancies == 0 and not parent?
   #     record.errors.add :firstname, :no_vacancies

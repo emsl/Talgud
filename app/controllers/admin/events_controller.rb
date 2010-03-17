@@ -1,6 +1,6 @@
 class Admin::EventsController < Admin::AdminController
   filter_resource_access :additional_collection => :map, :attribute_check => true
-  filter_access_to [:new, :show, :create, :edit, :update], :require => :manage
+  filter_access_to [:new, :show, :create, :edit, :update], :require => :manage  
 
   def index
     @search = Event.can_manage(@current_user).search(params[:search]).search(params[:order])
