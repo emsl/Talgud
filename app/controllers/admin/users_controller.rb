@@ -25,7 +25,7 @@ class Admin::UsersController < Admin::AdminController
       flash[:notice] = t('admin.users.create.notice')
       redirect_to admin_users_path
     else
-      flash.now[:error] = t('admin.users.create.error')
+      flash.now[:error] = t('admin.users.create.error')      
       render :action => :new
     end
   end
@@ -36,6 +36,7 @@ class Admin::UsersController < Admin::AdminController
       redirect_to admin_users_path
     else
       flash.now[:error] = t('admin.users.update.error')
+      @roles = @user.roles.all(:include => :model)
       render :action => :edit
     end
   end
