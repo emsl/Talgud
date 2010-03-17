@@ -4,7 +4,7 @@ class ParticipationsController < ApplicationController
   before_filter :load_event_participant, :only => [:show, :update, :redirect]
 
   def index
-    @event_participants = @event.event_participants.all
+    @event_participants = @event.event_participants.paginate(:order => 'firstname, lastname', :page => params[:page])
   end
 
   def new

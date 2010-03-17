@@ -1,7 +1,7 @@
 <h1>
   <%= t('.title', :event_name => @event.name) %>
   <div style="float: right;" class="dataformats">
-    <%= t('admin.common.format') %>:
+    <%= t('common.format') %>:
     <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :xls) %>
     <%= link_to t('admin.common.export_csv'), admin_event_participations_path(@event.id, :format => :csv) %>
     <%= link_to t('admin.common.export_xml'), admin_event_participations_path(@event.id, :format => :xml) %>

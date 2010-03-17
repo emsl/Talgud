@@ -62,7 +62,6 @@ et:
       export_csv: CSV
       export_excel: Excel
       export_xml: XML
-      format: Formaat
       logged_in: Sisse loginud kasutaja
       title: Talgute admin
       view: Vaata
@@ -294,7 +293,10 @@ et:
         destroy_role: Kustuta
         destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?        
   common:
+    created_at: Lisatud
+    delete: Kustuta
     filter_all: Kõik
+    format: Formaat
     loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
     title: Teeme ära! Talgud
@@ -553,8 +555,13 @@ et:
       footer: Kohtumiseni talgupäeval!
     create:
       error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
+    form:
+      add_participants: Lisa veel osavõtjaid
+      invite_1: "Kui soovid nendele talgutele minna teistega koos, siis palun sisesta siia ka nende nimed ning kontaktandmed."
+      invite_2: "Kui sa lisad siia oma sõprade e-mailid, siis saavad nad info registreerimise kohta ka oma e-mailile. Kui sa siia e-maile ei sisesta, siis palun edasta kogu sulle saadetud info neile ise."
     index:
       empty: Sellele talgule ei ole veel registreerunuid.
+      title: talgutel osalejad
     new:
       intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
       no_vacancies: "Nendele talgutele registreerumine on lõppenud, kuna kõik kohad on täidetud"

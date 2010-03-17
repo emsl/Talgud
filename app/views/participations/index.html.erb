@@ -3,20 +3,55 @@
   <%= render 'events/submenu_edit' if permitted_to?(:edit, @event) %>
 </div>
 <div class="container-right">
-  <h1><%= @event.name %></h1>
-  
+  <h1><%= @event.name %> <span style="font-weight: normal"><%= t('.title') %></span></h1>
+
+  <div class="object-detail">
   <% unless @event_participants.empty? %>
-  <table border="1">
+  
+  <div class="output-formats">
+    <%= t('common.format') %>:
+    <%= link_to 'Excel', event_participations_path(@event, :format => :xls) %>
+    <%= link_to 'CSV', event_participations_path(@event, :format => :csv) %>
+  </div>
+  
+  <table class="datatable">
+  <tr>
+    <th><%= t('formtastic.labels.event_participant.participant_name') %></th>
+    <th><%= t('formtastic.labels.event_participant.email') %></th>
+    <th><%= t('formtastic.labels.event_participant.phone') %></th>
+    <th><%= t('formtastic.labels.event_participant.notes') %></th>
+    <th><%= t('common.created_at') %></th>
+    <th></th>
+  </tr>
   <% for event_participant in @event_participants %>
   <tr>
-    <td><%= event_participant.participant_name %></td>
-    <td><%= event_participant.phone %></td>
-    <td><%= event_participant.email %></td>
-    <td><%= event_participant.notes %></td>
+    <td><%=h event_participant.participant_name %></td>
+    <td><%=h event_participant.phone %></td>
+    <td><%=h event_participant.email %></td>
+    <% if event_participant.notes && event_participant.notes.length > 20 %>
+    <td class="data-details">
+      <div class="data-details-overlay" style="display: none;"><%=h event_participant.notes %></div>
+      <span class="data-details-link"><%= truncate(h(event_participant.notes), :length => 20) %></span>
+    </td>
+    <% else %>
+    <td><%=h event_participant.notes %></td>
+    <% end %>
+    <td><%=h l(event_participant.created_at.to_date, :format => :long) %></td>
+    <td style="text-align: right;"><%#= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#', :title => t('common.delete')) %></td>
   </tr>
   <% end %>
   </table>
+  <%= paginate @event_participants %>
+  <div class="clearfix"></div>
   <% else %>
   <%= t('.empty') %>
   <% end %>
+  </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  jQuery(document).ready(function() {
+      $('table.datatable td.data-details').mouseover(function() { $(this).find('div.data-details-overlay').show(); });
+      $('div.data-details-overlay').mouseout(function() { $(this).hide(); });
+  });
+</script>

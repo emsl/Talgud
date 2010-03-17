@@ -13,14 +13,9 @@
   jQuery(document).ready(initFormHints);
 </script>
 
-<p>
-  Kui soovid nendel talgutele minna teistega koos, siis palun sisesta siia ka nende nimed ning kontaktandmed.
-</p>
+<p><%= t('.invite_1') %></p>
 
-<p>
-  Kui sa lisad siia oma sõprade e-mailid, siis saavad nad info registreerimise kohta ka oma e-mailile.
-  Kui sa siia e-maile ei sisesta, siis palun edasta kogu sulle saadetud info neile ise.
-</p>
+<p><%= t('.invite_2') %></p>
 
 <% fields_for @event_participant do |f| %>
 <table width="100%" class="dataentry" style="margin: 15px 0;">
@@ -57,7 +52,7 @@
 <tbody class="footer">
 <tr>
   <td colspan="4">
-    <a href="#add-participants" id="add_event_participant">Lisa veel osavõtjaid</a>
+    <a href="#add-participants" id="add_event_participant"><%= t('.add_participants') %></a>
   </td>
 </tr>
 </tbody>

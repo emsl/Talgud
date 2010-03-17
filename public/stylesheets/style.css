@@ -541,47 +541,89 @@ ul.submenu .active .arrow { display: block; }
 /* object-detail */
 .object-detail {
   background: white;
-  padding: 20px 10px;
-  border-left: 1px solid #f0f1f2;
   border-right: 1px solid #eff1f2;
   border-bottom: 1px solid #d7d9d9;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-left: 1px solid #f0f1f2;
   border-radius: 5px;
-  -moz-box-shadow: 1px 1px 1px #f0f0f0;
-  -webkit-box-shadow: 0 1px 2px #dedede;
   box-shadow: 0 1px 2px #dedede;
   margin-top: 15px;
+  padding: 20px;
+  -moz-border-radius: 5px;
+  -moz-box-shadow: 1px 1px 1px #f0f0f0;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px #dedede;
 }
-.object-detail table {
+
+.object-detail-time {
+  border: 5px solid #c2d97c;
+  border-radius: 10px;
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 13px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+table.vertical-data {
+  border-collapse: collapse;
   margin: 0;
   padding: 0;
-  border-collapse: collapse;
   width: 100%;
-
 }
-  .object-detail td {
-    vertical-align: top;
-    padding: 10px 10px;
-  }
-  .object-detail td.first {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: right;
-    width: 200px;
-  }
-  
-  .object-detail-time {
-    float: left;
-    border: 5px solid #c2d97c;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 8px 13px;
-  }
-                  
+
+table.vertical-data td {
+  padding: 10px 10px;
+  vertical-align: top;
+}
+
+table.vertical-data td.first {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+  width: 200px;
+}
+
+table.datatable {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+table.datatable td, table.datatable th {
+  padding: 5px;
+}
+
+table.datatable td {
+  border-top: 1px solid #cce6ee;
+  vertical-align: top;
+}
+
+table.datatable tr.noborder td {
+  border-top: none;
+}
+
+table.datatable td div.data-details-overlay {
+  background: #fff;
+  border: 2px solid #c2d97c;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #999;
+  margin: -17px 0 0 -17px;
+  padding: 15px;
+  position: absolute;
+  width: 300px;
+  z-index: 99999;
+  -moz-border-radius: 5px;
+  -moz-box-shadow: 0 0 5px #999;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+table.datatable td span.data-details-link {
+  border-bottom: 1px dotted #999;
+}
+
 /* Event listing */
 .event_item {
   margin-bottom: 15px;
@@ -845,6 +887,20 @@ div.infowindow div.clustered a {
 
 div.infowindow div.clustered a:hover {
   text-decoration: underline;
+}
+
+/* Output formats link */
+.output-formats {
+  color: #999;
+  text-align: right;
+  padding: 10px 0;
+}
+
+.output-formats a {
+  color: #666;
+  font-weight: bold;
+  padding-left: 5px;
+  text-decoration: none;
 }
 
 /* Pagination */
