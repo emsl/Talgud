@@ -140,7 +140,7 @@ class EventsController < ApplicationController
       memo << {
         :name => e.name, :latitude => e.latitude, :longitude => e.longitude, :url => event_url(e),
         :event_type => e.event_type.name, :address => e.location_address, :vacancies => e.vacancies,
-        :aim_desc => e.meta_aim_description, :job_desc => e.meta_job_description
+        :has_vacancies => e.vacancies?, :aim_desc => e.meta_aim_description, :job_desc => e.meta_job_description
       }
     end
   end

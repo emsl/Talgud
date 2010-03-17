@@ -29,7 +29,10 @@
               var position = new google.maps.LatLng(point.latitude, point.longitude);
               bounds.extend(position);
               
-              var marker = new DataMarker({position: position, title: point.name, icon: clusterer_red_icon, shadow: clusterer_shadow_icon});
+              var marker = new DataMarker({
+                title: point.name, icon: (point.has_vacancies ? clusterer_red_icon : clusterer_yellow_icon),
+                position: position, shadow: clusterer_shadow_icon
+              });
               marker.setData(point);
               
               google.maps.event.addListener(marker, 'click', function() {

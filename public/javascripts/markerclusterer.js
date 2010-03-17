@@ -51,6 +51,12 @@ var clusterer_red_icon = new google.maps.MarkerImage(
     new google.maps.Point(0, 0)
 );
 
+var clusterer_yellow_icon = new google.maps.MarkerImage(
+    'http://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png',
+    new google.maps.Size(32, 32),
+    new google.maps.Point(0, 0)
+);
+
 var clusterer_shadow_icon = new google.maps.MarkerImage(
     'http://maps.gstatic.com/intl/et_ee/mapfiles/shadow50.png',
     new google.maps.Size(50, 34),
