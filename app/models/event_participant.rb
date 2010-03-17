@@ -17,6 +17,8 @@ class EventParticipant < ActiveRecord::Base
   validates_presence_of :firstname, :lastname, :event
   validates_presence_of :email, :phone, :if => :parent?
   
+  named_scope :ordered_by_name, :order => 'firstname ASC, lastname ASC'
+  
   def parent?
     self.event_participant.nil?
   end
