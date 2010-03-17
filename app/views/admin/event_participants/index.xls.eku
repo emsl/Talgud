@@ -1,4 +1,4 @@
-__filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"
+__filename = @filename
 
 sheet1 = xls.create_worksheet
 sheet1[0, 0] = t('.title', :event_name => @event.name)
