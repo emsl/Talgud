@@ -58,6 +58,14 @@ class ParticipationsController < ApplicationController
       render :show
     end
   end
+  
+  def destroy
+    @event_participant = EventParticipant.find(params[:id])
+    @event_participant.destroy
+    
+    flash[:notice] = t('participations.destroy.notice')
+    redirect_to event_participations_path(@event)
+  end
 
   def redirect
     if @event_participant
@@ -70,10 +78,7 @@ class ParticipationsController < ApplicationController
   private
 
   def load_event
-    if action_name == 'index' and not @current_user
-      redirect_to(root_path)
-      return
-    end
+    redirect_to(root_path) and return if ['index', 'destroy'].include?(action_name) and not @current_user
 
     @event = if @current_user
       Event.can_manage(@current_user).find_by_url(params[:event_id])

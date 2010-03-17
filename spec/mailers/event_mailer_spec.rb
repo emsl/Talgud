@@ -29,6 +29,29 @@ describe Mailers::EventMailer, :type => :view do
     end
   end
   
+  describe 'invite_event_manager_notification' do
+    before(:each) do
+      @user = Factory(:user)
+      @manager = Factory(:user)
+      @event = Factory(:event)
+      @password = ActiveSupport::SecureRandom.base64(12)
+    end
+
+    it 'should contain manager login information if it is a new user' do
+      mail = Mailers::EventMailer.create_invite_event_manager_notification(@user, @manager, @event, login_url, @password)
+      mail.body.should include(@manager.name)
+      mail.body.should include(@user.name)
+      mail.body.should include(@manager.email)
+      mail.body.should include(@password)
+      mail.body.should include(login_url)
+    end
+    
+    it 'should not send password when new manager is an existing user' do
+      mail = Mailers::EventMailer.create_invite_event_manager_notification(@user, @manager, @event, login_url)
+      mail.body.should_not include(@password)
+    end
+  end
+  
   describe 'participant_notification' do
     before(:each) do
       activate_authlogic

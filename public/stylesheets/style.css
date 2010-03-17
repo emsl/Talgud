@@ -129,9 +129,10 @@ div.error, div.notice {
   font-size: 12px;
   padding: 15px;
   margin-bottom: 15px;
-  -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px;
+  -moz-box-shadow: 0 1px 0 #ccc;
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 }
 
 div.error {

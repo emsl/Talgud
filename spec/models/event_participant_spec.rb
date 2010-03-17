@@ -50,16 +50,6 @@ describe EventParticipant, 'create' do
     @event_participant.save!
     @event.current_participants.should eql(3)
   end
-
-  it "should not create while event vacancies is zero" do
-    @event = Factory(:event, :max_participants => 1)
-    @event_participant = Factory(:event_participant, :event => @event)
-    @event.vacancies.should eql(0)
-    
-    @event_participant = Factory.build(:event_participant, :event => @event)
-    @event_participant.should be_invalid
-    @event_participant.should have(1).error_on(:firstname)
-  end
 end
 
 describe EventParticipant, 'recommend_emails' do

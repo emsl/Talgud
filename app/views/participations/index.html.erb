@@ -37,7 +37,7 @@
     <td><%=h event_participant.notes %></td>
     <% end %>
     <td><%=h l(event_participant.created_at.to_date, :format => :long) %></td>
-    <td style="text-align: right;"><%#= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#', :title => t('common.delete')) %></td>
+    <td style="text-align: right;"><%= link_to(image_tag('trash.gif', :alt => t('common.delete')), event_participation_path(@event, event_participant), :method => :delete, :confirm => t('common.destroy_confirmation'), :title => t('common.delete')) %></td>
   </tr>
   <% end %>
   </table>

@@ -1,0 +1,23 @@
+<div class="container-left">
+  <%= render 'events/submenu' %>
+  <%= render 'events/submenu_edit' %>
+</div>
+<div class="container-right">
+  <h1><span style="font-weight: normal"><%= t('.title') %></span> <%= @event.name %></h1>
+
+  <p style="margin-bottom: 20px;">
+    <%= t('.intro') %>
+  </p>
+
+  <% semantic_form_for :user, @manager, :url => event_managers_path(@event) do |f| %>
+    <% f.inputs do %>
+      <%= f.input :firstname %>
+      <%= f.input :lastname %>
+      <%= f.input :email %>
+      <%= f.input :phone %>
+    <% end %>
+    <% f.buttons do %>
+      <%= f.commit_button :invite_event_manager %>
+    <% end %>
+  <% end %>
+</div>

@@ -57,7 +57,6 @@ et:
       apply_filter: Filtreeri
       created_at: Lisatud
       destroy: Kustuta
-      destroy_confirmation: Oled Sa ikka kustutamises kindel?
       edit: Muuda
       export_csv: CSV
       export_excel: Excel
@@ -295,6 +294,7 @@ et:
   common:
     created_at: Lisatud
     delete: Kustuta
+    destroy_confirmation: Oled Sa ikka kustutamises kindel?
     filter_all: Kõik
     format: Formaat
     loading: Laen andmeid...
@@ -349,7 +349,16 @@ et:
     submenu_edit:
       event_info: Talgute info
       edit_event: Muuda talguid
+      invite_manager: Lisa talgujuht
       show_participants: Registreerunud
+  event_managers:
+    new:
+      title: Lisa juht talgutele
+      intro: "Kui soovid talgute korraldamise õigust anda ka teisele kasutajale, siis sisesta siia tema nimi ja kontaktandmed. Pärast sisestamist saadetakse talle teavitus kutse kohta e-posti teel."
+    create:
+      error: "Talgujuhi lisamine ebaõnnestus, palun kontrolli andmete korrektsust ning proovi uuesti"
+      notice: "Talgujuht on lisatud, kutse selle kohta saadeti ka tema e-posti aadressile"
+      role_exists: "Kasutaja on juba nende talgute juhtide nimekirjas"
   formtastic:
     labels:
       county:
@@ -490,10 +499,11 @@ et:
         tellafriend_emails: Sisesta sõbra või sõprade e-posti aadressid eraldades need komadega
     actions:
       create: "Lisa {{model}}"
-      update: "Salvesta {{model}}"
-      signup: Registreeru
+      invite_event_manager: Saada talgujuhile kutse
       save_my_settings: Salvesta minu andmed
+      signup: Registreeru
       participate: Registreeru talgutele
+      update: "Salvesta {{model}}"
     submit: "Salvesta"
   mailers:
     common:
@@ -524,6 +534,12 @@ et:
         event_link: "Sulle ja Sinu meeskonna liikmetele talgupäevaks vajalik informatsioon koos vajalike telefoninumbritega asub aadressil {{url}}. Palun säilita see e-kiri ning kontrolli saadetud linki vahetult enne talgupäeva: võib juhtuda, et informatsiooni osas toimub muudatusi. Talgupäevaks trüki infoleht välja ning võta talgutele kaasa."
         edit_link: "Sinu registreerumisel esitatud andmeid saad vaadata ja muuta siin: {{url}}"
         footer: "Kohtumiseni talgutel!"
+      invite_event_manager_notification:
+        subject: "{{name}} kutsub sind talgujuhiks!"
+        intro: "Tere {{name}}!"
+        text: "{{user_name}} kutsus sind juhtima talguid {{event_name}}. Talgujuhina saad muuta talgute infot ning korraldada talguliste nimekirja. Jätkamiseks logi sisse aadressilt {{login_url}}."
+        your_username: "Sinu kasutajanimi on: {{username}}"
+        your_password: "Sinu salasõna on: {{password}}"
       manager_participation_notification:
         subject: "{{name}} registreerus talgutele {{event_name}}"
         intro: "{{name}} registreerus just sinu poolt korraldavatele talgutele"
@@ -555,6 +571,8 @@ et:
       footer: Kohtumiseni talgupäeval!
     create:
       error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
+    destroy:
+      notice: Talguline on kustutatud.
     form:
       add_participants: Lisa veel osavõtjaid
       invite_1: "Kui soovid nendele talgutele minna teistega koos, siis palun sisesta siia ka nende nimed ning kontaktandmed."

@@ -64,7 +64,6 @@ ru:
       clear_filter: "Tühista filter"
       created_at: Добавлен
       destroy: Kustuta
-      destroy_confirmation: "Oled Sa ikka kustutamises kindel?"
       edit: Изменить
       export_csv: CSV
       export_excel: Excel
@@ -278,6 +277,7 @@ ru:
       password_invalid: "пароль неверен"
   common:
     filter_all: Kõik
+    destroy_confirmation: "Oled Sa ikka kustutamises kindel?"
     loading: "Загрузка данных..."
     paginate_next: "järgmised &raquo;"
     paginate_previous: "&laquo; eelmised"

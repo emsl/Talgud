@@ -1,0 +1,10 @@
+<%= t('.intro', :name => @manager.name) %>
+
+<%= t('.text', :user_name => @user.name, :event_name => @event.name, :login_url => @login_url) %>
+
+<%= t('.your_username', :username => @manager.email) %>
+<%- if @password -%>
+<%= t('.your_password', :password => @password) %>
+<%- end -%>
+
+<%= t('mailers.common.footer_text') %>

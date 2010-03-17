@@ -41,7 +41,7 @@
     <td><%=h participation.lastname %></td>
     <td><%=h participation.email %></td>
     <td><%=h participation.phone %></td>
-    <td><%=h participation.notes %></td>
+    <td title="<%=h participation.notes %>"><%=h truncate(participation.notes, :length => 30) %></td>
     <td class="actions">
       <% if permitted_to?(:read, :admin_event_participants) %>
       <%= link_to t('admin.common.view'), admin_event_participation_path(@event.id, participation) %>
@@ -50,7 +50,7 @@
       <%= link_to t('admin.common.edit'), edit_admin_event_participation_path(@event.id, participation) %>
       <% end %>
       <% if permitted_to?(:destroy, :admin_event_participants) %>
-      <%= link_to t('admin.common.destroy'), admin_event_participation_path(@event.id, participation), :confirm => t('admin.common.destroy_confirmation'), :method => :delete %>
+      <%= link_to t('admin.common.destroy'), admin_event_participation_path(@event.id, participation), :confirm => t('common.destroy_confirmation'), :method => :delete %>
       <% end %>
     </td>
 

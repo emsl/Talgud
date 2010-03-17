@@ -61,11 +61,18 @@ class User < ActiveRecord::Base
     update_attribute(:status, STATUS[:active])
   end
 
-  #
-  def reset_password!
+  # Generates new password for user, but does not save the record. Use reset_password! method to update password with
+  # save.
+  def reset_password
     temporary_password = ActiveSupport::SecureRandom.base64(6)
     self.password = temporary_password
     self.password_confirmation = temporary_password
+    temporary_password
+  end
+
+  # Generates new password for user and saves the record.
+  def reset_password!
+    temporary_password = reset_password
     save! and return temporary_password
   end
 
