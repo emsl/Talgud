@@ -76,6 +76,8 @@ namespace :talgud do
     end
 
     task :merge, :primary, :new, :target, :needs => :environment do |t, args|
+      require 'ya2yaml'
+      
       if args[:primary] and args[:new] and args[:target]
         primary_yml = YAML::load_file(args[:primary])
         new_yml = YAML::load_file(args[:new])
