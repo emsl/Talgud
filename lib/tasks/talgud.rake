@@ -40,7 +40,7 @@ namespace :talgud do
 
         user = User.find_by_email(args[:manager_email])
         unless user
-          user = User.create! :firstname => 'Default', :lastname => 'Administrator', :password => args[:manager_password],
+          user = User.create! :firstname => 'Default', :lastname => 'Administrator', :phone => '123', :password => args[:manager_password],
           :password_confirmation => args[:manager_password], :email => args[:manager_email]
           puts "Created default account manager '#{user.email}' for domain '#{account.domain}'."
         else

@@ -5,12 +5,12 @@ describe User, 'validations' do
   before(:each) do
     @valid_attributes = {
       :firstname => 'Foo', :lastname => 'Bar', :email => 'example@example.com',
-      :password => 'abc', :password_confirmation => 'abc'
+      :password => 'abc', :password_confirmation => 'abc', :phone => '1234'
     }
   end
   
   it 'should require firstname, lastname and email' do
-    User.with_options(:password => 'abc', :password_confirmation => 'abc') do |u|
+    User.with_options(:password => 'abc', :password_confirmation => 'abc', :phone => '1234') do |u|
       u.new(:firstname => 'Foo', :lastname => 'Bar', :email => 'example@example.com').should be_valid
       u.new(:firstname => 'Foo', :lastname => 'Bar').should_not be_valid
       u.new.should_not be_valid
@@ -18,7 +18,7 @@ describe User, 'validations' do
   end
   
   it 'should require password to be at least 3 characters long' do
-    User.with_options(:firstname => 'Foo', :lastname => 'Bar', :email => 'example@example.com') do |u|
+    User.with_options(:firstname => 'Foo', :lastname => 'Bar', :email => 'example@example.com', :phone => '1234') do |u|
       u.new(:password => 'a', :password_confirmation => 'a').should_not be_valid
       u.new(:password => 'abcd', :password_confirmation => 'abce').should_not be_valid
       u.new(:password => 'abc', :password_confirmation => 'abc').should be_valid
@@ -49,11 +49,11 @@ describe User, 'validations' do
     user.phone.should eql('+3727121490')
   end
 
-  it 'should validate blank phone' do
+  it 'should not validate blank phone' do
     user = Factory.build(:user, :phone => nil)
-    user.should be_valid
+    user.should be_invalid
     user = Factory.build(:user, :phone => '')
-    user.should be_valid
+    user.should be_invalid
   end
 end
 
