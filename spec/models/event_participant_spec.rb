@@ -78,6 +78,11 @@ describe EventParticipant, 'recommend_emails' do
     @ep.tellafriend_emails = 'test@example.com, not_an_email'
     @ep.recommend_emails.should eql(['test@example.com'])
   end
+  
+  it 'should return empty array on nil' do
+    @ep.tellafriend_emails = nil
+    @ep.recommend_emails.should be_empty
+  end
 end
 
 describe EventParticipant, 'participant_name' do

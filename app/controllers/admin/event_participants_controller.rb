@@ -7,10 +7,10 @@ class Admin::EventParticipantsController < Admin::AdminController
   def index
     @search = @event.event_participants.search(params[:search]).search(params[:order])
     respond_to do |format|
-      format.html { @event_participants = @search.paginate(:page => params[:page]) }
       format.xml  { render :xml => @search.all }
       format.csv { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv" }
       format.xls { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"}
+      format.html { @event_participants = @search.paginate(:page => params[:page]) }
     end
   end
 
@@ -29,9 +29,6 @@ class Admin::EventParticipantsController < Admin::AdminController
       Mailers::EventMailer.deliver_participant_notification(@event_participant, event_url(@event), event_participation_url(@event, UrlStore.encode(@event_participant.id)))
       @event.managers.each do |manager|
         Mailers::EventMailer.deliver_manager_participation_notification(manager, @event_participant, event_participations_url(@event))
-      end
-      @event_participant.recommend_emails.each do |email|
-        Mailers::EventMailer.deliver_tell_friend_notification(email, @event_participant, event_url(@event))
       end
 
       flash[:notice] = t('admin.event_participants.create.notice')

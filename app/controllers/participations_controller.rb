@@ -7,9 +7,9 @@ class ParticipationsController < ApplicationController
     @search = @event.event_participants.search(:ordered_by_name => true)
     #@event_participants = @event.event_participants.paginate(:order => 'firstname, lastname')
     respond_to do |format|
-      format.html { @event_participants = @search.paginate(:page => params[:page]) }
       format.csv { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv" }
       format.xls { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"}
+      format.html { @event_participants = @search.paginate(:page => params[:page]) }
     end
   end
 

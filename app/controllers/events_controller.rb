@@ -9,8 +9,8 @@ class EventsController < ApplicationController
     ).search(filter_from_params)
     
     respond_to do |format|
-      format.html { @events = @search.paginate(:page => params[:page]) }
       format.xml  { render :xml => @search.all }
+      format.html { @events = @search.paginate(:page => params[:page]) }
     end
   end
 

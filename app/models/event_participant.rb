@@ -32,6 +32,7 @@ class EventParticipant < ActiveRecord::Base
   end
 
   def recommend_emails
+    return [] if tellafriend_emails.blank?
     res = tellafriend_emails.split(',').inject(Array.new) do |memo, item|
       item = item.strip
       memo << item if item =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/
