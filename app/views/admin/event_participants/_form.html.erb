@@ -4,6 +4,7 @@
   <%= f.input :lastname %>
   <%= f.input :email %>
   <%= f.input :phone %>
+  <%= f.input :age_range, :as => :select, :collection => age_range_options, :include_blank => false %>
   <%= f.input :notes, :input_html => {:rows => 3} %>
 <% end %>
 <% end %>

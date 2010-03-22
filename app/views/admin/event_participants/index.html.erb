@@ -24,7 +24,7 @@
     <th><%= order @search, :by => :phone, :as => t('formtastic.labels.event_participant.phone'), :params_scope => :order %></th>
     <th><%= order @search, :by => :age_range, :as => t('formtastic.labels.event_participant.age_range'), :params_scope => :order %></th>
     <th><%= order @search, :by => :notes, :as => t('formtastic.labels.event_participant.notes'), :params_scope => :order %></th>
-    <th><%= order @search, :by => :notes, :as => t('formtastic.labels.event_participant.event_participant'), :params_scope => :order %></th>
+    <th><%=h t('formtastic.labels.event_participant.event_participant') %></th>
     <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>

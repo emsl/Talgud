@@ -6,6 +6,7 @@ sheet1[0, 0] = t('.title')
 sheet1.row(1).concat [t('formtastic.labels.event.code'), 
   t('formtastic.labels.event.name'),
   t('formtastic.labels.event.event_type'),
+  t('formtastic.labels.event.managers'),
   t('formtastic.labels.event.location_address_county'),
   t('formtastic.labels.event.location_address_municipality'),
   t('formtastic.labels.event.location_address_settlement'),
@@ -27,7 +28,7 @@ sheet1.row(1).concat [t('formtastic.labels.event.code'),
   t('formtastic.labels.event.status')]
 
 @events.each_with_index do |e, i|
-  sheet1.update_row i+2, e.code, e.name, e.event_type.name, 
+  sheet1.update_row i+2, e.code, e.name, e.event_type.name, all_manager_contacts(e.managers),
     (e.location_address_county ? e.location_address_county.name : nil), 
     (e.location_address_municipality ? e.location_address_municipality.name : nil), 
     (e.location_address_settlement ? e.location_address_settlement.name : nil),

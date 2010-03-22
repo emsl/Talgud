@@ -232,6 +232,8 @@ et:
         notice: Talgu liigi andmed on uuendatud
         error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
     event_participants:
+      form:
+        choose_age_range: Vali vanus...
       create:
         notice: Osaleja andmed on lisatud
         error: Osaleja lisamisel tekkis viga. Palun kontrolli andmete korrektsust

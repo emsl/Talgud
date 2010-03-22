@@ -28,6 +28,10 @@
   <td><%=h @event_participant.phone %></td>
 </tr>
 <tr>
+  <td><b><%= t('formtastic.labels.event_participant.age_range') %></b></td>
+  <td><%=h age_range_label(@event_participant.age_range) %></td>
+</tr>
+<tr>
   <td><b><%= t('formtastic.labels.event_participant.notes') %></b></td>
   <td><%=h @event_participant.notes %></td>
 </tr>

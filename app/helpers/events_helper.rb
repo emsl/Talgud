@@ -25,4 +25,12 @@ module EventsHelper
   def manager_contacts(manager)
     [manager.name, manager.email, manager.phone].select{ |i| not i.blank? } * ', '
   end
+
+  def all_manager_contacts(managers)
+    return '' unless managers
+    contacts = managers.collect do |manager|
+      manager_contacts(manager)
+    end
+    contacts * '; '
+  end
 end
