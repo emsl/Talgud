@@ -15,7 +15,7 @@ describe Admin::EventsController do
       Role.grant_role(Role::ROLE[:account_manager], account_manager, Account.current)
 
       events = Array.new(10) { |i| Factory.create(:event) }
-      get :index
+      get :index, {:format => 'html'}
       assigns[:events].each { |e| events.should include(e) }
     end
 
@@ -29,7 +29,7 @@ describe Admin::EventsController do
         Role.grant_role(Role::ROLE[:regional_manager], regional_manager, event.location_address_county)
         event
       end
-      get :index
+      get :index, {:format => 'html'}
       assigns[:events].each { |e| events.should include(e) }
     end
 
@@ -40,7 +40,7 @@ describe Admin::EventsController do
       Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
 
       events = Array.new(10) { |i| Factory.create(:event) }
-      get :index
+      get :index, {:format => 'html'}
       assigns[:events].should be_empty
     end
     
@@ -53,14 +53,14 @@ describe Admin::EventsController do
       e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
       e3 = Factory.create(:event, :location_address_county => e2.location_address_county, :event_type => Factory.create(:event_type))
       
-      get :index, {:search => {:location_address_county_id => e2.location_address_county.id}}
+      get :index, {:search => {:location_address_county_id => e2.location_address_county.id}, :format => 'html'}
       assigns[:events].should include(e2, e3)
       assigns[:events].should_not include(e1)
 
-      get :index
+      get :index, {:format => 'html'}
       assigns[:events].should include(e2, e3, e1)
        
-      get :index, {:search => {:event_type_id => e1.event_type.id}}
+      get :index, {:search => {:event_type_id => e1.event_type.id}, :format => 'html'}
       assigns[:events].should include(e1, e2)
       assigns[:events].should_not include(e3)
     end

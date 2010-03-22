@@ -5,10 +5,10 @@ class Admin::EventsController < Admin::AdminController
   def index
     @search = Event.can_manage(@current_user).search(params[:search]).search(params[:order])
     respond_to do |format|
+      format.html { @events = @search.paginate(:page => params[:page]) }
       format.xml { render :xml => @search.all }
       format.csv { @events = @search.all; @filename = "events-#{Time.now.strftime("%Y%m%d")}.csv" }
       format.xls { @events = @search.all; @filename = "events-#{Time.now.strftime("%Y%m%d")}.xls" }
-      format.html { @events = @search.paginate(:page => params[:page]) }
     end
   end
 
@@ -19,10 +19,10 @@ class Admin::EventsController < Admin::AdminController
   def show
     @roles = @event.roles.all(:include => :model)
     respond_to do |format|
+      format.html
       format.xml  { render :xml => @event }
       format.csv { @filename = "event-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv" }
       format.xls { @filename = "event-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls" }
-      format.html
     end
   end
 

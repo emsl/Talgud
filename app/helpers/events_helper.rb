@@ -7,7 +7,8 @@ module EventsHelper
   end
   
   def duration_dates(event)
-    event.begins_at.strftime('%d.%m')
+    # event.begins_at.strftime('%d.%b')
+    l(event.begins_at.to_date, :format => :short)
   end
 
   # Returns language names associated with event as sentence.
