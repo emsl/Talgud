@@ -1,0 +1,27 @@
+body {
+  font: 13px/18px Arial, Verdana, sans-serif;
+}
+
+.noprint {
+  display: none;
+}
+
+#mainmenu {
+  display: none;
+}
+
+#langmenu {
+  display: none;
+}
+
+.container-left {
+  display: none;
+}
+
+.output-formats {
+  display: none;
+}
+
+#footer {
+  display: none;
+}

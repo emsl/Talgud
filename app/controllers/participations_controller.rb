@@ -4,12 +4,18 @@ class ParticipationsController < ApplicationController
   before_filter :load_event_participant, :only => [:show, :update, :redirect]
 
   def index
-    @search = @event.event_participants.search(:ordered_by_name => true)
-    #@event_participants = @event.event_participants.paginate(:order => 'firstname, lastname')
     respond_to do |format|
-      format.csv { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv" }
-      format.xls { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"}
-      format.html { @event_participants = @search.paginate(:page => params[:page]) }
+      format.html do
+        @event_participants = @event.event_participants.parents.all(:order => :id, :include => :children)
+      end
+      format.csv do
+        @event_participants = @event.event_participants.search(:ordered_by_name => true).all
+        @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv"
+      end
+      format.xls do
+        @event_participants = @event.event_participants.search(:ordered_by_name => true).all
+        @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"
+      end
     end
   end
 

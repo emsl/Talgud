@@ -26,9 +26,9 @@
   </tr>
   <% for event_participant in @event_participants %>
   <tr>
-    <td><%=h event_participant.participant_name %></td>
-    <td><%=h event_participant.phone %></td>
+    <td><b><%=h event_participant.participant_name %></b></td>
     <td><%=h event_participant.email %></td>
+    <td><%=h event_participant.phone %></td>
     <td><%=h age_range_label(event_participant.age_range) %></td>
     <% if event_participant.notes && event_participant.notes.length > 20 %>
     <td class="data-details">
@@ -39,14 +39,31 @@
     <td><%=h event_participant.notes %></td>
     <% end %>
     <td><%=h l(event_participant.created_at.to_date, :format => :long) %></td>
-    <td style="text-align: right;"><%= link_to(image_tag('trash.gif', :alt => t('common.delete')), event_participation_path(@event, event_participant), :method => :delete, :confirm => t('common.destroy_confirmation'), :title => t('common.delete')) %></td>
+    <td style="text-align: right;"><%= link_to(image_tag('trash.gif', :alt => t('common.delete')), event_participation_path(@event, event_participant), :method => :delete, :confirm => t('common.destroy_confirmation'), :title => t('common.delete')) if event_participant.children.empty? %></td>
+  </tr>
+  <% for child in event_participant.children %>
+  <tr class="child-row">
+    <td><%=h child.participant_name %></td>
+    <td><%=h child.email %></td>
+    <td><%=h child.phone %></td>
+    <td><%=h age_range_label(child.age_range) %></td>
+    <% if child.notes && child.notes.length > 20 %>
+    <td class="data-details">
+      <div class="data-details-overlay" style="display: none;"><%=h child.notes %></div>
+      <span class="data-details-link"><%= truncate(h(child.notes), :length => 20) %></span>
+    </td>
+    <% else %>
+    <td><%=h child.notes %></td>
+    <% end %>
+    <td><%=h l(child.created_at.to_date, :format => :long) %></td>
+    <td style="text-align: right;"><%= link_to(image_tag('trash.gif', :alt => t('common.delete')), event_participation_path(@event, child), :method => :delete, :confirm => t('common.destroy_confirmation'), :title => t('common.delete')) %></td>
   </tr>
   <% end %>
+  <% end %>
   </table>
-  <%= paginate @event_participants %>
   <div class="clearfix"></div>
   <% else %>
-  <%= t('.empty') %>
+  <div class="empty"><%= t('.empty') %></div>
   <% end %>
   </div>
 </div>
