@@ -613,6 +613,7 @@ et:
     create:
       notice: Uus salasõna saadeti sulle e-mailile
       error: Sellist e-posti aadressiga kontot ei ole registreeritud. Palun kontrolli aadressi korrektsust.
+      user_inactive: Parooli meeldetuletust on võimalik tellida pärast konto aktiveerimist. Aktiveerimise juhised saadeti uuesti sinu e-postile.
   signups:
     create:
       notice: Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile.

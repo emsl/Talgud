@@ -20,4 +20,13 @@ describe PasswordRemindersController, 'create' do
     flash[:error].should_not be_blank
   end
 
+  it 'should set a warning message and redirect to home screen when user is not activated' do
+    user = Factory(:user, :status => User::STATUS[:created])
+    Mailers::UserMailer.should_not_receive(:deliver_password_reminder)
+    Mailers::UserMailer.should_receive(:deliver_activation_instructions)
+    
+    post :create, {:password_reminder => {:email => "#{user.email}"}}
+    response.should redirect_to(login_path)
+    flash[:error].should_not be_blank
+  end
 end
