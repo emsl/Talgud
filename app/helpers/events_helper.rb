@@ -15,4 +15,8 @@ module EventsHelper
   def languages_label(event)
     event.languages.collect(&:name) * ', '
   end
+  
+  def manager_contacts(manager)
+    [manager.name, manager.email, manager.phone].select{ |i| not i.blank? } * ', '
+  end
 end

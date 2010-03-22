@@ -67,6 +67,16 @@
         <td class="first"><%= t('formtastic.labels.event.meta_subject_info') %></td>
         <td><%= auto_link(@event.meta_subject_info, :all, :target => "_blank") %></td>
       </tr>
+      <% if @event.managers.size > 1 %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.managers') %></td>
+        <td>
+          <% for manager in @event.managers %>
+          <div style="margin-bottom: 5px;"><%=h manager_contacts(manager) %></div>
+          <% end %>
+        </td>
+      </tr>
+      <% else %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.manager') %></td>
         <td><%=h @event.manager.name %></td>
@@ -82,6 +92,7 @@
         <td class="first"><%= t('formtastic.labels.event.manager_email') %></td>
         <td><%=h @event.manager.email %></td>
       </tr>
+      <% end %>
       <% end %>
       <% unless @event.languages.empty? %>
       <tr>
