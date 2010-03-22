@@ -3,6 +3,8 @@ class Admin::EventParticipantsController < Admin::AdminController
   before_filter :load_event  
   filter_resource_access :attribute_check => true  
   filter_access_to [:new, :show, :create, :edit, :update], :require => :manage
+  
+  helper :participations
 
   def index
     @search = @event.event_participants.search(params[:search]).search(params[:order])

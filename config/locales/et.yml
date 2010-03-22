@@ -409,6 +409,7 @@ et:
         location_address_street: "Asula, tänav, maja"
         longitude: Pikkuskraad
         manager: Talgujuht
+        managers: Talgujuhid
         manager_email: Talgujuhi e-mail
         manager_phone: Talgujuhi telefon
         max_participants: Talguliste maksimumarv
@@ -438,6 +439,16 @@ et:
         actions:
           submit: Salvesta talgud
       event_participant:
+        age_range: Vanus
+        age_ranges:
+          "1": "0 - 10"
+          "2": "11 - 18"
+          "3": "19 - 28"
+          "4": "29 - 38"
+          "5": "39 - 48"
+          "6": "49 - 58"
+          "7": "59 - 68"
+          "8": "68 ja vanem"
         email: E-mail
         event: Talgud
         firstname: Eesnimi
@@ -498,6 +509,7 @@ et:
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
         notes: Vajadusel lisa siia talgulistele oluline muu info
       event_participant:
+        age_range: "Registreerumiseks pead olema vähemalt 18-aastane! Noorematel soovitame talgutele tulla koos täiskasvanutega."
         notes: "Kirjuta siia igasugust lisainformatsiooni, mida pead oluliseks enda kohta talgujuhile teada anda."
         tellafriend_emails: "Sisesta siia nende sõprade e-posti aadressid, kellel tahad soovitada talgupäeval osalemist, eraldades aadressid komadega. Sõbrad saavad e-posti teel talgupäeva kutse."
     actions:
@@ -578,12 +590,13 @@ et:
       notice: Talguline on kustutatud.
     form:
       add_participants: Lisa veel osavõtjaid
+      choose_age_range: Vali vanus...
       invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talgupäevaks vajamineva informatsiooni ise edastama!"
     index:
       empty: Sellele talgule ei ole veel registreerunuid.
       title: talgutel osalejad
     new:
-      intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
+      intro: "Nendele talgutele registreerumiseks sisesta palun enda andmed. Sisestatud andmed edastatakse talgujuhile."
       no_vacancies: "Nendele talgutele registreerimine on lõppenud, kuna kõik kohad on täidetud"
       title: Registreeru talgutele
     update:

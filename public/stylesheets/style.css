@@ -601,6 +601,10 @@ table.datatable td {
   vertical-align: top;
 }
 
+table.datatable tr.child-row td {
+  border-top: 1px solid #eef7ff;
+}
+
 table.datatable tr.noborder td {
   border-top: none;
 }
@@ -877,7 +881,7 @@ div.infowindow div.label {
 }
 
 div.infowindow div.clustered a {
-  background: url('../images/map_mini_marker.png') no-repeat;
+  background: url('../images/map/red_mini_marker.png') no-repeat;
   color: black;
   display: block;
   font-weight: bold;
@@ -937,4 +941,12 @@ div.infowindow div.clustered a:hover {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+}
+
+/** Empty content area **/
+.empty {
+  color: #999;
+  font-size: 18px;
+  padding: 40px;
+  text-align: center;
 }

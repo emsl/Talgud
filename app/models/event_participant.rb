@@ -16,8 +16,10 @@ class EventParticipant < ActiveRecord::Base
 
   validates_presence_of :firstname, :lastname, :event
   validates_presence_of :email, :phone, :if => :parent?
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_blank => true
   
   named_scope :ordered_by_name, :order => 'firstname ASC, lastname ASC'
+  named_scope :parents, :conditions => {:event_participant_id => nil}
   
   def parent?
     self.event_participant.nil?

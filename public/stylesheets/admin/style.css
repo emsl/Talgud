@@ -347,7 +347,7 @@ div.pagination a {
 /**
  * Data format selectors
  */
-div.dataformats {
+span.dataformats {
   color: #999;
   font-size: 12px;
   font-weight: normal;
@@ -355,7 +355,7 @@ div.dataformats {
   vertical-align: bottom;
 }
 
-div.dataformats a {
+span.dataformats a {
   color: #999;
   font-weight: bold;
   margin-left: 4px;

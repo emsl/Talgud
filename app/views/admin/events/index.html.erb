@@ -1,14 +1,14 @@
 <h1>
-  <%= t('.title') %>
-  
-  <div style="float: right;" class="dataformats">
+  <span style="float: left;"><%= t('.title') %></span>
+  <span style="float: right;" class="dataformats">
     <%= t('common.format') %>:
     <%= link_to t('admin.common.export_excel'), admin_events_path(:format => :xls) %>
     <%= link_to t('admin.common.export_csv'), admin_events_path(:format => :csv) %>
     <%= link_to t('admin.common.export_xml'), admin_events_path(:format => :xml) %>
-  </div>
-  
+  </span>
 </h1>
+
+<div class="clearer"></div>
 
 <div class="datacontent">
   <table class="datatable">

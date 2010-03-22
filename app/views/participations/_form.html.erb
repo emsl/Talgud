@@ -4,6 +4,7 @@
   <%= f.input :lastname %>
   <%= f.input :email %>
   <%= f.input :phone %>
+  <%= f.input :age_range, :as => :select, :collection => age_range_options, :include_blank => false %>
   <%= f.input :notes, :input_html => {:rows => 3} %>
   <%= f.input :tellafriend_emails, :input_html => {:rows => 3} if @event_participant.new_record? %>
 <% end %>
@@ -25,6 +26,7 @@
   <th><%= t('formtastic.labels.event_participant.lastname') %></th>
   <th><%= t('formtastic.labels.event_participant.email') %></th>
   <th><%= t('formtastic.labels.event_participant.phone') %></th>
+  <th><%= t('formtastic.labels.event_participant.age_range') %></th>
 </tr>
 </thead>
 <tbody style="display:none;">
@@ -33,8 +35,9 @@
   <td class="first"><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.text_field :firstname %></td>
   <td><%= child.text_field :lastname %></td>
   <td><%= child.text_field :email %></td>
+  <td><%= child.text_field :phone %></td>
   <td class="last">
-    <%= child.text_field :phone %>
+    <%= child.select :age_range, age_range_options %>
     <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
   </td>
 </tr>
@@ -47,8 +50,9 @@
   <td<%= column_class_name(epc, :firstname, 'first') %>><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.hidden_field :id %><%= child.text_field :firstname %></td>
   <td<%= column_class_name(epc, :lastname) %>><%= child.text_field :lastname %></td>
   <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
-  <td<%= column_class_name(epc, :phone, 'last') %>>
-    <%= child.text_field :phone %>
+  <td<%= column_class_name(epc, :phone) %>><%= child.text_field :phone %></td>
+  <td<%= column_class_name(epc, :age_range, 'last') %>>
+    <%= child.select :age_range, age_range_options %>
     <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
   </td>
 </tr>
@@ -57,7 +61,7 @@
 </tbody>
 <tbody class="footer">
 <tr>
-  <td colspan="4">
+  <td colspan="5">
     <a href="#add-participants" id="add_event_participant"><%= t('.add_participants') %></a>
   </td>
 </tr>
