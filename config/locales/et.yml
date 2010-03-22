@@ -315,6 +315,11 @@ et:
       error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
     edit:
       title: Talguinfo muutmine
+    filter:
+      county: Maakond
+      event_type: Talgu liik
+      search: Otsi!
+      title: Otsi täpsemalt
     index:
       title: Kõik talgud
     latest:
