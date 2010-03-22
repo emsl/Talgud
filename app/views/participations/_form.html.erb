@@ -14,9 +14,8 @@
 </script>
 
 <% if @event_participant.parent? or @event_participant.new_record? %>
-<p><%= t('.invite_1') %></p>
 
-<p><%= t('.invite_2') %></p>
+<p><%= t('.invite') %></p>
 
 <% fields_for @event_participant do |f| %>
 <table width="100%" class="dataentry" style="margin: 15px 0;">

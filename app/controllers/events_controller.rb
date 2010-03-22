@@ -4,20 +4,20 @@ class EventsController < ApplicationController
 
   def index
     @search = Event.published(
-    :order => 'begins_at ASC', 
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+      :order => 'begins_at ASC', 
+      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     ).search(filter_from_params)
     
     respond_to do |format|
-      format.xml  { render :xml => @search.all }
+      format.xml { render :xml => @search.all }
       format.html { @events = @search.paginate(:page => params[:page]) }
     end
   end
 
   def my
     @events = Event.my_events(@current_user).paginate(
-    :order => 'begins_at ASC', :page => params[:page],
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+      :order => 'begins_at ASC', :page => params[:page],
+      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
 
@@ -29,8 +29,8 @@ class EventsController < ApplicationController
       end
       format.json do
         @events = Event.published.all(
-        :conditions => filter_from_params,
-        :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+          :conditions => filter_from_params,
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
         )
         render :json => events_json_hash(@events)
       end

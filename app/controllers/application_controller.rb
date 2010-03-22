@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   # Account select before filter must be declared before userstamp, which in turn adds one before filter that depends
   # on selected account.
-  before_filter :set_locale, :select_account_and_user
+  before_filter :set_locale, :select_account_and_user, :hijack_ie_default_format
 
   include Userstamp
 
@@ -54,5 +54,11 @@ class ApplicationController < ActionController::Base
   def set_locale
     session[:language] = params[:language].is_a?(String) ? params[:language].to_sym : params[:language] if params[:language]
     I18n.locale = APPLICATION_LANGUAGES.include?(session[:language]) ? session[:language] : I18n.default_locale
+  end
+  
+  def hijack_ie_default_format
+    if request.user_agent =~ /MSIE/ and params['format'].nil?
+      params['format'] = 'html'
+    end
   end
 end
