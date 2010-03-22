@@ -21,6 +21,7 @@
     <th><%= order @search, :by => :email, :as => t('formtastic.labels.event_participant.email'), :params_scope => :order %></th>
     <th><%= order @search, :by => :phone, :as => t('formtastic.labels.event_participant.phone'), :params_scope => :order %></th>
     <th><%= order @search, :by => :notes, :as => t('formtastic.labels.event_participant.notes'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :notes, :as => t('formtastic.labels.event_participant.event_participant'), :params_scope => :order %></th>
     <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>
@@ -41,7 +42,8 @@
     <td><%=h participation.lastname %></td>
     <td><%=h participation.email %></td>
     <td><%=h participation.phone %></td>
-    <td title="<%=h participation.notes %>"><%=h truncate(participation.notes, :length => 30) %></td>
+    <td title="<%=h participation.notes %>"><%=h truncate(participation.notes, :length => 30) %></td>    
+    <td><%=h participation.parent_name %></td>
     <td class="actions">
       <% if permitted_to?(:read, :admin_event_participants) %>
       <%= link_to t('admin.common.view'), admin_event_participation_path(@event.id, participation) %>

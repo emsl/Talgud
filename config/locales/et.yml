@@ -445,6 +445,7 @@ et:
         participant_name: Nimi
         phone: Telefon
         tellafriend_emails: Soovita ka sõbral osaleda
+        event_participant: Kaaslane
       municipality:
         name: Omavalitsuse nimi
         regional_managers: Piirkondlikud haldurid

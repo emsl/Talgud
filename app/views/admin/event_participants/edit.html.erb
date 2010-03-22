@@ -1,6 +1,6 @@
 <h1><%= t('.title', :event_name => @event.name) %></h1>
 
-<% semantic_form_for @event_participant, :url => admin_event_participations_path(@event.id) do |f| %>
+<% semantic_form_for @event_participant, :url => admin_event_participation_path(@event.id) do |f| %>
   <%= render 'form' %>
   <%= f.buttons %>
 <% end %>
