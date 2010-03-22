@@ -581,7 +581,7 @@ et:
       empty: Sellele talgule ei ole veel registreerunuid.
       title: talgutel osalejad
     new:
-      intro: Nendele talgutele registreerumiseks sisestage palun enda andmed.
+      intro: "Nendele talgutele registreerumiseks sisesta palun enda andmed. Sisestatud andmed edastatakse talgujuhile."
       no_vacancies: "Nendele talgutele registreerimine on lõppenud, kuna kõik kohad on täidetud"
       title: Registreeru talgutele
     update:

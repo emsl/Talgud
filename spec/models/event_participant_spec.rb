@@ -2,34 +2,39 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe EventParticipant, 'validations' do
   it "should validate presence of first and lastname" do
-    @event_participant = Factory.build(:event_participant, :firstname => nil, :lastname => nil)
-    @event_participant.should be_invalid
-    @event_participant.should have(1).error_on(:firstname)
-    @event_participant.should have(1).error_on(:lastname)
+    ep = Factory.build(:event_participant, :firstname => nil, :lastname => nil)
+    ep.should be_invalid
+    ep.should have(1).error_on(:firstname)
+    ep.should have(1).error_on(:lastname)
   end
 
   it "should validate presence of email and phone on parent record" do
-    @event_participant = Factory.build(:event_participant, :phone => nil, :email => nil)
-    @event_participant.should be_invalid
-    @event_participant.should have(1).error_on(:phone)
-    @event_participant.should have(1).error_on(:email)
+    ep = Factory.build(:event_participant, :phone => nil, :email => nil)
+    ep.should be_invalid
+    ep.should have(1).error_on(:phone)
+    ep.should have(1).errors_on(:email)
   end
 
   it "should validate presence of email and phone on child record" do
-    @event_participant = Factory.build(:event_participant, :phone => nil, :email => nil, :event_participant => Factory(:event_participant))
-    @event_participant.should be_valid
+    ep = Factory.build(:event_participant, :phone => nil, :email => nil, :event_participant => Factory(:event_participant))
+    ep.should be_valid
+  end
+  
+  it 'should validate format of email' do
+    ep = Factory.build(:event_participant, :email => 'invalid_email')
+    ep.should have(1).error_on(:email)
   end
 end
 
 describe EventParticipant, 'parent' do
   it "should return true on parent record" do
-    @event_participant = Factory(:event_participant, :event_participant => nil)
-    @event_participant.parent?.should be_true
+    ep = Factory(:event_participant, :event_participant => nil)
+    ep.parent?.should be_true
   end
 
   it "should return false on child record" do
-    @event_participant = Factory(:event_participant, :event_participant => Factory(:event_participant))
-    @event_participant.parent?.should be_false
+    ep = Factory(:event_participant, :event_participant => Factory(:event_participant))
+    ep.parent?.should be_false
   end
 end
 
@@ -87,8 +92,8 @@ end
 
 describe EventParticipant, 'participant_name' do
   it 'should glue firstname and lastname together' do
-    @event_participant = Factory(:event_participant, :firstname => 'John', :lastname => 'Smith')
-    @event_participant.participant_name.should eql('John Smith')
+    ep = Factory(:event_participant, :firstname => 'John', :lastname => 'Smith')
+    ep.participant_name.should eql('John Smith')
   end
 end
 
