@@ -31,6 +31,15 @@ class EventParticipant < ActiveRecord::Base
     [firstname, lastname] * ' '
   end
 
+  # Returns full name for given participant.
+  def name
+    [firstname, lastname] * ' '
+  end
+  
+  def parent_name
+    self.event_participant ? self.event_participant.name : nil
+  end
+
   def recommend_emails
     return [] if tellafriend_emails.blank?
     res = tellafriend_emails.split(',').inject(Array.new) do |memo, item|

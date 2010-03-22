@@ -6,6 +6,9 @@ sheet1[0, 0] = t('.title', :event_name => @event.name)
 sheet1.row(1).concat [t('formtastic.labels.event.code'), 
   t('formtastic.labels.event.name'),
   t('formtastic.labels.event.event_type'),
+  t('formtastic.labels.event.location_address_county'),
+  t('formtastic.labels.event.location_address_municipality'),
+  t('formtastic.labels.event.location_address_settlement'),
   t('formtastic.labels.event.location_address_street'),
   t('formtastic.labels.event.meta_aim_description'),
   t('formtastic.labels.event.meta_job_description'),
@@ -23,7 +26,11 @@ sheet1.row(1).concat [t('formtastic.labels.event.code'),
   t('formtastic.labels.event.meta_subject_heritage_number'),
   t('formtastic.labels.event.status')]
 
-sheet1.update_row 2, @event.code, @event.name, @event.event_type.name, @event.location_address_street, @event.meta_aim_description,
+sheet1.update_row 2, @event.code, @event.name, @event.event_type.name, 
+  (@event.location_address_county ? @event.location_address_county.name : nil), 
+  (@event.location_address_municipality ? @event.location_address_municipality.name : nil), 
+  (@event.location_address_settlement ? @event.location_address_settlement.name : nil),        
+  @event.location_address_street, @event.meta_aim_description,
   @event.meta_job_description, @event.max_participants, @event.current_participants, @event.begins_at, @event.ends_at, 
   @event.meta_bring_with_you, @event.meta_provided_for_participiants, @event.languages.collect(&:name) * ', ', @event.gathering_location,
   @event.notes, @event.meta_subject_owner, @event.meta_subject_protegee, @event.meta_subject_heritage_number, 
@@ -48,11 +55,13 @@ sheet2.row(1).concat [t('formtastic.labels.event.code'),
   t('formtastic.labels.event_participant.lastname'),
   t('formtastic.labels.event_participant.email'),
   t('formtastic.labels.event_participant.phone'),
-  t('formtastic.labels.event_participant.notes')]
+  t('formtastic.labels.event_participant.notes'),
+  t('formtastic.labels.event_participant.event_participant')
+  ]
 
 @event.event_participants.each_with_index do |p, i|
   sheet2.update_row i+2, p.event.code, p.event.name, p.event.max_participants, p.event.current_participants, p.event.vacancies, 
-    p.firstname, p.lastname, p.email, p.phone, p.notes
+    p.firstname, p.lastname, p.email, p.phone, p.notes, p.parent_name
 end
 
 sheet2.row(0).set_format(0, title_format)
