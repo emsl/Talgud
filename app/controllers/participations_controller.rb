@@ -87,10 +87,11 @@ class ParticipationsController < ApplicationController
 
   private
 
+  # Index and destroy actions should be only accessible to users who can manage event.
   def load_event
     redirect_to(root_path) and return if ['index', 'destroy'].include?(action_name) and not @current_user
 
-    @event = if @current_user
+    @event = if @current_user and ['index', 'destroy'].include?(action_name)
       Event.can_manage(@current_user).find_by_url(params[:event_id])
     else
       Event.find_by_url(params[:event_id])

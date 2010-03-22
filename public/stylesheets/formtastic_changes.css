@@ -78,7 +78,6 @@ table.dataentry {
 }
 
 table.dataentry thead th {
-  border-bottom: 1px solid #a9a9aa;
   font-weight: normal;
   padding: 5px 7px;
 }
@@ -90,6 +89,7 @@ table.dataentry tbody.inputs td {
 }
 
 table.dataentry tbody.inputs tr.first td {
+  border-top: 1px solid #a9a9aa;
   background: url('../images/textbox.gif') repeat-x scroll left top white;
 }
 
@@ -110,11 +110,11 @@ table.dataentry tbody.inputs td input {
   border: transparent;
   outline: none;
   font-size: 16px;
-  width: 170px;
+  width: 135px;
 }
 
-table.dataentry tbody.inputs td.last input {
-  width: 150px;
+table.dataentry tbody.inputs td.last select {
+  width: 100px;
 }
 
 table.dataentry tbody.inputs td.error input {
