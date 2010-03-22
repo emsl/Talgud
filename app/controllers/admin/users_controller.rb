@@ -37,6 +37,7 @@ class Admin::UsersController < Admin::AdminController
       redirect_to admin_users_path
     else
       flash.now[:error] = t('admin.users.update.error')
+      @roles = @user.roles.all(:include => :model)
       render :action => :edit
     end
   end

@@ -26,7 +26,10 @@ class Admin::EventParticipantsController < Admin::AdminController
       @event_participant.save
 
       # Deliver load of emails to all parties that might be interested in such participation
-      Mailers::EventMailer.deliver_participant_notification(@event_participant, event_url(@event), event_participation_url(@event, UrlStore.encode(@event_participant.id)))
+      Mailers::EventMailer.deliver_participant_notification(@event_participant, event_url(@event), event_participation_redirect_url(UrlStore.encode(@event_participant.id)))
+      @event_participant.children.select{ |c| not c.email.blank? }.each do |event_participant|
+        Mailers::EventMailer.deliver_invite_participant_notification(event_participant, event_url(@event), event_participation_redirect_url(UrlStore.encode(event_participant.id)))
+      end
       @event.managers.each do |manager|
         Mailers::EventMailer.deliver_manager_participation_notification(manager, @event_participant, event_participations_url(@event))
       end
@@ -77,7 +80,6 @@ class Admin::EventParticipantsController < Admin::AdminController
   end
 
   def load_event_participant
-    p params
     @event_participant = @event.event_participants.find(params[:id])
   end
 end

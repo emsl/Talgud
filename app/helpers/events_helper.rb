@@ -15,4 +15,10 @@ module EventsHelper
   def languages_label(event)
     event.languages.collect(&:name) * ', '
   end
+  
+  def select_options_for_language
+    Language.sorted.collect do |l|
+      [l.name, l.id]
+    end
+  end  
 end

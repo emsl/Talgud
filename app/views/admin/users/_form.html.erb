@@ -6,5 +6,7 @@
     <%= f.input :phone %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
+    <%= f.input :perishable_token, :input_html => {:disabled => true} %>
+    <%= f.input :status, :as => :select, :collection => User::STATUS.keys.collect{ |s| [t("formtastic.labels.user.statuses.#{s}"), s.to_s] }, :include_blank => false unless @user.new_record? %>    
   <% end %>
 <% end %>

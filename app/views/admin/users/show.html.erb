@@ -23,6 +23,14 @@
   <td><b><%= t('formtastic.labels.user.phone') %></b></td>
   <td><%=h @user.phone %></td>
 </tr>
+<tr>
+  <td><b><%= t('formtastic.labels.user.perishable_token') %></b></td>
+  <td><%=h @user.perishable_token %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.user.status') %></b></td>
+  <td><%=h t("formtastic.labels.user.statuses.#{@user.status}") %></td>
+</tr>
 </table>
 </div>
 

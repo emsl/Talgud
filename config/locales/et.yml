@@ -381,6 +381,7 @@ et:
         password: Salasõna
         password_confirmation: Salasõna kinnitus
         status: Staatus
+        perishable_token: Aktiveerimise võti
         statuses:
           created: Uus
           active: Aktiveeritud
@@ -405,7 +406,7 @@ et:
         location_address_county: Maakond
         location_address_municipality: Linn / vald
         location_address_settlement: Asula / küla
-        location_address_street: "Tänav, maja"
+        location_address_street: "Asula, tänav, maja"
         longitude: Pikkuskraad
         manager: Talgujuht
         manager_email: Talgujuhi e-mail
