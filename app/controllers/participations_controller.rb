@@ -6,7 +6,7 @@ class ParticipationsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @event_participants = @event.event_participants.parents.all(:order => :id, :include => :children)
+        @event_participants = @event.event_participants.all(:order => :id, :include => :children)
       end
       format.csv do
         @event_participants = @event.event_participants.search(:ordered_by_name => true).all

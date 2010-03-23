@@ -890,6 +890,10 @@ div.infowindow div.clustered a {
   text-decoration: none;
 }
 
+div.infowindow div.clustered a.no_vacancies {
+  background: url('../images/map/yellow_mini_marker.png') no-repeat;
+}
+
 div.infowindow div.clustered a:hover {
   text-decoration: underline;
 }

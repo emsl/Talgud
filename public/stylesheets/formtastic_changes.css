@@ -1,4 +1,9 @@
-form.formtastic abbr, form.formtastic acronym { display: none; }
+form.formtastic acronym { display: none; }
+
+form.formtastic abbr {
+  color: #c00;
+  margin-left: 2px;
+}
 
 form.formtastic fieldset { display: block; }
 

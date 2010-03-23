@@ -4,8 +4,8 @@
     
     <% semantic_form_for :user_session, @user_session, :url => user_sessions_path do |f| %>
       <% f.inputs do %>
-        <%= f.input :email %>
-        <%= f.input :password, :wrapper_html => {:style => 'padding-bottom: 0px;'} %>
+        <%= f.input :email, :required => false %>
+        <%= f.input :password, :wrapper_html => {:style => 'padding-bottom: 0px;'}, :required => false %>
         <li>
           <%= link_to t('.forgot_password'), '#reset-password', :id => 'reset_password_link' %>
         </li>
@@ -26,7 +26,7 @@
     
     <% semantic_form_for :password_reminder, :url => password_reminders_path do |f| %>
       <% f.inputs do %>
-        <%= f.input :email %>
+        <%= f.input :email, :required => false %>
       <% end %>
       <ol>
         <li class="commit">

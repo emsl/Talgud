@@ -132,6 +132,7 @@ class EventsController < ApplicationController
     conditions = {}
     conditions[:location_address_county_id] = params[:county] unless params[:county].blank?
     conditions[:event_type_id] = params[:event_type] unless params[:event_type].blank?
+    conditions[:code] = params[:event_code] unless params[:event_code].blank?
     conditions
   end
 

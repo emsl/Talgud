@@ -45,7 +45,7 @@ et:
       account: konto
       county: maakond
       event: talgu
-      event_type: talgu liik
+      event_type: talgute liik
       language: keel
       municipality: omavalitsus
       settlement: asula
@@ -216,18 +216,18 @@ et:
         error: Keele andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
     event_types:
       create:
-        notice: Talgu liigi andmed on lisatud
-        error: Talgu liigi lisamisel tekkis viga. Palun kontrolli andmete korrektsust
+        notice: Talgute liigi andmed on lisatud
+        error: Talgute liigi lisamisel tekkis viga. Palun kontrolli andmete korrektsust
       destroy:
-        notice: Talgu liik on kustutatud
-        error: Talgu liigi kustutamine ebaõnnestus
+        notice: Talgute liik on kustutatud
+        error: Talgute liigi kustutamine ebaõnnestus
       edit:
-        title: Talgu liigi muutmine
+        title: Talgute liigi muutmine
       index:
-        add_event_type: Lisa talgu liik
-        title: Talgu liigid
+        add_event_type: Lisa talgute liik
+        title: Talgute liigid
       new:
-        title: Talgu liigi lisamine
+        title: Talgute liigi lisamine
       update:
         notice: Talgu liigi andmed on uuendatud
         error: Talgu liigi andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
@@ -319,11 +319,13 @@ et:
       title: Talguinfo muutmine
     filter:
       county: Maakond
-      event_type: Talgu liik
+      event_code: Talgute kood
+      event_type: Talgute liik
       search: Otsi!
       title: Otsi täpsemalt
     index:
       title: Kõik talgud
+      empty: Otsingu tulemusena talguid ei leitud
     latest:
       title: Viimati lisatud
     my:
@@ -340,9 +342,12 @@ et:
       additional_questions: "Lisaküsimused, ei avalikustata"
     map:
       show_link: "Vaata lähemalt &raquo;"
+      event_aim: Tööde eesmärk
+      event_description: Tööde kirjeldus
+      event_vacancies: Vabu kohti
     show:
       more_events_in_area: Veel talguid samas piirkonnas
-      register_to_this_event: Registreeri end sellele talgule!
+      register_to_this_event: Registreeri nendele talgutele!
       no_vacancies: Kõik kohad on täidetud!
       registration_starts_at: Talgutele registreerumine algab 1. aprillil
       sponsor_this_event: Toeta neid talguid!
@@ -482,7 +487,7 @@ et:
         roles:
           account_manager: Konto haldur
           event_manager: Talgujuht
-          event_participant: Talgul osaleja
+          event_participant: Talgutel osaleja
           guest: Tavakasutaja
           regional_manager: Piirkonna haldur
           system_administrator: Süsteemi administraator
@@ -600,7 +605,7 @@ et:
       choose_age_range: Vali vanus...
       invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talgupäevaks vajamineva informatsiooni ise edastama!"
     index:
-      empty: Sellele talgule ei ole veel registreerunuid.
+      empty: Nendele talgutele ei ole veel registreerunuid.
       title: talgutel osalejad
     new:
       intro: "Nendele talgutele registreerumiseks sisesta palun enda andmed. Sisestatud andmed edastatakse talgujuhile."
