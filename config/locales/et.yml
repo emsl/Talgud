@@ -129,7 +129,7 @@ et:
         title: Talgute kaart
         show: Vaata
       update:
-        notice: Talgu andmed on uuendatud
+        notice: Talgu andmed on uuendatud. Olulisemate muudatuste korral palun teavita sellest ka talgulisi.
         error: Talgu andmete uuendamisel tekkis viga
       show:
         roles: Talgujuhid
@@ -463,7 +463,7 @@ et:
         notes: Lisainfo
         participant_name: Nimi
         phone: Telefon
-        tellafriend_emails: Soovita ka sõbral osaleda
+        tellafriend_emails: Kutsu ka teised sõbrad osalema
         event_participant: Kaaslane
       municipality:
         name: Omavalitsuse nimi
@@ -590,7 +590,7 @@ et:
       mail_info: "Registreerumiskinnitus saadeti Sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, võta ühendust talgujuhiga."
       contact_info: "Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta!"
       link_to_event: Vaata talguinfot
-      footer: Täname registreerumast!
+      footer: Kohtumiseni talgupäeval!
     create:
       error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
     destroy:

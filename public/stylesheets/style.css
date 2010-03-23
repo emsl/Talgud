@@ -126,7 +126,7 @@ input, textarea { color: #222; font: 13px/15px Arial, Verdana, sans-serif;}
 
 /* Error and notice messages */
 div.error, div.notice {
-  font-size: 12px;
+  font-size: 14px;
   padding: 15px;
   margin-bottom: 15px;
   -moz-border-radius: 3px;

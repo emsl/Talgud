@@ -14,7 +14,7 @@ class EventParticipant < ActiveRecord::Base
   before_validation_on_create :ensure_event_association
   after_save :recalculate_event_current_participants
 
-  validates_presence_of :firstname, :lastname, :event
+  validates_presence_of :firstname, :lastname, :event, :age_range
   validates_presence_of :email, :phone, :if => :parent?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_blank => true
   

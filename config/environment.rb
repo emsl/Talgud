@@ -17,6 +17,7 @@ Rails::Initializer.run do |config|
   config.gem 'url_store'
   config.gem 'fastercsv'
   config.gem 'spreadsheet'
+  config.gem 'icalendar'
   
   config.frameworks -= [:active_resource]
 
