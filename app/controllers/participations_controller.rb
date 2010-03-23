@@ -64,9 +64,17 @@ class ParticipationsController < ApplicationController
   end
 
   def update
+    previous_children = @event_participant.children.collect{ |c| c.id }
+    
     @event_participant.attributes = params[:event_participant]
     if @event_participant.valid? & @event_participant.children_valid?
       @event_participant.save
+      @event_participant.children.select{ |c| not c.email.blank? }.each do |c|
+        unless previous_children.include?(c.id)
+          Mailers::EventMailer.deliver_invite_participant_notification(c, event_url(@event), event_participation_redirect_url(UrlStore.encode(c.id)))
+        end
+      end
+      
       flash[:notice] = t('participations.update.notice')
       redirect_to event_path(@event)
     else

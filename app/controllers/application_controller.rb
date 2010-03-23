@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  helper_method :current_user_session, :current_user, :current_account
+  helper_method :current_user_session, :current_user, :current_account, :get_locale
 
   filter_parameter_logging :password
 
@@ -54,6 +54,10 @@ class ApplicationController < ActionController::Base
   def set_locale
     session[:language] = params[:language].is_a?(String) ? params[:language].to_sym : params[:language] if params[:language]
     I18n.locale = APPLICATION_LANGUAGES.include?(session[:language]) ? session[:language] : I18n.default_locale
+  end
+  
+  def get_locale
+    I18n.locale
   end
   
   def hijack_ie_default_format

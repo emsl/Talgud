@@ -25,21 +25,19 @@
         <%= print_flash %>
         
         <div class="container-left">
-          <div class="orangebox-border"><div class="orangebox">
+          <div class="orangebox-border"><div class="orangebox <%= get_locale %>">
             <p>
               <b><%= t('.intro') %></b>
             </p>
             <p>
-              <%= t('.objective') %>              
+              <%= t('.objective') %>
             </p>
             
             <div class="pad-10-0">
               <%= link_to t('.register_event'), if current_user then new_event_path else signup_path end, :class => :bigbtn %>
-              <%#
-              <div class="orangebox-small pending">
-                või <a href="#">Registreeru talgudele</a>
+              <div class="orangebox-small">
+                <%= t('common.or') %> <%= link_to t('.register_link'), events_path %>
               </div>
-              %>
             </div>
           </div></div>
         </div>

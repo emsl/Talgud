@@ -34,9 +34,7 @@
 <tr id="event_participant_template">
   <td class="first"><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.text_field :firstname %></td>
   <td><%= child.text_field :lastname %></td>
-  <td>
-    <%= child.select :age_range, age_range_options %>    
-  </td>
+  <td><%= child.select :age_range, age_range_options %></td>
   <td><%= child.text_field :email %></td>
   <td class="last"><%= child.text_field :phone %>
   <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
@@ -50,9 +48,7 @@
 <tr<%= ' class="first"' if idx == 0 %>>
   <td<%= column_class_name(epc, :firstname, 'first') %>><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.hidden_field :id %><%= child.text_field :firstname %></td>
   <td<%= column_class_name(epc, :lastname) %>><%= child.text_field :lastname %></td>
-  <td<%= column_class_name(epc, :age_range) %>>
-    <%= child.select :age_range, age_range_options %>
-  </td>
+  <td<%= column_class_name(epc, :age_range) %>><%= child.select :age_range, age_range_options %></td>
   <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
   <td<%= column_class_name(epc, :phone, 'last') %>><%= child.text_field :phone %>
   <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>  

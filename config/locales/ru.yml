@@ -2,9 +2,9 @@ ru:
   activerecord:
     attributes:
       form:
-        submit_emails: "Адрес э-почты"
+        submit_emails: "Адрес эл. почты"
       language:
-        title: "Название языка"
+        title: Язык
       layout:
         title: Заголовок
       person:
@@ -15,31 +15,31 @@ ru:
         accepted: "должна быть принята"
         blank: "не может быть пустой"
         confirmation: "не совпадает с подтверждением"
+        email_missing: "адрес эл. почты обязателен"
+        email_taken: "указанный адрес эл. почты уже используется в системе"
         empty: "не может быть пустой"
         equal_to: "должно быть равно %d"
-        even: "должно быть чётным"
+        even: "должно быть четным"
         exclusion: зарезервирована
         greater_than: "должно быть больше %d"
         greater_than_or_equal_to: "должно быть больше или равно %d"
+        in_past: "по отношению к дате {{date}} должна быть в будущем"
         inclusion: "не включена в список"
         invalid: неверна
+        invalid_email: "указанный адрес эл. почты неправильный"
+        invalid_sec_num: "указанный личный код неправильный"
         less_than: "должно быть меньше %d"
         less_than_or_equal_to: "должно быть меньше или равно %d"
-        not_a_number: "не цифра"
-        odd: "должно быть нечётным"
+        not_a_number: "должно быть цифровое значение"
+        odd: "должно быть нечетным"
+        password_confirmation_do_not_match: "указанные пароли разные"
+        password_missing: "поле пароль обязательно"
+        password_too_short: "пароль слишком короткий"
+        record_invalid: "при проверке данных произошли следующие ошибки: {{errors}}"
         taken: "уже занято"
         too_long: "слишком длинная (максимум %d знаков)"
         too_short: "слишком короткая (минимум %d знаков)"
-        wrong_length: "неправильной длинны (должна быть %d знаков)"      
-        email_missing: "e-posti aadress ei tohi olla tühi"
-        email_taken: "e-posti aadress on juba kasutusel"
-        in_past: "peab kuupäeva {{date}} suhtes olema tulevikus"
-        invalid_email: "vigane e-posti aadress"
-        invalid_sec_num: "isikukood ei ole valiidne"
-        password_confirmation_do_not_match: "salasõna kordus ei klapi"
-        password_missing: "parool ei tohi olla tühi"
-        password_too_short: "salasõna on liiga lühike"
-        record_invalid: "valideerimine ebaõnnestus: {{errors}}"
+        wrong_length: "неправильной длины (должна быть %d знаков)"
       models:
         event:
           attributes:
@@ -60,7 +60,7 @@ ru:
       account: "учетная запись"
       county: уезд
       event: "полезное дело"
-      event_participant: участие
+      event_participant: участник
       event_type: "тип полезного дела"
       form: Форма
       language: язык
@@ -123,6 +123,8 @@ ru:
         notice: "Участник удален из списка"
       edit:
         title: "Изменение данных участника, зарегистрированного на полезное дело “{{event_name}}”"
+      form:
+        choose_age_range: "Укажите возраст ..."
       index:
         add_participant: "Добавить участника на полезное дело"
         title: "Зарегистрированные на полезное дело “{{event_name}}” участники"
@@ -255,8 +257,8 @@ ru:
     user_sessions:
       new:
         email: E-mail
-        login: "Logi sisse"
-        login_submit: Войдите
+        login: "Вход в систему"
+        login_submit: Войти
         password: Пароль
         remember_me: "Запомнить меня"
     users:
@@ -297,10 +299,11 @@ ru:
   common:
     created_at: Lisatud
     delete: Kustuta
-    destroy_confirmation: "Oled Sa ikka kustutamises kindel?"
+    destroy_confirmation: "Вы уверены, что хотите удалить запись?"
     filter_all: Все
     format: Формат
     loading: "Загрузка данных..."
+    or: või
     paginate_next: "следущие &raquo;"
     paginate_previous: "&laquo; предыдущие"
     permission_denied: "Для просмотра этой страницы у Вас нет прав"
@@ -530,7 +533,7 @@ ru:
     ua: Украина
     ug: Уганда
     um: "Внешние малые острова (США)"
-    us: "Соединенные Штаты"
+    us: "Соединенные Штаты Америки"
     uy: Уругвай
     uz: Узбекистан
     va: "Государство-город Ватикан"
@@ -653,18 +656,23 @@ ru:
         other: "{{count}} секунд"
   event_managers:
     create:
-      error: "Talgujuhi lisamine ebaõnnestus, palun kontrolli andmete korrektsust ning proovi uuesti"
-      notice: "Talgujuht on lisatud, kutse selle kohta saadeti ka tema e-posti aadressile"
-      role_exists: "Kasutaja on juba nende talgute juhtide nimekirjas"
+      error: "При добавлении координатора произошла ошибка, проверьте, пожалуйста, данные и попробуйте снова."
+      notice: "Координатор успешно добавлен. Уведомление отправлено на эл. адрес координатора"
+      role_exists: "Пользователь уже существует в списке координаторов."
     new:
-      intro: "Kui soovid talgute korraldamise õigust anda ka teisele kasutajale, siis sisesta siia tema nimi ja kontaktandmed. Pärast sisestamist saadetakse talle teavitus kutse kohta e-posti teel."
-      title: "Lisa juht talgutele"
+      intro: "Если хотите дать права координатора другому пользователю, введите его имя и контактные данные. После чего пользователю будет отправлено на адрес эл. почты соответствующее уведомление с приглашением."
+      title: "Добавить координатора  полезного дела"
   events:
     create:
       error: "При сохранении данных полезного дела произошла ошибка. Пожалуйста, проверьте данные и попробуйте снова."
       notice: "Спасибо, что зарегистрировали свое полезное дело. Мы получили Ваши данные, они станут доступны каждому после того, как уездный координатор их проверит. Код Вашего полезного дела {{code}}."
     edit:
       title: "Изменение данных полезного дела"
+    filter:
+      county: Уезд
+      event_type: "Тип полезного дела"
+      search: Поиск!
+      title: "Расширенный поиск"
     form:
       additional_questions: "Дополнительные вопросы (ответы не публикуются)"
       map_location_hint: "При необходимости уточните месторасположение на карте (для этого передвиньте красную кнопочку в правильное место на карте)."
@@ -677,7 +685,7 @@ ru:
     my:
       title: "Мои полезные дела"
     new:
-      footer_hint: "Регистрацией места проведения полезного дела Вы подтверждаете, что ваш возраст по меньшей мере 18 лет, а также, что Вы согласны получать информацию о мероприятии от организаторов Дня полезных дел на Ваш адрес эл. почты."
+      footer_hint: "Регистрацией места проведения полезного дела Вы подтверждаете, что Ваш возраст по меньшей мере 18 лет, а также, что Вы согласны получать информацию о мероприятии от организаторов Дня полезных дел на Ваш адрес эл. почты."
       header_hint: "Здесь можно зарегистрировать место своего полезного дела и описать для добровольцев, что будет сделано, что необходимо иметь с собой и что Вы можете предложить по завершению работ. Хотя данные полезного дела можно изменить и позже, постарайтесь все хорошо продумать уже сейчас. Введенные данные будут опубликованы в течение нескольких дней."
       title: "Зарегистрируй свое полезное дело"
     show:
@@ -697,39 +705,41 @@ ru:
     submenu_edit:
       edit_event: "Изменить полезное дело"
       event_info: "Информация о полезном деле"
-      invite_manager: "Lisa talgujuht"
+      invite_manager: "Добавить координатора полезного дела"
       show_participants: Зарегистрировавшиеся
     update:
       error: "При изменении данных полезного дела произошла ошибка, проверьте данные и попробуйте снова."
-      notice: "Данные полезного дела изменены. При существенных изменениях, пожалуйста уведомите участников."
+      notice: "Данные полезного дела изменены. При существенных изменениях, пожалуйста, уведомьте участников."
   formtastic:
     actions:
       create: "Добавить {{model}}"
-      invite_event_manager: "Saada talgujuhile kutse"
+      invite_event_manager: "Отправить приглашение координатору полезного дела"
       participate: "Зарегистрироваться на полезное дело"
       save_my_settings: "Сохранить мои данные"
-      signup: Регистрироваться
+      signup: Зарегистрироваться
       update: "Сохранить {{model}}"
     hints:
       event:
         begin_time: "Время начала толоки"
-        current_participants: "Число участников, зарегистрировавшихся на это полезное дело, вычисляетсяна основе регистрации. Информацию в этом поле изменить невозможно."
+        current_participants: "Число участников, зарегистрировавшихся на это полезное дело, вычисляется на основе регистрации. Информацию в этом поле изменить невозможно."
         end_time: "Прогнозируемое время завершения"
-        event_type: "Выберите категорию, которая наиболее подходит"
+        event_type: "Выберите самую подходящую категорию"
         gathering_location: "Место и время сборов. При необходимости укажите ориентиры и путь. Место сборов лучше назначить в месте, которое легко найти."
         location_address_street: "Укажите как можно более точный адрес"
         max_participants: "Укажите максимальное ожидаемое число помощников, которое необходимо для реализации Вашего полезного дела."
         meta_aim_description: "В чьих интересах будет организовано полезное дело, его цель и польза от него. И каковы связанные с ним последующие планы."
         meta_bring_with_you: "Укажите, что необходимо взять с собой участникам. Например, ведра, топор, корзинку для пикника, перчатки и т.д."
         meta_job_description: "Укажите все планируемые работы (вырубка кустов, собирание и сжигание веток...)"
-        meta_provided_for_participiants: "Что Вы как организатор полезного дела может предложить участникам? Приветствуется любая форма поощрения, которая заинтересует участников: экскурсия по местности, знакомство с местными тайнами и достопримечательстями, сауна, горячие пирожки, сладости, концерт, танцы и т.д."
-        meta_subject_heritage_number: "Если место проведения находится под охраной памятников архитектуры, укажите его номер. База данных памятников находится по ссылке <a href=\"http://register.muinas.ee\" target=\"blank\">http://register.muinas.ee</a>"
+        meta_provided_for_participiants: "Что Вы, как организатор полезного дела, можете предложить участникам? Приветствуется любая форма поощрения, которая заинтересует участников: экскурсия по местности, знакомство с местными тайнами и достопримечательстями, сауна, горячие пирожки, сладости, концерт, танцы и т.д."
+        meta_subject_heritage_number: "Если место проведения находится под охраной памятников архитектуры, укажите его номер. База данных памятников находится по ссылке «a href=\"http://register.muinas.ee\" target=\"blank\"»http://register.muinas.ee«/a»"
         meta_subject_info: "При возможности укажите ссылку на сайт того места, где будет проводиться толока."
         meta_subject_owner: "Кто владелец или арендатор места или объекта недвижимости, где будет проводиться толока."
         meta_subject_protegee: "Находится ли место проведения толоки под охраной памятников архитектуры или природы?"
-        name: "Желательно, чтобы название полезного дела содержало место проведения и характер работы (например \"Приведение в порядок концертной площадки в Сиймусти\" или \"Ремонт народного дома в Кивиыли\"). Помните, что первое знакомство участника с Вашим полезным делом, происходит через название и именно оно отображается в базе данных и в интернете."
+        name: "Желательно, чтобы название полезного дела содержало место проведения и характер работы (например \"Приведение в порядок концертной площадки в Сиймусти\" или \"Ремонт народного дома в Кивиыли\"). Помните, что первое знакомство участника с Вашим полезным делом происходит через название и именно оно отображается в базе данных и в интернете."
         notes: "При необходимости укажите здесь другую важную информацию"
       event_participant:
+        age_range: "При регистрации действует возрастное ограничение 18 лет! Тем, кто моложе, рекомендуем прийти на мероприятие вместе со взрослыми."
+        notes: "Дополнительные заметки для координатора полезного дела."
         tellafriend_emails: "Добавьте адрес или адреса электронной почты друга/друзей, отделяя их запятыми"
     labels:
       account:
@@ -745,7 +755,7 @@ ru:
         begins_at: "Начальное время"
         code: "Код толоки"
         current_participants: "Число зарегистрировавшихся"
-        current_participants_short: Reg
+        current_participants_short: Зарег.
         end_time: "время окончания ~"
         ends_at: "Конечное время"
         event_type: "Тип полезного дела"
@@ -762,8 +772,9 @@ ru:
         manager: "Координатор толоки"
         manager_email: "Эл. почта координатора"
         manager_phone: "Телефон координатора"
+        managers: Координаторы
         max_participants: "Максимальное количество помощников"
-        max_participants_short: Max
+        max_participants_short: Maкс.
         meta_aim_description: "Цель полезного дела и благо от него"
         meta_bring_with_you: "Необходимо иметь с собой"
         meta_job_description: "Описание работ"
@@ -772,7 +783,7 @@ ru:
         meta_subject_info: "Подробная информация об объекте"
         meta_subject_owner: "Владелец объекта"
         meta_subject_protegee: "Находится ли объект под охраной?"
-        name: "Название полезного дела?"
+        name: "Название полезного дела"
         notes: "Дополнительная информация"
         status: Статус
         statuses:
@@ -787,8 +798,27 @@ ru:
           took_place: Состоявшееся
         vacancies: "Свободных мест"
       event_participant:
+        age_range: Возраст
+        age_ranges:
+          ? "1"
+          : "0 - 10"
+          ? "2"
+          : "11 - 18"
+          ? "3"
+          : "19 - 28"
+          ? "4"
+          : "29 - 38"
+          ? "5"
+          : "39 - 48"
+          ? "6"
+          : "49 - 58"
+          ? "7"
+          : "59 - 68"
+          ? "8"
+          : "68 и старше"
         email: "Эл. почта"
         event: "Полезное дело"
+        event_participant: Соратник
         firstname: Имя
         lastname: Фамилия
         notes: Примечания
@@ -844,6 +874,7 @@ ru:
         name: "Имя пользователя"
         password: Пароль
         password_confirmation: "Пароль еще раз"
+        perishable_token: "Ключ активации"
         phone: Телефон
         status: Статус
         statuses:
@@ -909,6 +940,7 @@ ru:
     et: Эстонский
     eu: Баскский
     fa: Персидский
+    false: Норвежский
     ff: Фулах
     fi: Финский
     fj: Фиджи
@@ -983,8 +1015,6 @@ ru:
     ng: Ндонга
     nl: Голландский
     nn: "Норвежский нюнорск"
-    ? "no"
-    : Норвежский
     nr: "Южная ндебеле"
     nv: Навахо
     ny: Чичева
@@ -1056,30 +1086,31 @@ ru:
     home:
       internet_reflections: "О нас в интернете"
       intro: "1 мая состоится очередная акция «Сделаем!» — День полезных дел, всеэстонская толока."
-      objective: "Приглашаем всех жителей Эстонии огранизовать в этот день полезное дело или поучаствовать в нем, чтобы вместе сделать что-то полезное.."
-      register_event: "Зарегистрируйте свою толоку"
+      objective: "Приглашаем всех жителей Эстонии провести в этот день толоку или поучаствовать в ней, чтобы вместе сделать что-то полезное."
+      register_event: "Зарегистрируй толоку"
       show_all_events: "Показать все"
+      register_link: Registreeru talgutele
   mailers:
     common:
-      disclaimer: "NB! Käesolev e-kiri saadetakse automaatselt kõigile registreerunutele ning sellele ei ole vaja vastata. Küsimuste korral pöördu oma talgujuhi poole, kelle andmed leiad ülaltoodud lingil klikkides või küsi abi talguliste infotelefonilt 59740000."
+      disclaimer: "NB! На это письмо отвечать не надо. Полученная информация отправляется автоматически всем зарегистрировавшимся в системе. Если у Вас возникли вопросы - обратитесь к координатору полезного дела, чьи контактные данные можно получить, нажав на ссылку ниже. Если же у Вас возникли общие вопросы, можете их задать, позвонив на общий телефон  59 74 0000."
       footer_text: "Команда Дня полезных дел \"Сделаем!\""
       hello: "Добро пожаловать!"
     event_mailer:
       invite_event_manager_notification:
-        intro: "Tere {{name}}!"
-        subject: "{{name}} kutsub sind talgujuhiks!"
-        text: "{{user_name}} kutsus sind juhtima talguid {{event_name}}. Talgujuhina saad muuta talgute infot ning korraldada talguliste nimekirja. Jätkamiseks logi sisse aadressilt {{login_url}}."
-        your_password: "Sinu salasõna on: {{password}}"
-        your_username: "Sinu kasutajanimi on: {{username}}"
+        intro: "Здравствуйте, {{name}}!"
+        subject: "{{name}} приглашает Вас стать координатором полезного дела!"
+        text: "{{user_name}} позвал Вас стать координатором полезного дела {{event_name}}. Став координатором, у вас появится возможность изменять данные полезного дела и редактировать список участников. Для начала войдите в систему по ссылке {{login_url}}."
+        your_password: "Ваш пароль: {{password}}"
+        your_username: "Ваше имя пользователя: {{username}}"
       invite_participant_notification:
-        edit_link: "Sinu registreerumisel esitatud andmeid saad vaadata ja muuta siin: {{url}}"
-        event_link: "Sulle ja Sinu meeskonna liikmetele talgupäevaks vajalik informatsioon koos vajalike telefoninumbritega asub aadressil {{url}}. Palun säilita see e-kiri ning kontrolli saadetud linki vahetult enne talgupäeva: võib juhtuda, et informatsiooni osas toimub muudatusi. Talgupäevaks trüki infoleht välja ning võta talgutele kaasa."
-        event_name: "Oled registreerunud talgutele {{event_name}}. Sind registreeris {{registrant_name}}."
-        footer: "Kohtumiseni talgutel!"
-        intro: "Tere {{name}}!"
-        subject: "Talgupäevale registreerumine"
+        edit_link: "Регистрационные данные можно изменить пройдя по ссылке: {{url}}"
+        event_link: "Всю необходимую информацию для Вас и участников Вашей команды со всеми контактами найдете перейдя по ссылке {{url}}. Пожалуйста, не удаляйте это письмо и перед началом дня полезных дел перепроверьте организационную информацию по указанным ссылкам, т.к. могли произойти изменения. Ко дню полезных дел распечатайте инфолисток и возьмите с собой на место сборов."
+        event_name: "Регистрация на участие в полезном деле {{event_name}} успешно завершена. Вас зарегистрировал {{registrant_name}}."
+        footer: "До встречи в День полезных дел!"
+        intro: "Здравствуйте,  {{name}}!"
+        subject: "Регистрация на день полезных дел"
       manager_participation_notification:
-        event_participants_address: "Данные зарегистрировавшихся можете изменять по адресу {{url}}"
+        event_participants_address: "Данные зарегистрировавшихся Вы можете изменить по адресу {{url}}"
         footer: "Команда Дня полезных дел «Сделаем!»"
         intro: "Участник{{name}} только что зарегистрировался на организовываемое Вами полезное дело"
         participant_info: "Участником введены следущие данные:"
@@ -1087,8 +1118,8 @@ ru:
       participant_notification:
         edit_address: "Данные регистрации можно редактировать по адресу {{url}}"
         event_address: "При необходимости пошлите исправление или уточнение через электронную почту  своему координатору полезного дела. Контакты координаторов полезных дел найдете на странице {{url}}"
-        event_link: "Sulle ja Sinu meeskonna liikmetele talgupäevaks vajalik informatsioon koos vajalike telefoninumbritega asub aadressil {{url}}. Palun säilita see e-kiri ning kontrolli saadetud linki vahetult enne talgupäeva: võib juhtuda, et informatsiooni osas toimub muudatusi. Talgupäevaks trüki infoleht välja ning võta talgutele kaasa."
-        event_name: "Oled registreerunud talgutele {{event_name}}."
+        event_link: "Информацию для Вас и Ваших участников команды полезного дела со всеми контактами найдете перейдя по ссылке {{url}}. Пожалуйста, не удаляйте это письмо и перед началом Дня полезных дел перепроверьте организационную информацию по указанным ссылкам, т.к. могли произойти изменения. Ко Дню полезных дел распечатайте инфолисток и возьмите с собой на место сборов."
+        event_name: "Регистрация на полезное дело {{event_name}} успешно завершена."
         footer: "До встречи 1 мая на толоке!"
         intro: "Благодарим Вас за регистрацию на День полезных дел «Сделаем!»"
         subject: "Подтверждение регистрации на День полезных дел"
@@ -1098,9 +1129,9 @@ ru:
         intro: "В системе полезных дел было зарегистрировано новое полезное дело со следующими данными:"
         subject: "Уведомление о регистрации полезного дела"
       tell_friend_notification:
-        event_info: "Подробнее о Дне полезных дел смотрите на странице {{event_url}} или www.teemeara.ee и найдите там подходящее Вам полезное дело."
+        event_info: "Подробнее о Дне полезных дел смотрите на странице {{event_url}} или www.teemeara.ee и выберите там подходящее Вам полезное дело."
         event_registrant_info: "Участник{{name}} только что зарегистрировался на полезное дело: {{event_name}}."
-        intro: "Ваш друг {{name}} приглашает Вас принять участие в Дне полезных дел «Сделаем!» 1 мая 20010 г."
+        intro: "Ваш друг {{name}} приглашает Вас принять участие в Дне полезных дел «Сделаем!» 1 мая 2010 г."
         subject: "{{name}} приглашает Вас на День полезных дел"
     user_mailer:
       activation_instructions:
@@ -1151,27 +1182,29 @@ ru:
     separator: "."
   participations:
     confirmation:
-      contact_info: "Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta!"
-      footer: "Kohtumiseni talgupäeval!"
-      link_to_event: "Vaata talguinfot"
-      mail_info: "Registreerumiskinnitus saadeti sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, anna sellest talgujuhile teada."
-      title: "Aitäh registreerumast!"
+      contact_info: "Запишите себе контактные данные координатора полезного дела, чтобы при необходимости они были бы под рукой!"
+      footer: "До встречи в  День полезных дел!"
+      link_to_event: "Просмотреть общую информацию полезного дела"
+      mail_info: "Уведомление о регистрации на полезное дело отправлено на указанный адрес эл. почты. Если Вы не получили подтверждения, сообщите об этом координатору полезного дела."
+      title: "Спасибо за регистрацию!"
     create:
       error: "При регистрации произошла ошибка. Проверьте, пожалуйста, правильность данных и попробуйте вновь."
-      notice: "Благодарим Вас, что зарегистрировались на Полезное дело. Мы получили данные и выслали на Ваш адрес электронной почты сслылку по которой Вы сможете при необходимости изменить данные регистрации."
+      notice: "Благодарим Вас, что зарегистрировались на Полезное дело. Мы получили данные и выслали на Ваш адрес электронной почты сслылку, по которой Вы сможете, при необходимости, изменить данные регистрации."
     destroy:
-      notice: "Talguline on kustutatud."
+      notice: "Участник удален из списка."
     form:
-      add_participants: "Lisa veel osavõtjaid"
-      invite_1: "Kui soovid nendele talgutele minna teistega koos, siis palun sisesta siia ka nende nimed ning kontaktandmed."
-      invite_2: "Kui sa lisad siia oma sõprade e-mailid, siis saavad nad info registreerimise kohta ka oma e-mailile. Kui sa siia e-maile ei sisesta, siis palun edasta kogu sulle saadetud info neile ise."
+      add_participants: "Добавить еще участников в список"
+      choose_age_range: "Укажите возраст..."
+      invite: "Если Вы регистрируете на полезное дело своих друзей, тогда заранее уведомите их и соберите нужную личную информацию, необходимую для регистрации. После регистрации, на адреса эл. почты друзей будет так же выслано уведомление об участии, но следует помнить, что Вам необходимо будет самим проинформировать друзей о всем необходимом для полезного дела до его начала."
+      invite_1: "Если желаете принять участие в полездном деле вместе со друзьями или семьей, укажите также и их имена и контактные данные."
+      invite_2: "Если в списке указаны также адреса ваших друзей или членов семьи, то они тоже получат уведомление об их регистрации. Если же контактные данные указаны не будут, просим Вас сообщить о правилах и регистрации самостоятельно."
     index:
       empty: "На это полезное дело еще нет зарегистрировавшихся."
-      title: "talgutel osalejad"
+      title: "участники полезного дела"
     new:
       intro: "Для регистрации на это полезное дело введите, пожалуйста, свои данные."
       no_vacancies: "Регистрация на это полезное дело уже закончена потому, что все места заполнены"
-      title: "Registreeru talgutele"
+      title: "Зарегистрируйтесь на полезное дело"
     update:
       error: "При обновлении данных регистрации произошла ошибка. Пожалуйста, проверьте правильность данных и попробуйте вновь"
       notice: "Данные регистрации обновлены"
@@ -1179,6 +1212,7 @@ ru:
     create:
       error: "Учетная запись с указаным адресом эл. почты не найдена. Пожалуйста, проверьте указанный адрес."
       notice: "Новый пароль выслан Вам на адрес электронной почты"
+      user_inactive: "Функция восстановления пароля будет доступна после активации учетной записи. Инструкции по активации отправлены вам снова на ваш адрес эл. почты."
   shared:
     admin:
       object_roles:
@@ -1205,7 +1239,7 @@ ru:
       notice: "Учетная запись успешно создана. Инструкции по активации высланы Вам на адрес эл. почты."
     new:
       login_submit: войдите
-      registration_hint: "Для того, чтобы зарегистрировать свое полезное дело, Вы должны быть зарегистрированы в системе. Регистрация займет всего пару минут. Если у вас уже есть учетная запись, тогда"
+      registration_hint: "Для того, чтобы зарегистрировать свое полезное дело, Вы должны быть зарегистрированы в системе. Регистрация займет всего пару минут. Если у Вас уже есть учетная запись, тогда"
   support:
     array:
       last_word_connector: ""

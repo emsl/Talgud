@@ -350,6 +350,11 @@ ul.submenu .active .arrow { display: block; }
               line-height: 24px;
             }
             
+            .orangebox.ru {
+              padding-top: 15px;
+              line-height: 20px;
+            }
+
             #front .orangebox {
               height: 268px;
               width: 258px;
@@ -358,6 +363,7 @@ ul.submenu .active .arrow { display: block; }
             .orangebox p {
               text-shadow: 0 1px 0 #facf86;
             }
+            
             .orangebox-border {
               border: 1px solid #ec920b;
               border-radius: 5px;

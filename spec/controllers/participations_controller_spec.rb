@@ -174,6 +174,22 @@ describe ParticipationsController do
       get :show, {:event_id => ep.event.url, :id => ep.id}
       response.should redirect_to(event_path(ep.event))
     end
+  end
+  
+  describe 'updating participation from encoded url' do
+    before(:each) do
+      @event = Factory(:event)
+      @ep = Factory(:event_participant, :children => [Factory(:event_participant), Factory(:event_participant)])
+      # @epchildren = {0 => Factory.build(:event_participant).attributes, 1 => Factory.build(:event_participant).attributes}
+    end
+    
+    it 'should send e-mail to freshly invited participants after successful save' do
+      Mailers::EventMailer.should_receive(:deliver_invite_participant_notification).twice
 
+      children = {0 => Factory.build(:event_participant).attributes, 1 => Factory.build(:event_participant).attributes}
+      put :update, {:event_id => @event.url, :id => UrlStore.encode(@ep.id), :event_participant => @ep.attributes.merge(:children_attributes => children)}
+      
+      response.should redirect_to(event_path(@event.url))
+    end
   end
 end

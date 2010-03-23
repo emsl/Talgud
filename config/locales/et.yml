@@ -302,6 +302,7 @@ et:
     loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
     title: Teeme ära! Talgud
+    or: või
     paginate_previous: "&laquo; eelmised"
     paginate_next: "järgmised &raquo;"
   layouts:
@@ -311,6 +312,7 @@ et:
       register_event: Registreeri oma talgud
       internet_reflections: Kajastusi Internetis
       show_all_events: Näita kõiki
+      register_link: Registreeru talgutele
   events:
     create:
       notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
