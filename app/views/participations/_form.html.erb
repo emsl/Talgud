@@ -24,9 +24,9 @@
 <tr>
   <th><%= t('formtastic.labels.event_participant.firstname') %></th>
   <th><%= t('formtastic.labels.event_participant.lastname') %></th>
+  <th><%= t('formtastic.labels.event_participant.age_range') %></th>
   <th><%= t('formtastic.labels.event_participant.email') %></th>
   <th><%= t('formtastic.labels.event_participant.phone') %></th>
-  <th><%= t('formtastic.labels.event_participant.age_range') %></th>
 </tr>
 </thead>
 <tbody style="display:none;">
@@ -34,11 +34,12 @@
 <tr id="event_participant_template">
   <td class="first"><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.text_field :firstname %></td>
   <td><%= child.text_field :lastname %></td>
+  <td>
+    <%= child.select :age_range, age_range_options %>    
+  </td>
   <td><%= child.text_field :email %></td>
-  <td><%= child.text_field :phone %></td>
-  <td class="last">
-    <%= child.select :age_range, age_range_options %>
-    <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
+  <td class="last"><%= child.text_field :phone %>
+  <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
   </td>
 </tr>
 <% end %>
@@ -49,11 +50,12 @@
 <tr<%= ' class="first"' if idx == 0 %>>
   <td<%= column_class_name(epc, :firstname, 'first') %>><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.hidden_field :id %><%= child.text_field :firstname %></td>
   <td<%= column_class_name(epc, :lastname) %>><%= child.text_field :lastname %></td>
-  <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
-  <td<%= column_class_name(epc, :phone) %>><%= child.text_field :phone %></td>
-  <td<%= column_class_name(epc, :age_range, 'last') %>>
+  <td<%= column_class_name(epc, :age_range) %>>
     <%= child.select :age_range, age_range_options %>
-    <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
+  </td>
+  <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
+  <td<%= column_class_name(epc, :phone, 'last') %>><%= child.text_field :phone %>
+  <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>  
   </td>
 </tr>
 <% end %>

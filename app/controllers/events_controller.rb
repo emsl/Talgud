@@ -4,20 +4,24 @@ class EventsController < ApplicationController
 
   def index
     @search = Event.published(
-      :order => 'begins_at ASC', 
-      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    :order => 'begins_at ASC',
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     ).search(filter_from_params)
-    
+
     respond_to do |format|
       format.xml { render :xml => @search.all }
       format.html { @events = @search.paginate(:page => params[:page]) }
+      format.ics do
+        @events = @search.all
+        render :text => self.generate_ical
+      end
     end
   end
 
   def my
     @events = Event.my_events(@current_user).paginate(
-      :order => 'begins_at ASC', :page => params[:page],
-      :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    :order => 'begins_at ASC', :page => params[:page],
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
 
@@ -29,8 +33,8 @@ class EventsController < ApplicationController
       end
       format.json do
         @events = Event.published.all(
-          :conditions => filter_from_params,
-          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+        :conditions => filter_from_params,
+        :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
         )
         render :json => events_json_hash(@events)
       end
@@ -54,12 +58,12 @@ class EventsController < ApplicationController
       end
     end
   end
-  
+
   def stats
     @max_participants = Event.published.sum(:max_participants, :conditions => filter_from_params)
     @current_participants = Event.published.sum('case when current_participants > max_participants then max_participants else current_participants end').to_i
     @needed_participants = [(@max_participants - @current_participants), 0].max
-    
+
     render :json => {:max_participants => @max_participants, :current_participants => @current_participants, :needed_participants => @needed_participants}
   end
 
@@ -124,6 +128,36 @@ class EventsController < ApplicationController
 
   def load_event
     @event = Event.find_by_url(params[:id])
+  end
+
+  def generate_ical
+    cal = Icalendar::Calendar.new
+    cal.custom_property("METHOD","PUBLISH")
+    
+    @events.each do |e|
+      event = Icalendar::Event.new
+      event.start = e.begins_at.strftime("%Y%m%dT%H%M%S")
+      event.status = t("formtastic.labels.event.statuses.#{e.status}")
+      event.end = e.ends_at.strftime("%Y%m%dT%H%M%S")
+      event.last_modified = e.updated_at.strftime("%Y%m%dT%H%M%S")
+      event.summary = e.label
+      event.geo = [e.latitude, e.longitude] * ';'
+      event.location = e.location_address
+      event.uid = e.code
+      event.categories = [e.event_type.name]
+      event.contacts = e.managers.collect do |manager|
+        [manager.name, manager.email, manager.phone].select{ |i| not i.blank? } * ', '
+      end
+      event.description = e.meta_subject_info
+      event.url = event_url(e)
+      event.organizer = event.contacts * '; '
+      event.add_comment(root_url)
+      cal.add event
+    end
+    
+    headers['Content-Type'] = "text/calendar; charset=UTF-8"
+    cal.publish
+    cal.to_ical
   end
 
   private

@@ -126,6 +126,10 @@ table.dataentry tbody.inputs td.error input {
   background: url('../images/invalid_line.gif') repeat-x scroll left bottom transparent;
 }
 
+table.dataentry tbody.inputs td.error select {
+  background: url('../images/invalid_line.gif') repeat-x scroll left bottom transparent;
+}
+
 table.dataentry tbody.footer td {
   background-color: #d9f5ff;
   border-right: 1px solid #a9a9aa;

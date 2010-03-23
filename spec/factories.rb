@@ -63,6 +63,7 @@ Factory.define :event_participant do |p|
   p.sequence(:lastname) { |n| "Lastname#{n}" }
   p.sequence(:email) { |n| "admin#{n}@example.com" }
   p.sequence(:phone) { |n| "12222333#{n}" }
+  p.age_range 1  
   p.notes ''
   p.tellafriend_emails 'mail1@talgud.com,mail2@talgud.ee'
 end

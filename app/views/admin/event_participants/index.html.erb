@@ -32,9 +32,9 @@
     <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
     <td><%= f.input :firstname_like, :label => false, :input_html => {:size => 20} %></td>
     <td><%= f.input :lastname_like, :label => false, :input_html => {:size => 20} %></td>
-    <td><%= f.input :email_like, :label => false, :input_html => {:size => 20} %></td>
-    <td><%= f.input :phone_like, :label => false, :input_html => {:size => 20} %></td>
     <td></td>
+    <td><%= f.input :email_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :phone_like, :label => false, :input_html => {:size => 20} %></td>    
     <td><%= f.input :notes, :label => false, :input_html => {:size => 20} %></td>
     <td></td>
     <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
@@ -45,9 +45,9 @@
   <tr>
     <td><%=h participation.firstname %></td>
     <td><%=h participation.lastname %></td>
-    <td><%=h participation.email %></td>
-    <td><%=h participation.phone %></td>
     <td><%=h age_range_label(participation.age_range) %></td>
+    <td><%=h participation.email %></td>
+    <td><%=h participation.phone %></td>    
     <td title="<%=h participation.notes %>"><%=h truncate(participation.notes, :length => 30) %></td>    
     <td><%=h participation.parent_name %></td>
     <td class="actions">
