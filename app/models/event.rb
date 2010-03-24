@@ -66,6 +66,10 @@ class Event < ActiveRecord::Base
     [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]].include?(self.status)
   end
   
+  def can_register?
+    vacancies? && self.status == STATUS[:registration_open]
+  end
+  
   def begin_time=(new_time)
     new_time = new_time.split(':')
     if self.begins_at

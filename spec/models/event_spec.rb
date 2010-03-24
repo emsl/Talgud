@@ -67,6 +67,24 @@ describe Event, 'vacancies' do
   end
 end
 
+describe Event, 'can_register?' do
+  it 'should return true while there are vacancies and status is registration_open' do
+    @event = Factory.build(:event, :max_participants => 10, :current_participants => 2, :status => Event::STATUS[:registration_open])
+    @event.can_register?.should be_true
+  end
+
+  it 'should return false while there are vacancies but status is different from registration_open' do
+    @event = Factory.build(:event, :max_participants => 10, :current_participants => 2, :status => Event::STATUS[:registration_closed])
+    @event.can_register?.should be_false
+  end
+
+  it 'should return false while there are no vacancies but status is registration_open' do
+    @event = Factory.build(:event, :max_participants => 10, :current_participants => 10, :status => Event::STATUS[:registration_open])
+    @event.can_register?.should be_false
+  end
+end
+
+
 describe Event, 'event code generation' do
   it 'should generate event code' do
     @event = Factory(:event)

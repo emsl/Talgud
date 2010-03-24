@@ -28,11 +28,10 @@
       <div class="reg-link">
       <%= link_to t('.register_to_this_event'), new_event_participation_path(@event) %>
       </div>
-      <% unless @event.vacancies? %>
-      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 58px;"><%= t('.no_vacancies') %></div>
-      <% end %>
-      <% if Rails.env == 'production' %>
+      <% if not @event.can_register? %>
       <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at') %></div>
+      <% elsif not @event.vacancies? %>
+      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 58px;"><%= t('.no_vacancies') %></div>
       <% end %>
     </div>
   </div>
