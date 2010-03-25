@@ -6,7 +6,6 @@
   <%= f.input :phone %>
   <%= f.input :age_range, :as => :select, :collection => age_range_options, :include_blank => false %>
   <%= f.input :notes, :input_html => {:rows => 3}, :required => false %>
-  <%= f.input :tellafriend_emails, :input_html => {:rows => 3}, :required => false if @event_participant.new_record? %>
 <% end %>
 <% end %>
 
@@ -56,6 +55,7 @@
 </tr>
 <% end %>
 <% end %>
+
 </tbody>
 <tbody class="footer">
 <tr>
@@ -63,6 +63,20 @@
     <a href="#add-participants" id="add_event_participant"><%= t('.add_participants') %></a>
   </td>
 </tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="6">
+    <% semantic_fields_for @event_participant do |f| %>
+    <% f.inputs do %>
+      <%= f.input :tellafriend_emails, :input_html => {:rows => 3}, :required => false if @event_participant.new_record? %>
+    <% end %>
+    <% end %>
+    </td>
+  </tr>
 </tbody>
 </table>
 <% end %>
