@@ -52,6 +52,6 @@ describe SignupsController, 'activate' do
   it 'should redirect to signup screen when activation code is invalid' do
     user = Factory(:user, :perishable_token => 'perishable_token')
     get :activate, {:activation_code => "not_#{user.perishable_token}"}
-    response.should redirect_to(signup_path)
+    response.should redirect_to(login_path)
   end
 end
