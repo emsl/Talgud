@@ -158,6 +158,16 @@ describe ParticipationsController do
       response.should render_template(:new)
     end
   end  
+  
+  describe 'edit' do
+    it 'should show edit form to event manager' do
+      
+    end
+    
+    it 'should be denied to edit if different event manager'
+    
+    it 'should be denied to edit if public user'
+  end
 
   describe 'editing participation from encoded url' do
     it 'should load participation when encoded url is valid' do

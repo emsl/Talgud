@@ -2,9 +2,9 @@
   <span style="float: left;"><%= t('.title', :event_name => @event.name) %></span>
   <span style="float: right;" class="dataformats">
     <%= t('common.format') %>:
-    <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :xls) %>
-    <%= link_to t('admin.common.export_csv'), admin_event_participations_path(@event.id, :format => :csv) %>
-    <%= link_to t('admin.common.export_xml'), admin_event_participations_path(@event.id, :format => :xml) %>
+    <%= link_to t('admin.common.export_excel'), admin_event_participations_path(@event.id, :format => :xls, :search => params[:search]) %>
+    <%= link_to t('admin.common.export_csv'), admin_event_participations_path(@event.id, :format => :csv, :search => params[:search]) %>
+    <%= link_to t('admin.common.export_xml'), admin_event_participations_path(@event.id, :format => :xml, :search => params[:search]) %>
   </span>
 </h1>
 
