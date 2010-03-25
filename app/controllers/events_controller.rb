@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.xml { render :xml => @search.all }
-      format.html { @events = @search.paginate(:page => params[:page]) }
+      format.html { @events = @search.paginate(:page => params[:page])}
       format.ics do
         @events = @search.all
         render :text => self.generate_ical
@@ -170,6 +170,8 @@ class EventsController < ApplicationController
     conditions[:location_address_county_id] = params[:county] unless params[:county].blank?
     conditions[:event_type_id] = params[:event_type] unless params[:event_type].blank?
     conditions[:code] = params[:event_code] unless params[:event_code].blank?
+    conditions[:languages_code_eq] = params[:language_code] unless params[:language_code].blank?
+    conditions[:managers_firstname_or_managers_lastname_like_any] = params[:manager_name].split unless params[:manager_name].blank?
     conditions
   end
 

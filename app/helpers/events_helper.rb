@@ -1,11 +1,11 @@
 module EventsHelper
-  
+
   # Displays event start and end hours in a simple format, i.e. when event starts at 12:00 and ends 18:00, the result
   # would be 12-18
   def duration_times(event)
     [event.begins_at.try(:hour), event.ends_at.try(:hour)].compact * '-'
   end
-  
+
   def duration_dates(event)
     # event.begins_at.strftime('%d.%b')
     l(event.begins_at.to_date, :format => :short)
@@ -15,12 +15,30 @@ module EventsHelper
   def languages_label(event)
     event.languages.collect(&:name) * ', '
   end
-  
+
+  # event stats for listing
+  def event_name_with_stats(event)
+    arr = [event.name, '<span class="event_stats">']
+
+    if event.can_register?
+      arr << [event.max_participants, event.vacancies] * '/ '
+    else
+      if event.vacancies?
+        arr << t('.registration_starts_at')
+      else
+        arr << t('.no_vacancies') 
+      end
+    end
+    arr << '</span>'
+
+    arr * ''
+  end
+
   def select_options_for_language
     Language.sorted.collect do |l|
       [l.name, l.id]
     end
-  end  
+  end
 
   def manager_contacts(manager)
     [manager.name, manager.email, manager.phone].select{ |i| not i.blank? } * ', '

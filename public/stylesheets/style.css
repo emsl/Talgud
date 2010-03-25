@@ -657,6 +657,12 @@ table.datatable td span.data-details-link {
    margin-left: 5px;
 }
 
+.event_stats {
+   color: #7f8080;
+   font-size: 12px;
+   margin-left: 5px;
+}
+
           /* info-inner */
             .info-inner { text-align: center; padding-bottom: 40px;}
               #dead-bird { height: 77px; width: 118px; background: url('../images/m6ttetu_tibu.png') no-repeat center center; margin: 0 auto;}

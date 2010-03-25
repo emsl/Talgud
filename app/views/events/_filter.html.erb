@@ -1,12 +1,18 @@
 <h3><%= t('.title') %></h3>
 
 <label><%= t('.county') %></label>
-<%= select_tag :county, options_for_select([[t('common.filter_all'), '']] + County.all.collect{ |c| [c.name, c.id.to_s] }, :selected => params[:county]) %>
+<%= select_tag :county, options_for_select([[t('common.filter_all'), '']] + County.sorted.collect{ |c| [c.name, c.id.to_s] }, :selected => params[:county]) %>
 
 <label><%= t('.event_type') %></label>
-<%= select_tag :event_type, options_for_select([[t('common.filter_all'), '']] + EventType.all.collect{ |c| [c.name, c.id.to_s] }, :selected => params[:event_type]) %>
+<%= select_tag :event_type, options_for_select([[t('common.filter_all'), '']] + EventType.sorted.collect{ |c| [c.name, c.id.to_s] }, :selected => params[:event_type]) %>
+
+<label><%= t('.language_code') %></label>
+<%= select_tag :language_code, options_for_select([[t('common.filter_all'), '']] + Language.sorted.collect{ |c| [c.name, c.code.to_s] }, :selected => params[:language_code]) %>
 
 <label><%= t('.event_code') %></label>
 <%= text_field_tag :event_code, params[:event_code] %>
+
+<label><%= t('.manager_name') %></label>
+<%= text_field_tag :manager_name, params[:manager_name] %>
 
 <%= submit_tag t('.search'), :name => '' %>
