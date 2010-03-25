@@ -160,13 +160,36 @@ describe ParticipationsController do
   end  
   
   describe 'edit' do
+    before(:each) do
+      @ep = Factory(:event_participant)
+    end
+        
     it 'should show edit form to event manager' do
-      
+      manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(manager)
+      Role.grant_role(Role::ROLE[:event_manager], manager, @ep.event)
+
+      get :edit, {:event_id => @ep.event.url, :id => @ep.id}
+      assigns[:event].should eql(@ep.event)
+      assigns[:event_participant].should eql(@ep)
     end
     
-    it 'should be denied to edit if different event manager'
+    it 'should not accesible by another event manager' do
+      manager = Factory.create(:user)
+      activate_authlogic and UserSession.create(manager)
+      event = Factory(:event, :manager => manager)
+      #Role.grant_role(Role::ROLE[:event_manager], manager, @ep.event)
+      
+      EventParticipant.should_not_receive(:find)
+      get :edit, {:event_id => @ep.event.url, :id => @ep.id}
+      response.should redirect_to(root_path)            
+    end
     
-    it 'should be denied to edit if public user'
+    it 'should not accesible by public user' do
+      EventParticipant.should_not_receive(:find)
+      get :edit, {:event_id => @ep.event, :id => @ep.id}
+      response.should redirect_to(root_path)            
+    end
   end
 
   describe 'editing participation from encoded url' do
