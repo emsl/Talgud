@@ -39,6 +39,11 @@
   <div class="object-detail">
     <table class="vertical-data">
       <tr>
+        <td></td>
+        <td><div class="object-detail-time"><%= t('.starts_at', :date => duration_dates(@event), :time => duration_times(@event)) %></div></td>
+      </tr>
+      
+      <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_aim_description') %></td>
         <td><%=h @event.meta_aim_description %></td>
       </tr>
@@ -112,10 +117,6 @@
         <td>
           <%=h @event.code %> <a href="http://www.teemeara.ee/loo-kaasa/toeta-talguid" target="blank"><%= t('.sponsor_this_event') %></a>
         </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><div class="object-detail-time"><%= t('.starts_at', :date => duration_dates(@event), :time => duration_times(@event)) %></div></td>
       </tr>
       <tr>
         <td></td>
