@@ -107,6 +107,14 @@ describe ParticipationsController do
       get :new, {:event_id => event.url}
       response.should redirect_to(event_path(event))
     end
+
+    it 'should redirect to events path if registration is not opened' do
+      event = Factory(:event, :max_participants => 10, :status => Event::STATUS[:published])
+      ep = Factory(:event_participant, :event => event)
+      
+      get :new, {:event_id => event.url}
+      response.should redirect_to(event_path(event))
+    end
   end
   
   describe 'create' do

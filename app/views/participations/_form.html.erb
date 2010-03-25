@@ -14,19 +14,19 @@
   jQuery(document).ready(initFormHints);
 </script>
 
-<% if @event_participant.parent? or @event_participant.new_record? %>
+<% if @event_participant.parent? or @event_participant.new_record?  %>
 
 <p><%= t('.invite') %></p>
 
-<% fields_for @event_participant do |f| %>
+<% semantic_fields_for @event_participant do |f| %>
 <table width="100%" class="dataentry" style="margin: 15px 0;">
 <thead>
 <tr>
-  <th><%= t('formtastic.labels.event_participant.firstname') %></th>
-  <th><%= t('formtastic.labels.event_participant.lastname') %></th>
-  <th><%= t('formtastic.labels.event_participant.age_range') %></th>
-  <th><%= t('formtastic.labels.event_participant.email') %></th>
-  <th><%= t('formtastic.labels.event_participant.phone') %></th>
+  <th><%= f.label :firstname, :required => true %></th>
+  <th><%= f.label :lastname, :required => true %></th>
+  <th><%= f.label :age_range, :required => true %></th>
+  <th><%= f.label :email, :required => false %></th>
+  <th><%= f.label :phone, :required => false %></th>
 </tr>
 </thead>
 <tbody style="display:none;">
