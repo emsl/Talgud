@@ -102,7 +102,6 @@ class EventsController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        # TODO: nearby distance should be configurable
         @nearby_events = Event.published.all(:origin => [@event.latitude, @event.longitude], :within => 25, :limit => 10).delete_if{ |e| e == @event }
       end
       format.ics do

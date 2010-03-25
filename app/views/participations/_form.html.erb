@@ -13,12 +13,12 @@
   jQuery(document).ready(initFormHints);
 </script>
 
-<% if @event_participant.parent? or @event_participant.new_record?  %>
+<% if !@event_participant.children.empty? or @event_participant.new_record? %>
 
 <p><%= t('.invite') %></p>
 
 <% semantic_fields_for @event_participant do |f| %>
-<table width="100%" class="dataentry" style="margin: 15px 0;">
+<table width="100%" class="dataentry" style="margin: 15px 0;" border="0" cellpadding="0" cellspacing="0">
 <thead>
 <tr>
   <th><%= f.label :firstname, :required => true %></th>
@@ -49,8 +49,9 @@
   <td<%= column_class_name(epc, :lastname) %>><%= child.text_field :lastname %></td>
   <td<%= column_class_name(epc, :age_range) %>><%= child.select :age_range, age_range_options %></td>
   <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
-  <td<%= column_class_name(epc, :phone, 'last') %>><%= child.text_field :phone %>
-  <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>  
+  <td<%= column_class_name(epc, :phone, 'last') %>>
+    <%= child.text_field :phone %>
+    <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>  
   </td>
 </tr>
 <% end %>

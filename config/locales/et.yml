@@ -329,6 +329,7 @@ et:
     index:
       title: Kõik talgud
       empty: Otsingu tulemusena talguid ei leitud
+      save_ical: Salvesta oma kalendrisse
     latest:
       title: Viimati lisatud
     my:

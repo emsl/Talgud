@@ -9,9 +9,9 @@ class Admin::EventParticipantsController < Admin::AdminController
   def index
     @search = @event.event_participants.search(params[:search]).search(params[:order])
     respond_to do |format|
-      format.xml  { render :xml => @search.all }
-      format.csv { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv" }
-      format.xls { @event_participants = @search.all; @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"}
+      format.xml { render :xml => @search.all }
+      format.csv { @event_participants = @search.all; @filename = "event-participants-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv" }
+      format.xls { @event_participants = @search.all; @filename = "event-participants-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls" }
       format.html { @event_participants = @search.paginate(:page => params[:page]) }
     end
   end
