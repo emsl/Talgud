@@ -658,11 +658,11 @@ table.datatable td span.data-details-link {
 }
 
 .event_stats {
-  color: #7f8080;
+  color: white;
   font-size: 10px;
   font-weight: normal;
   margin-left: 5px;
-  color: white;
+  text-shadow: 0 1px 0 #557087;
 }
 
 .event_stats .max_participants, .event_stats .vacancies {
