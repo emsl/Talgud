@@ -105,6 +105,10 @@ class EventsController < ApplicationController
         # TODO: nearby distance should be configurable
         @nearby_events = Event.published.all(:origin => [@event.latitude, @event.longitude], :within => 25, :limit => 10).delete_if{ |e| e == @event }
       end
+      format.ics do
+        @events = [@event]
+        render :text => self.generate_ical
+      end      
       format.json { render :json => @event }
     end
   end
