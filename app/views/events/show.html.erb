@@ -117,6 +117,13 @@
         <td></td>
         <td><div class="object-detail-time"><%= t('.starts_at', :date => duration_dates(@event), :time => duration_times(@event)) %></div></td>
       </tr>
+      <tr>
+        <td></td>
+        <td>
+          <%= image_tag 'ical.png', :style => 'vertical-align: middle;' %>
+          <span style="vertical-align: middle;"><%= link_to t('events.index.save_ical'), event_path(@event, :format => :ical) %></span>
+        </td>
+      </tr>
     </table> 
   </div>
   
