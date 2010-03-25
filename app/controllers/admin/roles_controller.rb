@@ -1,13 +1,18 @@
 class Admin::RolesController < Admin::AdminController
-  
+
   filter_resource_access :attribute_check => true
   filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
-  
+
   before_filter :load_target_model, :except => :index
 
   def index
-    @search = Role.with_permissions_to(:manage, :context => :admin_users).search(params[:search]).search(params[:order])
+    if @current_user.role_symbols.include?(:account_manager)
+      @search = Role.with_permissions_to(:manage, :context => :admin_roles).search(params[:search]).search(params[:order])
+    else
+      @search = Role.can_manage_events(@current_user).search(params[:search]).search(params[:order])
+    end
     @roles = @search.paginate(:page => params[:page])
+    @target_model = Role.new
   end
 
   def new
@@ -27,33 +32,49 @@ class Admin::RolesController < Admin::AdminController
     end
   end
 
+  def show
+    p @role
+  end
+
   def destroy
     @role.destroy
     flash[:notice] = t('admin.roles.destroy.notice')
-    redirect_to new_admin_role_path(:model_type => @target_model.class.name, :model_id => @target_model)
+    if params[:model_type] == 'Role'
+      redirect_to admin_roles_path
+    else
+      redirect_to new_admin_role_path(:model_type => @target_model.class.name, :model_id => @target_model)
+    end
   end
 
   protected
+  def load_role
+    @role = Role.find(params[:id])
+    if @role.model_type == 'Event' && !Event.can_manage(@current_user).exists?(@role.model.id)
+      redirect_to admin_login_path
+    end
+  end
+  
   # Tries to detect target role model by parameter. Loads role symbols and all object permissions.
   def load_target_model
     id = params[:model_id] if params[:model_id]
     type = params[:model_type] if params[:model_type]
 
     @target_model =
-      # TODO: find with permissions_to
-      case type
-      when 'County' then County.find(id)
-      when 'Settlement' then Settlement.find(id)
-      when 'Municipality' then Municipality.find(id)      
-      when 'Account' then Account.with_permissions_to(:read, :context => :admin_accounts).find(id)      
-      when 'Event' then Event.find_by_url(id)      
-      end
+    # TODO: find with permissions_to
+    case type
+    when 'County' then County.find(id)
+    when 'Settlement' then Settlement.find(id)
+    when 'Municipality' then Municipality.find(id)
+    when 'Account' then Account.with_permissions_to(:read, :context => :admin_accounts).find(id)
+    when 'Event' then Event.find_by_url(id)
+    when 'Role' then Role.find(params[:id]).model
+    end
 
     if @target_model
       @role_symbols = @target_model.class.try(:class_role_symbols)
       @roles = @target_model.try(:roles)
     else
-      redirect_to admin_path
+      redirect_to admin_login_path
     end
   end
 end

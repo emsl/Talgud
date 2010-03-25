@@ -29,7 +29,10 @@
               var position = new google.maps.LatLng(point.latitude, point.longitude);
               bounds.extend(position);
               
-              var marker = new DataMarker({position: position, title: point.name, icon: clusterer_red_icon, shadow: clusterer_shadow_icon});
+              var marker = new DataMarker({
+                title: point.name, icon: (point.has_vacancies ? clusterer_red_icon : clusterer_yellow_icon),
+                position: position, shadow: clusterer_shadow_icon
+              });
               marker.setData(point);
               
               google.maps.event.addListener(marker, 'click', function() {
@@ -37,14 +40,12 @@
                   cbody += '<h3><a href="' + point.url + '">' + point.name + '</a></h3>';
                   cbody += '<span class="object-type">' + point.event_type + '</span> ' + point.address;
                   if (point.aim_desc && point.aim_desc != '') {
-                    cbody += '<div class="label">Tööde eesmärk</div>' + point.aim_desc;
+                    cbody += '<div class="label"><%= t('.event_aim') %></div>' + point.aim_desc;
                   }
                   if (point.job_desc && point.job_desc != '') {
-                    cbody += '<div class="label">Tööde kirjeldus</div>' + point.job_desc;
+                    cbody += '<div class="label"><%= t('.event_description') %></div>' + point.job_desc;
                   }
-                  if (point.vacancies && point.vacancies != '') {
-                    cbody += '<div class="label">Vabu kohti</div>' + point.vacancies;
-                  }
+                  cbody += '<div class="label"><%= t('.event_vacancies') %></div>' + point.vacancies;
                   cbody += '<div style="margin-top: 10px;"><a href="' + point.url + '"><%= t('.show_link') %></a></a>';
                   cbody += '</div>';
                 
@@ -66,7 +67,11 @@
           body += '<div class="infowindow"><div class="clustered">';
           for (var i = 0; i < markers.length; i++) {
               point = markers[i].getData();
-              body += '<a href="' + point.url + '">' + point.name + '</a>';
+              body += '<a href="' + point.url + '"';
+              if (!point.has_vacancies) {
+                body += ' class="no_vacancies"';
+              }
+              body += '>' + point.name + '</a>';
           }
           body += '</div></div>';
 

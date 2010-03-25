@@ -14,6 +14,10 @@ Rails::Initializer.run do |config|
   config.gem 'newrelic_rpm'
   config.gem 'will_paginate'
   config.gem 'searchlogic'
+  config.gem 'url_store'
+  config.gem 'fastercsv'
+  config.gem 'spreadsheet'
+  config.gem 'icalendar'
   
   config.frameworks -= [:active_resource]
 
@@ -22,3 +26,5 @@ Rails::Initializer.run do |config|
 end
 
 ActionController::Dispatcher.middleware.use Rack::JSONP
+
+UrlStore.defaults = {:secret => 'gBtMF3qmpXKyDHUFnW14CxYoHspADjntqicwNCl+acuwv+8WpnZkIr/ukv2gtT+4YQQN+vV8dD8b56ytmCoLOQ=='}

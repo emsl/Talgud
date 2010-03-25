@@ -24,4 +24,28 @@ module ApplicationHelper
   def paginate(collection = nil)
     will_paginate collection, :previous_label => t('common.paginate_previous'), :next_label => t('common.paginate_next')
   end  
+  
+  def language_menu(code, title)    
+    if I18n.locale == code
+      content_tag :span, :class => :active do
+        title
+      end
+    else
+      link_to title, language_path(:language => code)
+    end
+  end  
+  
+  # Set required headers for CSV file serving as attachment. Also solved special case with IE.
+  def csv_headers(filename)
+    if request.env['HTTP_USER_AGENT'] =~ /msie/i
+      headers['Pragma'] = 'public'
+      headers["Content-type"] = "text/plain"
+      headers['Cache-Control'] = 'no-cache, must-revalidate, post-check=0, pre-check=0'
+      headers["Content-Disposition"] = "attachment; filename=\"#{filename}\""
+      headers['Expires'] = "0"
+    else
+      headers["Content-Type"] ||= 'text/csv'
+      headers["Content-Disposition"] = "attachment; filename=\"#{filename}\""
+    end
+  end
 end

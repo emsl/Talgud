@@ -10,7 +10,7 @@
   </tr>
   </thead>
   <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
-    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
+    <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
     <td><%= f.input :name_like, :label => false %></td>
     <td><%= f.input :domain_like, :label => false %></td>
     <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>

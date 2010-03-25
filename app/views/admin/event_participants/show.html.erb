@@ -1,0 +1,43 @@
+<h1><%= t('.title', :event_name => @event.name) %></h1>
+
+<div class="textcontent">
+  <% if permitted_to?(:edit, :admin_event_participants) %>
+  <div style="margin-bottom:10px;">    
+    <%= link_to t('admin.common.edit'), edit_admin_event_participation_path(@event.id, @event_participant) %>
+  </div>
+  <% end %>
+<table>
+<tr>
+  <td style="width: 25%;"><b><%= t('formtastic.labels.event.code') %></b></td>
+  <td><%=h @event.code %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.firstname') %></b></td>
+  <td><%=h @event_participant.firstname %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.lastname') %></b></td>
+  <td><%=h @event_participant.lastname %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.email') %></b></td>
+  <td><%=h @event_participant.email %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.phone') %></b></td>
+  <td><%=h @event_participant.phone %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.age_range') %></b></td>
+  <td><%=h age_range_label(@event_participant.age_range) %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.notes') %></b></td>
+  <td><%=h @event_participant.notes %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event_participant.event_participant') %></b></td>
+  <td><%=h @event_participant.parent_name %></td>
+</tr>
+</table>
+</div>

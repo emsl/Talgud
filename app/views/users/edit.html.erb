@@ -6,11 +6,12 @@
   
   <% semantic_form_for @user, :url => user_path(@user) do |f| %>
     <% f.inputs do %>
+      <%= f.input :email, :input_html => {:disabled => true} %>
       <%= f.input :firstname %>
       <%= f.input :lastname %>
       <%= f.input :phone %>
-      <%= f.input :password %>
-      <%= f.input :password_confirmation %>
+      <%= f.input :password, :required => false %>
+      <%= f.input :password_confirmation, :required => false %>
     <% end %>
     <% f.buttons do %>
       <%= f.commit_button :save_my_settings %>

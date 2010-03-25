@@ -14,7 +14,9 @@ class Role < ActiveRecord::Base
   
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:role => ' ASC'}
-  
+
+  named_scope :can_manage_events, lambda { |u| { :conditions => ['role = ? AND exists(SELECT 1 FROM roles r, events e WHERE ((r.model_type = ? AND r.model_id = e.location_address_county_id) OR (r.model_type = ? AND r.model_id = e.location_address_municipality_id) OR (r.model_type = ? AND r.model_id = e.location_address_settlement_id)) AND r.user_id = ? AND r.role = ? AND roles.model_id = e.id)', 'event_manager', 'County', 'Municipality', 'Settlement', u.id, 'regional_manager'] }}
+
   def self.grant_role(role, user, m)
     Role.create!(:role => role, :user => user, :model => m, :account => Account.current)
   end

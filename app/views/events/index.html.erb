@@ -10,7 +10,11 @@
 <div class="container-right">
   <h1><%= t('.title') %></h1>
 
+  <% unless @events.empty? %>
   <%= render @events %>
+  <% else %>
+  <%= t('.empty') %>
+  <% end %>
   
   <%= paginate %>
 </div>

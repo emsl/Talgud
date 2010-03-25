@@ -1,0 +1,121 @@
+<% semantic_fields_for @event_participant do |f| %>
+<% f.inputs do %>
+  <%= f.input :firstname %>
+  <%= f.input :lastname %>
+  <%= f.input :email %>
+  <%= f.input :phone %>
+  <%= f.input :age_range, :as => :select, :collection => age_range_options, :include_blank => false %>
+  <%= f.input :notes, :input_html => {:rows => 3}, :required => false %>
+<% end %>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+  jQuery(document).ready(initFormHints);
+</script>
+
+<% if !@event_participant.children.empty? or @event_participant.new_record? %>
+
+<p><%= t('.invite') %></p>
+
+<% semantic_fields_for @event_participant do |f| %>
+<table width="100%" class="dataentry" style="margin: 15px 0;" border="0" cellpadding="0" cellspacing="0">
+<thead>
+<tr>
+  <th><%= f.label :firstname, :required => true %></th>
+  <th><%= f.label :lastname, :required => true %></th>
+  <th><%= f.label :age_range, :required => true %></th>
+  <th><%= f.label :email, :required => false %></th>
+  <th><%= f.label :phone, :required => false %></th>
+</tr>
+</thead>
+<tbody style="display:none;">
+<% f.fields_for :children, EventParticipant.new, :child_index => 'new_children' do |child| %>
+<tr id="event_participant_template">
+  <td class="first"><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.text_field :firstname %></td>
+  <td><%= child.text_field :lastname %></td>
+  <td><%= child.select :age_range, age_range_options %></td>
+  <td><%= child.text_field :email %></td>
+  <td class="last"><%= child.text_field :phone %>
+  <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>
+  </td>
+</tr>
+<% end %>
+</tbody>
+<tbody class="inputs" id="event_participant_inputs">
+<% @event_participant.children.each_with_index do |epc, idx| %>
+<% f.fields_for :children, epc do |child| %>
+<tr<%= ' class="first"' if idx == 0 %>>
+  <td<%= column_class_name(epc, :firstname, 'first') %>><%= child.hidden_field :_destroy, :class => 'event_participant_destroy' %><%= child.hidden_field :id %><%= child.text_field :firstname %></td>
+  <td<%= column_class_name(epc, :lastname) %>><%= child.text_field :lastname %></td>
+  <td<%= column_class_name(epc, :age_range) %>><%= child.select :age_range, age_range_options %></td>
+  <td<%= column_class_name(epc, :email) %>><%= child.text_field :email %></td>
+  <td<%= column_class_name(epc, :phone, 'last') %>>
+    <%= child.text_field :phone %>
+    <%= link_to(image_tag('trash.gif', :alt => t('common.delete')), '#remove', :title => t('common.delete'), :class => 'event_participant_remove') %>  
+  </td>
+</tr>
+<% end %>
+<% end %>
+
+</tbody>
+<tbody class="footer">
+<tr>
+  <td colspan="5">
+    <a href="#add-participants" id="add_event_participant"><%= t('.add_participants') %></a>
+  </td>
+</tr>
+</tbody>
+<tbody>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="6">
+    <% semantic_fields_for @event_participant do |f| %>
+    <% f.inputs do %>
+      <%= f.input :tellafriend_emails, :input_html => {:rows => 3}, :required => false if @event_participant.new_record? %>
+    <% end %>
+    <% end %>
+    </td>
+  </tr>
+</tbody>
+</table>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+    function addParticipantRow() {
+        var tbl = $(this).parent('table.dataentry'),
+            inputs = document.getElementById('event_participant_inputs'),
+            tpl = document.getElementById('event_participant_template');
+        
+        var newRow = tpl.cloneNode(true);
+        newRow.removeAttribute('id');
+        
+        inputs.appendChild(newRow);
+        
+        var new_id = 'new_' + new Date().getTime();
+        var regexp = new RegExp("new_children", "g");
+        
+        $(newRow).find('input').each(function(input) {
+            this.setAttribute('name', this.getAttribute('name').replace(regexp, new_id));
+        });
+        
+        return false;
+    }
+    
+    jQuery(document).ready(function() {
+        $('#add_event_participant').click(addParticipantRow);
+        $('table.dataentry input').live('focus', function() {
+            $(this).closest('tr').addClass('active');
+        });
+        $('table.dataentry input').live('blur', function() {
+            $(this).closest('tr').removeClass('active');
+        });
+        $('a.event_participant_remove').live('click', function() {
+            $(this).closest('tr').hide();
+            $(this).closest('tr').find('input.event_participant_destroy').val(1);
+            return false;
+        });
+    });
+</script>
+<% end %>

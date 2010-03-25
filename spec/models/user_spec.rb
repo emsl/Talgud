@@ -5,7 +5,7 @@ describe User, 'validations' do
   before(:each) do
     @valid_attributes = {
       :firstname => 'Foo', :lastname => 'Bar', :email => 'example@example.com',
-      :password => 'abc', :password_confirmation => 'abc', :phone => '12345'
+      :password => 'abc', :password_confirmation => 'abc', :phone => '1234'
     }
   end
   
@@ -51,9 +51,9 @@ describe User, 'validations' do
 
   it 'should not validate blank phone' do
     user = Factory.build(:user, :phone => nil)
-    user.should_not be_valid
+    user.should be_invalid
     user = Factory.build(:user, :phone => '')
-    user.should_not be_valid
+    user.should be_invalid
   end
 end
 

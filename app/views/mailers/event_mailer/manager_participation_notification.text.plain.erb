@@ -1,0 +1,12 @@
+<%= t('.intro', :name => @event_participant.participant_name) %>
+
+<%= t('.participant_info') %>
+
+<%= t('formtastic.labels.event_participant.event') %>: <%= @event_participant.event.name %>
+<%= t('formtastic.labels.event_participant.participant_name') %>: <%= @event_participant.participant_name %>
+<%= t('formtastic.labels.event_participant.email') %>: <%= @event_participant.email %>
+<%= t('formtastic.labels.event_participant.phone') %>: <%= @event_participant.phone %>
+
+<%= t('.event_participants_address', :url => @event_participations_url) %>
+
+<%= t('mailers.common.footer_text') %>

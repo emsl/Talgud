@@ -1,4 +1,4 @@
-<h1>Muuda talguid</h1>
+<h1><%= t('.title') %></h1>
 
 <% semantic_form_for @event, :url => admin_event_path(@event.id) do |f| %>
   <%= render 'form' %>

@@ -4,6 +4,16 @@
 // ==/ClosureCompiler==
 
 /**
+ *  !! IMPORTANT !!
+ *
+ * This is a stripped, lightweight version of MarkerClusterer by Luke Mehe that originally can be found at
+ * http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/
+ *
+ * This modification of the clusterer uses Google Maps original Markers to display cluster icons and therefore
+ * is missing a feature of displaying number of markers inside a cluster.
+ */
+
+/**
  * @name MarkerClusterer for Google Maps v3
  * @version version 1.0
  * @author Luke Mahe
@@ -37,6 +47,12 @@ var clusterer_blue_icon = new google.maps.MarkerImage(
 
 var clusterer_red_icon = new google.maps.MarkerImage(
     'http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png',
+    new google.maps.Size(32, 32),
+    new google.maps.Point(0, 0)
+);
+
+var clusterer_yellow_icon = new google.maps.MarkerImage(
+    'http://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png',
     new google.maps.Size(32, 32),
     new google.maps.Point(0, 0)
 );
@@ -518,9 +534,9 @@ function Cluster(markerClusterer) {
  * @return {boolean} True if the marker is already added.
  */
 Cluster.prototype.isMarkerAlreadyAdded = function(marker) {
-    if (this.markers_.indexOf) {
-        return this.markers_.indexOf(marker) != -1;
-    }
+  if (this.markers_.indexOf) {
+    return this.markers_.indexOf(marker) != -1;
+  }
 };
 
 

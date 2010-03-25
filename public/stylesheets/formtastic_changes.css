@@ -1,4 +1,9 @@
-form.formtastic abbr, form.formtastic acronym { display: none; }
+form.formtastic acronym { display: none; }
+
+form.formtastic abbr {
+  color: #c00;
+  margin-left: 2px;
+}
 
 form.formtastic fieldset { display: block; }
 
@@ -71,4 +76,60 @@ form.formtastic div.form-extra fieldset ol li.string input,
 form.formtastic div.form-extra fieldset ol li.numeric input,
 form.formtastic div.form-extra fieldset ol li.text textarea {
   width: 378px;
+}
+
+table.dataentry thead th {
+  font-weight: normal;
+  padding: 5px 7px;
+}
+
+table.dataentry tbody.inputs td {
+  border-bottom: 1px solid #e4e4e4;
+  border-left: 1px solid #e4e4e4;
+  padding: 5px;
+}
+
+table.dataentry tbody.inputs tr.first td {
+  border-top: 1px solid #a9a9aa;
+  background: url('../images/textbox.gif') repeat-x scroll left top white;
+}
+
+table.dataentry tbody.inputs tr.active td {
+  background: #f5fcff;
+}
+
+table.dataentry tbody.inputs td.first {
+  border-left: 1px solid #a9a9aa;
+}
+
+table.dataentry tbody.inputs td.last {
+  border-right: 1px solid #a9a9aa;
+}
+
+table.dataentry tbody.inputs td input {
+  background: transparent;
+  border: transparent;
+  outline: none;
+  padding: 2px;
+  font-size: 16px;
+  width: 130px;
+}
+
+table.dataentry tbody.inputs td.last select {
+}
+
+table.dataentry tbody.inputs td.error input {
+  background: url('../images/invalid_line.gif') repeat-x scroll left bottom transparent;
+}
+
+table.dataentry tbody.inputs td.error select {
+  background: url('../images/invalid_line.gif') repeat-x scroll left bottom transparent;
+}
+
+table.dataentry tbody.footer td {
+  background-color: #d9f5ff;
+  border-right: 1px solid #a9a9aa;
+  border-bottom: 1px solid #a9a9aa;
+  border-left: 1px solid #a9a9aa;
+  padding: 5px 10px;
 }

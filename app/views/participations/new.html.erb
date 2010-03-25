@@ -1,0 +1,17 @@
+<div class="container-left">
+  <%= render 'events/submenu' %>
+</div>
+<div class="container-right">
+  <h1><span style="font-weight: normal"><%= t('.title') %></span> <%= @event.name %></h1>
+
+  <p style="margin-bottom: 20px;">
+    <%= t('.intro') %>
+  </p>
+
+  <% semantic_form_for :event_participant, @event_participant, :url => event_participations_path(@event) do |f| %>
+    <%= render 'form' %>
+    <% f.buttons do %>
+      <%= f.commit_button :participate %>
+    <% end %>
+  <% end %>
+</div>

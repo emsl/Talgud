@@ -1,7 +1,9 @@
 <div class="container-left">
   <%= render 'submenu' %>
   
-  <% unless @nearby_events.empty? %>
+  <% if permitted_to?(:edit, @event) %>
+  <%= render 'submenu_edit' %>
+  <% elsif not @nearby_events.empty? %>
   <div class="container-left-inner">
     <div class="bluebox-border"><h2 class="colored bg-blue"><%= t('.more_events_in_area') %></h2></div>
     <ul class="border-list">
@@ -18,24 +20,29 @@
     <div class="object-left">
       <h1><%=h @event.name %> <span class="object-type"><%=h @event.event_type.name %></span></h1>
       
-      <% if permitted_to?(:edit, @event) %>
-      <%= link_to t('.edit_event'), edit_event_path(@event) %><br/><br/>
-      <% end %>
-      
       <div class="object-location">
         <a href="#map" id="map_link"><%= @event.location_address %></a>
       </div>
     </div>
-    <div class="object-right">
+    <div class="object-right noprint">
       <div class="reg-link">
-        <a href="#" onclick="return false;"><%= t('.register_to_this_event') %></a>
+      <%= link_to t('.register_to_this_event'), new_event_participation_path(@event) %>
       </div>
+      <% if not @event.can_register? %>
       <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at') %></div>
+      <% elsif not @event.vacancies? %>
+      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 58px;"><%= t('.no_vacancies') %></div>
+      <% end %>
     </div>
   </div>
 
   <div class="object-detail">
-    <table>
+    <table class="vertical-data">
+      <tr>
+        <td></td>
+        <td><div class="object-detail-time"><%= t('.starts_at', :date => duration_dates(@event), :time => duration_times(@event)) %></div></td>
+      </tr>
+      
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_aim_description') %></td>
         <td><%=h @event.meta_aim_description %></td>
@@ -43,6 +50,10 @@
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_job_description') %></td>
         <td><%=h @event.meta_job_description %></td>
+      </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.max_participants') %></td>
+        <td><%=h @event.max_participants %></td>
       </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.vacancies') %></td>
@@ -60,6 +71,16 @@
         <td class="first"><%= t('formtastic.labels.event.meta_subject_info') %></td>
         <td><%= auto_link(@event.meta_subject_info, :all, :target => "_blank") %></td>
       </tr>
+      <% if @event.managers.size > 1 %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.managers') %></td>
+        <td>
+          <% for manager in @event.managers %>
+          <div style="margin-bottom: 5px;"><%=h manager_contacts(manager) %></div>
+          <% end %>
+        </td>
+      </tr>
+      <% else %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.manager') %></td>
         <td><%=h @event.manager.name %></td>
@@ -75,6 +96,7 @@
         <td class="first"><%= t('formtastic.labels.event.manager_email') %></td>
         <td><%=h @event.manager.email %></td>
       </tr>
+      <% end %>
       <% end %>
       <% unless @event.languages.empty? %>
       <tr>
@@ -98,7 +120,10 @@
       </tr>
       <tr>
         <td></td>
-        <td><div class="object-detail-time"><%= t('.starts_at') %> <%= duration_times(@event) %></div></td>
+        <td>
+          <%= image_tag 'ical.png', :style => 'vertical-align: middle;' %>
+          <span style="vertical-align: middle;"><%= link_to t('events.index.save_ical'), event_path(@event, :format => :ics) %></span>
+        </td>
       </tr>
     </table> 
   </div>

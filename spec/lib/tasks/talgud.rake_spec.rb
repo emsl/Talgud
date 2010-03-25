@@ -30,6 +30,7 @@ describe "talgud rake tasks" do
     it "should create new account and user and grant account_manager role to that user" do
       account = Factory.build(:account)
       user = Factory.build(:user)
+      user.should be_valid
       Account.find_by_domain(account.domain).should be_nil
       User.find_by_email(user.email).should be_nil
       @rake[@task_name].invoke(account.name, account.domain, user.email, user.password)

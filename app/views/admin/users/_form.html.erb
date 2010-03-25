@@ -2,9 +2,11 @@
   <% f.inputs do %>
     <%= f.input :firstname %>
     <%= f.input :lastname %>
-    <%= f.input :email %>
+    <%= f.input :email, :required => true %>
     <%= f.input :phone %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
+    <%= f.input :password, :required => true %>
+    <%= f.input :password_confirmation, :required => true %>
+    <%= f.input :perishable_token, :input_html => {:disabled => true} %>
+    <%= f.input :status, :as => :select, :collection => User::STATUS.keys.collect{ |s| [t("formtastic.labels.user.statuses.#{s}"), s.to_s] }, :include_blank => false unless @user.new_record? %>    
   <% end %>
 <% end %>

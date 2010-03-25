@@ -1,0 +1,17 @@
+<div class="container-left">
+  <%= render 'events/submenu' %>
+</div>
+<div class="container-right">
+  <div style="border: 1px solid #dfd923; background: #fcfdbb; padding: 20px; text-align: center; width: 420px; -webkit-border-radius: 5px;">
+    <h2><%= t('.title') %></h2>
+    
+    <p><%= t('.mail_info') %></p>
+
+    <p>
+      <%= t('.contact_info') %>
+      <%= link_to t('.link_to_event'), event_path(@event) %>.
+    </p>
+    
+    <p><b><%= t('.footer') %></b></p>
+  </div>
+</div>

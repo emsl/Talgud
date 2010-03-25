@@ -1,0 +1,37 @@
+<%- 
+csv_headers(@filename)
+
+events_csv = FasterCSV.generate :col_sep => ';' do |csv|
+  # header row
+  csv << [t('formtastic.labels.event.code'), 
+    t('formtastic.labels.event.name'),
+    t('formtastic.labels.event.max_participants'),        
+    t('formtastic.labels.event.current_participants'),        
+    t('formtastic.labels.event.vacancies'),        
+    t('formtastic.labels.event_participant.firstname'),
+    t('formtastic.labels.event_participant.lastname'),
+    t('formtastic.labels.event_participant.email'),
+    t('formtastic.labels.event_participant.phone'),
+    t('formtastic.labels.event_participant.age_range'),    
+    t('formtastic.labels.event_participant.notes'),
+    t('formtastic.labels.event_participant.event_participant')
+  ]
+  # data rows
+  @event_participants.each do |participant|
+    csv << [participant.event.code,
+      participant.event.name,
+      participant.event.max_participants,
+      participant.event.current_participants,
+      participant.event.vacancies,
+      participant.firstname,
+      participant.lastname,
+      participant.email,
+      participant.phone,
+      age_range_label(participant.age_range),
+      participant.notes,
+      participant.parent_name      
+    ]
+  end
+end
+-%>
+<%= events_csv %>

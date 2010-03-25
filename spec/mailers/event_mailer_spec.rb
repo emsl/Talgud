@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Mailers::EventMailer, :type => :view do
   
   describe 'region_manager_notification' do
-    
     before(:each) do
       @user = Factory(:user)
       @event = Factory(:event)
@@ -27,6 +26,94 @@ describe Mailers::EventMailer, :type => :view do
       @mail.body.should include(@event.gathering_location)
       @mail.body.should include(@event.notes)
       @mail.body.should include(@url)
+    end
+  end
+  
+  describe 'invite_event_manager_notification' do
+    before(:each) do
+      @user = Factory(:user)
+      @manager = Factory(:user)
+      @event = Factory(:event)
+      @password = ActiveSupport::SecureRandom.base64(12)
+    end
+
+    it 'should contain manager login information if it is a new user' do
+      mail = Mailers::EventMailer.create_invite_event_manager_notification(@user, @manager, @event, login_url, @password)
+      mail.body.should include(@manager.name)
+      mail.body.should include(@user.name)
+      mail.body.should include(@manager.email)
+      mail.body.should include(@password)
+      mail.body.should include(login_url)
+    end
+    
+    it 'should not send password when new manager is an existing user' do
+      mail = Mailers::EventMailer.create_invite_event_manager_notification(@user, @manager, @event, login_url)
+      mail.body.should_not include(@password)
+    end
+  end
+  
+  describe 'participant_notification' do
+    before(:each) do
+      activate_authlogic
+      @event_participant = Factory(:event_participant)
+      @edit_url = event_participation_url(@event_participant.event, @event_participant)
+      @event_url = event_url(@event_participant.event)
+      @mail = Mailers::EventMailer.create_participant_notification(@event_participant, @event_url, @edit_url)
+    end
+    
+    it 'should contain event info and link to edit participation info' do
+      @mail.body.should include(@event_participant.event.name)
+      @mail.body.should include(@event_url)
+      @mail.body.should include(@edit_url)
+    end
+  end
+  
+  describe 'invited_participant_notification' do
+    before(:each) do
+      @event_participant = Factory(:event_participant, :event_participant => Factory(:event_participant))
+      @edit_url = event_participation_url(@event_participant.event, @event_participant)
+      @event_url = event_url(@event_participant.event)
+      @mail = Mailers::EventMailer.create_invite_participant_notification(@event_participant, @event_url, @edit_url)
+    end
+    
+    it 'should contain parent participant name and event information' do
+      @mail.body.should include(@event_participant.event_participant.participant_name)
+      @mail.body.should include(@event_participant.event.name)
+      @mail.body.should include(@event_url)
+      @mail.body.should include(@edit_url)
+    end
+  end
+  
+  describe 'manager_participation_notification' do
+    before(:each) do
+      @event_participant = Factory(:event_participant)
+      @event_participations_url = event_participations_url(@event_participant.event)
+      @event_manager = Factory(:user)
+      @mail = Mailers::EventMailer.create_manager_participation_notification(@event_manager, @event_participant, @event_participations_url)
+    end
+    
+    it 'should contain event and participant infor and link to participants page' do
+      @mail.subject.should include(@event_participant.event.name)
+      @mail.subject.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.email)
+      @mail.body.should include(@event_participant.phone)
+      @mail.body.should include(@event_participations_url)
+    end
+  end
+  
+  describe 'tell_friend_notification' do
+    before(:each) do
+      @event_participant = Factory(:event_participant)
+      @event_url = event_url(@event_participant.event)
+      @mail = Mailers::EventMailer.create_tell_friend_notification('test@example.com', @event_participant, @event_url)
+    end
+    
+    it 'should countain user name, event name and link to event page' do
+      @mail.subject.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.participant_name)
+      @mail.body.should include(@event_participant.event.name)
+      @mail.body.should include(@event_url)
     end
   end
 end

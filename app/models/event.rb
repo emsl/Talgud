@@ -6,8 +6,9 @@ class Event < ActiveRecord::Base
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :closed => 'closed', :took_place => 'took_place', :adjustment => 'adjustment'}
 
-  has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:role => Role::ROLE[:event_manager]}
+  has_many :manager_roles, :as => :model, :class_name => 'Role', :conditions => {:roles => {:role => Role::ROLE[:event_manager]}}
   has_many :managers, :through => :manager_roles, :source => :user
+  has_many :event_participants
 
   belongs_to :event_type
   belongs_to :manager, :class_name => 'User', :foreign_key => :manager_id
@@ -16,6 +17,7 @@ class Event < ActiveRecord::Base
   belongs_to :location_address_settlement, :class_name => 'Settlement', :foreign_key => :location_address_settlement_id
   has_many :roles, :as => :model
   has_and_belongs_to_many :languages
+  
   
   validates_uniqueness_of :code, :scope => :account_id
 
@@ -37,8 +39,8 @@ class Event < ActiveRecord::Base
   named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
   named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}} }
   named_scope :latest, lambda { |count| {:limit => count, :order => 'created_at DESC'} }
-  named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ?)) ',
-     u.id, 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager'] }}
+  named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ? OR (role = ? AND (model_type = ? AND model_id = events.id))))',
+     u.id, 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:name => ' ASC'}
 
@@ -47,7 +49,7 @@ class Event < ActiveRecord::Base
   end
   
   def label
-    self.name
+    [self.code, self.name] * ', '
   end
 
   def to_param
@@ -62,6 +64,10 @@ class Event < ActiveRecord::Base
 
   def published?
     [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]].include?(self.status)
+  end
+  
+  def can_register?
+    vacancies? && self.status == STATUS[:registration_open]
   end
   
   def begin_time=(new_time)
@@ -101,13 +107,12 @@ class Event < ActiveRecord::Base
     m
   end
   
-  # Returns list of users who have permissions to manage this event.
-  # def managers
-  #   self.roles.all(:conditions => {:role => Role::ROLE[:event_manager]}).collect{ |r| r.user }
-  # end
-
   def vacancies
-    self.max_participants
+    [self.max_participants - self.current_participants, 0].max
+  end
+
+  def vacancies?
+    self.vacancies > 0
   end
 
   private

@@ -1,4 +1,14 @@
-<h1><%= t('.title') %></h1>
+<h1>
+  <span style="float: left;"><%= t('.title') %></span>
+  <span style="float: right;" class="dataformats">
+    <%= t('common.format') %>:
+    <%= link_to t('admin.common.export_excel'), admin_events_path(:format => :xls, :search => params[:search]) %>
+    <%= link_to t('admin.common.export_csv'), admin_events_path(:format => :csv, :search => params[:search]) %>
+    <%= link_to t('admin.common.export_xml'), admin_events_path(:format => :xml, :search => params[:search]) %>
+  </span>
+</h1>
+
+<div class="clearer"></div>
 
 <div class="datacontent">
   <table class="datatable">
@@ -9,6 +19,7 @@
     <th><%= order @search, :by => :event_type_name, :as => t('formtastic.labels.event.event_type'), :params_scope => :order %></th>    
     <th><%= h t('formtastic.labels.event.manager') %></th>
     <th><%= order @search, :by => :max_participants, :as => t('formtastic.labels.event.max_participants_short'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :current_participants, :as => t('formtastic.labels.event.current_participants_short'), :params_scope => :order %></th>
     <th><%= order @search, :by => :location_address_county_name, :as => t('formtastic.labels.event.location_address'), :params_scope => :order %></th>
     <th><%= order @search, :by => :status, :as => t('formtastic.labels.event.status'), :params_scope => :order %></th>
     <th><%= order @search, :by => :created_at, :as => t('admin.common.created_at'), :params_scope => :order %></th>
@@ -16,17 +27,18 @@
   </tr>
   </thead>
   <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
-    <% semantic_form_for @search, :html => {:class => 'searchform'} do |f| %>
+    <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
     <td><%= f.input :name_like, :label => false, :input_html => {:size => 30} %></td>
     <td><%= f.input :code_like, :label => false, :input_html => {:size => 10} %></td>
     <td colspan="2"><%= f.input :event_type_id, :as => :select, :collection => EventType.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %></td>
     <td><%= f.input :max_participants, :label => false, :input_html => {:size => 5} %></td>
+    <td><%= f.input :current_participants, :label => false, :input_html => {:size => 5} %></td>
     <td><%= f.input :location_address_county_id, :collection => County.sorted.collect{ |et| [et.name, et.id] }, :include_blank => true, :label => false %></td>
     <td colspan="2"><%= f.input :status, :as => :select, :collection => Event::STATUS.keys.collect{ |s| [t("formtastic.labels.event.statuses.#{s}"), s.to_s] }, :include_blank => true, :label => false %></td>
     <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
     <% end %>
   </tr>  
-  <%= filter_notify(9) %>
+  <%= filter_notify(10) %>
   <% for event in @events %>
   <tr>
     <td><%=h truncate(event.name) %></td>
@@ -34,6 +46,13 @@
     <td><%=h event.event_type.name %></td>    
     <td><%= managers_for_object(event) %></td>
     <td><%=h event.max_participants %></td>
+    <td>
+      <% if permitted_to?(:read, :admin_event_participants) %>
+      <%= link_to event.current_participants, admin_event_participations_path(event.id) %>
+      <% else %>
+      <%=h event.current_participants %>
+      <% end %>      
+    </td>
     <td><%=h truncate(event.location_address, :size => 20) %></td>
     <td><%=h t("formtastic.labels.event.statuses.#{event.status}") %></td>
     <td><%=h event.created_at.strftime('%d.%m') unless event.created_at.nil? %></td>
