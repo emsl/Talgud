@@ -188,7 +188,6 @@ describe ParticipationsController do
     before(:each) do
       @event = Factory(:event)
       @ep = Factory(:event_participant, :children => [Factory(:event_participant), Factory(:event_participant)])
-      # @epchildren = {0 => Factory.build(:event_participant).attributes, 1 => Factory.build(:event_participant).attributes}
     end
     
     it 'should send e-mail to freshly invited participants after successful save' do
