@@ -16,24 +16,6 @@ module EventsHelper
     event.languages.collect(&:name) * ', '
   end
 
-  # event stats for listing
-  def event_name_with_stats(event)
-    arr = [event.name, '<span class="event_stats">']
-
-    if event.can_register?
-      arr << [event.max_participants, event.vacancies] * '/ '
-    else
-      if event.vacancies?
-        arr << t('.registration_starts_at')
-      else
-        arr << t('.no_vacancies') 
-      end
-    end
-    arr << '</span>'
-
-    arr * ''
-  end
-
   def select_options_for_language
     Language.sorted.collect do |l|
       [l.name, l.id]

@@ -658,9 +658,31 @@ table.datatable td span.data-details-link {
 }
 
 .event_stats {
-   color: #7f8080;
-   font-size: 12px;
-   margin-left: 5px;
+  color: #7f8080;
+  font-size: 10px;
+  font-weight: normal;
+  margin-left: 5px;
+  color: white;
+}
+
+.event_stats .max_participants, .event_stats .vacancies {
+  padding: 2px 5px;
+}
+
+.event_stats .max_participants {
+  background-color: #7791a9;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+}
+
+.event_stats .vacancies {
+  background-color: #99b3cb;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
 }
 
           /* info-inner */

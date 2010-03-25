@@ -351,9 +351,6 @@ et:
       event_aim: Tööde eesmärk
       event_description: Tööde kirjeldus
       event_vacancies: Vabu kohti
-    event:
-      no_vacancies: Kõik kohad on täidetud!
-      registration_starts_at: Talgutele registreerumine algab 1. aprillil      
     show:
       more_events_in_area: Veel talguid samas piirkonnas
       register_to_this_event: Registreeri nendele talgutele!

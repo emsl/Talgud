@@ -1,5 +1,7 @@
 <div class="event_item">
-<%= link_to event_name_with_stats(event), event_path(event), :class => 'event_title' %><br/>
-<span class="object-type"><%= event.event_type.name %></span>
-<span class="event_address"><%= event.location_address %></span>
+  <%= link_to event.name, event_path(event), :class => 'event_title' %>
+  <span class="event_stats"><span class="max_participants"><%= event.max_participants %></span><span class="vacancies"><%= event.vacancies %></span></span>
+  <br/>
+  <span class="object-type"><%= event.event_type.name %></span>
+  <span class="event_address"><%= event.location_address %></span>
 </div>
