@@ -48,9 +48,37 @@
       </div>
       <div class="container clearfix"> 
         <div class="container-left">
+          <div class="colorbox colorbox-light-green"><div class="colorbox-border" style="padding: 10px;">
+            <table class="stats">
+            <tr>
+              <td><%= image_tag 'ico_event_count.gif', :alt => '' %></td>
+              <td><%= image_tag 'ico_current_participants.gif', :alt => '' %></td>
+              <td><%= image_tag 'ico_needed_participants.gif', :alt => '' %></td>
+            </tr>
+            <tr class="numbers">
+              <td id="stats_event_count"><%= @event_count %></td>
+              <td id="stats_current_participants"><%= @current_participants %></td>
+              <td id="stats_needed_participants"><%= @needed_participants %></td>
+            </tr>
+            <tr class="texts">
+              <td><%= t('.event_count') %></td>
+              <td><%= t('.current_participants') %></td>
+              <td><%= t('.needed_participants') %></td>
+            </tr>
+            </table>
+          </div></div>
+          <script type="text/javascript" charset="utf-8">
+              setInterval(function() {
+                  jQuery.getJSON('<%= stats_events_path %>', function(data) {
+                      $('#stats_event_count').text(data.event_count);
+                      $('#stats_current_participants').text(data.current_participants);
+                      $('#stats_needed_participants').text(data.needed_participants);
+                  });
+              }, 60000);
+          </script>
           <div class="pad-15">
-            <%= image_tag 'eea-logo.jpg', :alt => '' %>
-            <%= image_tag 'nor-logo.jpg', :alt => '' %>
+            <%#= image_tag 'eea-logo.jpg', :alt => '' %>
+            <%#= image_tag 'nor-logo.jpg', :alt => '' %>
           </div>
         </div>
         <div class="container-right">

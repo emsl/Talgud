@@ -314,6 +314,9 @@ et:
       internet_reflections: Kajastusi Internetis
       show_all_events: Näita kõiki
       register_link: Registreeru talgutele
+      event_count: talgut
+      current_participants: talgulist
+      needed_participants: vaba kohta
   events:
     create:
       notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
@@ -636,6 +639,7 @@ et:
       activation_successful: "Sinu konto on aktiveeritud. Palun logige sisse."
       invalid_activation_code: "Palun logi sisse, kui sisselogimine ebaõnnestub, siis kontrolli kas oled konto aktiveerinud sinu e-posti aadressile saadetud juhiste järgi."
     new:
+      title: Registreeru kasutajaks
       registration_hint: "Talgute lisamiseks pead end kasutajaks registreerima, see võtab vaid hetke. Kui sul on kasutajakonto siin juba olemas, siis"
       login_submit: logi sisse      
   user_sessions:
