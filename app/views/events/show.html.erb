@@ -129,11 +129,13 @@
   </div>
   
   <a name="map" id="map_target"></a>
-  <div id="event_map" style="margin-top: 20px; height: 500px;"></div>
+  <% if @event.latitude and @event.longitude %><div id="event_map" style="margin-top: 20px; height: 500px;"></div><% end %>
 </div>
 
 <%= javascript_include_tag 'jquery.scrollTo-min' %>
+<% if @event.latitude and @event.longitude %>
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<%= javascript_include_tag 'markerclusterer', 'datamarker' %>
 <script type="text/javascript" charset="utf-8">
   var map, bounds;
 
@@ -145,7 +147,7 @@
       });
       
       var position = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>);
-      var marker = new google.maps.Marker({position: position, map: map, title: '<%= @event.name %>'});
+      var marker = new google.maps.Marker({position: position, map: map, title: '<%= @event.name %>', icon: <%= if @event.vacancies? then 'clusterer_blue_icon' else 'clusterer_red_icon' end %>});
       var infowindow = new google.maps.InfoWindow({maxwidth: 350});
       
       var cbody = '<div class="infowindow" style="margin-top: 10px;">';
@@ -157,7 +159,7 @@
       infowindow.open(map, marker);
       
       google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open();
+        infowindow.open(map, marker);
       });
       
       map.setCenter(position);
@@ -170,3 +172,4 @@
       return false;
   });
 </script>
+<% end %>
