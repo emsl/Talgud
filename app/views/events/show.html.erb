@@ -147,7 +147,7 @@
       });
       
       var position = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>);
-      var marker = new google.maps.Marker({position: position, map: map, title: '<%= @event.name %>', icon: <%= if @event.vacancies? then 'clusterer_blue_icon' else 'clusterer_red_icon' end %>});
+      var marker = new google.maps.Marker({position: position, map: map, title: '<%= @event.name %>', icon: <%= if @event.vacancies? then 'clusterer_yellow_icon' else 'clusterer_red_icon' end %>});
       var infowindow = new google.maps.InfoWindow({maxwidth: 350});
       
       var cbody = '<div class="infowindow" style="margin-top: 10px;">';

@@ -915,7 +915,7 @@ div.infowindow div.label {
 }
 
 div.infowindow div.clustered a {
-  background: url('../images/map/blue_mini_marker.png') no-repeat;
+  background: url('../images/map/yellow_mini_marker.png') no-repeat;
   color: black;
   display: block;
   font-weight: bold;
