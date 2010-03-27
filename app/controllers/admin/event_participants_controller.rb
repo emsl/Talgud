@@ -79,6 +79,7 @@ class Admin::EventParticipantsController < Admin::AdminController
 
   def load_event
     @event = Event.can_manage(@current_user).find(params[:event_id])
+    redirect_to admin_login_path unless @event
   end
 
   def load_event_participant

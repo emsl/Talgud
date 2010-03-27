@@ -1,104 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ParticipationsController do
-  describe 'index' do
-    before(:each) do
-      @ep = Factory(:event_participant)
-    end
-    
-    it 'should be denied for public users and redirect to home' do
-      get :index, {:event_id => @ep.event.url}
-      response.should redirect_to(root_path)
-    end
-
-    it 'should redirect to home if event url is invalid' do
-      get :index, {:event_id => 'blaah-event'}
-      response.should redirect_to(root_path)
-    end
-
-    it 'should assign list of participants associated with event to regional manager' do
-      manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager)
-      Role.grant_role(Role::ROLE[:regional_manager], manager, @ep.event.location_address_county)
-
-      get :index, {:event_id => @ep.event.url}
-      assigns[:event_participants].should include(@ep)
-    end
-
-    it 'should be denied to see list of participants associated with event to different regional manager' do
-      manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager)
-      Role.grant_role(Role::ROLE[:regional_manager], manager, Factory(:county))
-
-      get :index, {:event_id => @ep.event.url}
-      assigns[:event_participants].should be_nil
-    end
-
-    it 'should assign list of participants associated with event to account manager' do
-      manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager)
-      Role.grant_role(Role::ROLE[:account_manager], manager, Account.current)
-
-      get :index, {:event_id => @ep.event.url}
-      assigns[:event_participants].should include(@ep)
-    end
-
-    it 'should assign list of participants associated with event to event manager' do
-      manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager)
-      Role.grant_role(Role::ROLE[:event_manager], manager, @ep.event)
-
-      get :index, {:event_id => @ep.event.url}
-      assigns[:event_participants].should include(@ep)
-    end
-
-    it 'should not assign list of participants associated with event to different event manager' do
-      manager = Factory.create(:user)
-      manager2 = Factory.create(:user)
-
-      activate_authlogic and UserSession.create(manager)
-      Role.grant_role(Role::ROLE[:event_manager], manager2, @ep.event)
-
-      get :index, {:event_id => @ep.event.url}
-      assigns[:event_participants].should be_nil
-    end
-  end
-  
-  describe 'destroy' do
-    before(:each) do
-      @ep = Factory(:event_participant)
-    end
-    
-    it 'should be denied for public users and redirect to home' do
-      delete :destroy, {:event_id => @ep.event.url, :id => @ep.id}
-      response.should redirect_to(root_path)
-    end
-    
-    it 'should delete participant if requested by event manager' do
-      EventParticipant.should_receive(:find).and_return(@ep)
-      @ep.should_receive(:destroy)
-      
-      manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager)
-      Role.grant_role(Role::ROLE[:event_manager], manager, @ep.event)
-
-      delete :destroy, {:event_id => @ep.event.url, :id => @ep.id}
-      response.should redirect_to(event_participations_path(@ep.event))
-    end
-    
-    it 'should not be accessible by another event manager' do
-      EventParticipant.should_not_receive(:find)
-      
-      manager = Factory.create(:user)
-      manager2 = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager2)
-      Role.grant_role(Role::ROLE[:event_manager], manager, @ep.event)
-
-      delete :destroy, {:event_id => @ep.event.url, :id => @ep.id}
-      response.should redirect_to(root_path)
-    end
-  end
-
   describe 'new' do
     it 'should redirect to events path if there are no vacancies' do
       event = Factory(:event, :max_participants => 1)
@@ -115,6 +17,12 @@ describe ParticipationsController do
       get :new, {:event_id => event.url}
       response.should redirect_to(event_path(event))
     end
+    
+    it 'should render new registration form' do
+      event = Factory(:event, :max_participants => 10)
+      get :new, {:event_id => event.url}
+      response.should be_success
+    end    
   end
   
   describe 'create' do
@@ -164,31 +72,10 @@ describe ParticipationsController do
       @ep = Factory(:event_participant)
     end
         
-    it 'should show edit form to event manager' do
-      manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager)
-      Role.grant_role(Role::ROLE[:event_manager], manager, @ep.event)
-
-      get :edit, {:event_id => @ep.event.url, :id => @ep.id}
-      assigns[:event].should eql(@ep.event)
-      assigns[:event_participant].should eql(@ep)
-    end
-    
-    it 'should not accesible by another event manager' do
-      manager = Factory.create(:user)
-      activate_authlogic and UserSession.create(manager)
-      event = Factory(:event, :manager => manager)
-      #Role.grant_role(Role::ROLE[:event_manager], manager, @ep.event)
-      
-      EventParticipant.should_not_receive(:find)
-      get :edit, {:event_id => @ep.event.url, :id => @ep.id}
-      response.should redirect_to(root_path)            
-    end
-    
     it 'should not accesible by public user' do
       EventParticipant.should_not_receive(:find)
-      get :edit, {:event_id => @ep.event, :id => @ep.id}
-      response.should redirect_to(root_path)            
+      get :edit, {:event_id => @ep.event.url, :id => @ep.id}
+      assigns[:event_participant].should be_nil
     end
   end
 
