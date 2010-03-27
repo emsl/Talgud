@@ -14,7 +14,7 @@ authorization do
 
   role :event_manager do
     includes :guest
-    has_permission_on [:event_participants], :to => [:manage] do
+    has_permission_on [:event_participants, :participation_managements], :to => [:manage] do
       if_attribute :event => {:managers => contains {user}}
     end
 

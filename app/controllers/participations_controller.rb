@@ -1,23 +1,7 @@
 class ParticipationsController < ApplicationController
 
   before_filter :load_event, :except => :redirect
-  before_filter :load_event_participant, :only => [:show, :update, :edit, :redirect]
-
-  def index
-    respond_to do |format|
-      format.html do
-        @event_participants = @event.event_participants.all(:order => :id, :include => :children)
-      end
-      format.csv do
-        @event_participants = @event.event_participants.search(:ordered_by_name => true).all
-        @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv"
-      end
-      format.xls do
-        @event_participants = @event.event_participants.search(:ordered_by_name => true).all
-        @filename = "event-participans-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.xls"
-      end
-    end
-  end
+  before_filter :load_event_participant, :except => [:new, :create] #:only => [:show, :update, :redirect]
 
   def new
     @event_participant = EventParticipant.new(:event => @event)
@@ -66,9 +50,6 @@ class ParticipationsController < ApplicationController
     @event_participant.children.build while @event_participant.children.size < 3
   end
 
-  def edit
-  end
-
   def update
     previous_children = @event_participant.children.collect{ |c| c.id }
 
@@ -82,23 +63,11 @@ class ParticipationsController < ApplicationController
       end
 
       flash[:notice] = t('participations.update.notice')
-      if @current_user
-        redirect_to event_participations_path(@event)
-      else        
-        redirect_to event_path(@event)
-      end
+      redirect_to event_path(@event)
     else
       flash.now[:error] = t('participations.update.error')
       render :show
     end
-  end
-
-  def destroy
-    @event_participant = EventParticipant.find(params[:id])
-    @event_participant.destroy
-
-    flash[:notice] = t('participations.destroy.notice')
-    redirect_to event_participations_path(@event)
   end
 
   def redirect
@@ -111,23 +80,14 @@ class ParticipationsController < ApplicationController
 
   private
 
-  # Index, edit, update and destroy actions should be only accessible to users who can manage event.
   def load_event
-    redirect_to(root_path) and return if ['index', 'destroy', 'edit'].include?(action_name) and not @current_user
-
-    @event = if @current_user and ['index', 'destroy', 'edit', 'update'].include?(action_name)
-      Event.can_manage(@current_user).find_by_url(params[:event_id])
-    else
-      Event.find_by_url(params[:event_id])
-    end
+    @event = Event.find_by_url(params[:event_id])
     redirect_to(root_path) unless @event
   end
 
   def load_event_participant
     if id = UrlStore.decode(params[:id])
       @event_participant = EventParticipant.find(id)
-    elsif @event and @current_user
-      @event_participant = EventParticipant.find(params[:id])
     else      
       if @event
         redirect_to event_path(@event)
