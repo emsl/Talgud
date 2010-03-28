@@ -262,7 +262,7 @@ et:
   authlogic:
     error_messages:
       login_blank: palun sisesta e-posti aadress
-      # login_not_found: is not valid
+      login_not_found: sellist kasutajat ei eksisteeri
       # login_invalid: should use only letters, numbers, spaces, and .-_@ please.
       # consecutive_failed_logins_limit_exceeded: Consecutive failed logins limit exceeded, account is disabled.
       email_invalid: peab olema korrektne e-posti aadress
