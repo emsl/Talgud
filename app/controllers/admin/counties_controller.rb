@@ -8,19 +8,19 @@ class Admin::CountiesController < Admin::AdminController
   end
   
   def new
-    @county = County.new
+    #@county = County.new
   end
 
   def show
-    @county = County.find(params[:id])
+    #@county = County.find(params[:id])
   end
 
   def edit
-    @county = County.find(params[:id])
+    #@county = County.find(params[:id])
   end
   
   def create
-    @county = County.new(params[:county])
+    #@county = County.new(params[:county])
     if @county.save
       flash[:notice] = t('admin.counties.create.notice')
       redirect_to admin_counties_path
@@ -31,7 +31,7 @@ class Admin::CountiesController < Admin::AdminController
   end
 
   def update
-    @county = County.find(params[:id])
+    #@county = County.find(params[:id])
     if @county.update_attributes(params[:county])
       flash[:notice] = t('admin.counties.update.notice')
       redirect_to admin_counties_path
@@ -42,7 +42,7 @@ class Admin::CountiesController < Admin::AdminController
   end
   
   def destroy
-    @county = County.find(params[:id])
+    #@county = County.find(params[:id])
     if @county.destroy
       flash[:notice] = t('admin.counties.destroy.notice')
     else
