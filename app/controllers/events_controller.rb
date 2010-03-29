@@ -32,10 +32,9 @@ class EventsController < ApplicationController
         @languages = Language.all
       end
       format.json do
-        @events = Event.published.all(
-        :conditions => filter_from_params,
+        @events = Event.published(
         :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-        )
+        ).search(filter_from_params)
         render :json => events_json_hash(@events)
       end
     end
@@ -43,17 +42,19 @@ class EventsController < ApplicationController
 
   def latest
     includes = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-    limit = (params[:limit].try(:to_i) || nil)
+    limit = (params[:limit].try(:to_i) || nil)    
+    @search = Event.latest(limit).published.search(filter_from_params)
 
     respond_to do |format|
       format.html do
-        @events = Event.latest.published.paginate(
-        :conditions => filter_from_params, :order => 'id DESC', :limit => limit, :include => includes,
-        :page => params[:page]
-        )
+        @events = if limit 
+          @search.all(:include => includes)
+        else
+          @search.paginate(:page => params[:page], :limit => limit, :include => includes)
+        end
       end
       format.json do
-        @events = Event.latest.published.all(:order => 'id DESC', :limit => limit, :include => includes)
+        @events = @search.all(:include => includes)
         render :json => events_json_hash(@events)
       end
     end

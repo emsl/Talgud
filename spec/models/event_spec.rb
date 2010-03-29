@@ -146,3 +146,24 @@ describe Event, 'regional_managers' do
     @event.regional_managers.should include(@regional_manager)
   end
 end
+
+
+describe Event, 'named scopes' do
+  it 'should return latest events' do
+    e1 = Factory(:event)
+    e2 = Factory(:event)
+    e3 = Factory(:event)
+    Event.latest(2).should include(e3, e2)
+    Event.latest(2).should_not include(e1)
+  end
+
+  it 'should return published events' do
+    e1 = Factory(:event, :status => Event::STATUS[:published])
+    e2 = Factory(:event, :status => Event::STATUS[:registration_open])
+    e3 = Factory(:event, :status => Event::STATUS[:registration_closed])
+    e4 = Factory(:event, :status => Event::STATUS[:closed])
+    e5 = Factory(:event, :status => Event::STATUS[:new])
+    Event.published.should include(e1, e2, e3)
+    Event.published.should_not include(e4, e5)
+  end
+end
