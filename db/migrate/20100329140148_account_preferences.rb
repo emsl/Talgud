@@ -13,3 +13,4 @@ class AccountPreferences < ActiveRecord::Migration
     remove_column :accounts, :em_publish_event
   end
 end
+
