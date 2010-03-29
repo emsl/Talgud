@@ -14,3 +14,4 @@ class AccountPreferences < ActiveRecord::Migration
   end
 end
 
+
