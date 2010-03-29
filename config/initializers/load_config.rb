@@ -48,7 +48,7 @@ module ActionMailer
       def smtp_settings
         settings = @@smtp_settings
         if Talgud.config.mailer.try(:smtp_accounts).is_a?(Array)
-          @@smtp_account_index ||= 0
+          @@smtp_account_index ||= -1
           idx = (@@smtp_account_index += 1) % Talgud.config.mailer.smtp_accounts.size
           settings.merge(Talgud.config.mailer.smtp_accounts[idx])
         end
