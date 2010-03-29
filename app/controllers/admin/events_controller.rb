@@ -5,7 +5,8 @@ class Admin::EventsController < Admin::AdminController
   helper :participations, :events
   
   def index
-    @search = Event.can_manage(@current_user).search(params[:search]).search(params[:order])
+    order = params[:order] ? params[:order] : {'order' => 'descend_by_id'}
+    @search = Event.can_manage(@current_user).search(params[:search]).search(order)
     respond_to do |format|
       format.html { @events = @search.paginate(:page => params[:page]) }
       format.xml { render :xml => @search.all }

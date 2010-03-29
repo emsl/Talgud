@@ -6,10 +6,11 @@ class Admin::RolesController < Admin::AdminController
   before_filter :load_target_model, :except => :index
 
   def index
-    if @current_user.role_symbols.include?(:account_manager)
-      @search = Role.with_permissions_to(:manage, :context => :admin_roles).search(params[:search]).search(params[:order])
+    order = params[:order] ? params[:order] : {'order' => 'ascend_by_user_firstname'}
+    @search = if @current_user.role_symbols.include?(:account_manager)
+      Role.with_permissions_to(:manage, :context => :admin_roles).search(params[:search]).search(order)
     else
-      @search = Role.can_manage_events(@current_user).search(params[:search]).search(params[:order])
+      Role.can_manage_events(@current_user).search(params[:search]).search(order)
     end
     @roles = @search.paginate(:page => params[:page])
     @target_model = Role.new

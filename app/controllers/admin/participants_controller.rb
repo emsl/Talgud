@@ -4,7 +4,8 @@ class Admin::ParticipantsController < Admin::AdminController
   helper :participations
 
   def index
-    @search = EventParticipant.can_manage(@current_user).search(params[:search]).search(params[:order])
+    order = params[:order] ? params[:order] : {'order' => 'descend_by_id'}
+    @search = EventParticipant.can_manage(@current_user).search(params[:search]).search(order)
     respond_to do |format|
       format.xml {render :xml => @search.all}
       format.csv do

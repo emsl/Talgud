@@ -46,6 +46,7 @@ Factory.define :event do |e|
   e.meta_subject_owner 'Subject owner'
   e.meta_aim_description 'Aim description'
   e.meta_job_description 'Job description'
+  e.meta_subject_protegee 'Blah'
   
   e.association :event_type
   e.association :location_address_county, :factory => :county

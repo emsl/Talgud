@@ -3,7 +3,8 @@ class Admin::CountiesController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
   
   def index
-    @search = County.with_permissions_to(:manage, :context => :admin_counties).search(params[:search]).search(params[:order])
+    order = params[:order] ? params[:order] : {'order' => 'ascend_by_name'}
+    @search = County.with_permissions_to(:manage, :context => :admin_counties).search(params[:search]).search(order)
     @counties = @search.paginate(:page => params[:page])
   end
   

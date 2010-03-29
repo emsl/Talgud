@@ -3,7 +3,8 @@ class Admin::EventTypesController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
 
   def index
-    @search = EventType.with_permissions_to(:manage, :context => :admin_event_types).search(params[:search]).search(params[:order])
+    order = params[:order] ? params[:order] : {'order' => 'ascend_by_name'}
+    @search = EventType.with_permissions_to(:manage, :context => :admin_event_types).search(params[:search]).search(order)
     @event_types = @search.paginate(:page => params[:page])    
   end
   

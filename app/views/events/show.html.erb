@@ -80,21 +80,21 @@
           <% end %>
         </td>
       </tr>
-      <% else %>
+      <% elsif @event.managers.size == 1 %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.manager') %></td>
-        <td><%=h @event.manager.name %></td>
+        <td><%=h @event.managers.first.name %></td>
       </tr>
-      <% unless @event.manager.phone.blank? %>
+      <% unless @event.managers.first.phone.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.manager_phone') %></td>
-        <td><%=h @event.manager.phone %></td>
+        <td><%=h @event.managers.first.phone %></td>
       </tr>
       <% end %>
-      <% unless @event.manager.email.blank? %>
+      <% unless @event.managers.first.email.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.manager_email') %></td>
-        <td><%=h @event.manager.email %></td>
+        <td><%=h @event.managers.first.email %></td>
       </tr>
       <% end %>
       <% end %>

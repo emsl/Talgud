@@ -7,7 +7,8 @@ class Admin::EventParticipantsController < Admin::AdminController
   helper :participations
 
   def index
-    @search = @event.event_participants.search(params[:search]).search(params[:order])
+    order = params[:order] ? params[:order] : {'order' => 'ascend_by_firstname'}
+    @search = @event.event_participants.search(params[:search]).search(order)
     respond_to do |format|
       format.xml { render :xml => @search.all }
       format.csv { @event_participants = @search.all; @filename = "event-participants-#{@event.code}-#{Time.now.strftime("%Y%m%d")}.csv" }

@@ -3,7 +3,8 @@ class Admin::LanguagesController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update, :destroy], :require => :manage
   
   def index
-    @search = Language.with_permissions_to(:manage, :context => :admin_languages).search(params[:search]).search(params[:order])
+    order = params[:order] ? params[:order] : {'order' => 'ascend_by_name'}
+    @search = Language.with_permissions_to(:manage, :context => :admin_languages).search(params[:search]).search(order)
     @languages = @search.paginate(:page => params[:page])
   end
   
