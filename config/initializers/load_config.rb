@@ -30,28 +30,25 @@ module ActionMailer
   class Base
     cattr_accessor :smtp_account_index
 
-    class << self
-      
-      # Overrides base smtp_settings accessor to enable multiple smtp accounts rotation. Accounts should be defined in
-      # app_config.yml file as array in mailer.smtp_accounts like this.
-      #
-      #   development:
-      #     mailer:
-      #       smtp_accounts:
-      #       - user_name: foo@example.com
-      #         password: PWD_FOR_FOO
-      #       - user_name: bar@example.com
-      #         password: PWD_FOR_BAR
-      #
-      # If smtp_accounts configuration variable is omitted, it will fall back to the defaults defined in
-      # ActionMailer::Base.smtp_settings
-      def smtp_settings
-        settings = @@smtp_settings
-        if Talgud.config.mailer.try(:smtp_accounts).is_a?(Array)
-          @@smtp_account_index ||= -1
-          idx = (@@smtp_account_index += 1) % Talgud.config.mailer.smtp_accounts.size
-          settings.merge(Talgud.config.mailer.smtp_accounts[idx])
-        end
+    # Overrides base smtp_settings accessor to enable multiple smtp accounts rotation. Accounts should be defined in
+    # app_config.yml file as array in mailer.smtp_accounts like this.
+    #
+    #   development:
+    #     mailer:
+    #       smtp_accounts:
+    #       - :user_name: foo@example.com
+    #         :password: PWD_FOR_FOO
+    #       - :user_name: bar@example.com
+    #         :password: PWD_FOR_BAR
+    #
+    # If smtp_accounts configuration variable is omitted, it will fall back to the defaults defined in
+    # ActionMailer::Base.smtp_settings
+    def smtp_settings
+      settings = @@smtp_settings
+      if Talgud.config.mailer.try(:smtp_accounts).is_a?(Array)
+        @@smtp_account_index ||= -1
+        idx = (@@smtp_account_index += 1) % Talgud.config.mailer.smtp_accounts.size
+        settings.merge(Talgud.config.mailer.smtp_accounts[idx])
       end
     end
   end
