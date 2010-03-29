@@ -69,6 +69,8 @@ et:
       logout: Logi välja
       search: Otsi
       filter_applied: Vaatele on rakendatud filter.
+      true_option: Jah
+      false_option: Ei      
       clear_filter: Tühista filter
     counties:
       create:
@@ -117,6 +119,11 @@ et:
         destroy_role: Kustuta
         destroy_role_confirmation: Kas sa oled ikka rolli kustutamises kindel?
         edit_role: Muuda administraatoreid
+      edit:
+        title: Muuta kontot
+      update:
+        notice: Konto andmed on uuendatud
+        error: Konto andmete uuendamisel tekkis viga
     events:
       index:
         filter:
@@ -411,6 +418,10 @@ et:
       account:
         name: Konto nimi
         domain: Domeen
+        em_publish_event: "Talgujuht saab avalikustada"
+        em_edit_mail_templates: "Talgujuht saab muuta kirja põhju"
+        rm_event_notifications: "Teavita piirkondliku juhti"
+        account_managers: Konto haldurid
       user:
         email: E-post
         firstname: Eesnimi
