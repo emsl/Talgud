@@ -6,6 +6,7 @@
 <%= t('formtastic.labels.event_participant.participant_name') %>: <%= @event_participant.participant_name %>
 <%= t('formtastic.labels.event_participant.email') %>: <%= @event_participant.email %>
 <%= t('formtastic.labels.event_participant.phone') %>: <%= @event_participant.phone %>
+<%= t('formtastic.labels.event_participant.age_range') %>: <%= t("formtastic.labels.event_participant.age_ranges.#{@event_participant.age_range}") %>
 
 <%= t('.event_participants_address', :url => @event_participations_url) %>
 
