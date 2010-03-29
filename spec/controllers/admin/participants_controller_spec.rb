@@ -4,6 +4,7 @@ describe Admin::ParticipantsController do
   describe 'index' do
     before(:each) do
       @ep = Factory(:event_participant)
+      @ep2 = Factory(:event_participant)
     end
     
     it 'should be denied for public users and redirect to home' do
@@ -18,13 +19,12 @@ describe Admin::ParticipantsController do
 
       get :index, {:format => 'html'}
       assigns[:participants].should include(@ep)
+      assigns[:participants].should_not include(@ep2)
 
       get :index, {:format => 'csv'}
-      assigns[:participants].should include(@ep)
       response.content_type.should eql('text/csv')
 
       get :index, {:format => 'excel'}
-      assigns[:participants].should include(@ep)
       response.content_type.should eql('text/csv')
 
       get :index, {:format => 'xml'}

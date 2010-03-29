@@ -4,8 +4,7 @@ class Admin::ParticipantsController < Admin::AdminController
   helper :participations
 
   def index
-    p params
-    @search = EventParticipant.search(params[:search]).search(params[:order])
+    @search = EventParticipant.can_manage(@current_user).search(params[:search]).search(params[:order])
     respond_to do |format|
       format.xml {render :xml => @search.all}
       format.csv do
@@ -16,7 +15,7 @@ class Admin::ParticipantsController < Admin::AdminController
         @participants = @search.all
         @filename = "event-participants-#{Time.now.strftime("%Y%m%d")}.xls"
       end
-      format.html {@participants = @search.paginate(:page => params[:page])}
+      format.html {@participants = @search.paginate(:page => params[:page], :include => [:event])}
     end
   end
 end
