@@ -40,6 +40,16 @@ class Mailers::EventMailer < Mailers::Base
     body :event_participant => event_participant, :event_url => event_url
   end
   
+  def participants_manager_notification(mail, event_url)
+    from full_from_address
+    subject mail.subject
+    reply_to mail.reply_to
+    recipients mail.reply_to
+    bcc mail.to
+    sent_on Time.now
+    body :message => mail.message, :event_name => mail.event.name, :event_url => event_url
+  end
+  
   private
   
   def setup_headers(email)

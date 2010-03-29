@@ -254,6 +254,9 @@ et:
         error: Talgutel osaleja andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
       show:
         title: "Talgutele “{{event_name}}” registreeritud osaleja"
+    participants:
+      index:
+        title: "Talgulised"
     user_sessions:
       new:
         login_submit: Logi sisse
@@ -264,7 +267,7 @@ et:
   authlogic:
     error_messages:
       login_blank: palun sisesta e-posti aadress
-      # login_not_found: is not valid
+      login_not_found: sellist kasutajat ei eksisteeri
       # login_invalid: should use only letters, numbers, spaces, and .-_@ please.
       # consecutive_failed_logins_limit_exceeded: Consecutive failed logins limit exceeded, account is disabled.
       email_invalid: peab olema korrektne e-posti aadress
@@ -384,6 +387,12 @@ et:
       role_exists: "Kasutaja on juba nende talgute juhtide nimekirjas"
   formtastic:
     labels:
+      mail:
+        from: Saatja
+        to: Saaja(d)
+        reply_to: Vastuse saajad
+        subject: Teema
+        message: Kirja sisu
       county:
         name: Maakonna nimi
         regional_managers: Piirkondlikud haldurid
@@ -542,6 +551,7 @@ et:
       signup: Registreeru
       participate: Registreeru talgutele
       update: "Salvesta {{model}}"
+      send: Saada kiri
     submit: "Salvesta"
   mailers:
     common:
@@ -600,6 +610,8 @@ et:
         intro: "Sinu sõber {{name}} kutsub Sind osalema Teeme Ära talgupäeval 1. mail 2010."
         event_registrant_info: "{{name}} registreeris ennast just talgutele: {{event_name}}."
         event_info: "Talgute kohta vaata lähemalt kodulehelt {{event_url}} või www.teemeara.ee ja leia sealt Sulle sobivad talgud."
+      participants_manager_notification:
+        footer: "See kiri on saadetud Teeme Ära talgute infosüsteemist kõigile {{event_name}} talgutele registreerunutele. Küsimuste korral pöördu talgujuhi poole, kelle andmed leiad siit {{event_url}}."
   participations:
     confirmation:
       title: Aitäh registreerumast!
@@ -623,6 +635,28 @@ et:
       no_vacancies: "Nendele talgutele registreerimine on lõppenud, kuna kõik kohad on täidetud"
       registration_starts_at: Talgutele registreerumine algab 1. aprillil
       title: Registreeru talgutele
+    update:
+      notice: "Registreerumise andmed on uuendatud"
+      error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
+    edit:
+      title: Muuda osaleja andmeid talgutel
+  event_participants:
+    destroy:
+      notice: Talguline on kustutatud.
+    form:
+      add_participants: Lisa veel osavõtjaid
+      choose_age_range: Vali vanus...
+      invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talgupäevaks vajamineva informatsiooni ise edastama!"
+    index:
+      empty: Nendele talgutele ei ole veel registreerunuid.
+      title: talgutel osalejad
+      new_email: Saada osalejatele kiri
+    new_mail:
+      title: Saada kiri talgulistele
+      intro: "Registreerunutele e-kirja saatmiseks sisesta palun e-kirja teema ja sisu. Sisestatud teade edastatakse kõikidele registreerunutele, kes on märkinud oma e-posti aadressi."
+    create_mail:
+      notice: "Kiri on talgulistele saadetud!"
+      error: "Talgulistele kirja satmisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
     update:
       notice: "Registreerumise andmed on uuendatud"
       error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"

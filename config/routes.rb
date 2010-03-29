@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :events, :collection => {:map => :get} do |event|
       event.resources :participations, :controller => :event_participants
     end
+    admin.resources :participants, :controller => :participants
     admin.resources :event_types
     admin.resources :user_sessions
     admin.resources :users
@@ -32,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :events, :collection => {:my => :get, :map => :get, :latest => :get, :stats => :get} do |event|
     event.resources :participations, :member => {:confirmation => :get}
     event.resources :managers, :controller => :event_managers
+    event.resources :event_participants, :collection => {:new_mail => :get, :create_mail => :post}
   end
   map.event_participation_redirect 'participation/:id', :controller => :participations, :action => :redirect
   map.resources :password_reminders

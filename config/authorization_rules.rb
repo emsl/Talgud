@@ -14,7 +14,7 @@ authorization do
 
   role :event_manager do
     includes :guest
-    has_permission_on [:event_participants], :to => [:manage] do
+    has_permission_on [:event_participants, :participation_managements], :to => [:manage] do
       if_attribute :event => {:managers => contains {user}}
     end
 
@@ -38,6 +38,7 @@ authorization do
     end
     
     has_permission_on [:admin_event_participants], :to => [:manage]
+    has_permission_on [:admin_participants], :to => [:manage]
     has_permission_on [:admin_roles], :to => [:manage] do
       if_attribute :role => Role::ROLE[:event_manager]
     end
@@ -45,7 +46,7 @@ authorization do
 
   role :account_manager do
     includes :guest
-    has_permission_on [:admin_roles, :admin_counties, :admin_event_types, :admin_municipalities, :admin_settlements, :admin_users, :admin_languages, :admin_events, :admin_event_participants], :to => [:manage, :map] do
+    has_permission_on [:admin_participants, :admin_roles, :admin_counties, :admin_event_types, :admin_municipalities, :admin_settlements, :admin_users, :admin_languages, :admin_events, :admin_event_participants], :to => [:manage, :map] do
     end
     has_permission_on [:admin_accounts], :to => [:manage] do
       if_attribute :roles => {:user => contains {user}, :role => Role::ROLE[:account_manager]}

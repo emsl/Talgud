@@ -72,6 +72,11 @@ form.formtastic div.form-extra fieldset ol li.select select {
   width: 395px;
 }
 
+form.formtastic fieldset ol li.text textarea.small_text {
+  font-size: 13px;
+}
+
+
 form.formtastic div.form-extra fieldset ol li.string input,
 form.formtastic div.form-extra fieldset ol li.numeric input,
 form.formtastic div.form-extra fieldset ol li.text textarea {

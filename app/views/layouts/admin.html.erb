@@ -25,8 +25,8 @@
   <div id="content">
     <% if controller_name == 'events' %>
     <ul id="submenu" class="navmenu">
-      <li><%= link_to 'Nimekiri', admin_events_path, :class => if action_name != 'map' then :active end %></li>
-      <li><%= link_to 'Kaart', map_admin_events_path, :class => if action_name == 'map' then :active end %></li>
+      <li><%= link_to t('admin.events.index.title'), admin_events_path, :class => if action_name == 'index' then :active end %></li>
+      <li><%= link_to t('admin.events.map.title'), map_admin_events_path, :class => if action_name == 'map' then :active end %></li>
     </ul>
     <div class="clearer"></div>
     <% end %>

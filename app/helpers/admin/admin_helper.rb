@@ -24,6 +24,7 @@ module Admin::AdminHelper
   def navigation_menu_contents
     [
       {:name => :events, :active_when => [:events, :event_participants]},
+      {:name => :participants, :active_when => [:participants]},
       :users,
       {:name => :counties, :active_when => [:counties, :municipalities, :settlements]},
       :event_types, :languages, :roles, :accounts

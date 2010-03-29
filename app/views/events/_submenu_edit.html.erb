@@ -1,7 +1,7 @@
 <div class="colorbox colorbox-blue" style="width: 187px; margin-top: 10px;"><div class="colorbox-border">
   <ul class="submenu">
     <li<%= ' class="active"' if action_name == 'show' %>><%= link_to t('.event_info'), event_path(@event) %></li>
-    <li<%= ' class="active"' if action_name == 'index' %>><%= link_to t('.show_participants'), event_participations_path(@event) %></li>
+    <li<%= ' class="active"' if action_name == 'index' %>><%= link_to t('.show_participants'), event_event_participants_path(@event) %></li>
     <li<%= ' class="active"' if request.path_parameters[:controller] == 'event_managers' %>><%= link_to t('.invite_manager'), new_event_manager_path(@event) %></li>
     <li<%= ' class="active"' if action_name == 'edit' %>><%= link_to t('.edit_event'), edit_event_path(@event) %></li>
   </ul>

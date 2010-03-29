@@ -21,6 +21,9 @@ class EventParticipant < ActiveRecord::Base
   named_scope :ordered_by_name, :order => 'firstname ASC, lastname ASC'
   named_scope :parents, :conditions => {:event_participant_id => nil}
   
+  named_scope :can_manage, lambda { |u| {:include => [:event], :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND ((role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ? OR (role = ? AND model_type = ? AND model_id = events.id))))',
+     (u ? u.id : nil) , 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
+    
   def parent?
     self.event_participant.nil?
   end
