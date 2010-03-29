@@ -23,13 +23,36 @@ Talgud.config = NestedOpenStruct.new(YAML.load_file(RAILS_ROOT + "/config/app_co
 
 if Talgud.config.mailer.delivery_method == 'smtp'
   ActionMailer::Base.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-    :address => Talgud.config.mailer.smtp_address,
-    :port => Talgud.config.mailer.smtp_port, 
-    :domain => Talgud.config.mailer.smtp_domain,
-    :user_name => Talgud.config.mailer.smtp_username,
-    :password => Talgud.config.mailer.smtp_password,
-    :enable_starttls_auto => true,
-    :authentication => :plain
-  }
+  ActionMailer::Base.smtp_settings = Talgud.config.mailer.smtp_settings.marshal_dump
+end
+
+module ActionMailer
+  class Base
+    cattr_accessor :smtp_account_index
+
+    class << self
+      
+      # Overrides base smtp_settings accessor to enable multiple smtp accounts rotation. Accounts should be defined in
+      # app_config.yml file as array in mailer.smtp_accounts like this.
+      #
+      #   development:
+      #     mailer:
+      #       smtp_accounts:
+      #       - user_name: foo@example.com
+      #         password: PWD_FOR_FOO
+      #       - user_name: bar@example.com
+      #         password: PWD_FOR_BAR
+      #
+      # If smtp_accounts configuration variable is omitted, it will fall back to the defaults defined in
+      # ActionMailer::Base.smtp_settings
+      def smtp_settings
+        settings = @@smtp_settings
+        if Talgud.config.mailer.try(:smtp_accounts).is_a?(Array)
+          @@smtp_account_index ||= 0
+          idx = (@@smtp_account_index += 1) % Talgud.config.mailer.smtp_accounts.size
+          settings.merge(Talgud.config.mailer.smtp_accounts[idx])
+        end
+      end
+    end
+  end
 end
