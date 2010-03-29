@@ -37,6 +37,8 @@ et:
               pick_at_least_one: vali nimekirjast vähemalt üks keel
             end_time:
               must_be_after_begin_time: peab olema hilisem algusajast
+            ends_at:
+              must_be_after_begin_time: peab olema hilisem algusajast
         event_participant:
           attributes:
             firstname:

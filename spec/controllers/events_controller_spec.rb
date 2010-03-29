@@ -15,24 +15,6 @@ describe EventsController do
       response.should be_success
     end
     
-    it 'should filter events if requested' do
-      e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type))
-      e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
-      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, :event_type => Factory.create(:event_type))
-      
-      get :index, {:county => e2.location_address_county.id, :event_type => e2.event_type.id, :format => 'html'}
-      assigns[:events].should include(e2)
-      assigns[:events].should_not include(e1, e3)
-      
-      get :index, {:county => e2.location_address_county.id, :format => 'html'}
-      assigns[:events].should include(e2, e3)
-      assigns[:events].should_not include(e1)
-      
-      get :index, {:event_type => e1.event_type.id, :format => 'html'}
-      assigns[:events].should include(e1, e2)
-      assigns[:events].should_not include(e3)
-    end
-
     it 'should filter and list events in xml format' do
       e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type))
       e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
@@ -47,7 +29,104 @@ describe EventsController do
       end
     end
   end
+  
+  describe 'filter' do
+    before(:each) do
+      @first_manager = Factory(:user, :firstname => 'Mati', :lastname => 'Kuusk')
+      @second_manager = Factory(:user, :firstname => 'Laine', :lastname => 'Mägi')
+      @third_manager = Factory(:user, :firstname => 'Mati', :lastname => 'Kägi')
+      @e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type), :manager => @first_manager)
+      @e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => @e1.event_type, :manager => @second_manager)
+      @e3 = Factory.create(:event, :location_address_county => @e2.location_address_county, :event_type => Factory.create(:event_type),
+      :languages => @e1.languages, :manager => @third_manager)
+    end    
+    
+    it 'should filter index' do      
+      get :index, {:county => @e2.location_address_county.id, :event_type => @e2.event_type.id, :format => 'html'}
+      assigns[:events].should include(@e2)
+      assigns[:events].should_not include(@e1, @e3)
+      
+      get :index, {:county => @e2.location_address_county.id, :format => 'html'}
+      assigns[:events].should include(@e2, @e3)
+      assigns[:events].should_not include(@e1)
+      
+      get :index, {:event_type => @e1.event_type.id, :format => 'html'}
+      assigns[:events].should include(@e1, @e2)
+      assigns[:events].should_not include(@e3)
 
+      get :index, {:language_code => @e1.languages.first.code, :format => 'html'}
+      assigns[:events].should include(@e1, @e3)
+      assigns[:events].should_not include(@e2)      
+
+      get :index, {:event_code => @e1.code, :format => 'html'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)      
+
+      get :index, {:manager_name => @first_manager.firstname, :format => 'html'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)      
+    end
+    
+    it 'should filter latest' do      
+      get :latest, {:county => @e2.location_address_county.id, :event_type => @e2.event_type.id, :format => 'html'}
+      assigns[:events].should include(@e2)
+      assigns[:events].should_not include(@e1, @e3)
+      
+      get :latest, {:county => @e2.location_address_county.id, :format => 'html'}
+      assigns[:events].should include(@e2, @e3)
+      assigns[:events].should_not include(@e1)
+      
+      get :latest, {:event_type => @e1.event_type.id, :format => 'html'}
+      assigns[:events].should include(@e1, @e2)
+      assigns[:events].should_not include(@e3)
+
+      get :latest, {:language_code => @e1.languages.first.code, :format => 'html'}
+      assigns[:events].should include(@e1, @e3)
+      assigns[:events].should_not include(@e2)      
+
+      get :latest, {:event_code => @e1.code, :format => 'html'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)      
+
+      get :latest, {:manager_name => @first_manager.firstname, :format => 'html'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)      
+
+      get :latest, {:limit => 2, :format => 'json'}
+      assigns[:events].size.should eql(2)
+
+      get :latest, {:limit => 2, :format => 'html'}
+      assigns[:events].size.should eql(2)
+    end
+    
+    it 'should filter map' do
+      get :map, {:county => @e2.location_address_county.id, :event_type => @e2.event_type.id, :format => 'json'}
+      assigns[:events].should include(@e2)
+      assigns[:events].should_not include(@e1, @e3)
+      
+      get :map, {:county => @e2.location_address_county.id, :format => 'json'}
+      assigns[:events].should include(@e2, @e3)
+      assigns[:events].should_not include(@e1)
+      
+      get :map, {:event_type => @e1.event_type.id, :format => 'json'}
+      assigns[:events].should include(@e1, @e2)
+      assigns[:events].should_not include(@e3)
+
+      get :map, {:language_code => @e1.languages.first.code, :format => 'json'}
+      assigns[:events].should include(@e1, @e3)
+      assigns[:events].should_not include(@e2)      
+
+      get :map, {:event_code => @e1.code, :format => 'json'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)      
+
+      get :map, {:manager_name => @first_manager.firstname, :format => 'json'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)            
+    end    
+  end  
+  
+  
   describe 'new' do
     it 'should not be displayed when user is not logged in' do
       get :new
@@ -185,5 +264,5 @@ describe EventsController do
       get :map
       response.should be_success
     end
-  end
+  end  
 end

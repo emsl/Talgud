@@ -16,8 +16,8 @@
     <%= f.input :meta_job_description, :input_html => {:rows => 4} %>
     <%= f.input :max_participants %>
     <%= f.input :current_participants, :input_html => {:disabled => true}  %>
-    <%= f.input :begin_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false, :required => true %>
-    <%= f.input :end_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false, :required => true %>
+    <%= f.input :begins_at %>
+    <%= f.input :ends_at %>
     <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
     <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
     <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>

@@ -69,6 +69,7 @@ end
 describe User, 'role_symbols' do
   it 'should return no roles for unauthenticated user' do
     user = Factory(:user)
+    user.class.stamper = nil
     user.role_symbols.should be_empty
   end
 
