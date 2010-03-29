@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :events, :collection => {:map => :get} do |event|
       event.resources :participations, :controller => :event_participants
     end
+    admin.resources :participants, :controller => :participants
     admin.resources :event_types
     admin.resources :user_sessions
     admin.resources :users

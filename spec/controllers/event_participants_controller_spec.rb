@@ -112,7 +112,8 @@ describe EventParticipantsController do
       get :new_mail, {:event_id => @ep.event.url}
       assigns[:mail].should_not be_nil
       assigns[:event].should eql(@ep.event)
-      response.should be_success
+      # TODO: strange case, response.should be_success returns false
+      response.status.should eql("200 OK")
     end
 
     it 'should not by accessible by public users and redirect to login path' do
@@ -136,16 +137,16 @@ describe EventParticipantsController do
       @ep = Factory(:event_participant)
     end
 
-    it 'should send valid email to event participants' do
+    it 'should send email to event participants' do
       user = Factory(:user)
       activate_authlogic and UserSession.create(user)
       Role.grant_role(Role::ROLE[:event_manager], user, @ep.event)
+      Mailers::EventMailer.should_receive(:deliver_participants_manager_notification)
       
       post :create_mail, {:event_id => @ep.event.url, :mail => {:subject => 'test', :message => 'message'}}
       assigns[:mail].should_not be_nil
       assigns[:mail].should be_valid
       
-      Mailers::EventMailer.should_receive(:deliver_participants_manager_notification)
       response.should redirect_to(event_event_participants_path(@ep.event))
     end
 

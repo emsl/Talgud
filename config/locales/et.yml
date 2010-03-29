@@ -252,6 +252,9 @@ et:
         error: Talgutel osaleja andmete uuendamisel tekkis viga. Palun kontrolli andmete korrektsust
       show:
         title: "Talgutele “{{event_name}}” registreeritud osaleja"
+    participants:
+      index:
+        title: "Talgulised"
     user_sessions:
       new:
         login_submit: Logi sisse

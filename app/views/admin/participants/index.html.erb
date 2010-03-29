@@ -1,0 +1,71 @@
+<h1>
+  <span style="float: left;"><%= t('.title') %></span>
+  <span style="float: right;" class="dataformats">
+    <%= t('common.format') %>:
+    <%= link_to t('admin.common.export_excel'), admin_participants_path(:format => :xls, :search => params[:search]) %>
+    <%= link_to t('admin.common.export_csv'), admin_participants_path(:format => :csv, :search => params[:search]) %>
+    <%= link_to t('admin.common.export_xml'), admin_participants_path(:format => :xml, :search => params[:search]) %>
+  </span>
+</h1>
+
+<div class="clearer"></div>
+
+<div class="datacontent">
+  <table class="datatable">
+  <thead>
+  <tr>
+    <th><%= order @search, :by => :event_code, :as => t('formtastic.labels.event.code'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :event_name, :as => t('formtastic.labels.event.name'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :firstname, :as => t('formtastic.labels.event_participant.firstname'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :lastname, :as => t('formtastic.labels.event_participant.lastname'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :age_range, :as => t('formtastic.labels.event_participant.age_range'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :email, :as => t('formtastic.labels.event_participant.email'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :phone, :as => t('formtastic.labels.event_participant.phone'), :params_scope => :order %></th>
+    <th><%= order @search, :by => :notes, :as => t('formtastic.labels.event_participant.notes'), :params_scope => :order %></th>
+    <th><%=h t('formtastic.labels.event_participant.event_participant') %></th>
+    <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
+  </tr>
+  </thead>
+  <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
+    <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
+    <td><%= f.input :event_code_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :event_name_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :firstname_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :lastname_like, :label => false, :input_html => {:size => 20} %></td>
+    <td></td>
+    <td><%= f.input :email_like, :label => false, :input_html => {:size => 20} %></td>
+    <td><%= f.input :phone_like, :label => false, :input_html => {:size => 20} %></td>    
+    <td><%= f.input :notes, :label => false, :input_html => {:size => 20} %></td>
+    <td></td>
+    <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
+    <% end %>
+  </tr>
+  <%= filter_notify(10) %>  
+  <% for participation in @participants %>
+  <tr>
+    <td><%= link_to participation.event.code, admin_event_path(participation.event.id) %></td>
+    <td><%=h participation.event.name %></td>
+    <td><%=h participation.firstname %></td>
+    <td><%=h participation.lastname %></td>
+    <td><%=h age_range_label(participation.age_range) %></td>
+    <td><%=h participation.email %></td>
+    <td><%=h participation.phone %></td>    
+    <td title="<%=h participation.notes %>"><%=h truncate(participation.notes, :length => 30) %></td>    
+    <td><%=h participation.parent_name %></td>
+    <td class="actions">
+      <% if permitted_to?(:read, :admin_event_participants) %>
+      <%= link_to t('admin.common.view'), admin_event_participation_path(participation.event.id, participation) %>
+      <% end %>
+      <% if permitted_to?(:edit, :admin_event_participants) %>
+      <%= link_to t('admin.common.edit'), edit_admin_event_participation_path(participation.event.id, participation) %>
+      <% end %>
+      <% if permitted_to?(:destroy, :admin_event_participants) %>
+      <%= link_to t('admin.common.destroy'), admin_event_participation_path(participation.event.id, participation), :confirm => t('common.destroy_confirmation'), :method => :delete %>
+      <% end %>
+    </td>
+
+  </tr>
+  <% end %>
+  </table>
+  <%= paginate @participants %>
+</div>
