@@ -7,4 +7,10 @@ class Admin::AccountsController < Admin::AdminController
     @search = Account.with_permissions_to(:manage, :context => :admin_accounts).search(params[:search]).search(order)
     @accounts = @search.paginate(:page => params[:page])
   end
+  
+  def edit
+  end
+  
+  def update
+  end
 end
