@@ -45,6 +45,8 @@ ru:
           attributes:
             end_time:
               must_be_after_begin_time: "конечное время должно быть позже начала"
+            ends_at:
+              must_be_after_begin_time: "конечное время должно быть позже начала"
             languages:
               pick_at_least_one: "выберите из списка по меньшей мере один язык"
         event_participant:
