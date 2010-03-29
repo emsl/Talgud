@@ -71,4 +71,3 @@ describe Admin::AccountsController do
     end
   end
 end
-

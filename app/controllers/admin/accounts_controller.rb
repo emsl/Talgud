@@ -12,6 +12,7 @@ class Admin::AccountsController < Admin::AdminController
   end
   
   def update
+<<<<<<< HEAD
     if @account.update_attributes(params[:account])
       flash[:notice] = t('admin.accounts.update.notice')
       redirect_to admin_accounts_path
@@ -22,5 +23,7 @@ class Admin::AccountsController < Admin::AdminController
   end
   
   def show
+=======
+>>>>>>> Account preferences.
   end
 end
