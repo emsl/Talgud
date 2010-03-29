@@ -15,12 +15,11 @@
     <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
     <td><%= f.input :name_like, :label => false, :input_html => {:size => 15} %></td>
     <td><%= f.input :domain_like, :label => false, :input_html => {:size => 15} %></td>
-    <td></td>
     <td><%= f.input :em_publish_event_eq, :as => :select, :collection => true_false_options, :label => false %></td>
     <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
     <% end %>
   </tr>
-  <%= filter_notify(5) %>  
+  <%= filter_notify(6) %>  
   <% for account in @accounts %>
   <tr>
     <td><%=h account.name %></td>

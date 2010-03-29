@@ -70,5 +70,4 @@ describe Admin::AccountsController do
       response.should redirect_to(admin_accounts_path)      
     end
   end
-  
 end
