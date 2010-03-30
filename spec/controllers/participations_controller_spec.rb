@@ -31,6 +31,11 @@ describe ParticipationsController do
       @ep = Factory.build(:event_participant)
     end
 
+    it 'should register more participants than maximum if there are vacancies' do
+      event = Factory(:event)
+      eps = Array.new(10) { |i| Factory.build(:event_participant, :event => event) }      
+    end
+
     it 'should create event participation record when submitted data is valid' do
       post :create, {:event_id => @event.url, :event_participant => @ep.attributes}
       response.should redirect_to(confirmation_event_participation_path(@event, UrlStore.encode(assigns[:event_participant].id)))

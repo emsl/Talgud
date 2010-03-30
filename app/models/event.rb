@@ -33,7 +33,19 @@ class Event < ActiveRecord::Base
       record.errors.add :ends_at, :must_be_after_begin_time
       record.errors.add :end_time, :must_be_after_begin_time
     end
-  end 
+  end
+  
+  validates_each :location_address_municipality  do |record, attr, value|
+    if not record.location_address_municipality.nil?
+      record.errors.add :location_address_municipality, :inclusion unless record.location_address_county.municipalities.include?(value)
+    end
+  end
+
+  validates_each :location_address_settlement  do |record, attr, value|
+    if not record.location_address_settlement.nil?
+      record.errors.add :location_address_settlement, :inclusion unless record.location_address_municipality.settlements.include?(value)
+    end
+  end
 
   named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
   named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}} }

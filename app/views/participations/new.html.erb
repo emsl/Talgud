@@ -11,7 +11,7 @@
   <% semantic_form_for :event_participant, @event_participant, :url => event_participations_path(@event) do |f| %>
     <%= render 'form' %>
     <% f.buttons do %>
-      <%= f.commit_button :participate %>
+      <%= f.submit t('formtastic.actions.participate'), :disable_with => t('formtastic.actions.participate') %>
     <% end %>
   <% end %>
 </div>

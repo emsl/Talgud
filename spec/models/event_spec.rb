@@ -9,12 +9,17 @@ describe Event, 'validations' do
   
   it 'should validate that begin time is before end time' do
     time = 1.day.from_now
-    Factory.build(:event, :begins_at => time, :ends_at => time).should be_valid
+    Factory.build(:event, :begins_at => time, :ends_at => time + 1.minute).should be_valid
     # TODO: mutating start and end time should be possible by simply declaring them as create attributes
     f = Factory.build(:event, :begins_at => time, :ends_at => time)
     f.begin_time = '11:00'
     f.end_time = '10:00'
     f.should be_invalid
+
+    # TODO: enable for next iteration
+    # f.begin_time = '10:00'
+    # f.end_time = '10:00'
+    # f.should be_invalid
   end
 
   it 'should validate that number of participants is a positive number' do
@@ -22,6 +27,25 @@ describe Event, 'validations' do
     Factory.build(:event, :max_participants => 0).should be_invalid
     Factory.build(:event, :max_participants => -1).should be_invalid
   end
+  
+  it 'should validate municipality in county' do
+    event = Factory.build(:event)
+    event.location_address_municipality = Factory(:municipality)
+    event.should be_invalid
+  end
+  
+  it 'should validate settlement in municipality' do
+    event = Factory.build(:event)
+    event.location_address_settlement = Factory(:settlement)
+    event.should be_invalid
+  end
+
+  it 'should validate settlement and municipality' do
+    event = Factory.build(:event)
+    event.location_address_settlement = nil
+    event.should be_valid
+  end
+  
 end
 
 describe Event, 'create' do
@@ -125,9 +149,9 @@ describe Event, 'regional_managers' do
   before(:each) do
     @regional_manager = Factory(:user)
 
-    @county = Factory(:county)
-    @municipality = Factory(:municipality)
     @settlement = Factory(:settlement)
+    @municipality = @settlement.municipality
+    @county = @municipality.county
     @event = Factory(:event, :location_address_settlement => @settlement, :location_address_municipality => @municipality, :location_address_county => @county)
   end
 

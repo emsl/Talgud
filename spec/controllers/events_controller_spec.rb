@@ -16,9 +16,10 @@ describe EventsController do
     end
     
     it 'should filter and list events in xml format' do
-      e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type))
-      e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
-      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, :event_type => Factory.create(:event_type))
+      e1 = Factory.create(:event, :event_type => Factory.create(:event_type))
+      e2 = Factory.create(:event, :event_type => e1.event_type)
+      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, 
+        :location_address_municipality => e2.location_address_municipality, :event_type => Factory.create(:event_type))
       
       get :index, {:format => 'xml', :county => e2.location_address_county.id, :event_type => e2.event_type.id}
       response.content_type.should eql('application/xml')
@@ -35,9 +36,10 @@ describe EventsController do
       @first_manager = Factory(:user, :firstname => 'Mati', :lastname => 'Kuusk')
       @second_manager = Factory(:user, :firstname => 'Laine', :lastname => 'Mägi')
       @third_manager = Factory(:user, :firstname => 'Mati', :lastname => 'Kägi')
-      @e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type), :manager => @first_manager)
-      @e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => @e1.event_type, :manager => @second_manager)
-      @e3 = Factory.create(:event, :location_address_county => @e2.location_address_county, :event_type => Factory.create(:event_type),
+      @e1 = Factory.create(:event, :event_type => Factory.create(:event_type), :manager => @first_manager)
+      @e2 = Factory.create(:event, :event_type => @e1.event_type, :manager => @second_manager)
+      @e3 = Factory.create(:event, :location_address_county => @e2.location_address_county,
+        :location_address_municipality => @e2.location_address_municipality, :event_type => Factory.create(:event_type),
       :languages => @e1.languages, :manager => @third_manager)
     end    
     
@@ -159,11 +161,12 @@ describe EventsController do
       end
       
       it 'should send e-mail notification to region manager' do
-        county = Factory(:county)
+        municipality = Factory(:municipality)
         regional_manager = Factory(:user)
-        Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
+        Role.grant_role(Role::ROLE[:regional_manager], regional_manager, municipality.county)
         
-        @event.location_address_county = county
+        @event.location_address_county = municipality.county
+        @event.location_address_municipality = municipality
         Mailers::EventMailer.should_receive(:deliver_region_manager_notification)
         
         post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}

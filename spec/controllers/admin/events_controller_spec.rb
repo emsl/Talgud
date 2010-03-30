@@ -49,9 +49,10 @@ describe Admin::EventsController do
       activate_authlogic and UserSession.create(account_manager)
       Role.grant_role(Role::ROLE[:account_manager], account_manager, Account.current)
       
-      e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type))
-      e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
-      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, :event_type => Factory.create(:event_type))
+      e1 = Factory.create(:event, :event_type => Factory.create(:event_type))
+      e2 = Factory.create(:event, :event_type => e1.event_type)
+      e3 = Factory.create(:event, :location_address_county => e2.location_address_county,
+        :location_address_municipality => e2.location_address_municipality, :event_type => Factory.create(:event_type))
       
       get :index, {:search => {:location_address_county_id => e2.location_address_county.id}, :format => 'html'}
       assigns[:events].should include(e2, e3)
@@ -71,9 +72,10 @@ describe Admin::EventsController do
       activate_authlogic and UserSession.create(account_manager)
       Role.grant_role(Role::ROLE[:account_manager], account_manager, Account.current)
       
-      e1 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => Factory.create(:event_type))
-      e2 = Factory.create(:event, :location_address_county => Factory.create(:county), :event_type => e1.event_type)
-      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, :event_type => Factory.create(:event_type))
+      e1 = Factory.create(:event, :event_type => Factory.create(:event_type))
+      e2 = Factory.create(:event, :event_type => e1.event_type)
+      e3 = Factory.create(:event, :location_address_county => e2.location_address_county, 
+        :location_address_municipality => e2.location_address_municipality, :event_type => Factory.create(:event_type))
       
       get :index, {:format => 'xml', :search => {:location_address_county_id => e2.location_address_county.id}}
       response.content_type.should eql('application/xml')
@@ -157,12 +159,11 @@ describe Admin::EventsController do
     end
     
     it 'should show event details if user is regional manager' do
-      county = Factory(:county)
       regional_manager = Factory.create(:user)
       activate_authlogic and UserSession.create(regional_manager)
-      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
-
-      event = Factory.create(:event, :location_address_county => county)
+      event = Factory.create(:event)
+      
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, event.location_address_county)
       get :show, {:id => event.id}
       response.should be_success
       assigns[:event].should eql(event)
@@ -198,25 +199,23 @@ describe Admin::EventsController do
     end
 
     it 'should update event if user is regional manager' do
-      county = Factory(:county)
       regional_manager = Factory.create(:user)
       activate_authlogic and UserSession.create(regional_manager)
-      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
+      event = Factory.create(:event)
 
-      event = Factory.create(:event, :location_address_county => county)
+      Role.grant_role(Role::ROLE[:regional_manager], regional_manager, event.location_address_county)
       post :update, {:id => event.id, :event => event.attributes}
       response.should redirect_to(admin_event_path(event.id))
     end
 
     it 'should be denied to update event if user is different regional manager' do
       county = Factory(:county)
-      county2 = Factory(:county)
-      
+            
       regional_manager = Factory.create(:user)
       activate_authlogic and UserSession.create(regional_manager)
       Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
 
-      event = Factory.create(:event, :location_address_county => county2)
+      event = Factory.create(:event)
       proc { post :update, {:id => event.id, :event => event.attributes} }.should raise_error(ActiveRecord::RecordNotFound)
     end
 
