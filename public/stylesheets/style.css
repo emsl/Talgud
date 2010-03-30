@@ -1022,16 +1022,21 @@ div.infowindow div.clustered a:hover {
 }
 
 /* Photo gallery output */
-div.photogallery.nagi a {
-  margin: 3px;
+div#photogallery {
+  width: 450px;
 }
 
-div#flickr_photoset ul.flickr {
+div.nagi a {
+  padding: 0 5px 5px 0;
+}
+
+div#photogallery ul.flickr {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-div#flickr_photoset ul.flickr li {
+div#photogallery ul.flickr li {
   display: inline;
+  padding: 0 5px 5px 0;
 }

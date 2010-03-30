@@ -56,9 +56,6 @@
   // accepts a series of photos and constructs
   // the thumbnails that link back to Flickr
   $.flickr.thumbnail.process = function(photos, photoset) {
-      
-      console.log(photoset);
-      
     var thumbnails = $.map(photos.photo, function(photo) {
       var image = new Image(), html = '', href = undefined
 
