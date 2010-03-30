@@ -33,4 +33,19 @@ module EventsHelper
     end
     contacts * '; '
   end
+
+  def all_manager_names(managers)
+    return '' unless managers
+    managers.collect(&:name).select{ |i| not i.blank? } * ', '
+  end
+
+  def all_manager_emails(managers)
+    return '' unless managers
+    managers.collect(&:email).select{ |i| not i.blank? } * ', '
+  end
+
+  def all_manager_phones(managers)
+    return '' unless managers
+    managers.collect(&:phone).select{ |i| not i.blank? } * ', '
+  end
 end

@@ -444,6 +444,7 @@ et:
         managers: Talgujuhid
         manager_email: Talgujuhi e-mail
         manager_phone: Talgujuhi telefon
+        manager_name: Talgujuhi nimi
         max_participants: Talguliste maksimumarv
         max_participants_short: Max
         current_participants: Registreerunute arv

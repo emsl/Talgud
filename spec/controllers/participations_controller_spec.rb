@@ -19,7 +19,7 @@ describe ParticipationsController do
     end
     
     it 'should render new registration form' do
-      event = Factory(:event, :max_participants => 10)
+      event = Factory(:event, :max_participants => 10, :status => Event::STATUS[:registration_open])
       get :new, {:event_id => event.url}
       response.should be_success
     end    
