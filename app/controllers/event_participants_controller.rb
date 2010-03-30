@@ -70,7 +70,7 @@ class EventParticipantsController < ApplicationController
       end
     else
       flash.now[:error] = t('participations.update.error')
-      render :show
+      render :edit
     end
   end
 
