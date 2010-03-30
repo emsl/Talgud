@@ -12,5 +12,15 @@ class Admin::AccountsController < Admin::AdminController
   end
   
   def update
+    if @account.update_attributes(params[:account])
+      flash[:notice] = t('admin.accounts.update.notice')
+      redirect_to admin_accounts_path
+    else
+      flash.now[:error] = t('admin.accounts.update.error')
+      render :action => :edit
+    end    
+  end
+  
+  def show
   end
 end

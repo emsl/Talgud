@@ -15,6 +15,10 @@ describe Event, 'validations' do
     f.begin_time = '11:00'
     f.end_time = '10:00'
     f.should be_invalid
+    
+    f.begin_time = '10:00'
+    f.end_time = '10:00'
+    f.should be_invalid
   end
 
   it 'should validate that number of participants is a positive number' do
@@ -22,6 +26,10 @@ describe Event, 'validations' do
     Factory.build(:event, :max_participants => 0).should be_invalid
     Factory.build(:event, :max_participants => -1).should be_invalid
   end
+  
+  it 'should validate inclusion of municipality in county'
+  
+  it 'should validate inclusion of settlement in municipality'
 end
 
 describe Event, 'create' do

@@ -58,6 +58,9 @@ et:
     common:
       apply_filter: Filtreeri
       created_at: Lisatud
+      updated_at: Muudetud
+      creator: Looja
+      updater: Muutja
       destroy: Kustuta
       edit: Muuda
       export_csv: CSV
@@ -374,7 +377,7 @@ et:
       more_events_in_area: Veel talguid samas piirkonnas
       register_to_this_event: Registreeri nendele talgutele!
       no_vacancies: Kõik kohad on täidetud!
-      registration_starts_at: Talgutele registreerumine algab 1. aprillil
+      registration_starts_at: "Talgutele registreerumine algab<br/> {{date}} kell {{time}}"
       sponsor_this_event: Toeta neid talguid!
       starts_at: "Talgud toimuvad {{date}} kell {{time}}"
     submenu:
@@ -416,8 +419,6 @@ et:
         name: Konto nimi
         domain: Domeen
         em_publish_event: "Talgujuht saab avalikustada"
-        em_edit_mail_templates: "Talgujuht saab muuta kirja põhju"
-        rm_event_notifications: "Teavita piirkondliku juhti"
         account_managers: Konto haldurid
       user:
         email: E-post
@@ -444,6 +445,8 @@ et:
         end_time: "Lõpu kellaaeg ~"
         begins_at: Algusaeg
         ends_at: Lõpuaeg
+        registration_begins_at: Registreerumise algusaeg
+        registration_ends_at: Registreerumise lõpuaeg
         event_type: Talgute liik
         gathering_location: Kogunemine
         gathering_time: Kogunemisaeg
@@ -467,14 +470,20 @@ et:
         meta_aim_description: Talgute eesmärk ja hüvang
         meta_job_description: Talgutööd
         meta_bring_with_you: Kaasa võtta
-        meta_provided_for_participiants: Talgulistele pakutav
+        meta_provided_for_participiants: Talgulistele pakutavad hüved va. toitlustamine
         meta_subject_heritage_number: Objekti mälestise number
         meta_subject_info: Lähem info talguobjekti kohta
         meta_subject_owner: Talguobjekti omanik
         meta_subject_protegee: Kas objekt on kaitsealune?
+        meta_cash_info: Osavõtutasu
+        meta_transport_info: Transport
+        meta_sleep_info: Ööbimine
+        meta_food_info: Toitlustamine
         name: Talgute nimi
         notes: Lisainfo talgute kohta
         status: Staatus
+        registration_text: Registreerumise tekst
+        registration_notes_title: Registreerumisvormi lisainfo täpsustus
         statuses:
           new: Uus
           adjustment: Täpsustamisel
@@ -539,8 +548,10 @@ et:
         name: Küla või asula nimi
     hints:
       event:
-        begin_time: Talgute alguse kellaaeg
-        end_time: Talgute prognoositav lõpuaeg
+        begins_at: Talgute alguse kellaaeg
+        ends_at: Talgute prognoositav lõpuaeg
+        registration_begins_at: Talgutele regisreerumise alguse kellaaeg
+        registration_ends_at: Talgute regisreerumise lõpuaeg
         event_type: "Vali üks kategooria, mis tundub kõige paremini sobivat"
         gathering_location: "Kogunemise koht ja kellaaeg, vajadusel ka kohalejõudmise juhised. Mõistlik on kogunemine leppida kergesti leitavas kohas."
         location_address_street: Sisesta võimalikult täpne aadress
@@ -549,13 +560,20 @@ et:
         meta_aim_description: "Kelle või mille hüvanguks talgutöid tehakse, mis on talgute eesmärk või kasu. Või mis on edasised plaanid talguobjektiga."
         meta_job_description: "Märgi kõik kavandatavad talgutööde tüübid (nt võsa saagimine, langetatud võsa ja okste korjamine ning põletamine)"
         meta_bring_with_you: "Mida osalejatel on vaja kaasa võtta: nt kindad, tööriistad, muud vahendid, piknikukorv, kummikud"
-        meta_provided_for_participiants: "Mida korraldajana saad talgulistele pakkuda, väga teretulnud on kohaliku paiga, muinsusväärtuse, looduse või külaseltsi tegemiste lühitutvustus. Siia märgi ka muu talgulise meelehea vastavalt võimalustele: nt soe tee, supp, pillimees, väike meene või saun."
+        meta_provided_for_participiants: "Mida korraldajana saad talgulistele pakkuda, väga teretulnud on kohaliku paiga, muinsusväärtuse, looduse või külaseltsi tegemiste lühitutvustus. Siia märgi ka muu talgulise meelehea vastavalt võimalustele: pillimees, väike meene või saun."
         meta_subject_heritage_number: Muinsuskaitsealuse objekti puhul sisesta mälestise number. Otsi number mälestiste registrist <a href="http://register.muinas.ee" target="blank">http://register.muinas.ee</a>
         meta_subject_info: Võimalusel viide objekti puudutavale veebilehele
         meta_subject_owner: "Kes on talguobjekti/kinnistu omanik ja rentnik või valdaja, mida korrastatakse või millel talgud toimuvad"
         meta_subject_protegee: "Kas objekt on äkki looduskaitse all või muinsuskaitse all?"
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
         notes: Vajadusel lisa siia talgulistele oluline muu info
+        meta_cash_info: "Info osavõtutasu, hinna sisse kuuluv, arvelduse kohta."
+        meta_transport_info: "Info transpordi kohta."
+        meta_sleep_info: "Info ööbimise ja majutuse kohta"
+        meta_food_info: "Kui pakud talgulistele süüa, siis kirjelda, kuidas on korraldatud toitlustamine? Mida talgulistele pakutakse?"
+        name: Talgute nimi        
+        registration_text: "Tekst, mida näitatakse registreerumisel ning, mis saadetakse registreerujale e-postiga."
+        registration_notes_title: "Kirjelda, mida peab iga osaleja registreerumisel lisainfo välja sisestama."        
       event_participant:
         age_range: "Registreerumiseks pead olema vähemalt 18-aastane! Noorematel soovitame talgutele tulla koos täiskasvanutega."
         notes: "Kirjuta siia igasugust lisainformatsiooni, mida pead oluliseks enda kohta talgujuhile teada anda."

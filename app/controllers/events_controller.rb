@@ -91,9 +91,11 @@ class EventsController < ApplicationController
     @event.location_address_country_code = 'ee'
     if @event.valid?
       @event.save
-
-      @event.regional_managers.each do |rm|
-        Mailers::EventMailer.deliver_region_manager_notification(rm, @event, admin_event_url(@event.id))
+      
+      unless Account.current.em_publish_event
+        @event.regional_managers.each do |rm|
+          Mailers::EventMailer.deliver_region_manager_notification(rm, @event, admin_event_url(@event.id))
+        end
       end
 
       flash[:notice] = t('events.create.notice', :code => @event.code)

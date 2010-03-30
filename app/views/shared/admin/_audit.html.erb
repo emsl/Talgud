@@ -1,0 +1,27 @@
+<tr>
+  <td colspan="2">&nbsp;</td>
+</tr>
+<%- if object.respond_to?(:created_at) and object.created_at -%>
+<tr>
+  <td><b><%= t('admin.common.created_at') %></b></td>
+  <td><%= l(object.created_at) %></td>
+</tr>
+<%- end -%>
+<%- if object.respond_to?(:creator) and object.creator -%>
+<tr>
+  <td><b><%= t('admin.common.creator') %></b></td>
+  <td><%= object.creator %></td>
+</tr>
+<%- end -%>
+<%- if object.respond_to?(:updated_at) and object.updated_at -%>
+<tr>
+  <td><b><%= t('admin.common.updated_at') %></b></td>
+  <td><%= l(object.updated_at) %></td>
+</tr>
+<%- end -%>
+<%- if object.respond_to?(:updater) and object.updater -%>
+<tr>
+  <td><b><%= t('admin.common.updater') %></b></td>
+  <td><%= h object.updater %></td>
+</tr>
+<%- end -%>
