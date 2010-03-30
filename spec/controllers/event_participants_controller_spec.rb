@@ -113,7 +113,8 @@ describe EventParticipantsController do
       assigns[:mail].should_not be_nil
       assigns[:event].should eql(@ep.event)
       # TODO: strange case, response.should be_success returns false
-      response.status.should eql("200 OK")
+      #response.status.should eql("200 OK")
+      response.should be_success
     end
 
     it 'should not by accessible by public users and redirect to login path' do

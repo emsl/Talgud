@@ -1,0 +1,24 @@
+<h1><%= @account.label %></h1>
+
+<div class="textcontent">
+  <div style="margin-bottom:10px;">
+    <% if permitted_to?(:edit, :admin_accounts) %>
+    <%= link_to t('admin.common.edit'), edit_admin_account_path(@account) %>
+    <% end %>
+  </div>
+<table>
+<tr>
+  <td style="width: 25%;"><b><%= t('formtastic.labels.account.name') %></b></td>
+  <td><%=h @account.name %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.account.domain') %></b></td>
+  <td><%=h @account.domain %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.account.em_publish_event') %></b></td>
+  <td><%=label_for_boolean @account.em_publish_event %></td>
+</tr>
+<%= render :partial => 'shared/admin/audit', :object => @account %>
+</table>
+</div>
