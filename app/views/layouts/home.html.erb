@@ -44,6 +44,7 @@
         <div class="container-right">
           <div id="map" style="height:310px;"></div>
           <%= render 'events/map' %>
+          <%= render 'events/map_legend' %>
         </div>
       </div>
       <div class="container clearfix"> 
@@ -78,8 +79,7 @@
           </script>
           
           <div style="text-align: center; margin-top: 20px;">
-            <%= link_to image_tag('logo-eea.png', :alt => '', :style => 'border: 0px;'), 'http://www.ngo.ee/seitse', :target => :blank %>
-            <%= link_to image_tag('logo-nor.png', :alt => '', :style => 'border: 0px;'), 'http://www.ngo.ee/seitse', :target => :blank, :style => 'margin-left: 20px;' %>
+            <%= render 'shared/logos' %>
           </div>
         </div>
         <div class="container-right">

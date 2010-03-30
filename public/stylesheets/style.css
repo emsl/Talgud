@@ -944,6 +944,26 @@ div.infowindow div.clustered a:hover {
   text-decoration: underline;
 }
 
+/* Map legend */
+#map-legend {
+	background: #5e6e7e;
+	background: -moz-linear-gradient(90deg, #313b47, #5e6e7e);
+	background: -webkit-gradient(linear, left bottom, left top, from(#313b47), to(#5e6e7e));
+	color: white;
+	font-size: 12px;
+	padding: 5px 0px;
+	text-shadow: 0 -1px 0 #323c48;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+}
+
+#map-legend img {
+	vertical-align: middle;
+	margin: 0 5px 0 20px;
+}
+
 /* Output formats link */
 .output-formats {
   color: #999;

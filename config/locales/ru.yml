@@ -697,6 +697,10 @@ ru:
       event_description: "Описание робот"
       event_vacancies: "Свободных мест"
       show_link: "Подробнее &raquo;"
+    map_legend:
+      event_clustered: "В этом месте несколько толок"
+      event_no_vacancies: Места заняты
+      event_vacancies: Свободные места есть!
     my:
       title: "Мои полезные дела"
     new:

@@ -359,6 +359,10 @@ et:
       event_aim: Tööde eesmärk
       event_description: Tööde kirjeldus
       event_vacancies: Vabu kohti
+    map_legend:
+      event_clustered: "Selles piirkonnas on mitu üritust, suurenda kaarti!"
+      event_no_vacancies: Kohad täis
+      event_vacancies: Vabu kohti veel on!
     show:
       more_events_in_area: Veel talguid samas piirkonnas
       register_to_this_event: Registreeri nendele talgutele!
