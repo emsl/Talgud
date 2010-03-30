@@ -1025,3 +1025,13 @@ div.infowindow div.clustered a:hover {
 div.photogallery.nagi a {
   margin: 3px;
 }
+
+div#flickr_photoset ul.flickr {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+div#flickr_photoset ul.flickr li {
+  display: inline;
+}

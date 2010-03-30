@@ -549,7 +549,7 @@ et:
         meta_subject_protegee: "Kas objekt on äkki looduskaitse all või muinsuskaitse all?"
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
         notes: Vajadusel lisa siia talgulistele oluline muu info
-        photogallery_url: "Sisesta siia pildigalerii aadress, millest soovid pilte näidata. Hetkel on toetatud NAGI.ee pildikeskkond. Sisesta aadress kujul http://nagi.ee/photos/peeter_meeter/"
+        photogallery_url: "Sisesta siia pildigalerii aadress, millest soovid pilte näidata. Hetkel on toetatud NAGI.ee ja Flickr pildikeskkonnad.<br/><br/> Sisesta NAGI.ee aadress kujul http://nagi.ee/photos/peeter_meeter/<br/><br/>või Flickri galerii aadress kujul http://flickr.com/photos/kasutaja/sets/123"
       event_participant:
         age_range: "Registreerumiseks pead olema vähemalt 18-aastane! Noorematel soovitame talgutele tulla koos täiskasvanutega."
         notes: "Kirjuta siia igasugust lisainformatsiooni, mida pead oluliseks enda kohta talgujuhile teada anda."

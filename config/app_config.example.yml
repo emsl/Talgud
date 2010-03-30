@@ -3,6 +3,9 @@ production:
   # will turn on the analytics tracking.
   # google_analytics_code: UA-XXXXX-X
   
+  # If you're using Flickr photosets, provide Flickr API key:
+  # flickr_api_key: FLICKR-API-KEY
+  
   # Mailer settings.
   mailer:
     from_name: From Name
@@ -12,20 +15,23 @@ production:
     # Set the delivery method for mailer. It will be used to set the ActionMailer::Base.delivery_method value.
     # delivery_method: smtp
     
-    # If delivery method is set to smtp, set the SMTP server address here. For example to use GMail, set it to smtp.gmail.com
-    # smtp_address: smtp_address
+    # If delivery method is set to smtp, set the SMTP server settings here. For example to use GMail, set it to smtp.gmail.com
+    # smtp_settings:
+      
+      # If delivery method is set to smtp, set the SMTP server settings here. For example to use GMail, set it to smtp.gmail.com
+      # address: smtp_address
     
-    # SMTP server username. With GMail set it to your e-mail address
-    # smtp_username: me@example.com
-    
-    # SMTP server password.
-    # smtp_password: my_password
-    
-    # With Google Apps, set it to your domain name
-    # smtp_domain: example.com
-    
-    # SMTP server port
-    # smtp_port: 587
+      # SMTP server username. With GMail set it to your e-mail address
+      # user_name: me@example.com
+      
+      # SMTP server password.
+      # password: my_password
+      
+      # With Google Apps, set it to your domain name
+      # domain: example.com
+      
+      # SMTP server port
+      # port: 587
     
 # Use the same configuration as in production. However, you should be use your own settings.
 development:

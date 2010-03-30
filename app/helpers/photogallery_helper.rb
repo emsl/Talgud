@@ -1,7 +1,7 @@
 module PhotogalleryHelper
   
   def valid_photogallery_url?(photogallery_url)
-    URI.parse(photogallery_url).host =~ /(www\.)?nagi.ee/
+    URI.parse(photogallery_url).host =~ /(www\.)?nagi.ee|(www\.)?flickr.com/
   rescue
     false
   end
@@ -10,11 +10,14 @@ module PhotogalleryHelper
     u = URI.parse(photogallery_url)
     
     if u.host =~ /(www\.)?nagi.ee/
-      render 'shared/photogallery_nagi', :service_url => get_service_url(photogallery_url), :photogallery_url => photogallery_url
+      render 'shared/photogallery_nagi', :service_url => get_nagi_service_url(photogallery_url), :photogallery_url => photogallery_url
+    elsif u.host =~ /(www\.)?flickr.com/
+      photoset_id = get_flickr_photoset_id(photogallery_url)
+      render 'shared/photogallery_flickr', :photoset_id => photoset_id, :photogallery_url => photogallery_url if photoset_id
     end
   end
   
-  def get_service_url(photogallery_url)
+  def get_nagi_service_url(photogallery_url)
     u = URI.parse(photogallery_url)
     
     if u.host =~ /(www\.)?nagi.ee/
@@ -26,5 +29,10 @@ module PhotogalleryHelper
         photogallery_url
       end
     end
+  end
+  
+  def get_flickr_photoset_id(photogallery_url)
+    u = URI.parse(photogallery_url)
+    if u.host =~ /(www\.)?flickr.com/ and u.path =~ /\/photos\/(\w+)\/sets\/(\w+)/ then $2 else nil end
   end
 end
