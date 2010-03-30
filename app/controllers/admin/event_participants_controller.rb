@@ -63,7 +63,7 @@ class Admin::EventParticipantsController < Admin::AdminController
       redirect_to admin_event_participations_path(@event.id)
     else
       flash.now[:error] = t('admin.event_participants.update.error')
-      render :show
+      render :edit
     end
   end
 

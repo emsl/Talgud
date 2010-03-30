@@ -498,7 +498,7 @@ et:
         participant_name: Nimi
         phone: Telefon
         tellafriend_emails: Kutsu ka teised sõbrad osalema
-        event_participant: Kaaslane
+        event_participant: Registreerija
       municipality:
         name: Omavalitsuse nimi
         regional_managers: Piirkondlikud haldurid
