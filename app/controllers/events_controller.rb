@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
 
   filter_resource_access :additional_collection => [:my, :map, :latest, :stats], :attribute_check => true
+  
+  helper :photogallery
 
   def index
     @search = Event.published(
