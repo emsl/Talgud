@@ -2,7 +2,7 @@
   <% f.inputs do %>
     <%= f.input :name %>
     <%= f.input :event_type, :include_blank => false %>
-    <%= f.input :location_address_county %>
+    <%= f.input :location_address_county, :collection => County.sorted.all %>
     <%= f.input :location_address_municipality, :collection => @event.location_address_county.try(:municipalities), :wrapper_html => {:style => unless @event.location_address_county then 'display: none;' end } %>
     <%= f.input :location_address_settlement, :collection => @event.location_address_municipality.try(:settlements), :wrapper_html => {:style => unless @event.location_address_municipality then 'display: none;' end } %>
     <li id="map_row" style="display: none">
@@ -15,11 +15,21 @@
     <%= f.input :meta_aim_description, :input_html => {:rows => 4} %>
     <%= f.input :meta_job_description, :input_html => {:rows => 4} %>
     <%= f.input :max_participants %>
-    <%= f.input :begin_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false, :required => true %>
-    <%= f.input :end_time, :as => :select, :collection => (0..23).collect{ |i| ["#{i}:00", "#{i}:00"] }, :include_blank => false, :required => true %>
+    <%= f.input :begins_at %>
+    <%= f.input :ends_at %>
+    <%= f.input :registration_begins_at %>
+    <%= f.input :registration_ends_at %>
     <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
     <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
     <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_food_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_sleep_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_transport_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_cash_info, :input_html => {:rows => 4} %>
+
+    <%= f.input :registration_text, :input_html => {:rows => 4} %>
+    <%= f.input :registration_notes_title, :input_html => {:rows => 4} %>
+    
     <%= f.input :languages, :as => :check_boxes, :collection => select_options_for_language %>
     <%= f.input :gathering_location, :input_html => {:rows => 4} %>
     <%= f.input :notes, :input_html => {:rows => 4} %>

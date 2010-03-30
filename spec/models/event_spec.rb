@@ -15,11 +15,10 @@ describe Event, 'validations' do
     f.begin_time = '11:00'
     f.end_time = '10:00'
     f.should be_invalid
-
-    # TODO: enable for next iteration
-    # f.begin_time = '10:00'
-    # f.end_time = '10:00'
-    # f.should be_invalid
+    
+    f.begin_time = '10:00'
+    f.end_time = '10:00'
+    f.should be_invalid
   end
 
   it 'should validate that number of participants is a positive number' do

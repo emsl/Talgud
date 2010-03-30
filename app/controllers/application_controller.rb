@@ -47,7 +47,11 @@ class ApplicationController < ActionController::Base
 
   # TODO: select account and throw an error if not found
   def select_account_and_user
-    Account.current = Account.first
+    Account.current = if Talgud.config.domain
+      Account.find_by_domain(Talgud.config.domain)
+    else
+      Account.first
+    end
     Authorization.current_user = current_user
   end
 

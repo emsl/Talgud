@@ -171,6 +171,19 @@ describe EventsController do
         
         post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}
       end
+
+      it 'should not send e-mail notification to region manager if event manager can publish events' do
+        county = Factory(:county)
+        Account.current.em_publish_event = true
+        Account.current.save!
+        regional_manager = Factory(:user)
+        Role.grant_role(Role::ROLE[:regional_manager], regional_manager, county)
+        
+        @event.location_address_county = county
+        Mailers::EventMailer.should_not_receive(:deliver_region_manager_notification)
+        
+        post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}
+      end
       
       it 'should redisplay event create form when event data is invalid' do
         post :create, {:event => @event.attributes.merge('name' => '')}

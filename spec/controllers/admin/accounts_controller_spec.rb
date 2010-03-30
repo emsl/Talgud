@@ -15,38 +15,14 @@ describe Admin::AccountsController do
 
     it 'should be accessible for account manager' do
       activate_authlogic and UserSession.create(@user)
-      counties = Array.new(10) { |i| Factory.create(:account) }
+      accounts = Array.new(10) do |i| 
+        Factory.create(:account)
+      end
+      accounts << Account.current
+      
       get :index
-      assigns[:accounts].each { |e| accounts.should include(e) }
       response.should be_success
-    end
-  end
-  
-  describe 'new' do
-    it 'should be denied for public users' do
-      get :new
-      response.should redirect_to(admin_login_path)
-    end
-    
-    it 'should be denied for account manager' do
-      activate_authlogic and UserSession.create(@user)
-      get :new
-      response.should redirect_to(admin_login_path)
-    end
-  end
-
-  describe 'create' do
-    it 'should be denied for public users' do
-      account = Factory(:account)
-      post :create, {:account => account.attributes}
-      response.should redirect_to(admin_login_path)
-    end
-    
-    it 'should be denied for account manager' do
-      activate_authlogic and UserSession.create(@user)
-      account = Factory(:account)
-      post :create, {:account => account.attributes}
-      response.should redirect_to(admin_login_path)
+      assigns[:accounts].each { |e| accounts.should include(e) }
     end
   end
   
@@ -95,18 +71,4 @@ describe Admin::AccountsController do
     end
   end
   
-  describe 'destroy' do
-    it 'should be denied for public users' do
-      account = Factory(:account)
-      put :destroy, {:id => account.id}
-      response.should redirect_to(admin_login_path)
-    end
-    
-    it 'should be accessible for account manager' do
-      activate_authlogic and UserSession.create(@user)
-      account = Factory(:account)
-      put :destroy, {:id => account.id}
-      response.should redirect_to(admin_accounts_path)
-    end
-  end
 end
