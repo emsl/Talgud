@@ -1,0 +1,8 @@
+<div id="photogallery" class="nagi">
+  <script type="text/javascript" src="<%= service_url %>"></script>
+  <script type="text/javascript" charset="utf-8">
+    Nagi.pics.show('sq', 1000);
+  </script>
+  
+  <div><%= link_to t('.link_label', :default => 'Vaata NAGI pildigaleriid'), photogallery_url, :target => :blank %></div>
+</div>

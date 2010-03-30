@@ -125,7 +125,15 @@
           <span style="vertical-align: middle;"><%= link_to t('events.index.save_ical'), event_path(@event, :format => :ics) %></span>
         </td>
       </tr>
-    </table> 
+      <% if valid_photogallery_url?(@event.photogallery_url) %>
+      <tr>
+        <td class="first"><%= t('.gallery_title', :default => 'Ürituse pildid') %></td>
+        <td>
+          <%= photogallery_area_for(@event.photogallery_url) %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
   </div>
   
   <a name="map" id="map_target"></a>

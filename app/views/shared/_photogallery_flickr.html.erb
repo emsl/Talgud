@@ -1,0 +1,5 @@
+<div id="photogallery"></div>
+<%= javascript_include_tag 'jquery.flickr' %>
+<script type="text/javascript" charset="utf-8">
+  $('#photogallery').flickr({api_key: '<%= Talgud.config.flickr_api_key %>'}).photosetsGetPhotos({photoset_id: '<%= photoset_id %>', per_page: 100});
+</script>

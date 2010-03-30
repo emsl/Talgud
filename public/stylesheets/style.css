@@ -1020,3 +1020,23 @@ div.infowindow div.clustered a:hover {
   padding: 40px;
   text-align: center;
 }
+
+/* Photo gallery output */
+div#photogallery {
+  width: 450px;
+}
+
+div.nagi a {
+  padding: 0 5px 5px 0;
+}
+
+div#photogallery ul.flickr {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+div#photogallery ul.flickr li {
+  display: inline;
+  padding: 0 5px 5px 0;
+}
