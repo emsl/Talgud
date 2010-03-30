@@ -4,7 +4,7 @@
 <div class="container-right">
   <h1><span style="font-weight: normal"><%= t('.title') %></span> <%= @event.name %></h1>
 
-  <% semantic_form_for @event_participant, :url => event_participation_path(@event, @event_participant) do |f| %>
+  <% semantic_form_for @event_participant, :url => event_event_participant_path(@event, @event_participant) do |f| %>
     <%= render 'form' %>
     <% f.buttons do %>
       <%= f.commit_button :update %>
