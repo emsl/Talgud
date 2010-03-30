@@ -1,6 +1,7 @@
 Factory.define :account do |a|
   a.name 'Account'
   a.sequence(:domain) { |n| "test#{n}.local" }
+  a.em_publish_event false
 end
 
 Factory.define :county do |c|
