@@ -1026,17 +1026,6 @@ div#photogallery {
   width: 450px;
 }
 
-div.nagi a {
-  padding: 0 5px 5px 0;
-}
-
-div#photogallery ul.flickr {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-div#photogallery ul.flickr li {
-  display: inline;
+div#photogallery a {
   padding: 0 5px 5px 0;
 }

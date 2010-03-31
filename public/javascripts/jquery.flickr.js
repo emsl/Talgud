@@ -68,10 +68,10 @@
       
       html = $.flickr.linkTag($.flickr.thumbnail.imageTag(image), photo, href, photoset)
         
-      return ['<li>' + html + '</li>']
-    }).join("\n")
+      return [html]
+    }).join("")
     
-    return $('<ul class="flickr"></ul>').append(thumbnails)
+    return thumbnails;
   }
   
   // handles requesting and thumbnailing photos
