@@ -29,7 +29,7 @@
       <%= link_to t('.register_to_this_event'), new_event_participation_path(@event) %>
       </div>
       <% if not @event.can_register? %>
-      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at', :date_begins => format_date(@event.registration_begins_at), :time_begins => format_time(@event.registration_begins_at), :date_ends => format_date(@event.registration_ends_at), :time_ends => format_time(@event.registration_ends_at)) %></div>
+      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at', :time_begins => format_time(@event.registration_begins_at), :time_ends => format_time(@event.registration_ends_at)) %></div>
       <% elsif not @event.vacancies? %>
       <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 58px;"><%= t('.no_vacancies') %></div>
       <% end %>
@@ -47,7 +47,7 @@
         <td class="first"><%= t('formtastic.labels.event.meta_aim_description') %></td>
         <td><%=h @event.meta_aim_description %></td>
       </tr>
-      <% if @event.managers.include?(@current_user) %>
+      <% if permitted_to?(:edit, @event) %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.status') %></td>
         <td><%=h t("formtastic.labels.event.statuses.#{@event.status}") %></td>
@@ -184,7 +184,7 @@
         </td>
       </tr>
       <% end %>
-      <% if @event.managers.include?(@current_user) %>
+      <% if permitted_to?(:edit, @event) %>
       <tr>
         <td class="first"><%= t('formtastic.labels.account.managers') %></td>
         <td>

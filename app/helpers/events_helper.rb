@@ -14,7 +14,7 @@ module EventsHelper
   # Displays event registration start and end hours in a simple format, i.e. when event starts at 12:00 and ends 18:00, the result
   # would be 12-18
   def format_time(date)
-    date.try(:hour)
+    l(date.to_time, :format => :short)
   end
 
   def format_date(date)

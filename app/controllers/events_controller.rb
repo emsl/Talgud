@@ -82,8 +82,8 @@ class EventsController < ApplicationController
 
   def new
     # TODO: date is currenlty hard coded.
-    @event.attributes = {:begins_at => 10.days.from_now, :ends_at => 10.days.from_now}
-    @event.attributes = {:begin_time => '10:00', :end_time => '18:00'}
+    @event.attributes = {:begins_at => 10.days.from_now, :ends_at => 10.days.from_now, :registration_begins_at => 7.days.from_now, :registration_ends_at => 9.days.from_now}
+    @event.attributes = {:begin_time => '10:00', :end_time => '18:00', :registration_begin_time => '00:00', :registration_end_time => '00:00'}
   end
 
   def create
@@ -140,9 +140,18 @@ class EventsController < ApplicationController
 
   def update
     @event.attributes = params[:event]
+    published = false
+    if @event.publish and Account.current.em_publish_event
+      @event.status = Event::STATUS[:published]
+      published = true
+    end
     if @event.valid?
       @event.save
-      flash[:notice] = t('events.update.notice')
+      if published 
+        flash[:notice] = t('events.update.em_published_notice')
+      else
+        flash[:notice] = t('events.update.notice')
+      end
       redirect_to event_path(@event)
     else
       flash.now[:error] = t('events.update.error')

@@ -15,10 +15,10 @@
     <%= f.input :meta_aim_description, :input_html => {:rows => 4} %>
     <%= f.input :meta_job_description, :input_html => {:rows => 4} %>
     <%= f.input :max_participants %>
-    <%= f.input :begins_at %>
-    <%= f.input :ends_at %>
     <%= f.input :registration_begins_at %>
     <%= f.input :registration_ends_at %>
+    <%= f.input :begins_at %>
+    <%= f.input :ends_at %>
     <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
     <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
     <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>
@@ -59,6 +59,15 @@
       <%= f.input :instant_publish, :as => :boolean, :selected => true, :required => false %>    
     <% end %>
     <p><%= t('formtastic.hints.event.instant_publish') %></p>
+  </div>  
+  <% elsif @event.status == Event::STATUS[:new] %>
+  <div class="form-extra round" style="margin-top:10px;">
+    <h3><%= t('.event_publishing') %></h3>
+    
+    <% f.inputs do %>
+      <%= f.input :publish, :as => :boolean, :required => false %>    
+    <% end %>
+    <p><%= t('formtastic.hints.event.publish') %></p>
   </div>  
   <% end %>
 <% end %>

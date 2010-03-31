@@ -4,10 +4,8 @@
 
 <%= t('.event_link', :url => @event_url) %>
 
-<%= t('.edit_link', :url => @manage_url) %>
+<%= t('.edit_link', :url => @manage_url, :registration_text => @event_participant.event.registration_text) %>
 
 <%= t('.footer') %>
-<%= t('mailers.common.footer_text') %>
-
 
 <%= t('mailers.common.disclaimer') %>

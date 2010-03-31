@@ -3,7 +3,7 @@ class Event < ActiveRecord::Base
   acts_as_scoped :account
   acts_as_url :name, :scope => :account_id, :only_when_blank => true
   acts_as_mappable :lat_column_name => :latitude, :lng_column_name => :longitude
-  attr_accessor :instant_publish
+  attr_accessor :instant_publish, :publish
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :closed => 'closed', :took_place => 'took_place', :adjustment => 'adjustment'}
 
