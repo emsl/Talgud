@@ -552,6 +552,7 @@ et:
         photogallery_url: "Sisesta siia pildigalerii aadress, millest soovid pilte näidata. Hetkel on toetatud NAGI.ee ja Flickr pildikeskkonnad.<br/><br/> Sisesta NAGI.ee aadress kujul http://nagi.ee/photos/peeter_meeter/<br/><br/>või Flickri galerii aadress kujul http://flickr.com/photos/kasutaja/sets/123"
       event_participant:
         age_range: "Registreerumiseks pead olema vähemalt 18-aastane! Noorematel soovitame talgutele tulla koos täiskasvanutega."
+        email: "Edastame Sinu e-maili talgujuhile, kes vajadusel saadab Sulle täiendavat infot. Saadame Sinu e-mailile vaid talgupäevaga seotud informatsiooni."
         notes: "Kirjuta siia igasugust lisainformatsiooni, mida pead oluliseks enda kohta talgujuhile teada anda."
         tellafriend_emails: "Sisesta siia nende sõprade e-posti aadressid, kellel tahad soovitada talgupäeval osalemist, eraldades aadressid komadega. Sõbrad saavad e-posti teel talgupäeva kutse."
     actions:
