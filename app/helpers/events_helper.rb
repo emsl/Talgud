@@ -31,7 +31,7 @@ module EventsHelper
       [l.name, l.id]
     end
   end
-
+  
   def manager_contacts(manager)
     [manager.name, manager.email, manager.phone].select{ |i| not i.blank? } * ', '
   end

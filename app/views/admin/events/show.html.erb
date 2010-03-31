@@ -39,6 +39,14 @@
   <td><%=h @event.current_participants %></td>
 </tr>
 <tr>
+  <td><b><%= t('formtastic.labels.event.registration_begins_at') %></b></td>
+  <td><%=h @event.registration_begins_at %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.registration_ends_at') %></b></td>
+  <td><%=h @event.registration_ends_at %></td>
+</tr>
+<tr>
   <td><b><%= t('formtastic.labels.event.begins_at') %></b></td>
   <td><%=h @event.begins_at %></td>
 </tr>
@@ -57,6 +65,22 @@
 <tr>
   <td><b><%= t('formtastic.labels.event.meta_subject_info') %></b></td>
   <td><%= auto_link(@event.meta_subject_info, :all, :target => "_blank") %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_food_info') %></b></td>
+  <td><%=h @event.meta_food_info %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_sleep_info') %></b></td>
+  <td><%=h @event.meta_sleep_info %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_transport_info') %></b></td>
+  <td><%=h @event.meta_transport_info %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.meta_cash_info') %></b></td>
+  <td><%=h @event.meta_cash_info %></td>
 </tr>
 <% unless @event.languages.empty? %>
 <tr>
@@ -83,6 +107,14 @@
 <tr>
   <td><b><%= t('formtastic.labels.event.meta_subject_heritage_number') %></b></td>
   <td><%=h @event.meta_subject_heritage_number %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.registration_text') %></b></td>
+  <td><%=h @event.registration_text %></td>
+</tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.registration_notes_title') %></b></td>
+  <td><%=h @event.registration_notes_title %></td>
 </tr>
 </table>
 </div>

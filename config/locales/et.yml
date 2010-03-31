@@ -358,6 +358,8 @@ et:
       save_ical: Salvesta oma kalendrisse
     latest:
       title: Viimati lisatud
+    past:
+      title: Toimunud talgud
     my:
       title: Minu talgud
     new:
@@ -395,6 +397,7 @@ et:
       show_all: Näita kõiki
       latest: Viimati lisatud
       show_on_map: Näita kaardil
+      past: Toimunud
     submenu_edit:
       event_info: Talgute info
       edit_event: Muuda talguid
@@ -429,6 +432,7 @@ et:
         domain: Domeen
         em_publish_event: "Talgujuht saab avalikustada"
         account_managers: Konto haldurid
+        managers: Üld administraatorite kontaktid
       user:
         email: E-post
         firstname: Eesnimi
@@ -496,7 +500,7 @@ et:
         registration_notes_title: Registreerumisvormi lisainfo täpsustus
         instant_publish: Kohene avalikustamine
         statuses:
-          new: Uus
+          new: Sisestatud
           adjustment: Täpsustamisel
           closed: Suletud
           took_place: Toimunud 

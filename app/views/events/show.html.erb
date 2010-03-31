@@ -128,16 +128,19 @@
       </tr>
       <% end %>
       <% unless @event.meta_sleep_info.blank? %>
+      <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_sleep_info') %></td>
         <td><%=h @event.meta_sleep_info %></td>
       </tr>
       <% end %>
       <% unless @event.meta_transport_info.blank? %>
+      <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_transport_info') %></td>
         <td><%=h @event.meta_transport_info %></td>
       </tr>
       <% end %>
       <% unless @event.meta_cash_info.blank? %>
+      <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_cash_info') %></td>
         <td><%=h @event.meta_cash_info %></td>
       </tr>
@@ -180,6 +183,16 @@
           <%= photogallery_area_for(@event.photogallery_url) %>
         </td>
       </tr>
+      <% end %>
+      <% if @event.managers.include?(@current_user) %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.account.managers') %></td>
+        <td>
+          <% for manager in account_managers %>
+          <div style="margin-bottom: 5px;"><%=h manager_contacts(manager) %></div>
+          <% end %>
+        </td>
+      </tr>      
       <% end %>
     </table>
   </div>

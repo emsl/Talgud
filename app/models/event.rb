@@ -55,12 +55,13 @@ class Event < ActiveRecord::Base
     end
   end
 
-  named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
-  named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}} }
+  named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}, :order => 'begins_at ASC'
+  named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}, :order => 'begins_at ASC'}}
   named_scope :latest, lambda { |count| {:limit => count, :order => 'ID DESC'} }
   named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ? OR (role = ? AND (model_type = ? AND model_id = events.id))))',
      (u ? u.id : nil) , 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
+  named_scope :past, :conditions => {:status => [STATUS[:took_place]]}, :order => 'ends_at DESC'
   named_scope :sorted, :order => {:name => ' ASC'}
 
   def self.class_role_symbols

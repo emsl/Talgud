@@ -9,6 +9,7 @@
     <% end %>
     <li<%= ' class="active"' if action_name == 'index' and request.path_parameters[:controller] == 'events' %>><%= link_to t('.show_all'), events_path %><span class="arrow"></span></li>
     <li<%= ' class="active"' if action_name == 'latest' %>><%= link_to t('.latest'), latest_events_path %><span class="arrow"></span></li>
+    <li<%= ' class="active"' if action_name == 'past' %>><%= link_to t('.past'), past_events_path %><span class="arrow"></span></li>
     <%#
     <li class="pending"><a href="#">Populaarsemad</a><span class="arrow"></span></li>
     %>

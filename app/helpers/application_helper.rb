@@ -56,4 +56,8 @@ module ApplicationHelper
   def label_for_boolean(value)
     t("admin.common.#{value}_option")
   end  
+  
+  def account_managers
+    Account.current.managers
+  end  
 end

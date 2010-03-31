@@ -1,12 +1,11 @@
 class EventsController < ApplicationController
 
-  filter_resource_access :additional_collection => [:my, :map, :latest, :stats], :attribute_check => true
+  filter_resource_access :additional_collection => [:my, :map, :latest, :stats, :past], :attribute_check => true
   
   helper :photogallery
 
   def index
-    @search = Event.published(
-    :order => 'begins_at ASC',
+    @search = Event.published(    
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     ).search(filter_from_params)
 
@@ -22,7 +21,14 @@ class EventsController < ApplicationController
 
   def my
     @events = Event.my_events(@current_user).paginate(
-    :order => 'begins_at ASC', :page => params[:page],
+    :page => params[:page],
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    )
+  end
+
+  def past
+    @events = Event.past.search(filter_from_params).paginate(
+    :page => params[:page], 
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
