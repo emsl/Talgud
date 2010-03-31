@@ -8,7 +8,7 @@
   <div class="object-detail">
   <% unless @event_participants.empty? %>
   
-  <div class="event_email">
+  <div class="event_email" style="float: left; padding-top: 10px;">
     <%= link_to t('.new_email'), new_mail_event_event_participants_path(@event) %>
   </div>
   

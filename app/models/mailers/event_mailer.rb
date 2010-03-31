@@ -47,6 +47,7 @@ class Mailers::EventMailer < Mailers::Base
     recipients mail.reply_to
     bcc mail.to
     sent_on Time.now
+    headers 'return-path' => from_address
     body :message => mail.message, :event_name => mail.event.name, :event_url => event_url
   end
   

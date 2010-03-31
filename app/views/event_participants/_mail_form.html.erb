@@ -3,7 +3,7 @@
   <%= f.input :from, :input_html => {:rows => 1, :disabled => true, :class => :small_text} %>
   <%= f.input :reply_to, :input_html => {:rows => 2, :disabled => true, :class => :small_text} %>
   <%= f.input :to, :input_html => {:rows => 3, :disabled => true, :class => :small_text} %>
-  <%= f.input :subject, :input_html => {:rows => 2} %>
+  <%= f.input :subject, :as => :string, :input_html => {:rows => 2} %>
   <%= f.input :message, :input_html => {:rows => 10} %>
 <% end %>
 <% end %>
