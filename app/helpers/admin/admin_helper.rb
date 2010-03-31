@@ -87,13 +87,5 @@ module Admin::AdminHelper
   # Displays notification row that view is currently filtered
   def filter_notify(colspan)
     render :partial => 'shared/admin/filter_notify', :locals => {:colspan => colspan}
-  end
-  
-  def true_false_options
-    [[t('admin.common.true_option'), true], [t('admin.common.false_option'), false]]
-  end
-  
-  def label_for_boolean(value)
-    t("admin.common.#{value}_option")
-  end
+  end  
 end

@@ -26,17 +26,22 @@
     <%= f.input :meta_sleep_info, :input_html => {:rows => 4} %>
     <%= f.input :meta_transport_info, :input_html => {:rows => 4} %>
     <%= f.input :meta_cash_info, :input_html => {:rows => 4} %>
-
-    <%= f.input :registration_text, :input_html => {:rows => 4} %>
-    <%= f.input :registration_notes_title, :input_html => {:rows => 4} %>
-    
     <%= f.input :languages, :as => :check_boxes, :collection => select_options_for_language %>
     <%= f.input :gathering_location, :input_html => {:rows => 4} %>
     <%= f.input :notes, :input_html => {:rows => 4} %>
     <%= f.input :photogallery_url, :as => :string %>
   <% end %>
-  
+
   <div class="form-extra round">
+    <h3><%= t('events.form.registration') %></h3>
+    
+    <% f.inputs do %>
+      <%= f.input :registration_text, :input_html => {:rows => 4} %>
+      <%= f.input :registration_notes_title, :input_html => {:rows => 4} %>
+    <% end %>
+  </div>
+  
+  <div class="form-extra round" style="margin-top:10px;">
     <h3><%= t('.additional_questions') %></h3>
     
     <% f.inputs do %>
@@ -45,6 +50,17 @@
       <%= f.input :meta_subject_heritage_number %>
     <% end %>
   </div>
+  
+  <% if @event.new_record? %>
+  <div class="form-extra round" style="margin-top:10px;">
+    <h3><%= t('.event_publishing') %></h3>
+    
+    <% f.inputs do %>
+      <%= f.input :instant_publish, :as => :boolean, :selected => true, :required => false %>    
+    <% end %>
+    <p><%= t('formtastic.hints.event.instant_publish') %></p>
+  </div>  
+  <% end %>
 <% end %>
 
 <script type="text/javascript" charset="utf-8">

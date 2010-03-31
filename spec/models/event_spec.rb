@@ -21,6 +21,26 @@ describe Event, 'validations' do
     f.should be_invalid
   end
 
+  it 'should validate that registration begin date is before registration end date' do
+    Factory.build(:event, :registration_begins_at => 1.day.ago, :registration_ends_at => 0.days.ago).should be_valid
+    Factory.build(:event, :registration_begins_at => 1.day.ago, :registration_ends_at => 2.days.ago).should be_invalid
+    Factory.build(:event, :registration_begins_at => 1.day.ago, :registration_ends_at => 1.days.ago).should be_valid
+  end
+  
+  it 'should validate that registration begin time is before registration end time' do
+    time = 1.day.from_now
+    Factory.build(:event, :registration_begins_at => time, :registration_ends_at => time + 1.minute).should be_valid
+    # TODO: mutating start and end time should be possible by simply declaring them as create attributes
+    f = Factory.build(:event, :registration_begins_at => time, :registration_ends_at => time)
+    f.registration_begin_time = '11:00'
+    f.registration_end_time = '10:00'
+    f.should be_invalid
+    
+    f.registration_begin_time = '10:00'
+    f.registration_end_time = '10:00'
+    f.should be_invalid
+  end
+
   it 'should validate that number of participants is a positive number' do
     Factory(:event, :max_participants => 1).should be_valid
     Factory.build(:event, :max_participants => 0).should be_invalid
@@ -93,6 +113,7 @@ end
 describe Event, 'can_register?' do
   it 'should return true while there are vacancies and status is registration_open' do
     @event = Factory.build(:event, :max_participants => 10, :current_participants => 2, :status => Event::STATUS[:registration_open])
+    @event.registration_begins_at = Time.now
     @event.can_register?.should be_true
   end
 
@@ -103,6 +124,13 @@ describe Event, 'can_register?' do
 
   it 'should return false while there are no vacancies but status is registration_open' do
     @event = Factory.build(:event, :max_participants => 10, :current_participants => 10, :status => Event::STATUS[:registration_open])
+    @event.can_register?.should be_false
+  end
+
+  it 'should return false while there are vacancies but registration has not started yet' do
+    @event = Factory.build(:event, :max_participants => 10, :current_participants => 1, :status => Event::STATUS[:registration_open])
+    @event.registration_begins_at = 2.days.ago
+    @event.registration_ends_at = 1.days.ago
     @event.can_register?.should be_false
   end
 end

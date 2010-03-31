@@ -37,6 +37,8 @@ et:
               pick_at_least_one: vali nimekirjast vähemalt üks keel
             end_time:
               must_be_after_begin_time: peab olema hilisem algusajast
+            registration_ends_at:
+              must_be_after_registration_begin_time: peab olema hilisem registreerimise algusajast
             ends_at:
               must_be_after_begin_time: peab olema hilisem algusajast
         event_participant:
@@ -337,6 +339,8 @@ et:
   events:
     create:
       notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
+      em_notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui avalikustad need enda talgute nimekirjast. Sinu talgute kood on {{code}}."
+      em_published_notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed on muudetud avalikuks. Sinu talgute kood on {{code}}."
       error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
     edit:
       title: Talguinfo muutmine
@@ -366,6 +370,8 @@ et:
     form:
       map_location_hint: Palun vajadusel täpsusta asukohta kaardil (selleks vea punast nuppu mööda kaarti õigesse kohta).
       additional_questions: "Lisaküsimused, ei avalikustata"
+      event_publishing: Avalikustamine
+      registration: Registreerumise info
     map:
       show_link: "Vaata lähemalt &raquo;"
       event_aim: Tööde eesmärk
@@ -380,7 +386,7 @@ et:
       more_events_in_area: Veel talguid samas piirkonnas
       register_to_this_event: Registreeri nendele talgutele!
       no_vacancies: Kõik kohad on täidetud!
-      registration_starts_at: "Talgutele registreerumine algab<br/> {{date}} kell {{time}}"
+      registration_starts_at: "Talgutele registreerumine toimub <br/>{{date_begins}} kell {{time_begins}} kuni {{date_ends}} kell {{time_ends}}"
       sponsor_this_event: Toeta neid talguid!
       starts_at: "Talgud toimuvad {{date}} kell {{time}}"
     submenu:
@@ -488,6 +494,7 @@ et:
         status: Staatus
         registration_text: Registreerumise tekst
         registration_notes_title: Registreerumisvormi lisainfo täpsustus
+        instant_publish: Kohene avalikustamine
         statuses:
           new: Uus
           adjustment: Täpsustamisel
@@ -578,7 +585,8 @@ et:
         meta_food_info: "Kui pakud talgulistele süüa, siis kirjelda, kuidas on korraldatud toitlustamine? Mida talgulistele pakutakse?"
         name: Talgute nimi        
         registration_text: "Tekst, mida näitatakse registreerumisel ning, mis saadetakse registreerujale e-postiga."
-        registration_notes_title: "Kirjelda, mida peab iga osaleja registreerumisel lisainfo välja sisestama."        
+        registration_notes_title: "Kirjelda, mida peab iga osaleja registreerumisel lisainfo välja sisestama. Antud teksti kuvatakse registeerumise lisainfo tiitlina."
+        instant_publish: "Avalikusta kohe või hiljem. Hiljem avalikustamise puhul Sinu talgud ei ilmu kaardile ega nähtavale talgute nimekirjas. Hiljem avalikustamiseks sisene uuesti antud lehele ning muuda oma talguid."
       event_participant:
         age_range: "Registreerumiseks pead olema vähemalt 18-aastane! Noorematel soovitame talgutele tulla koos täiskasvanutega."
         notes: "Kirjuta siia igasugust lisainformatsiooni, mida pead oluliseks enda kohta talgujuhile teada anda."

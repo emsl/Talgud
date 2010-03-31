@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   acts_as_scoped :account
   acts_as_url :name, :scope => :account_id, :only_when_blank => true
   acts_as_mappable :lat_column_name => :latitude, :lng_column_name => :longitude
+  attr_accessor :instant_publish
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :closed => 'closed', :took_place => 'took_place', :adjustment => 'adjustment'}
 
@@ -25,13 +26,20 @@ class Event < ActiveRecord::Base
   after_save :grant_manager_role
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
+  validates_presence_of :registration_begins_at, :registration_ends_at
   validates_presence_of :meta_aim_description, :meta_subject_owner, :meta_subject_protegee
   validates_presence_of :languages, :message => :pick_at_least_one
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
-    if not record.begins_at.nil? and record.begins_at > value
+    if not record.begins_at.nil? and record.begins_at >= value
       record.errors.add :ends_at, :must_be_after_begin_time
       record.errors.add :end_time, :must_be_after_begin_time
+    end
+  end
+
+  validates_each :registration_ends_at  do |record, attr, value|
+    if not record.registration_begins_at.nil? and record.registration_begins_at >= value
+      record.errors.add :registration_ends_at, :must_be_after_registration_begin_time
     end
   end
   
@@ -78,7 +86,8 @@ class Event < ActiveRecord::Base
   end
   
   def can_register?
-    vacancies? && self.status == STATUS[:registration_open]
+    vacancies and self.status == STATUS[:registration_open] and
+      (self.registration_begins_at..self.registration_ends_at).include?(Time.now)
   end
   
   def begin_time=(new_time)
@@ -103,6 +112,30 @@ class Event < ActiveRecord::Base
 
   def end_time
     ends_at.strftime('%H:%M').gsub(/^0/, '') if ends_at
+  end
+
+  def registration_begin_time=(new_time)
+    new_time = new_time.split(':')
+    if self.registration_begins_at
+      self.registration_begins_at = self.registration_begins_at.change(:hour => new_time[0].to_i)
+      self.registration_begins_at = self.registration_begins_at.change(:min => new_time[1].to_i)
+    end
+  end
+  
+  def registration_begin_time
+    registration_begins_at.strftime('%H:%M').gsub(/^0/, '') if registration_begins_at
+  end
+  
+  def registration_end_time=(new_time)
+    new_time = new_time.split(':')
+    if self.registration_ends_at
+      self.registration_ends_at = self.registration_ends_at.change(:hour => new_time[0].to_i)
+      self.registration_ends_at = self.registration_ends_at.change(:min => new_time[1].to_i)
+    end
+  end
+
+  def registration_end_time
+    registration_ends_at.strftime('%H:%M').gsub(/^0/, '') if registration_ends_at
   end
   
   # Tries to find user records that suit best to manage this event. It will be searched through address object. Any

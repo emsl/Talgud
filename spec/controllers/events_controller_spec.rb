@@ -154,6 +154,30 @@ describe EventsController do
         activate_authlogic and UserSession.create(@user)
       end
       
+      it 'should create and publish event' do
+        Account.current.em_publish_event = true
+        Account.current.save!
+        post :create, {:event => @event.attributes.merge('instant_publish' => true, 'language_ids' => [Factory(:language).id]) }
+        assigns[:event].status.should eql(Event::STATUS[:published])
+        response.should redirect_to(event_path(assigns[:event]))
+      end
+      
+      it 'should create and not publish event' do
+        Account.current.em_publish_event = true
+        Account.current.save!
+        post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}
+        assigns[:event].status.should eql(Event::STATUS[:new])
+        response.should redirect_to(event_path(assigns[:event]))
+      end
+
+      it 'should create and not publish event' do
+        Account.current.em_publish_event = false
+        Account.current.save!
+        post :create, {:event => @event.attributes.merge('instant_publish' => true, 'language_ids' => [Factory(:language).id])}
+        assigns[:event].status.should eql(Event::STATUS[:new])
+        response.should redirect_to(event_path(assigns[:event]))
+      end
+      
       it 'should create event and assign current user as manager when event is valid' do
         post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}
         response.should redirect_to(event_path(assigns[:event]))

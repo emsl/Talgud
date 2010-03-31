@@ -76,19 +76,19 @@ class EventsController < ApplicationController
 
   def new
     # TODO: date is currenlty hard coded.
-    @event.attributes = {:begins_at => DateTime.parse('2010-05-01 10:00'), :ends_at => DateTime.parse('2010-05-01 18:00')}
+    @event.attributes = {:begins_at => 10.days.from_now, :ends_at => 10.days.from_now}
     @event.attributes = {:begin_time => '10:00', :end_time => '18:00'}
   end
 
   def create
     @event = Event.new(params[:event])
-    # TODO: date is currently hard coded.
-    @event.begins_at = Date.parse('2010-05-01')
-    @event.ends_at = Date.parse('2010-05-01')
-    @event.begin_time = params[:event][:begin_time] if params[:event][:begin_time]
-    @event.end_time = params[:event][:end_time] if params[:event][:end_time]
-
-    @event.manager = current_user
+    @event.manager = current_user    
+    @event.status = if @event.instant_publish and Account.current.em_publish_event
+      Event::STATUS[:published]
+    else
+      Event::STATUS[:new]
+    end
+    
     # TODO: country code is hard coded. Must be configurable
     @event.location_address_country_code = 'ee'
     if @event.valid?
@@ -100,7 +100,15 @@ class EventsController < ApplicationController
         end
       end
 
-      flash[:notice] = t('events.create.notice', :code => @event.code)
+      if Account.current.em_publish_event
+        if @event.status == Event::STATUS[:published] 
+          flash[:notice] = t('events.create.em_published_notice', :code => @event.code)
+        else
+          flash[:notice] = t('events.create.em_notice', :code => @event.code)
+        end
+      else
+        flash[:notice] = t('events.create.notice', :code => @event.code)
+      end
       redirect_to event_path(@event)
     else
       flash.now[:error] = t('events.create.error')
