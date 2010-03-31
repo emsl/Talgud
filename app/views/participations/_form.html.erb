@@ -96,7 +96,7 @@
         var new_id = 'new_' + new Date().getTime();
         var regexp = new RegExp("new_children", "g");
         
-        $(newRow).find('input').each(function(input) {
+        $(newRow).find('input, select').each(function(input) {
             this.setAttribute('name', this.getAttribute('name').replace(regexp, new_id));
         });
         
