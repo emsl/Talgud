@@ -17,6 +17,9 @@ module ApplicationHelper
       end
       output << "</div>"
     end
+    output << '<script type="text/javascript" charset="utf-8">'
+    output << "jQuery('div.notice').pulse({backgroundColor: ['#f6bf54', '#ffeea8']}, 500, 4, 'linear');"
+    output << '</script>'
     output
   end
 

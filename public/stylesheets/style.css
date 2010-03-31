@@ -138,24 +138,14 @@ div.error, div.notice {
 div.error {
   color: #fff;
   background-color: #c52907;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f85230), to(#c52907));
   text-shadow: #800 0 1px 0;
 }
 
 div.notice {
   color: rgb(8, 41, 64);
   background-color: #ffeea8;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff4c8), to(#ffea95));
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px;
 }
-
-/*.textbox {
-  border: 1px solid #aaaaaa; padding: 5px 8px 5px; min-height: 18px; background: white url('../images/textbox.gif') repeat-x top left;
-  border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
-}*/
-/** html .textbox { height: 18px;}
-  .textbox input, .textbox textarea { padding: 0;margin: 0;border: none; background:none; font-size: 16px; line-height: 18px; width: 100%;}
-*/
 
 input.textbox {
   border: 1px solid #aaaaaa; padding: 5px 8px 5px; min-height: 18px; background: white url('../images/textbox.gif') repeat-x top left;
@@ -812,7 +802,8 @@ table.stats tr.texts td {
               
               .submit-container .submit {
                 color: #fff;
-                background: #caea5f;
+                background: #a8c83e;
+                background: -moz-linear-gradient(90deg, #649003, #a8c83e);
                 background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a8c83e), to(#649003));
                 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
                 font-size: 14px;

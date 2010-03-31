@@ -9,7 +9,6 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = t('user_sessions.create.notice')
       redirect_to events_path
     else
       flash.now[:error] = t('user_sessions.create.error')
