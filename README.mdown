@@ -1,0 +1,66 @@
+System requirements
+-------------------
+
+* Ruby on Rails **v2.3.5** stack (see *"Appendix: Rails stack install"* below for instuctions how to install Rails stack)
+* Either MySQL version **5.0** (or higher) or PostgreSQL version **8.3** (or higher) as database engine
+
+Installation
+------------
+
+    cd <APPLICATION_DIRECTORY>
+    sudo rake gems:install
+    rake db:create db:migrate
+
+Create configuration files from their respective templates
+
+    cp ./config/app_config.example.yml ./config/app_config.yml
+    cp ./config/database.example.yml ./config/database.yml
+
+See *Configuration* section on how to configure application settings.
+
+Configuration
+-------------
+
+### General settings
+
+Application settings are being configured in `./config/app_config.yml` file as YAML format.
+
+* `flickr_api_key` if you enable linking Flickr photo galleries to events, get API key from Flickr and add it here
+
+### Mailer settings
+
+* `mailer.from_name` name to be set in `from:` message header
+* `mailer.from_address` e-mail address to be set in `from:` message header
+* `mailer.manager_locale` locale to be used to deliver messages for regional managers and administrators, set to 2-character locale code, such as `en`. Locale file must exist in `./config/locales/` directory.
+* `mailer.delivery_method` set to `smtp` when you want to use SMTP protocol to deliver messages. In this case you need to set the following `mailer.smtp_settings` configuration values.
+* `mailer.smtp_settings.address` hostname of the SMTP server. For GMail, set it to `smtp.gmail.com`
+* `mailer.smtp_settings.domain` required by Google Apps, set it to your domain name (i.e. `example.com`)
+* `mailer.smtp_settings.user_name` SMTP account username, in GMail, use your e-mail address (i.e. `noreply@example.com`)
+* `mailer.smtp_settings.password` account password
+* `mailer.smtp_settings.port` SMTP server port, use `587` for GMail
+* `mailer.smtp_settings.enable_starttls_auto` set to `true` for GMail
+* `mailer.smtp_settings.authentication` authentication method, set to `:plain` for GMail
+
+Appendix: Rails stack install
+-----------------------------
+
+    apt-get update
+    apt-get install ssh gcc sudo make git-core build-essential zlib1g-dev libssl-dev libreadline5-dev
+    apt-get install mysql-server libmysql-ruby libmysqlclient15-dev
+    
+    # Ruby install
+    cd /usr/src
+    curl -O http://files.rubyforge.vm.bytemark.co.uk/emm-ruby/ruby-enterprise-1.8.7-2010.01.tar.gz
+    tar -xzvf ruby-enterprise-1.8.7-2010.01.tar.gz
+    ./ruby-enterprise-1.8.7-2010.01/installer
+    
+    ln -s /opt/ruby-enterprise-1.8.7-2010.01/bin/gem /usr/local/bin/gem
+    ln -s /opt/ruby-enterprise-1.8.7-2010.01/bin/rake /usr/local/bin/rake
+    ln -s /opt/ruby-enterprise-1.8.7-2010.01/bin/ruby /usr/local/bin/ruby
+    ln -s /opt/ruby-enterprise-1.8.7-2010.01/bin/irb /usr/local/bin/irb
+    ln -s /opt/ruby-enterprise-1.8.7-2010.01/bin/erb /usr/local/bin/erb
+    
+    gem install mysql
+    /opt/ruby-enterprise-1.8.7-2010.01/bin/passenger-install-nginx-module
+
+Follow instructons at http://library.linode.com/web-frameworks/ruby-on-rails/ruby-on-rails-nginx-debian-5-print to create /etc/init.d/nginx script
