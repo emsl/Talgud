@@ -5,6 +5,8 @@ class EventParticipantsController < ApplicationController
   filter_access_to [:new, :show, :create, :edit, :update, :new_mail, :create_mail], :require => :manage
 
   helper :participations
+  
+  cache_sweeper :event_participant_sweeper, :only => [:update, :destroy]
 
   def index
     respond_to do |format|
