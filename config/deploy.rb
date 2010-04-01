@@ -18,6 +18,9 @@ deploy.task :after_update_code, :roles => [:app] do
     After update code set correct group ownership and permissions for updated application code.
   DESC
   sudo "chown -R #{user}:#{files_group} #{release_path}/"
+  sudo "mkdir -p #{release_path}/tmp/cache"
+  sudo "chown -R #{user}:#{files_group} #{release_path}/tmp/cache"
+  sudo "chmod -R 775 #{release_path}/tmp/cache"
 end
 
 namespace :deploy do

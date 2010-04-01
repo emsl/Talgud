@@ -3,6 +3,10 @@ class EventsController < ApplicationController
   filter_resource_access :additional_collection => [:my, :map, :latest, :stats], :attribute_check => true
   
   helper :photogallery
+  
+  cache_sweeper :event_sweeper, :only => [:create, :update]
+  
+  caches_action :map, :if => Proc.new { |c| c.request.format.json? }
 
   def index
     @search = Event.published(
@@ -34,9 +38,10 @@ class EventsController < ApplicationController
         @languages = Language.all
       end
       format.json do
-        @events = Event.published(
-        :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-        ).search(filter_from_params)
+        @events = Event.published.all(
+          :conditions => filter_from_params,
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+        )
         render :json => events_json_hash(@events)
       end
     end

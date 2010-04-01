@@ -4,6 +4,8 @@ class Admin::EventsController < Admin::AdminController
   
   helper :participations, :events
   
+  cache_sweeper :event_sweeper, :only => [:update]
+  
   def index
     order = params[:order] ? params[:order] : {'order' => 'descend_by_id'}
     @search = Event.can_manage(@current_user).search(params[:search]).search(order)
