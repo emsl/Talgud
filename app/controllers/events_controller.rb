@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   
   cache_sweeper :event_sweeper, :only => [:create, :update]
   
-  caches_action :map, :if => Proc.new { |c| c.request.format.json? }
+  caches_action :map, :if => :cache_action?.to_proc
 
   def index
     @search = Event.published(
@@ -140,6 +140,10 @@ class EventsController < ApplicationController
   end
 
   protected
+  
+  def cache_action?
+    request.format.json? and [:county, :event_type, :event_code, :language_code, :manager_name].all? { |p| params[p].blank? }
+  end
 
   def load_event
     @event = Event.find_by_url(params[:id])
