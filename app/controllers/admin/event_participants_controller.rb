@@ -5,6 +5,8 @@ class Admin::EventParticipantsController < Admin::AdminController
   filter_access_to [:new, :show, :create, :edit, :update], :require => :manage
   
   helper :participations
+  
+  cache_sweeper :event_participant_sweeper, :only => [:create, :update, :destroy]
 
   def index
     order = params[:order] ? params[:order] : {'order' => 'ascend_by_firstname'}
