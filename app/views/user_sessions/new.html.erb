@@ -13,7 +13,7 @@
       <ol>
         <li class="commit">
           <%= f.submit t('.login_submit') %>
-          või <%= link_to t('.signup'), signup_path %>
+          <%= t('common.or') %> <%= link_to t('.signup'), signup_path %>
         </li>
       </ol>
     <% end %>
@@ -31,7 +31,7 @@
       <ol>
         <li class="commit">
           <%= f.submit t('.send_password') %>
-          või <%= link_to t('.reset_password_no_thanks'), '#login', :id => 'login_link' %>
+          <%= t('common.or') %> <%= link_to t('.reset_password_no_thanks'), '#login', :id => 'login_link' %>
         </li>
       </ol>
     <% end %>
