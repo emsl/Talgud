@@ -75,6 +75,75 @@ describe Event, 'create' do
   end
 end
 
+describe Event, 'run_state_jobs' do
+  it 'should change state to registration_open after registration date' do
+    @event1 = Factory(:event, :status => Event::STATUS[:published], :registration_begins_at => Time.now - 2.hours)
+    @event2 = Factory(:event, :status => Event::STATUS[:published], :registration_begins_at => Time.now - 10.hours)
+    
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+    
+    @event1.status.should eql(Event::STATUS[:registration_open])
+    @event2.status.should eql(Event::STATUS[:registration_open])
+  end
+  
+  it 'should not change state to registration_open' do
+    @event1 = Factory(:event, :status => Event::STATUS[:published], :registration_begins_at => 20.hours.from_now)
+    @event2 = Factory(:event, :status => Event::STATUS[:published], :registration_begins_at => 10.hours.from_now)
+
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+
+    @event1.status.should eql(Event::STATUS[:published])
+    @event2.status.should eql(Event::STATUS[:published])
+  end
+  
+  it 'should change state to registration_closed after registration is closed' do
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_open], :registration_begins_at => 2.days.ago,:registration_ends_at => 2.hours.ago)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_open], :registration_begins_at => 2.days.ago,:registration_ends_at => 1.minute.ago)
+    
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+
+    @event1.status.should eql(Event::STATUS[:registration_closed])
+    @event2.status.should eql(Event::STATUS[:registration_closed])
+  end
+  
+  it 'should not change state to registration_closed if registration ends at date is in the future' do
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_open], :registration_begins_at => 10.hours.ago)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_open], :registration_begins_at => 20.hours.ago)
+    
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+
+    @event1.status.should eql(Event::STATUS[:registration_open])
+    @event2.status.should eql(Event::STATUS[:registration_open])    
+  end
+  
+  it 'should change state to took_place after 2 days from ends_at day' do
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 4.days.ago)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 4.days.ago, :ends_at => 3.days.ago)
+    
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+
+    @event1.status.should eql(Event::STATUS[:took_place])
+    @event2.status.should eql(Event::STATUS[:took_place])    
+  end
+  
+  it 'should not change state to took_place after 1 day from ends_at day' do
+    @event = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 1.day.ago)
+    Event.run_state_jobs
+    @event.reload
+    @event.status.should eql(Event::STATUS[:registration_closed])    
+  end
+end
+
 describe Event, 'start and end time' do
   it 'should return formatted time' do
     @event = Factory.build(:event)
