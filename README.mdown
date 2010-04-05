@@ -18,6 +18,12 @@ Create configuration files from their respective templates
 
 See *Configuration* section on how to configure application settings.
 
+Next, generate initial records that are necessary for the system to start working:
+
+    rake talgud:account:create['My Account','mydomain.com','email@mydomain.com','my-password']
+
+Here, account and initial administrator user will be created. Since the system supports multiple accounts, you need to provide it's name and an internet address this account will start serving. So if you're using **mydomain.com** as the address of your application, make sure it is pointed to the server where application is installed.
+
 Configuration
 -------------
 
@@ -44,6 +50,13 @@ Application settings are being configured in `./config/app_config.yml` file as Y
 Appendix: Rails stack install
 -----------------------------
 
+This section contains brief overview how to install Rails stack on Debian *4.0* (or later) Linux server. By using the instructions given here, most basic system is being set up containing:
+
+* MySQL database server
+* nginx web server with passenger module
+
+This application will work on any decent Rails stack. Depending of the service provider, your mileage may vary.
+
     apt-get update
     apt-get install ssh gcc sudo make git-core build-essential zlib1g-dev libssl-dev libreadline5-dev
     apt-get install mysql-server libmysql-ruby libmysqlclient15-dev
@@ -63,4 +76,3 @@ Appendix: Rails stack install
     gem install mysql
     /opt/ruby-enterprise-1.8.7-2010.01/bin/passenger-install-nginx-module
 
-Follow instructons at http://library.linode.com/web-frameworks/ruby-on-rails/ruby-on-rails-nginx-debian-5-print to create /etc/init.d/nginx script
