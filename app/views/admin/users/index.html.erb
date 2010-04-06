@@ -12,7 +12,7 @@
     <th><%= order @search, :by => :lastname, :as => t('formtastic.labels.user.lastname'), :params_scope => :order %></th>
     <th><%= order @search, :by => :email, :as => t('formtastic.labels.user.email'), :params_scope => :order %></th>
     <th><%= order @search, :by => :phone, :as => t('formtastic.labels.user.phone'), :params_scope => :order %></th>
-    <th><%= t('formtastic.labels.user.status') %></th>
+    <th><%= order @search, :by => :status, :as => t('formtastic.labels.user.status'), :params_scope => :order %></th>
     <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>
@@ -22,7 +22,8 @@
     <td><%= f.input :lastname_like, :label => false, :input_html => {:size => 20}  %></td>
     <td><%= f.input :email_like, :label => false, :input_html => {:size => 20}  %></td>
     <td><%= f.input :phone_like, :label => false, :input_html => {:size => 20}  %></td>
-    <td></td>
+    <td><%= f.input :status, :as => :select, :collection => User::STATUS.keys.collect{ |s| [t("formtastic.labels.user.statuses.#{s}"), s.to_s] }, :include_blank => true, :label => false %></td>
+
     <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
     <% end %>
   </tr>
