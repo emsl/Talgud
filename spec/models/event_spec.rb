@@ -56,6 +56,51 @@ describe Event, 'create' do
   end
 end
 
+describe Event, 'run_state_jobs' do
+  it 'should change state to registration_closed after vacanies' do
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_open], :current_participants => 12, :max_participants => 10)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_open], :current_participants => 20, :max_participants => 20)
+    
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+
+    @event1.status.should eql(Event::STATUS[:registration_closed])
+    @event2.status.should eql(Event::STATUS[:registration_closed])
+  end
+  
+  it 'should not change state to registration_closed if registration ends at date is in the future' do
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_open], :current_participants => 10, :max_participants => 100)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_open], :current_participants => 9, :max_participants => 10)
+    
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+
+    @event1.status.should eql(Event::STATUS[:registration_open])
+    @event2.status.should eql(Event::STATUS[:registration_open])    
+  end
+  
+  it 'should change state to took_place after 2 days from ends_at day' do
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 4.days.ago)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 4.days.ago, :ends_at => 3.days.ago)
+    
+    Event.run_state_jobs
+    @event1.reload
+    @event2.reload
+
+    @event1.status.should eql(Event::STATUS[:took_place])
+    @event2.status.should eql(Event::STATUS[:took_place])    
+  end
+  
+  it 'should not change state to took_place after 1 day from ends_at day' do
+    @event = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 1.day.ago)
+    Event.run_state_jobs
+    @event.reload
+    @event.status.should eql(Event::STATUS[:registration_closed])    
+  end
+end
+
 describe Event, 'start and end time' do
   it 'should return formatted time' do
     @event = Factory.build(:event)

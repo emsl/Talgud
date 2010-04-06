@@ -56,17 +56,17 @@ describe EventsController do
       assigns[:events].should include(@e1, @e2)
       assigns[:events].should_not include(@e3)
 
-      get :index, {:language_code => @e1.languages.first.code, :format => 'html'}
-      assigns[:events].should include(@e1, @e3)
-      assigns[:events].should_not include(@e2)      
+      # get :index, {:language_code => @e1.languages.first.code, :format => 'html'}
+      # assigns[:events].should include(@e1, @e3)
+      # assigns[:events].should_not include(@e2)      
 
       get :index, {:event_code => @e1.code, :format => 'html'}
       assigns[:events].should include(@e1)
       assigns[:events].should_not include(@e2, @e3)      
 
-      get :index, {:manager_name => @first_manager.firstname, :format => 'html'}
-      assigns[:events].should include(@e1)
-      assigns[:events].should_not include(@e2, @e3)      
+      # get :index, {:manager_name => @first_manager.firstname, :format => 'html'}
+      # assigns[:events].should include(@e1)
+      # assigns[:events].should_not include(@e2, @e3)      
     end
     
     it 'should filter latest' do      
@@ -82,17 +82,17 @@ describe EventsController do
       assigns[:events].should include(@e1, @e2)
       assigns[:events].should_not include(@e3)
 
-      get :latest, {:language_code => @e1.languages.first.code, :format => 'html'}
-      assigns[:events].should include(@e1, @e3)
-      assigns[:events].should_not include(@e2)      
+      # get :latest, {:language_code => @e1.languages.first.code, :format => 'html'}
+      # assigns[:events].should include(@e1, @e3)
+      # assigns[:events].should_not include(@e2)      
 
       get :latest, {:event_code => @e1.code, :format => 'html'}
       assigns[:events].should include(@e1)
       assigns[:events].should_not include(@e2, @e3)      
 
-      get :latest, {:manager_name => @first_manager.firstname, :format => 'html'}
-      assigns[:events].should include(@e1)
-      assigns[:events].should_not include(@e2, @e3)      
+      # get :latest, {:manager_name => @first_manager.firstname, :format => 'html'}
+      # assigns[:events].should include(@e1)
+      # assigns[:events].should_not include(@e2, @e3)      
 
       get :latest, {:limit => 2, :format => 'json'}
       assigns[:events].size.should eql(2)
@@ -114,17 +114,17 @@ describe EventsController do
       assigns[:events].should include(@e1, @e2)
       assigns[:events].should_not include(@e3)
 
-      get :map, {:language_code => @e1.languages.first.code, :format => 'json'}
-      assigns[:events].should include(@e1, @e3)
-      assigns[:events].should_not include(@e2)      
+      # get :map, {:language_code => @e1.languages.first.code, :format => 'json'}
+      # assigns[:events].should include(@e1, @e3)
+      # assigns[:events].should_not include(@e2)      
 
       get :map, {:event_code => @e1.code, :format => 'json'}
       assigns[:events].should include(@e1)
       assigns[:events].should_not include(@e2, @e3)      
 
-      get :map, {:manager_name => @first_manager.firstname, :format => 'json'}
-      assigns[:events].should include(@e1)
-      assigns[:events].should_not include(@e2, @e3)            
+      # get :map, {:manager_name => @first_manager.firstname, :format => 'json'}
+      # assigns[:events].should include(@e1)
+      # assigns[:events].should_not include(@e2, @e3)            
     end    
   end  
   
