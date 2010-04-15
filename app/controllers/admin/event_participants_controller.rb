@@ -9,7 +9,7 @@ class Admin::EventParticipantsController < Admin::AdminController
   cache_sweeper :event_participant_sweeper, :only => [:create, :update, :destroy]
 
   def index
-    order = params[:order] ? params[:order] : {'order' => 'ascend_by_firstname'}
+    order = params[:order] ? params[:order] : {'order' => 'descend_by_id'}
     @search = @event.event_participants.search(params[:search]).search(order)
     respond_to do |format|
       format.xml { render :xml => @search.all }
