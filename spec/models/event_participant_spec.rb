@@ -24,6 +24,17 @@ describe EventParticipant, 'validations' do
     ep = Factory.build(:event_participant, :email => 'invalid_email')
     ep.should have(1).error_on(:email)
   end
+  
+  it 'should mark event as spam when links are present in tell-friend or notes emails' do
+    [:notes, :tellafriend_emails].each do |attrib|
+      ep = Factory.build(:event_participant, attrib => '<a href="http://rexmztwamxbd.com/">rexmztwamxbd</a>')
+      ep.should have(1).error_on(attrib)
+      ep = Factory.build(:event_participant, attrib => '[url=http://envrnweyvdqo.com/]envrnweyvdqo[/url]')
+      ep.should have(1).error_on(attrib)
+      ep = Factory.build(:event_participant, attrib => '[link=http://envrnweyvdqo.com/]envrnweyvdqo[/link]')
+      ep.should have(1).error_on(attrib)
+    end
+  end
 end
 
 describe EventParticipant, 'parent' do

@@ -17,6 +17,9 @@ class EventParticipant < ActiveRecord::Base
   validates_presence_of :firstname, :lastname, :event, :age_range
   validates_presence_of :email, :phone, :if => :parent?
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_blank => true
+  validates_each :notes, :tellafriend_emails do |record, attrib, value|
+    record.errors.add attrib, :value_not_accepted if value =~ /\<a href|\[url=|\[link=/
+  end
   
   named_scope :ordered_by_name, :order => 'firstname ASC, lastname ASC'
   named_scope :parents, :conditions => {:event_participant_id => nil}

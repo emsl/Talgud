@@ -43,6 +43,10 @@ et:
           attributes:
             firstname:
               no_vacancies: Nendele talgutele rohkem vabu kohti ei ole
+            notes:
+              value_not_accepted: Väärtus ei ole lubatud
+            tellafriend_emails:
+              value_not_accepted: Väärtus ei ole lubatud
     models:
       account: konto
       county: maakond
