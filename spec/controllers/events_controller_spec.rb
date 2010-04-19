@@ -41,6 +41,10 @@ describe EventsController do
       @e3 = Factory.create(:event, :location_address_county => @e2.location_address_county,
         :location_address_municipality => @e2.location_address_municipality, :event_type => Factory.create(:event_type),
       :languages => @e1.languages, :manager => @third_manager)
+      
+      Role.grant_role(Role::ROLE[:event_manager], @e1.manager, @e1)
+      Role.grant_role(Role::ROLE[:event_manager], @e2.manager, @e2)
+      Role.grant_role(Role::ROLE[:event_manager], @e3.manager, @e3)
     end    
     
     it 'should filter index' do      
@@ -64,9 +68,9 @@ describe EventsController do
       assigns[:events].should include(@e1)
       assigns[:events].should_not include(@e2, @e3)      
 
-      # get :index, {:manager_name => @first_manager.firstname, :format => 'html'}
-      # assigns[:events].should include(@e1)
-      # assigns[:events].should_not include(@e2, @e3)      
+      get :index, {:manager_name => @first_manager.firstname, :format => 'html'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)      
     end
     
     it 'should filter latest' do      
@@ -90,9 +94,9 @@ describe EventsController do
       assigns[:events].should include(@e1)
       assigns[:events].should_not include(@e2, @e3)      
 
-      # get :latest, {:manager_name => @first_manager.firstname, :format => 'html'}
-      # assigns[:events].should include(@e1)
-      # assigns[:events].should_not include(@e2, @e3)      
+      get :latest, {:manager_name => @first_manager.firstname, :format => 'html'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)      
 
       get :latest, {:limit => 2, :format => 'json'}
       assigns[:events].size.should eql(2)
@@ -122,9 +126,9 @@ describe EventsController do
       assigns[:events].should include(@e1)
       assigns[:events].should_not include(@e2, @e3)      
 
-      # get :map, {:manager_name => @first_manager.firstname, :format => 'json'}
-      # assigns[:events].should include(@e1)
-      # assigns[:events].should_not include(@e2, @e3)            
+      get :map, {:manager_name => @first_manager.firstname, :format => 'json'}
+      assigns[:events].should include(@e1)
+      assigns[:events].should_not include(@e2, @e3)            
     end    
   end  
   

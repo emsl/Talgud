@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     
     @event_count = Event.published.count
     @max_participants = Event.published.sum(:max_participants)
-    @current_participants = Event.published.sum('case when current_participants > max_participants then max_participants else current_participants end').to_i
+    @current_participants = Event.published.sum(:current_participants).to_i
     @needed_participants = [(@max_participants - @current_participants), 0].max
   end
 end

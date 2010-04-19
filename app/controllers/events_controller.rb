@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   caches_action :map, :if => :cache_action?.to_proc
 
   def index
-    @search = Event.published.all(
+    @search = Event.by_manager_name(filter_manager_name_from_params).published.all(
     :order => 'begins_at ASC',
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages, :managers],
     :conditions => filter_from_params
@@ -39,9 +39,9 @@ class EventsController < ApplicationController
         @languages = Language.all
       end
       format.json do
-        @events = Event.published.all(
+        @events = Event.by_manager_name(filter_manager_name_from_params).published.all(
           :conditions => filter_from_params,
-          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages]
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages, :managers]
         )
         render :json => events_json_hash(@events)
       end
@@ -51,8 +51,8 @@ class EventsController < ApplicationController
   def latest
     limit = (params[:limit].try(:to_i) || nil)
     
-    @search = Event.latest(limit).published.all(
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
+    @search = Event.by_manager_name(filter_manager_name_from_params).latest(limit).published.all(
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages, :managers],
     :conditions => filter_from_params
     )
 
@@ -74,7 +74,7 @@ class EventsController < ApplicationController
   def stats
     @event_count = Event.published.count
     @max_participants = Event.published.sum(:max_participants, :conditions => filter_from_params)
-    @current_participants = Event.published.sum('case when current_participants > max_participants then max_participants else current_participants end').to_i
+    @current_participants = Event.published.sum(:current_participants).to_i
     @needed_participants = [(@max_participants - @current_participants), 0].max
 
     render :json => {
@@ -189,13 +189,17 @@ class EventsController < ApplicationController
 
   private
 
+  def filter_manager_name_from_params
+    params[:manager_name]
+  end
+
   def filter_from_params
     conditions = {}
     conditions[:location_address_county_id] = params[:county] unless params[:county].blank?
     conditions[:event_type_id] = params[:event_type] unless params[:event_type].blank?
     conditions[:code] = params[:event_code] unless params[:event_code].blank?
     conditions[:events_languages] = {:languages => {:code => params[:language_code]}} unless params[:language_code].blank?
-    conditions[:users] = {:firstname => params[:manager_name], :lastname => params[:manager_name]} unless params[:manager_name].blank?
+    #conditions[:users] = {'firstname ILIKE ? AND lastname ILIKE ?'} unless params[:manager_name].blank?
     conditions
   end
 

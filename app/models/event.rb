@@ -54,6 +54,7 @@ class Event < ActiveRecord::Base
      (u ? u.id : nil) , 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:name => ' ASC'}
+  named_scope :by_manager_name, lambda { |u| {:conditions => ['users.firstname ILIKE ? OR users.lastname ILIKE ?', "#{u}%", "#{u}%"]} unless u.blank? } 
 
   def self.class_role_symbols
     [:event_manager]
