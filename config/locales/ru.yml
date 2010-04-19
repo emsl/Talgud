@@ -721,6 +721,7 @@ ru:
       register: "Зарегистрировать полезное дело"
       show_all: "Показать все"
       show_on_map: "Показать на карте"
+      registration_wiki: Abiks registreerujale
     submenu_edit:
       edit_event: "Изменить полезное дело"
       event_info: "Информация о полезном деле"
@@ -770,6 +771,7 @@ ru:
       event:
         actions:
           submit: "Сохранить данные полезного дела"
+        url: URL
         begin_time: "Время начала"
         begins_at: "Начальное время"
         code: "Код толоки"

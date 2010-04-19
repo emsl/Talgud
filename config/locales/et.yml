@@ -383,6 +383,7 @@ et:
       show_all: Näita kõiki
       latest: Viimati lisatud
       show_on_map: Näita kaardil
+      registration_wiki: Abiks registreerujale
     submenu_edit:
       event_info: Talgute info
       edit_event: Muuda talguid
@@ -435,6 +436,7 @@ et:
         password: Salasõna
         password_confirmation: Salasõna kinnitus
       event:
+        url: URL
         code: Talgukood
         begin_time: Alguse kellaaeg
         end_time: "Lõpu kellaaeg ~"

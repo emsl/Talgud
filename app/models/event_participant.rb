@@ -31,6 +31,10 @@ class EventParticipant < ActiveRecord::Base
     self.event_participant.nil?
   end
   
+  def participants_count
+    1 + self.children.all.count 
+  end
+  
   def children_valid?
     children.all? { |c| c.valid? }
   end

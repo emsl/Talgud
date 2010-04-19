@@ -15,6 +15,10 @@
   <td><%=h @event.code %></td>
 </tr>
 <tr>
+  <td><b><%= t('formtastic.labels.event.url') %></b></td>
+  <td><%= link_to event_url(@event), event_url(@event) %></td>
+</tr>
+<tr>
   <td><b><%= t('formtastic.labels.event.event_type') %></b></td>
   <td><%=h @event.event_type.name %></td>
 </tr>
@@ -84,6 +88,22 @@
   <td><b><%= t('formtastic.labels.event.meta_subject_heritage_number') %></b></td>
   <td><%=h @event.meta_subject_heritage_number %></td>
 </tr>
+<tr>
+  <td><b><%= t('formtastic.labels.event.photogallery_url') %></b></td>
+  <td>
+    <% if @event.photogallery_url %>
+      <%= link_to @event.photogallery_url, @event.photogallery_url, :target => '_blank' %>
+    <% end%>
+  </td>
+</tr>
+<% if valid_photogallery_url?(@event.photogallery_url) %>
+<tr>
+  <td class="first"><%= t('.gallery_title', :default => 'Ürituse pildid') %></td>
+  <td>
+    <%= photogallery_area_for(@event.photogallery_url) %>
+  </td>
+</tr>
+<% end %>
 </table>
 </div>
 

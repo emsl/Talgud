@@ -49,6 +49,19 @@ describe EventParticipant, 'parent' do
   end
 end
 
+describe EventParticipant, 'participants_count' do
+  it "should count participant with children" do
+    parent = Factory(:event_participant)
+    ep = Factory(:event_participant, :event_participant => parent)
+    parent.participants_count.should eql(2)
+  end
+
+  it "should count participant without children" do
+    ep = Factory(:event_participant, :event_participant => nil)
+    ep.participants_count.should eql(1)
+  end
+end
+
 describe EventParticipant, 'create' do
   it "should update event current participiants count after save" do
     @event = Factory(:event)

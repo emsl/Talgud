@@ -28,6 +28,7 @@ describe ParticipationsController do
   describe 'create' do
     before(:each) do
       @event = Factory(:event)
+      Role.grant_role(Role::ROLE[:event_manager], @event.manager, @event)
       @ep = Factory.build(:event_participant)
     end
 
@@ -54,6 +55,7 @@ describe ParticipationsController do
 
     it 'should send e-mail to event managers after successful registration' do
       Role.grant_role(Role::ROLE[:event_manager], Factory(:user), @event)
+      
       Mailers::EventMailer.should_receive(:deliver_manager_participation_notification).twice
       post :create, {:event_id => @event.url, :event_participant => @ep.attributes}
     end

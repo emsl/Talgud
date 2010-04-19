@@ -103,6 +103,8 @@ describe Admin::EventParticipantsController do
       user = Factory.create(:user)
       activate_authlogic and UserSession.create(user)
       event = Factory(:event, :manager => user)
+      Role.grant_role(Role::ROLE[:event_manager], event.manager, event)
+      
       get :new, {:event_id => event.id}
         
       response.should redirect_to(admin_login_path)
@@ -123,6 +125,7 @@ describe Admin::EventParticipantsController do
   describe 'create for authenticated user' do
     before(:each) do
       @event = Factory(:event)
+      Role.grant_role(Role::ROLE[:event_manager], @event.manager, @event)
       @ep = Factory.build(:event_participant)
       admin = Factory.create(:user)
       activate_authlogic and UserSession.create(admin)

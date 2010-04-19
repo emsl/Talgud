@@ -9,13 +9,14 @@ class EventsController < ApplicationController
   caches_action :map, :if => :cache_action?.to_proc
 
   def index
-    @search = Event.published(
+    @search = Event.published.all(
     :order => 'begins_at ASC',
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-    ).search(filter_from_params)
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages, :managers],
+    :conditions => filter_from_params
+    )
 
     respond_to do |format|
-      format.xml { render :xml => @search.all }
+      format.xml { render :xml => @search }
       format.html { @events = @search.paginate(:page => params[:page])}
       format.ics do
         @events = @search.all
@@ -27,7 +28,7 @@ class EventsController < ApplicationController
   def my
     @events = Event.my_events(@current_user).paginate(
     :order => 'begins_at ASC', :page => params[:page],
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages]
     )
   end
 
@@ -40,7 +41,7 @@ class EventsController < ApplicationController
       format.json do
         @events = Event.published.all(
           :conditions => filter_from_params,
-          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages]
         )
         render :json => events_json_hash(@events)
       end
@@ -48,20 +49,23 @@ class EventsController < ApplicationController
   end
 
   def latest
-    includes = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-    limit = (params[:limit].try(:to_i) || nil)    
-    @search = Event.latest(limit).published.search(filter_from_params)
+    limit = (params[:limit].try(:to_i) || nil)
+    
+    @search = Event.latest(limit).published.all(
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
+    :conditions => filter_from_params
+    )
 
     respond_to do |format|
       format.html do
         @events = if limit 
-          @search.all(:include => includes)
+          @search
         else
-          @search.paginate(:page => params[:page], :limit => limit, :include => includes)
+          @search.paginate(:page => params[:page], :limit => limit)
         end
       end
       format.json do
-        @events = @search.all(:include => includes)
+        @events = @search
         render :json => events_json_hash(@events)
       end
     end
@@ -92,12 +96,16 @@ class EventsController < ApplicationController
     @event.ends_at = Date.parse('2010-05-01')
     @event.begin_time = params[:event][:begin_time] if params[:event][:begin_time]
     @event.end_time = params[:event][:end_time] if params[:event][:end_time]
-
     @event.manager = current_user
+    
     # TODO: country code is hard coded. Must be configurable
     @event.location_address_country_code = 'ee'
     if @event.valid?
       @event.save
+      
+      unless Role.has_role?(Role::ROLE[:event_manager], @event.manager, @event)
+        Role.grant_role(Role::ROLE[:event_manager], @event.manager, @event)
+      end
 
       @event.regional_managers.each do |rm|
         Mailers::EventMailer.deliver_region_manager_notification(rm, @event, admin_event_url(@event.id))
@@ -186,8 +194,8 @@ class EventsController < ApplicationController
     conditions[:location_address_county_id] = params[:county] unless params[:county].blank?
     conditions[:event_type_id] = params[:event_type] unless params[:event_type].blank?
     conditions[:code] = params[:event_code] unless params[:event_code].blank?
-    #conditions[:languages_code_eq] = params[:language_code] unless params[:language_code].blank?
-    #conditions[:managers_firstname_or_managers_lastname_like_any] = params[:manager_name].split unless params[:manager_name].blank?
+    conditions[:events_languages] = {:languages => {:code => params[:language_code]}} unless params[:language_code].blank?
+    conditions[:users] = {:firstname => params[:manager_name], :lastname => params[:manager_name]} unless params[:manager_name].blank?
     conditions
   end
 

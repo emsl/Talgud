@@ -56,9 +56,9 @@ describe EventsController do
       assigns[:events].should include(@e1, @e2)
       assigns[:events].should_not include(@e3)
 
-      # get :index, {:language_code => @e1.languages.first.code, :format => 'html'}
-      # assigns[:events].should include(@e1, @e3)
-      # assigns[:events].should_not include(@e2)      
+      get :index, {:language_code => @e1.languages.first.code, :format => 'html'}
+      assigns[:events].should include(@e1, @e3)
+      assigns[:events].should_not include(@e2)      
 
       get :index, {:event_code => @e1.code, :format => 'html'}
       assigns[:events].should include(@e1)
@@ -82,9 +82,9 @@ describe EventsController do
       assigns[:events].should include(@e1, @e2)
       assigns[:events].should_not include(@e3)
 
-      # get :latest, {:language_code => @e1.languages.first.code, :format => 'html'}
-      # assigns[:events].should include(@e1, @e3)
-      # assigns[:events].should_not include(@e2)      
+      get :latest, {:language_code => @e1.languages.first.code, :format => 'html'}
+      assigns[:events].should include(@e1, @e3)
+      assigns[:events].should_not include(@e2)      
 
       get :latest, {:event_code => @e1.code, :format => 'html'}
       assigns[:events].should include(@e1)
@@ -114,9 +114,9 @@ describe EventsController do
       assigns[:events].should include(@e1, @e2)
       assigns[:events].should_not include(@e3)
 
-      # get :map, {:language_code => @e1.languages.first.code, :format => 'json'}
-      # assigns[:events].should include(@e1, @e3)
-      # assigns[:events].should_not include(@e2)      
+      get :map, {:language_code => @e1.languages.first.code, :format => 'json'}
+      assigns[:events].should include(@e1, @e3)
+      assigns[:events].should_not include(@e2)      
 
       get :map, {:event_code => @e1.code, :format => 'json'}
       assigns[:events].should include(@e1)
@@ -157,7 +157,7 @@ describe EventsController do
       it 'should create event and assign current user as manager when event is valid' do
         post :create, {:event => @event.attributes.merge('language_ids' => [Factory(:language).id])}
         response.should redirect_to(event_path(assigns[:event]))
-        assigns[:event].manager.should eql(@user)
+        assigns[:event].managers.should include(@user)
       end
       
       it 'should send e-mail notification to region manager' do
@@ -205,6 +205,7 @@ describe EventsController do
       activate_authlogic and UserSession.create(user)
       
       event = Factory(:event, :status => Event::STATUS[:new], :manager => user)
+      Role.grant_role(Role::ROLE[:event_manager], event.manager, event)
       
       get :show, {:id => event.url}
       response.should be_success
@@ -251,12 +252,15 @@ describe EventsController do
     
     it 'should update event with valid attributes' do
       event = Factory(:event, :manager => @user)
+      Role.grant_role(Role::ROLE[:event_manager], event.manager, event)
       post :update, {:id => event.url, :event => event.attributes}
       response.should redirect_to(event_path(event))
     end
     
     it 'should not update event with invalid attributes and render edit view again' do
       event = Factory(:event, :manager => @user)
+      Role.grant_role(Role::ROLE[:event_manager], event.manager, event)
+      
       post :update, {:id => event.url, :event => event.attributes.merge('name' => '')}
       response.should render_template(:new)
     end

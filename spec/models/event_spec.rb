@@ -48,14 +48,6 @@ describe Event, 'validations' do
   
 end
 
-describe Event, 'create' do
-  it 'should associate event manager role to creator of the event' do
-    @event = Factory(:event)
-    @event.roles.should_not be_nil
-    @event.roles.collect(&:role).should include(Role::ROLE[:event_manager])
-  end
-end
-
 describe Event, 'run_state_jobs' do
   it 'should change state to registration_closed after vacanies' do
     @event1 = Factory(:event, :status => Event::STATUS[:registration_open], :current_participants => 12, :max_participants => 10)

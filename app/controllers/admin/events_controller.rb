@@ -2,7 +2,7 @@ class Admin::EventsController < Admin::AdminController
   filter_resource_access :additional_collection => :map, :attribute_check => true
   filter_access_to [:new, :show, :create, :edit, :update], :require => :manage  
   
-  helper :participations, :events
+  helper :participations, :events, :photogallery
   
   cache_sweeper :event_sweeper, :only => [:update]
   

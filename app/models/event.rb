@@ -16,13 +16,13 @@ class Event < ActiveRecord::Base
   belongs_to :location_address_municipality, :class_name => 'Municipality', :foreign_key => :location_address_municipality_id
   belongs_to :location_address_settlement, :class_name => 'Settlement', :foreign_key => :location_address_settlement_id
   has_many :roles, :as => :model
-  has_and_belongs_to_many :languages
   
+  has_and_belongs_to_many :languages
+    
   validates_uniqueness_of :code, :scope => :account_id
 
   before_validation_on_create :set_defaults
   before_save :set_code
-  after_save :grant_manager_role
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
   validates_presence_of :meta_aim_description, :meta_job_description, :meta_bring_with_you, :meta_provided_for_participiants, :meta_subject_owner, :gathering_location, :meta_subject_protegee
@@ -42,14 +42,14 @@ class Event < ActiveRecord::Base
   end
 
   validates_each :location_address_settlement  do |record, attr, value|
-    if not record.location_address_settlement.nil?
+    if not record.location_address_settlement.nil? and record.location_address_municipality
       record.errors.add :location_address_settlement, :inclusion unless record.location_address_municipality.settlements.include?(value)
     end
   end
 
   named_scope :published, :conditions => {:status => [STATUS[:published], STATUS[:registration_open], STATUS[:registration_closed]]}
   named_scope :my_events, lambda { |u| {:include => :roles, :conditions => {:roles => {:user_id => u, :role => Role::ROLE[:event_manager]}}} }
-  named_scope :latest, lambda { |count| {:limit => count, :order => 'ID DESC'} }
+  named_scope :latest, lambda { |count| {:limit => count, :order => 'events.id DESC'} }
   named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ? OR (role = ? AND (model_type = ? AND model_id = events.id))))',
      (u ? u.id : nil) , 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
@@ -138,12 +138,6 @@ class Event < ActiveRecord::Base
   end
 
   private
-
-  def grant_manager_role
-    unless Role.has_role?(Role::ROLE[:event_manager], self.manager, self)
-      Role.grant_role(Role::ROLE[:event_manager], self.manager, self)
-    end
-  end
 
   def set_defaults
     self.status = 'new' if self.status.blank?
