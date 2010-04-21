@@ -10,15 +10,17 @@ class EventsController < ApplicationController
   INCLUDES = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
 
   def index
-    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published.all(
-    :order => 'begins_at ASC',
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement],
-    :conditions => filter_from_params
+    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published(
+    :order => 'begins_at ASC'
     )
 
     respond_to do |format|
-      format.xml { render :xml => @search }
-      format.html { @events = @search.paginate(:page => params[:page])}
+      format.xml do
+        @events = @search.paginate(:page => params[:page], :per_page => 10000, :conditions => filter_from_params, :include => INCLUDES)
+        render :xml => @events
+      end
+      
+      format.html { @events = @search.paginate(:page => params[:page], :conditions => filter_from_params, :include => INCLUDES) }
       format.ics do
         @events = @search.all
         render :text => self.generate_ical
@@ -28,8 +30,7 @@ class EventsController < ApplicationController
 
   def my
     @events = Event.my_events(@current_user).paginate(
-    :order => 'begins_at ASC', :page => params[:page],
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+      :order => 'begins_at ASC', :page => params[:page], :include => INCLUDES
     )
   end
 
@@ -42,7 +43,7 @@ class EventsController < ApplicationController
       format.json do
         @events = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published.all(
           :conditions => filter_from_params,
-          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+          :include => INCLUDES
         )
         render :json => events_json_hash(@events)
       end
@@ -51,19 +52,11 @@ class EventsController < ApplicationController
 
   def latest
     limit = (params[:limit].try(:to_i) || nil)
+    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).latest(limit).published
     
-    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).latest(limit).published.all(
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement],
-    :conditions => filter_from_params
-    )
-
     respond_to do |format|
       format.html do
-        @events = if limit 
-          @search
-        else
-          @search.paginate(:page => params[:page], :limit => limit)
-        end
+        @events = @search.paginate(:page => params[:page], :per_page => limit, :include => INCLUDES, :conditions => filter_from_params)
       end
       format.json do
         @events = @search

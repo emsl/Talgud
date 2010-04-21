@@ -89,38 +89,38 @@ describe EventsController do
       context 'xml' do
         it 'should by county and event type' do
           get :index, {:county => @e2.location_address_county.id, :event_type => @e2.event_type.id, :format => 'xml'}
-          assigns[:search].should include(@e2)
-          assigns[:search].should_not include(@e1, @e3)
+          assigns[:events].should include(@e2)
+          assigns[:events].should_not include(@e1, @e3)
         end
 
         it 'should by county' do
           get :index, {:county => @e2.location_address_county.id, :format => 'xml'}
-          assigns[:search].should include(@e2, @e3)
-          assigns[:search].should_not include(@e1)
+          assigns[:events].should include(@e2, @e3)
+          assigns[:events].should_not include(@e1)
         end
 
         it 'should by event type' do
           get :index, {:event_type => @e1.event_type.id, :format => 'xml'}
-          assigns[:search].should include(@e1, @e2)
-          assigns[:search].should_not include(@e3)
+          assigns[:events].should include(@e1, @e2)
+          assigns[:events].should_not include(@e3)
         end
 
         it 'should by language code' do
           get :index, {:language_code => @e1.languages.first.code, :format => 'xml'}
-          assigns[:search].should include(@e1, @e3)
-          assigns[:search].should_not include(@e2)
+          assigns[:events].should include(@e1, @e3)
+          assigns[:events].should_not include(@e2)
         end
 
         it 'should by event code' do
           get :index, {:event_code => @e1.code, :format => 'xml'}
-          assigns[:search].should include(@e1)
-          assigns[:search].should_not include(@e2, @e3)
+          assigns[:events].should include(@e1)
+          assigns[:events].should_not include(@e2, @e3)
         end
 
         it 'should by manager name' do
           get :index, {:manager_name => @first_manager.firstname, :format => 'xml'}
-          assigns[:search].should include(@e1)
-          assigns[:search].should_not include(@e2, @e3)
+          assigns[:events].should include(@e1)
+          assigns[:events].should_not include(@e2, @e3)
         end
       end
     end
