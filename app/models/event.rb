@@ -56,6 +56,7 @@ class Event < ActiveRecord::Base
   named_scope :sorted, :order => {:name => ' ASC'}
   named_scope :by_manager_name, lambda { |u| {:conditions => ['UPPER(users.firstname) LIKE UPPER(?) OR UPPER(users.lastname) LIKE UPPER(?)', "#{u}%", "#{u}%"], :include => :managers} unless u.blank? }
   named_scope :by_language_code, lambda { |l| {:conditions => ['languages.code = ?', l], :include => :languages} unless l.blank? }
+  
 
   def self.class_role_symbols
     [:event_manager]

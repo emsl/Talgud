@@ -7,11 +7,12 @@ class EventsController < ApplicationController
   cache_sweeper :event_sweeper, :only => [:create, :update]
   
   caches_action :map, :if => :cache_action?.to_proc
+  INCLUDES = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
 
   def index
     @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published.all(
     :order => 'begins_at ASC',
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement],
     :conditions => filter_from_params
     )
 
@@ -28,7 +29,7 @@ class EventsController < ApplicationController
   def my
     @events = Event.my_events(@current_user).paginate(
     :order => 'begins_at ASC', :page => params[:page],
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages]
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
 
@@ -41,7 +42,7 @@ class EventsController < ApplicationController
       format.json do
         @events = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published.all(
           :conditions => filter_from_params,
-          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages]
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
         )
         render :json => events_json_hash(@events)
       end
@@ -52,7 +53,7 @@ class EventsController < ApplicationController
     limit = (params[:limit].try(:to_i) || nil)
     
     @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).latest(limit).published.all(
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement],
     :conditions => filter_from_params
     )
 
