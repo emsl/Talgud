@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   caches_action :map, :if => :cache_action?.to_proc
 
   def index
-    @search = Event.by_manager_name(filter_manager_name_from_params).published.all(
+    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published.all(
     :order => 'begins_at ASC',
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
     :conditions => filter_from_params
@@ -39,7 +39,7 @@ class EventsController < ApplicationController
         @languages = Language.all
       end
       format.json do
-        @events = Event.by_manager_name(filter_manager_name_from_params).published.all(
+        @events = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published.all(
           :conditions => filter_from_params,
           :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages]
         )
@@ -51,7 +51,7 @@ class EventsController < ApplicationController
   def latest
     limit = (params[:limit].try(:to_i) || nil)
     
-    @search = Event.by_manager_name(filter_manager_name_from_params).latest(limit).published.all(
+    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).latest(limit).published.all(
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
     :conditions => filter_from_params
     )
@@ -192,14 +192,16 @@ class EventsController < ApplicationController
   def filter_manager_name_from_params
     params[:manager_name]
   end
+  
+  def filter_language_code_from_params
+    params[:language_code]
+  end
 
   def filter_from_params
     conditions = {}
     conditions[:location_address_county_id] = params[:county] unless params[:county].blank?
     conditions[:event_type_id] = params[:event_type] unless params[:event_type].blank?
     conditions[:code] = params[:event_code] unless params[:event_code].blank?
-    conditions[:events_languages] = {:languages => {:code => params[:language_code]}} unless params[:language_code].blank?
-    #conditions[:users] = {'firstname ILIKE ? AND lastname ILIKE ?'} unless params[:manager_name].blank?
     conditions
   end
 
