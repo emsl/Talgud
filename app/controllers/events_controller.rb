@@ -11,7 +11,7 @@ class EventsController < ApplicationController
   def index
     @search = Event.by_manager_name(filter_manager_name_from_params).published.all(
     :order => 'begins_at ASC',
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages, :managers],
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
     :conditions => filter_from_params
     )
 
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
       format.json do
         @events = Event.by_manager_name(filter_manager_name_from_params).published.all(
           :conditions => filter_from_params,
-          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages, :managers]
+          :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages]
         )
         render :json => events_json_hash(@events)
       end
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
     limit = (params[:limit].try(:to_i) || nil)
     
     @search = Event.by_manager_name(filter_manager_name_from_params).latest(limit).published.all(
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages, :managers],
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement, :languages],
     :conditions => filter_from_params
     )
 

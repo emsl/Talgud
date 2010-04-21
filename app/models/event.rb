@@ -54,7 +54,7 @@ class Event < ActiveRecord::Base
      (u ? u.id : nil) , 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:name => ' ASC'}
-  named_scope :by_manager_name, lambda { |u| {:conditions => ['UPPER(users.firstname) LIKE UPPER(?) OR UPPER(users.lastname) LIKE UPPER(?)', "#{u}%", "#{u}%"]} unless u.blank? } 
+  named_scope :by_manager_name, lambda { |u| {:conditions => ['UPPER(users.firstname) LIKE UPPER(?) OR UPPER(users.lastname) LIKE UPPER(?)', "#{u}%", "#{u}%"], :include => :managers} unless u.blank? }
 
   def self.class_role_symbols
     [:event_manager]
