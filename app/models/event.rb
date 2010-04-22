@@ -54,10 +54,18 @@ class Event < ActiveRecord::Base
      (u ? u.id : nil) , 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:name => ' ASC'}
-  named_scope :by_manager_name, lambda { |u| {:conditions => ['UPPER(users.firstname) LIKE UPPER(?) OR UPPER(users.lastname) LIKE UPPER(?)', "#{u}%", "#{u}%"], :include => :managers} unless u.blank? }
   named_scope :by_language_code, lambda { |l| {:conditions => ['languages.code = ?', l], :include => :languages} unless l.blank? }
+  named_scope :by_manager_name, (lambda do |u|
+    unless u.blank?
+      name = u.gsub(/\ /, '%')
+      case connection.adapter_name
+        when 'PostgreSQL' then {:conditions => ["UPPER(users.firstname||'%'||users.lastname) LIKE UPPER(?) OR UPPER(users.lastname||'%'||users.firstname) LIKE UPPER(?)", "%#{name}%", "%#{name}%"], :include => :managers}
+        when 'MySQL' then {:conditions => ["CONCAT(users.firstname, '%', users.lastname) LIKE ? OR CONCAT(users.lastname, '%', users.firstname) LIKE ?", "%#{name}%", "%#{name}%"], :include => :managers}
+        else {:conditions => ['UPPER(users.firstname) LIKE UPPER(?) OR UPPER(users.lastname) LIKE UPPER(?)', "#{u}%", "#{u}%"], :include => :managers}
+      end
+    end
+  end)
   
-
   def self.class_role_symbols
     [:event_manager]
   end

@@ -117,8 +117,26 @@ describe EventsController do
           assigns[:events].should_not include(@e2, @e3)
         end
 
-        it 'should by manager name' do
+        it 'should by manager firstname' do
           get :index, {:manager_name => @first_manager.firstname, :format => 'xml'}
+          assigns[:events].should include(@e1)
+          assigns[:events].should_not include(@e2, @e3)
+        end
+
+        it 'should by manager lastname' do
+          get :index, {:manager_name => @first_manager.lastname, :format => 'xml'}
+          assigns[:events].should include(@e1)
+          assigns[:events].should_not include(@e2, @e3)
+        end
+
+        it 'should by manager first- and lastname' do
+          get :index, {:manager_name => "#{@first_manager.firstname} #{@first_manager.lastname}", :format => 'xml'}
+          assigns[:events].should include(@e1)
+          assigns[:events].should_not include(@e2, @e3)
+        end
+
+        it 'should by manager last- and firstname' do
+          get :index, {:manager_name => "#{@first_manager.lastname} #{@first_manager.firstname}", :format => 'xml'}
           assigns[:events].should include(@e1)
           assigns[:events].should_not include(@e2, @e3)
         end
