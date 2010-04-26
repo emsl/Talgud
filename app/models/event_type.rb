@@ -9,4 +9,8 @@ class EventType < ActiveRecord::Base
   
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:name => ' ASC'}
+  
+  def name
+    I18n.translate("formtastic.labels.event_type.event_types.#{self.attributes['name'].downcase}", :default => self.attributes['name'])
+  end
 end

@@ -9,4 +9,8 @@ class Language < ActiveRecord::Base
   
   default_scope :conditions => {:deleted_at => nil}
   named_scope :sorted, :order => {:name => ' ASC'}
+  
+  def name
+    I18n.translate("formtastic.labels.language.languages.#{self.attributes['code'].downcase}", :default => self.attributes['name'])
+  end  
 end

@@ -848,9 +848,23 @@ ru:
         tellafriend_emails: "Предложите поучаствовать и другу"
       event_type:
         name: "Наименование типа полезного дела"
+        event_types:
+          heakord: Приведение в порядок
+          külatalgud: Сельская толока
+          looduskaitse: Охрана природы
+          mälestised: Памятники старины
+          mõttetalgud: Мозговой штурм
+          "muud talgud": "Иная толока"
+          riigimets: Государственный лес
+          terviserajad: Тропы здоровья
       language:
         code: "Код языка"
         name: "Наименование языка"
+        languages:
+          et: Эстонский
+          ru: Русский
+          fi: Финский
+          en: Английский
       municipality:
         kind: Тип
         kinds:
