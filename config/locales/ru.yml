@@ -669,6 +669,28 @@ ru:
     new:
       intro: "Если хотите дать права координатора другому пользователю, введите его имя и контактные данные. После чего пользователю будет отправлено на адрес эл. почты соответствующее уведомление с приглашением."
       title: "Добавить координатора  полезного дела"
+  event_participants:
+    destroy:
+      notice: Talguline on kustutatud.
+    form:
+      add_participants: Lisa veel osavõtjaid
+      choose_age_range: Vali vanus...
+      invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talgupäevaks vajamineva informatsiooni ise edastama!"
+    index:
+      empty: Nendele talgutele ei ole veel registreerunuid.
+      title: talgutel osalejad
+      new_email: Saada osalejatele kiri
+    new_mail:
+      title: Saada kiri talgulistele
+      intro: "Registreerunutele e-kirja saatmiseks sisesta palun e-kirja teema ja sisu. Sisestatud teade edastatakse kõikidele registreerunutele, kes on märkinud oma e-posti aadressi."
+    create_mail:
+      notice: "Kiri on talgulistele saadetud!"
+      error: "Talgulistele kirja satmisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
+    update:
+      notice: "Registreerumise andmed on uuendatud"
+      error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
+    edit:
+      title: Muuda osaleja andmeid talgutel
   events:
     create:
       error: "При сохранении данных полезного дела произошла ошибка. Пожалуйста, проверьте данные и попробуйте снова."
@@ -721,7 +743,7 @@ ru:
       register: "Зарегистрировать полезное дело"
       show_all: "Показать все"
       show_on_map: "Показать на карте"
-      registration_wiki: Abiks registreerujale
+      registration_wiki: "В помощь регистрирующемуся"
     submenu_edit:
       edit_event: "Изменить полезное дело"
       event_info: "Информация о полезном деле"
@@ -807,6 +829,7 @@ ru:
         name: "Название полезного дела"
         notes: "Дополнительная информация"
         status: Статус
+        photogallery_url: Pildigalerii aadress
         statuses:
           adjustment: Уточняется
           closed: Закрытое
