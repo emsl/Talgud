@@ -669,28 +669,28 @@ ru:
     new:
       intro: "Если хотите дать права координатора другому пользователю, введите его имя и контактные данные. После чего пользователю будет отправлено на адрес эл. почты соответствующее уведомление с приглашением."
       title: "Добавить координатора  полезного дела"
-  event_participants:
-    destroy:
-      notice: Talguline on kustutatud.
-    form:
-      add_participants: Lisa veel osavõtjaid
-      choose_age_range: Vali vanus...
-      invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talgupäevaks vajamineva informatsiooni ise edastama!"
-    index:
-      empty: Nendele talgutele ei ole veel registreerunuid.
-      title: talgutel osalejad
-      new_email: Saada osalejatele kiri
-    new_mail:
-      title: Saada kiri talgulistele
-      intro: "Registreerunutele e-kirja saatmiseks sisesta palun e-kirja teema ja sisu. Sisestatud teade edastatakse kõikidele registreerunutele, kes on märkinud oma e-posti aadressi."
-    create_mail:
-      notice: "Kiri on talgulistele saadetud!"
-      error: "Talgulistele kirja satmisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
-    update:
-      notice: "Registreerumise andmed on uuendatud"
-      error: "Registreerumise andmete uuendamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti"
-    edit:
-      title: Muuda osaleja andmeid talgutel
+  event_participants: 
+    destroy: 
+      notice: "Участник удален."
+    form: 
+      add_participants: "Добавить еще участников"
+      choose_age_range: "Выберите возраст..."
+      invite: "Если хотите зарегистрировать на толоку своих друзей, договоритесь об этом с ними и введите их имена и контактные данные. Введение их адресов электронной почты даст им возможность тоже получать информацию о толоке, в противном случае Вы должны будете передавать им всю необходимую инфомацию самию" 
+    index: 
+      empty: "На эту толоку еще нет зарегистрировавшихся."
+      title: "участники толоки"
+      new_email: "Отправьте участникам письмо"
+    new_mail: 
+      title: "Отправьте письмо участникам"
+      intro: "Для отправки письма зарегистрировавшимся введите, пожалуйста, тему и содержание. Введенное сообщение отправится всем, кто указал свой адрес электронной почты." 
+    create_mail: 
+      notice: "Письмо отправлено участникам!"
+      error: "При отправке письма проозошла ошибка, пожалуйста, проверьте правильность данных и попробуйте еще раз." 
+    update: 
+      notice: "Данные регистрации обновлены."
+      error: "При обновлении данных регистрации произошла ошибка, пожалуйста, проверьте правильность данных и попробуйте еще раз."
+    edit: 
+      title: "Измените данные участника"
   events:
     create:
       error: "При сохранении данных полезного дела произошла ошибка. Пожалуйста, проверьте данные и попробуйте снова."
@@ -748,7 +748,7 @@ ru:
       edit_event: "Изменить полезное дело"
       event_info: "Информация о полезном деле"
       invite_manager: "Добавить координатора полезного дела"
-      show_participants: Зарегистрировавшиеся
+      show_participants: Зарегистриро-вавшиеся
     update:
       error: "При изменении данных полезного дела произошла ошибка, проверьте данные и попробуйте снова."
       notice: "Данные полезного дела изменены. При существенных изменениях, пожалуйста, уведомьте участников."
@@ -1274,7 +1274,7 @@ ru:
       contact_info: "Запишите себе контактные данные координатора полезного дела, чтобы при необходимости они были бы под рукой!"
       footer: "До встречи в  День полезных дел!"
       link_to_event: "Просмотреть общую информацию полезного дела"
-      mail_info: "Уведомление о регистрации на полезное дело отправлено на указанный адрес эл. почты. Если Вы не получили подтверждения, сообщите об этом координатору полезного дела."
+      mail_info: "Подтверждение регистрации выслано на указанный Вами адрес электронной почты. Если подтверждение не пришло, свяжитесь с руководителем толоки или командой организаторов Дня полезных дел по адресу: talguinfo@teemeara.ee или телефону: +372 59 074 000. Запишите себе контакты руководителя толоки, чтобы при необходимости можно было с ним связаться. До встречи 1 мая!"
       title: "Спасибо за регистрацию!"
     create:
       error: "При регистрации произошла ошибка. Проверьте, пожалуйста, правильность данных и попробуйте вновь."
@@ -1328,7 +1328,7 @@ ru:
       invalid_activation_code: "Код активации неверен, пожалуйста, проверьте ссылку, которая была вам выслана на адрес эл. почты."
     create:
       error: "При регистрации возникла ошибка. Заполните, пожалуйста, все поля."
-      notice: "Учетная запись успешно создана. Инструкции по активации высланы Вам на адрес эл. почты."
+      notice: "Учетная запись успешно создана. Инструкции по активации высланы на Ваш адрес электронной почты. ВНИМАНИЕ! Если Вы не получили электронное письмо в течение часа, сообщите об этом по адресу talguinfo@teemeara.ee или позвоните по телефону +372 59 074 000."
     new:
       title: Зарегистрироваться
       login_submit: войдите

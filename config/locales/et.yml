@@ -574,7 +574,7 @@ et:
     common:
       hello: Tere!
       footer_text: "Teeme Ära talgupäeva meeskond"
-      disclaimer: "NB! Käesolev e-kiri saadetakse automaatselt kõigile registreerunutele ning sellele ei ole vaja vastata. Küsimuste korral pöördu oma talgujuhi poole, kelle andmed leiad ülaltoodud lingil klikkides või küsi abi talguliste infotelefonilt 59740000."
+      disclaimer: "NB! Käesolev e-kiri saadetakse automaatselt kõigile registreerunutele ning sellele ei ole vaja vastata. Küsimuste korral pöördu oma talgujuhi poole, kelle andmed leiad ülaltoodud lingil klikkides või küsi abi talguliste infotelefonilt +372 59 074 000."
     user_mailer:
       activation_instructions:
         subject: Talgute keskkonna kasutajakonto aktiveerimine
@@ -632,7 +632,7 @@ et:
   participations:
     confirmation:
       title: Aitäh registreerumast!
-      mail_info: "Registreerumiskinnitus saadeti Sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, võta ühendust talgujuhiga."
+      mail_info: "Registreerumiskinnitus saadeti Sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, võta ühendust talgujuhiga või Teeme Ära toimkonnaga (talguinfo@teemeara.ee, +372 59 074 000). Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta! Vaata talguinfot. Kohtumiseni talgupäeval!"
       contact_info: "Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta!"
       link_to_event: Vaata talguinfot
       footer: Kohtumiseni talgupäeval!
@@ -686,7 +686,7 @@ et:
       user_inactive: Parooli meeldetuletust on võimalik tellida pärast konto aktiveerimist. Aktiveerimise juhised saadeti uuesti sinu e-postile.
   signups:
     create:
-      notice: Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile.
+      notice: "Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile. NB! Kui te 1 h jooksul e-kirja saanud ei ole, palun andke sellest teada aadressil talguinfo@teemeara.ee või helistage telefonil +372 59 074 000."
       error: "Registreerumine ebaõnnestus. Palun täida kõik väljad"
     activate: 
       activation_successful: "Sinu konto on aktiveeritud. Palun logige sisse."

@@ -522,6 +522,9 @@ ul.submenu .active .arrow { display: block; }
       font-size: 16px;
       font-weight: bold;
     }
+    .object-right .reg-link a.ru {
+      padding: 6px 0 0;
+    }
     .object-right .reg-link a:hover {
       text-decoration: underline;
     }
