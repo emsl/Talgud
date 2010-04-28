@@ -13,7 +13,7 @@ class Mail < ActiveRecord::Base
   column :subject, :text
   column :message, :text
 
-  validates_length_of :message, :maximum => 500
+  validates_length_of :message, :maximum => 5000
   validates_presence_of :subject, :message, :from, :to, :reply_to
 
   belongs_to :event
