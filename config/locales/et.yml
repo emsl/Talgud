@@ -138,6 +138,7 @@ et:
         notice: Talgu andmed on uuendatud. Olulisemate muudatuste korral palun teavita sellest ka talgulisi.
         error: Talgu andmete uuendamisel tekkis viga
       show:
+        gallery_title: Ürituse pildid
         roles: Talgujuhid
         title: "Talgud '{{event_name}}'"
       edit:

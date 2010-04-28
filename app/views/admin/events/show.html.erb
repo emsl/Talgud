@@ -98,7 +98,7 @@
 </tr>
 <% if valid_photogallery_url?(@event.photogallery_url) %>
 <tr>
-  <td class="first"><%= t('.gallery_title', :default => 'Ürituse pildid') %></td>
+  <td class="first"><%= t('.gallery_title') %></td>
   <td>
     <%= photogallery_area_for(@event.photogallery_url) %>
   </td>

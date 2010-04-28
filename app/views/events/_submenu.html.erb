@@ -13,7 +13,7 @@
     <li class="pending"><a href="#">Populaarsemad</a><span class="arrow"></span></li>
     %>
     <li<%= ' class="active"' if action_name == 'map' %>><%= link_to t('.show_on_map'), map_events_path %><span class="arrow"></span></li>
-    <li><%= link_to t('.registration_wiki'), 'http://www.teemeara.ee/loo-kaasa/tule-talgutele/registreerimise-kkk' %><span class="arrow"></span></li>
+    <li><%= link_to t('.registration_wiki'), (I18n.locale == :ru ? 'http://www.teemeara.ee/loo-kaasa-ru/tule-talgutele/registreerimise-kkk' : 'http://www.teemeara.ee/loo-kaasa/tule-talgutele/registreerimise-kkk') %><span class="arrow"></span></li>
   </ul>
   </div>
 </div>
