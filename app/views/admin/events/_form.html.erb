@@ -21,6 +21,11 @@
     <%= f.input :meta_bring_with_you, :input_html => {:rows => 4} %>
     <%= f.input :meta_provided_for_participiants, :input_html => {:rows => 4} %>
     <%= f.input :meta_subject_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_food_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_sleep_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_transport_info, :input_html => {:rows => 4} %>
+    <%= f.input :meta_cash_info, :input_html => {:rows => 4} %>
+
     <%= f.input :languages, :as => :check_boxes %>
     <%= f.input :gathering_location, :input_html => {:rows => 4} %>
     <%= f.input :notes, :input_html => {:rows => 4} %>
@@ -28,6 +33,15 @@
   <% end %>
   
   <div class="form-extra round">
+    <h3><%= t('events.form.registration') %></h3>
+    
+    <% f.inputs do %>
+      <%= f.input :registration_text, :input_html => {:rows => 4} %>
+      <%= f.input :registration_notes_title, :input_html => {:rows => 4} %>
+    <% end %>
+  </div>
+
+  <div class="form-extra round" style="margin-top:10px;">
     <h3><%= t('events.form.additional_questions') %></h3>
     
     <% f.inputs do %>

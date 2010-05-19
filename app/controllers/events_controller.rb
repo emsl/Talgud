@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  filter_resource_access :additional_collection => [:my, :map, :latest, :stats], :attribute_check => true
+  filter_resource_access :additional_collection => [:my, :map, :latest, :stats, :past], :attribute_check => true
   
   helper :photogallery
   
@@ -10,9 +10,9 @@ class EventsController < ApplicationController
   INCLUDES = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
 
   def index
-    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published(
-    :order => 'begins_at ASC'
-    )
+    @search = Event.published(    
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    ).search(filter_from_params)
 
     respond_to do |format|
       format.xml do
@@ -30,7 +30,15 @@ class EventsController < ApplicationController
 
   def my
     @events = Event.my_events(@current_user).paginate(
-      :order => 'begins_at ASC', :page => params[:page], :include => INCLUDES
+    :page => params[:page],
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
+    )
+  end
+
+  def past
+    @events = Event.past.search(filter_from_params).paginate(
+    :page => params[:page], 
+    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
 
@@ -79,33 +87,39 @@ class EventsController < ApplicationController
 
   def new
     # TODO: date is currenlty hard coded.
-    @event.attributes = {:begins_at => DateTime.parse('2010-05-01 10:00'), :ends_at => DateTime.parse('2010-05-01 18:00')}
-    @event.attributes = {:begin_time => '10:00', :end_time => '18:00'}
+    @event.attributes = {:begins_at => 10.days.from_now, :ends_at => 10.days.from_now, :registration_begins_at => 7.days.from_now, :registration_ends_at => 9.days.from_now}
+    @event.attributes = {:begin_time => '10:00', :end_time => '18:00', :registration_begin_time => '00:00', :registration_end_time => '00:00'}
   end
 
   def create
     @event = Event.new(params[:event])
-    # TODO: date is currently hard coded.
-    @event.begins_at = Date.parse('2010-05-01')
-    @event.ends_at = Date.parse('2010-05-01')
-    @event.begin_time = params[:event][:begin_time] if params[:event][:begin_time]
-    @event.end_time = params[:event][:end_time] if params[:event][:end_time]
-    @event.manager = current_user
+    @event.manager = current_user    
+    @event.status = if @event.instant_publish and Account.current.em_publish_event
+      Event::STATUS[:published]
+    else
+      Event::STATUS[:new]
+    end
     
     # TODO: country code is hard coded. Must be configurable
     @event.location_address_country_code = 'ee'
     if @event.valid?
       @event.save
       
-      unless Role.has_role?(Role::ROLE[:event_manager], @event.manager, @event)
-        Role.grant_role(Role::ROLE[:event_manager], @event.manager, @event)
+      unless Account.current.em_publish_event
+        @event.regional_managers.each do |rm|
+          Mailers::EventMailer.deliver_region_manager_notification(rm, @event, admin_event_url(@event.id))
+        end
       end
 
-      @event.regional_managers.each do |rm|
-        Mailers::EventMailer.deliver_region_manager_notification(rm, @event, admin_event_url(@event.id))
+      if Account.current.em_publish_event
+        if @event.status == Event::STATUS[:published] 
+          flash[:notice] = t('events.create.em_published_notice', :code => @event.code)
+        else
+          flash[:notice] = t('events.create.em_notice', :code => @event.code)
+        end
+      else
+        flash[:notice] = t('events.create.notice', :code => @event.code)
       end
-
-      flash[:notice] = t('events.create.notice', :code => @event.code)
       redirect_to event_path(@event)
     else
       flash.now[:error] = t('events.create.error')
@@ -131,9 +145,18 @@ class EventsController < ApplicationController
 
   def update
     @event.attributes = params[:event]
+    published = false
+    if @event.publish and Account.current.em_publish_event
+      @event.status = Event::STATUS[:published]
+      published = true
+    end
     if @event.valid?
       @event.save
-      flash[:notice] = t('events.update.notice')
+      if published 
+        flash[:notice] = t('events.update.em_published_notice')
+      else
+        flash[:notice] = t('events.update.notice')
+      end
       redirect_to event_path(@event)
     else
       flash.now[:error] = t('events.update.error')

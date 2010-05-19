@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   acts_as_scoped :account
   acts_as_url :name, :scope => :account_id, :only_when_blank => true
   acts_as_mappable :lat_column_name => :latitude, :lng_column_name => :longitude
+  attr_accessor :instant_publish, :publish
   
   STATUS = {:new => 'new', :published => 'published', :registration_open => 'registration_open', :registration_closed => 'registration_closed', :closed => 'closed', :took_place => 'took_place', :adjustment => 'adjustment'}
 
@@ -25,13 +26,20 @@ class Event < ActiveRecord::Base
   before_save :set_code
 
   validates_presence_of :name, :code, :url, :begins_at, :ends_at, :event_type, :manager, :status, :location_address_country_code, :location_address_county, :location_address_municipality, :max_participants
-  validates_presence_of :meta_aim_description, :meta_job_description, :meta_bring_with_you, :meta_provided_for_participiants, :meta_subject_owner, :gathering_location, :meta_subject_protegee
+  validates_presence_of :registration_begins_at, :registration_ends_at
+  validates_presence_of :meta_aim_description, :meta_subject_owner, :meta_subject_protegee
   validates_presence_of :languages, :message => :pick_at_least_one
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
   validates_each :ends_at  do |record, attr, value|
-    if not record.begins_at.nil? and record.begins_at > value
+    if not record.begins_at.nil? and record.begins_at >= value
       record.errors.add :ends_at, :must_be_after_begin_time
       record.errors.add :end_time, :must_be_after_begin_time
+    end
+  end
+
+  validates_each :registration_ends_at  do |record, attr, value|
+    if not record.registration_begins_at.nil? and record.registration_begins_at >= value
+      record.errors.add :registration_ends_at, :must_be_after_registration_begin_time
     end
   end
   
@@ -53,6 +61,7 @@ class Event < ActiveRecord::Base
   named_scope :can_manage, lambda { |u| { :conditions => ['EXISTS (SELECT 1 FROM roles WHERE user_id = ? AND (role = ? AND ((model_type = ? AND model_id = events.location_address_county_id) OR (model_type = ? AND model_id = events.location_address_municipality_id) OR (model_type = ? AND model_id = events.location_address_settlement_id)) OR role = ? OR (role = ? AND (model_type = ? AND model_id = events.id))))',
      (u ? u.id : nil) , 'regional_manager', 'County', 'Municipality', 'Settlement', 'account_manager', 'event_manager', 'Event'] }}
   default_scope :conditions => {:deleted_at => nil}
+  named_scope :past, :conditions => {:status => [STATUS[:took_place]]}, :order => 'ends_at DESC'
   named_scope :sorted, :order => {:name => ' ASC'}
   named_scope :by_language_code, lambda { |l| {:conditions => ['languages.code = ?', l], :include => :languages} unless l.blank? }
   named_scope :by_manager_name, (lambda do |u|
@@ -89,7 +98,8 @@ class Event < ActiveRecord::Base
   end
   
   def can_register?
-    vacancies? && self.status == STATUS[:registration_open]
+    vacancies and self.status == STATUS[:registration_open] and
+      (self.registration_begins_at..self.registration_ends_at).include?(Time.now)
   end
   
   def begin_time=(new_time)
@@ -115,6 +125,30 @@ class Event < ActiveRecord::Base
   def end_time
     ends_at.strftime('%H:%M').gsub(/^0/, '') if ends_at
   end
+
+  def registration_begin_time=(new_time)
+    new_time = new_time.split(':')
+    if self.registration_begins_at
+      self.registration_begins_at = self.registration_begins_at.change(:hour => new_time[0].to_i)
+      self.registration_begins_at = self.registration_begins_at.change(:min => new_time[1].to_i)
+    end
+  end
+  
+  def registration_begin_time
+    registration_begins_at.strftime('%H:%M').gsub(/^0/, '') if registration_begins_at
+  end
+  
+  def registration_end_time=(new_time)
+    new_time = new_time.split(':')
+    if self.registration_ends_at
+      self.registration_ends_at = self.registration_ends_at.change(:hour => new_time[0].to_i)
+      self.registration_ends_at = self.registration_ends_at.change(:min => new_time[1].to_i)
+    end
+  end
+
+  def registration_end_time
+    registration_ends_at.strftime('%H:%M').gsub(/^0/, '') if registration_ends_at
+  end
   
   # Tries to find user records that suit best to manage this event. It will be searched through address object. Any
   # address item (county, municipality, settlement) may have a manager associated with it. This method looks for the
@@ -135,6 +169,18 @@ class Event < ActiveRecord::Base
 
   def vacancies?
     self.vacancies > 0
+  end
+  
+  # Run's automatic state change jobs. 
+  # Event statuses that will be affected.
+  #
+  # Published -> Registration opened on registration begins at date
+  # Registration opened -> Registration closed on registration ends at date
+  # Registration closed -> Took place after ends at date + 2 days.
+  def self.run_state_jobs
+    Event.update_all({:status => STATUS[:registration_open]}, ["status = ? AND ? BETWEEN registration_begins_at AND registration_ends_at", STATUS[:published], Time.now])
+    Event.update_all({:status => STATUS[:registration_closed]}, ["status = ? AND NOT ? BETWEEN registration_begins_at AND registration_ends_at", STATUS[:registration_open], Time.now])
+    Event.update_all({:status => STATUS[:took_place]}, ["status = ? AND ends_at <= ?", STATUS[:registration_closed], 2.days.ago])
   end
 
   # Run's automatic state change jobs. 

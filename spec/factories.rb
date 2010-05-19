@@ -1,6 +1,7 @@
 Factory.define :account do |a|
   a.name 'Account'
   a.sequence(:domain) { |n| "test#{n}.local" }
+  a.em_publish_event false
 end
 
 Factory.define :county do |c|
@@ -30,8 +31,10 @@ end
 
 Factory.define :event do |e|
   e.sequence(:name) { |n| "Event #{n}" }
-  e.begins_at 1.day.from_now
-  e.ends_at 2.days.from_now
+  e.registration_begins_at 1.day.from_now
+  e.registration_ends_at 2.day.from_now
+  e.begins_at 3.day.from_now
+  e.ends_at 4.days.from_now
   e.location_address_country_code 'ee'
   e.status Event::STATUS[:published]
   e.max_participants 10

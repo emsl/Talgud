@@ -8,6 +8,10 @@
     <%= t('.intro') %>
   </p>
 
+  <% unless @event.registration_text.blank? %>
+    <p style="margin-bottom: 20px;"><b><%= @event.registration_text %></b></p>
+  <% end %>
+
   <% semantic_form_for :event_participant, @event_participant, :url => event_participations_path(@event) do |f| %>
     <%= render 'form' %>
     <% f.buttons do %>

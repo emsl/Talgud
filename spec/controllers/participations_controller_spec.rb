@@ -19,7 +19,8 @@ describe ParticipationsController do
     end
     
     it 'should render new registration form' do
-      event = Factory(:event, :max_participants => 10, :status => Event::STATUS[:registration_open])
+      event = Factory(:event, :max_participants => 10, :status => Event::STATUS[:registration_open], 
+        :registration_begins_at => Time.now - 1.minute, :registration_ends_at => 1.days.from_now)
       get :new, {:event_id => event.url}
       response.should be_success
     end    

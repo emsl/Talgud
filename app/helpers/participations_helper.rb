@@ -14,4 +14,8 @@ module ParticipationsHelper
     
     t("formtastic.labels.event_participant.age_ranges.#{value}")
   end
+  
+  def notes_label(event_participant)
+    [t('formtastic.labels.event_participant.notes'), event_participant.event.registration_notes_title] * ': '
+  end
 end

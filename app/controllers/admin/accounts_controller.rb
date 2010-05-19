@@ -7,4 +7,20 @@ class Admin::AccountsController < Admin::AdminController
     @search = Account.with_permissions_to(:manage, :context => :admin_accounts).search(params[:search]).search(order)
     @accounts = @search.paginate(:page => params[:page])
   end
+  
+  def edit
+  end
+  
+  def update
+    if @account.update_attributes(params[:account])
+      flash[:notice] = t('admin.accounts.update.notice')
+      redirect_to admin_accounts_path
+    else
+      flash.now[:error] = t('admin.accounts.update.error')
+      render :action => :edit
+    end    
+  end
+  
+  def show
+  end
 end

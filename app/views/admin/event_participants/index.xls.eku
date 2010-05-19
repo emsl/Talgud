@@ -13,13 +13,17 @@ sheet1.row(1).concat [t('formtastic.labels.event.code'),
   t('formtastic.labels.event_participant.email'),
   t('formtastic.labels.event_participant.phone'),
   t('formtastic.labels.event_participant.age_range'),  
+  t('formtastic.labels.event_participant.residence'),
   t('formtastic.labels.event_participant.notes'),
-  t('formtastic.labels.event_participant.event_participant')
+  t('formtastic.labels.event_participant.event_participant'),
+  t('common.created_at'),
+  t('common.updated_at')    
   ]
 
 @event_participants.each_with_index do |p, i|
   sheet1.update_row i+2, p.event.code, p.event.name, p.event.max_participants, p.event.current_participants, p.event.vacancies, 
-    p.firstname, p.lastname, p.email, p.phone, age_range_label(p.age_range), p.notes, p.parent_name
+    p.firstname, p.lastname, p.email, p.phone, age_range_label(p.age_range), p.residence, p.notes, p.parent_name,
+    l(p.created_at), l(p.updated_at)              
 end
 
 title_format = Spreadsheet::Format.new(:color => :blue, :weight => :bold, :size => 18)

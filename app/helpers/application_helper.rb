@@ -51,4 +51,16 @@ module ApplicationHelper
       headers["Content-Disposition"] = "attachment; filename=\"#{filename}\""
     end
   end
+  
+  def true_false_options
+    [[t('admin.common.true_option'), true], [t('admin.common.false_option'), false]]
+  end
+  
+  def label_for_boolean(value)
+    t("admin.common.#{value}_option")
+  end  
+  
+  def account_managers
+    Account.current.managers
+  end  
 end

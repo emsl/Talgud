@@ -87,7 +87,5 @@ module Admin::AdminHelper
   # Displays notification row that view is currently filtered
   def filter_notify(colspan)
     render :partial => 'shared/admin/filter_notify', :locals => {:colspan => colspan}
-  end
-  
-  
+  end  
 end

@@ -5,7 +5,7 @@ authorization do
     has_permission_on [:event_participants], :to => [:create] do
       #if_attribute :event => {:vacancies => is {Proc.new {|p| p.vacancies > 0}}}
     end
-    has_permission_on [:events], :to => [:read, :map, :latest, :stats] do
+    has_permission_on [:events], :to => [:read, :map, :latest, :stats, :past] do
       if_attribute :status => Event::STATUS[:published]
       if_attribute :status => Event::STATUS[:registration_open]
       if_attribute :status => Event::STATUS[:registration_closed]

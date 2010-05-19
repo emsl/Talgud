@@ -13,8 +13,11 @@ events_csv = FasterCSV.generate :col_sep => ';' do |csv|
     t('formtastic.labels.event_participant.email'),
     t('formtastic.labels.event_participant.phone'),
     t('formtastic.labels.event_participant.age_range'),    
+    t('formtastic.labels.event_participant.residence'),
     t('formtastic.labels.event_participant.notes'),
-    t('formtastic.labels.event_participant.event_participant')
+    t('formtastic.labels.event_participant.event_participant'),
+    t('common.created_at'),
+    t('common.updated_at')    
   ]
   # data rows
   @event_participants.each do |participant|
@@ -28,8 +31,11 @@ events_csv = FasterCSV.generate :col_sep => ';' do |csv|
       participant.email,
       participant.phone,
       age_range_label(participant.age_range),
+      participant.residence,
       participant.notes,
-      participant.parent_name      
+      participant.parent_name,
+      l(participant.created_at),
+      l(participant.updated_at)          
     ]
   end
 end

@@ -1,0 +1,22 @@
+<div class="container-left">
+  <%= render 'submenu' %>
+  
+  <div style="text-align: right; width: 168px; margin-top: 20px;">
+    <% form_tag past_events_path, :method => :get, :class => :filter do %>
+    <%= render 'filter' %>
+    <% end %>
+  </div>
+  
+  <div style="text-align: center; margin-top: 40px; margin-right: 20px;">
+    <%= render 'shared/logos' %>
+  </div>
+</div>
+<div class="container-right">
+  <h1><%= t('.title') %></h1>
+
+  <% unless @events.empty? %>
+  <%= render @events %>
+  <% else %>
+  <%= t('events.index.empty') %>
+  <% end %>
+</div>

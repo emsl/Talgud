@@ -28,7 +28,9 @@
       <div class="reg-link">
       <%= link_to t('.register_to_this_event'), new_event_participation_path(@event), :class => I18n.locale %>
       </div>
-      <% if not @event.vacancies? %>
+      <% if not @event.can_register? %>
+      <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at', :time_begins => format_time(@event.registration_begins_at), :time_ends => format_time(@event.registration_ends_at)) %></div>
+      <% elsif not @event.vacancies? %>
       <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 58px;"><%= t('.no_vacancies') %></div>
       <% elsif not @event.can_register? %>
       <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at') %></div>
@@ -47,10 +49,26 @@
         <td class="first"><%= t('formtastic.labels.event.meta_aim_description') %></td>
         <td><%=h @event.meta_aim_description %></td>
       </tr>
+      <% if permitted_to?(:edit, @event) %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.status') %></td>
+        <td><%=h t("formtastic.labels.event.statuses.#{@event.status}") %></td>
+      </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.registration_begins_at') %></td>
+        <td><%=l (@event.registration_begins_at) %></td>
+      </tr>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.registration_ends_at') %></td>
+        <td><%=l (@event.registration_ends_at) %></td>
+      </tr>
+      <% end %>
+      <% unless @event.meta_job_description.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_job_description') %></td>
         <td><%=h @event.meta_job_description %></td>
       </tr>
+      <% end %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.max_participants') %></td>
         <td><%=h @event.max_participants %></td>
@@ -59,18 +77,24 @@
         <td class="first"><%= t('formtastic.labels.event.vacancies') %></td>
         <td><%=h @event.vacancies %></td>
       </tr>
+      <% unless @event.meta_bring_with_you.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_bring_with_you') %></td>
         <td><%=h @event.meta_bring_with_you %></td>
       </tr>
+      <% end %>
+      <% unless @event.meta_provided_for_participiants.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_provided_for_participiants') %></td>
         <td><%=h @event.meta_provided_for_participiants %></td>
       </tr>
+      <% end %>
+      <% unless @event.meta_subject_info.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_subject_info') %></td>
         <td><%= auto_link(@event.meta_subject_info, :all, :target => "_blank") %></td>
       </tr>
+      <% end %>
       <% if @event.managers.size > 1 %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.managers') %></td>
@@ -98,20 +122,49 @@
       </tr>
       <% end %>
       <% end %>
+      
+      <% unless @event.meta_food_info.blank? %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.meta_food_info') %></td>
+        <td><%=h @event.meta_food_info %></td>
+      </tr>
+      <% end %>
+      <% unless @event.meta_sleep_info.blank? %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.meta_sleep_info') %></td>
+        <td><%=h @event.meta_sleep_info %></td>
+      </tr>
+      <% end %>
+      <% unless @event.meta_transport_info.blank? %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.meta_transport_info') %></td>
+        <td><%=h @event.meta_transport_info %></td>
+      </tr>
+      <% end %>
+      <% unless @event.meta_cash_info.blank? %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.event.meta_cash_info') %></td>
+        <td><%=h @event.meta_cash_info %></td>
+      </tr>
+      <% end %>
       <% unless @event.languages.empty? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.languages') %></td>
         <td><%=h languages_label(@event) %></td>
       </tr>
       <% end %>
+      <% unless @event.gathering_location.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.gathering_location') %></td>
         <td><%=h @event.gathering_location %></td>
       </tr>
+      <% end %>
+      <% unless @event.notes.blank? %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.notes') %></td>
         <td><%=h @event.notes %></td>
       </tr>
+      <% end %>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.code') %></td>
         <td>
@@ -132,6 +185,16 @@
           <%= photogallery_area_for(@event.photogallery_url) %>
         </td>
       </tr>
+      <% end %>
+      <% if permitted_to?(:edit, @event) %>
+      <tr>
+        <td class="first"><%= t('formtastic.labels.account.managers') %></td>
+        <td>
+          <% for manager in account_managers %>
+          <div style="margin-bottom: 5px;"><%=h manager_contacts(manager) %></div>
+          <% end %>
+        </td>
+      </tr>      
       <% end %>
     </table>
   </div>

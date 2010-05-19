@@ -6,22 +6,34 @@
   <tr>
     <th><%= order @search, :by => :name, :as => t('formtastic.labels.account.name'), :params_scope => :order %></th>
     <th><%= order @search, :by => :domain, :as => t('formtastic.labels.account.domain'), :params_scope => :order %></th>
+    <th><%= t('formtastic.labels.account.account_managers') %></th>
+    <th><%= order @search, :by => :em_publish_event, :as => t('formtastic.labels.account.em_publish_event'), :params_scope => :order %></th>
     <th class="actions"><%= image_tag 'admin/magnifier.png', :class => :filter_toggle, :alt => t('admin.common.apply_filter') %></th>
   </tr>
   </thead>
   <tr class="filter"<%= ' style="display: none;"' unless filtering? %>>
     <% semantic_form_for @search, :builder => FilterFormBuilder do |f| %>
-    <td><%= f.input :name_like, :label => false %></td>
-    <td><%= f.input :domain_like, :label => false %></td>
+    <td><%= f.input :name_like, :label => false, :input_html => {:size => 15} %></td>
+    <td><%= f.input :domain_like, :label => false, :input_html => {:size => 15} %></td>
+    <td><%= f.input :em_publish_event_eq, :as => :select, :collection => true_false_options, :label => false %></td>
     <td class="actions"><%= f.submit :search, :value => t('admin.common.search') %></td>
     <% end %>
   </tr>
-  <%= filter_notify(3) %>  
+  <%= filter_notify(6) %>  
   <% for account in @accounts %>
   <tr>
     <td><%=h account.name %></td>
     <td><%=h account.domain %></td>
     <td><%= managers_for_object(account, 60) %></td>
+    <td><%= label_for_boolean account.em_publish_event %></td>
+    <td class="actions">
+      <% if permitted_to?(:read, :admin_accounts) %>
+      <%= link_to t('admin.common.view'), admin_account_path(account) %>
+      <% end %>
+      <% if permitted_to?(:edit, :admin_accounts) %>
+      <%= link_to t('admin.common.edit'), edit_admin_account_path(account) %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
   </table>

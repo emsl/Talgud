@@ -24,6 +24,7 @@
     <th><%= t('formtastic.labels.event_participant.email') %></th>
     <th><%= t('formtastic.labels.event_participant.phone') %></th>
     <th><%= t('formtastic.labels.event_participant.age_range') %></th>
+    <th><%= t('formtastic.labels.event_participant.residence') %></th>
     <th><%= t('formtastic.labels.event_participant.notes') %></th>
     <th><%= t('common.created_at') %></th>
     <th></th>
@@ -35,6 +36,14 @@
     <td><%=h event_participant.email %></td>
     <td><%=h event_participant.phone %></td>
     <td><%=h age_range_label(event_participant.age_range) %></td>
+    <% if event_participant.residence && event_participant.residence.length > 20 %>
+    <td class="data-details">
+      <div class="data-details-overlay" style="display: none;"><%=h event_participant.residence %></div>
+      <span class="data-details-link"><%= truncate(h(event_participant.residence), :length => 20) %></span>
+    </td>
+    <% else %>
+    <td><%=h event_participant.residence %></td>
+    <% end %>
     <% if event_participant.notes && event_participant.notes.length > 20 %>
     <td class="data-details">
       <div class="data-details-overlay" style="display: none;"><%=h event_participant.notes %></div>

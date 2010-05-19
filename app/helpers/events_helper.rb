@@ -11,6 +11,16 @@ module EventsHelper
     l(event.begins_at.to_date, :format => :short)
   end
 
+  # Displays event registration start and end hours in a simple format, i.e. when event starts at 12:00 and ends 18:00, the result
+  # would be 12-18
+  def format_time(date)
+    l(date.to_time, :format => :short)
+  end
+
+  def format_date(date)
+    l(date.to_date, :format => :short)
+  end
+
   # Returns language names associated with event as sentence.
   def languages_label(event)
     event.languages.collect(&:name) * ', '
@@ -21,7 +31,7 @@ module EventsHelper
       [l.name, l.id]
     end
   end
-
+  
   def manager_contacts(manager)
     [manager.name, manager.email, manager.phone].select{ |i| not i.blank? } * ', '
   end
