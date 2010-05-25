@@ -465,8 +465,8 @@ et:
         code: Talgukood
         begin_time: Alguse kellaaeg
         end_time: "Lõpu kellaaeg ~"
-        begins_at: Algusaeg
-        ends_at: Lõpuaeg
+        begins_at: Talgute toimumise algusaeg
+        ends_at: Talgute toimumise lõppaeg
         registration_begins_at: Registreerumise algusaeg
         registration_ends_at: Registreerumise lõpuaeg
         event_type: Talgute liik
