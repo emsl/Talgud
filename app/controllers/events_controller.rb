@@ -10,10 +10,10 @@ class EventsController < ApplicationController
   INCLUDES = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
 
   def index
-    @search = Event.published(    
-    :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
-    ).search(filter_from_params)
-
+    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published(
+      :order => 'begins_at ASC'
+    )
+    
     respond_to do |format|
       format.xml do
         @events = @search.paginate(:page => params[:page], :per_page => 10000, :conditions => filter_from_params, :include => INCLUDES)
