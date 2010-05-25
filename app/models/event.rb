@@ -183,17 +183,6 @@ class Event < ActiveRecord::Base
     Event.update_all({:status => STATUS[:took_place]}, ["status = ? AND ends_at <= ?", STATUS[:registration_closed], 2.days.ago])
   end
 
-  # Run's automatic state change jobs. 
-  # Event statuses that will be affected.
-  #
-  # Published -> Registration opened on registration begins at date
-  # Registration opened -> Registration closed on registration ends at date
-  # Registration closed -> Took place after ends at date + 2 days.
-  def self.run_state_jobs
-    Event.update_all({:status => STATUS[:registration_closed]}, ["status = ? AND current_participants >= max_participants", STATUS[:registration_open]])
-    Event.update_all({:status => STATUS[:took_place]}, ["status = ? AND ends_at <= ?", STATUS[:registration_closed], 2.days.ago])
-  end
-
   private
 
   def set_defaults

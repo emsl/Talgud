@@ -81,8 +81,8 @@ describe Event, 'run_state_jobs' do
   end
   
   it 'should not change state to registration_closed if registration ends at date is in the future' do
-    @event1 = Factory(:event, :status => Event::STATUS[:registration_open], :current_participants => 10, :max_participants => 100)
-    @event2 = Factory(:event, :status => Event::STATUS[:registration_open], :current_participants => 9, :max_participants => 10)
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_open], :registration_begins_at => 5.days.ago, :current_participants => 10, :max_participants => 100)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_open], :registration_begins_at => Time.now, :current_participants => 9, :max_participants => 10)
     
     Event.run_state_jobs
     @event1.reload
