@@ -105,6 +105,10 @@ class EventsController < ApplicationController
     if @event.valid?
       @event.save
       
+      unless Role.has_role?(Role::ROLE[:event_manager], @event.manager, @event)
+        Role.grant_role(Role::ROLE[:event_manager], @event.manager, @event)
+      end
+      
       unless Account.current.em_publish_event
         @event.regional_managers.each do |rm|
           Mailers::EventMailer.deliver_region_manager_notification(rm, @event, admin_event_url(@event.id))
