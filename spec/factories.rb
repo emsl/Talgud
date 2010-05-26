@@ -33,7 +33,7 @@ Factory.define :event do |e|
   e.sequence(:name) { |n| "Event #{n}" }
   e.registration_begins_at 1.day.from_now
   e.registration_ends_at 2.day.from_now
-  e.begins_at 3.day.from_now
+  e.begins_at 3.days.from_now
   e.ends_at 4.days.from_now
   e.location_address_country_code 'ee'
   e.status Event::STATUS[:published]

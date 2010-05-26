@@ -39,6 +39,10 @@ et:
               must_be_after_begin_time: peab olema hilisem algusajast
             registration_ends_at:
               must_be_after_registration_begin_time: peab olema hilisem registreerimise algusajast
+            begin_time:
+              must_be_after_registration_end_time: peab olema hilisem registreerimise lõpuajast
+            begins_at:
+              must_be_after_registration_end_time: peab olema hilisem registreerimise lõpuajast
             ends_at:
               must_be_after_begin_time: peab olema hilisem algusajast
         event_participant:
@@ -300,7 +304,7 @@ et:
         password: Salasõna
   shared:
     logo: 
-      home_link: Teeme Ära talgupäev
+      home_link: Talgupäev
     footer:
       facebook: Vaata meid Facebookis
       twitter: Jälgi meid Twitteris
@@ -327,14 +331,14 @@ et:
     format: Formaat
     loading: Laen andmeid...
     permission_denied: Sellele lehele juurdepääsuõigus puudub
-    title: Teeme ära! Talgud
+    title: Talgud
     or: või
     paginate_previous: "&laquo; eelmised"
     paginate_next: "järgmised &raquo;"
   layouts:
     home:
-      intro: "Teeme Ära tänavuse teona toimub laupäeval, 1. mail üle-eestiline talgupäev."
-      objective: "Sel päeval on kõik eestimaalased oodatud korraldama ja osalema erinevatel talgutel, et vajalikud tööd ühisel jõul ära teha."
+      intro: "Sinu Talgud, korralda need siin!"
+      objective: "Kõik inimesed on oodatud korraldama ja osalema erinevatel talgutel, et vajalikud tööd ühisel jõul ära teha."
       register_event: Registreeri oma talgud
       internet_reflections: Kajastusi Internetis
       show_all_events: Näita kõiki
@@ -538,7 +542,7 @@ et:
         notes: Lisainfo
         participant_name: Nimi
         phone: Telefon
-        tellafriend_emails: Kutsu ka teised sõbrad osalema
+        tellafriend_emails: Kutsu ka teised sõbrad osalema (e-posti eraldajaks kasuta koma)
         event_participant: Registreerija
         residence: "Elukoht"
       municipality:
@@ -674,12 +678,13 @@ et:
         subject: "{{name}} kutsub sind talgupäevale"
         intro: "Sinu sõber {{name}} just registreerus talgutele {{event_name}} ja kutsub ka Sind osalema."
         event_info: "Talgud toimuvad {{time}}. Vaata lähemalt kodulehelt {{event_url}}."
+        event_registrant_info: "{{name}} registreeris ennast just talgutele: {{event_name}}."
       participants_manager_notification:
-        footer: "See kiri on saadetud Teeme Ära talgute infosüsteemist kõigile {{event_name}} talgutele registreerunutele. Küsimuste korral pöördu talgujuhi poole, kelle andmed leiad siit {{event_url}}."
+        footer: "See kiri on saadetud talgute infosüsteemist kõigile {{event_name}} talgutele registreerunutele. Küsimuste korral pöördu talgujuhi poole, kelle andmed leiad siit {{event_url}}."
   participations:
     confirmation:
       title: Aitäh registreerumast!
-      mail_info: "Registreerumiskinnitus saadeti Sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, võta ühendust talgujuhiga või Teeme Ära toimkonnaga (talguinfo@teemeara.ee, +372 59 074 000). Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta! Vaata talguinfot. Kohtumiseni talgupäeval!"
+      mail_info: "Registreerumiskinnitus saadeti Sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, võta ühendust talgujuhiga. Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta! Vaata talguinfot. Kohtumiseni talgupäeval!"
       contact_info: "Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta!"
       link_to_event: Vaata talguinfot
       footer: Kohtumiseni talgupäeval!
@@ -697,7 +702,7 @@ et:
     new:
       intro: "Nendele talgutele registreerumiseks sisesta palun enda andmed. Sisestatud andmed edastatakse talgujuhile."
       no_vacancies: "Nendele talgutele registreerimine on lõppenud, kuna kõik kohad on täidetud"
-      registration_starts_at: Talgutele registreerumine algab 1. aprillil
+      registration_starts_at: "Talgutele registreerumine toimub {{time_begins}} kuni {{time_ends}}"
       title: Registreeru talgutele
     update:
       notice: "Registreerumise andmed on uuendatud"

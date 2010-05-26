@@ -12,7 +12,7 @@ class ParticipationsController < ApplicationController
       unless @event.vacancies?
         flash[:error] = t('participations.new.no_vacancies')
       else
-        flash[:error] = t('participations.new.registration_starts_at')
+        flash[:error] = t('participations.new.registration_starts_at', :time_begins => l(@event.registration_begins_at), :time_ends => l(@event.registration_ends_at))
       end
       redirect_to event_path(@event)
     end

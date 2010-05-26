@@ -37,6 +37,13 @@ class Event < ActiveRecord::Base
     end
   end
 
+  validates_each :begins_at  do |record, attr, value|
+    if not record.registration_ends_at.nil? and value < record.registration_ends_at
+      record.errors.add :begins_at, :must_be_after_registration_end_time
+      record.errors.add :begin_time, :must_be_after_registration_end_time
+    end
+  end
+
   validates_each :registration_ends_at  do |record, attr, value|
     if not record.registration_begins_at.nil? and record.registration_begins_at >= value
       record.errors.add :registration_ends_at, :must_be_after_registration_begin_time

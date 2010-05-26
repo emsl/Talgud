@@ -2,14 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Event, 'validations' do
   it 'should validate that begin date is before end date' do
-    Factory.build(:event, :begins_at => 1.day.ago, :ends_at => 0.days.ago).should be_valid
-    Factory.build(:event, :begins_at => 1.day.ago, :ends_at => 2.days.ago).should be_invalid
-    Factory.build(:event, :begins_at => 1.day.ago, :ends_at => 1.days.ago).should be_valid
+    Factory.build(:event, :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, :begins_at => 1.day.ago, :ends_at => 0.days.ago).should be_valid
+    Factory.build(:event, :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, :begins_at => 1.day.ago, :ends_at => 2.days.ago).should be_invalid
+    Factory.build(:event, :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, :begins_at => 1.day.ago, :ends_at => 1.days.ago).should be_valid
   end
   
   it 'should validate that begin time is before end time' do
     time = 1.day.from_now
-    Factory.build(:event, :begins_at => time, :ends_at => time + 1.minute).should be_valid
+    Factory.build(:event, :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, :begins_at => time, :ends_at => time + 1.minute).should be_valid
     # TODO: mutating start and end time should be possible by simply declaring them as create attributes
     f = Factory.build(:event, :begins_at => time, :ends_at => time)
     f.begin_time = '11:00'
@@ -39,6 +39,14 @@ describe Event, 'validations' do
     f.registration_begin_time = '10:00'
     f.registration_end_time = '10:00'
     f.should be_invalid
+  end
+
+  it 'should validate that begin date is after or equal to registration end date' do
+    time = 1.day.from_now
+    Factory.build(:event, :registration_begins_at => time, :registration_ends_at => time + 1.minute, 
+      :begins_at => time + 1.minute, :ends_at => time + 2.minutes).should be_valid
+    Factory.build(:event, :registration_begins_at => time, :registration_ends_at => time + 1.minute, 
+      :begins_at => time, :ends_at => time + 2.minutes).should be_invalid
   end
 
   it 'should validate that number of participants is a positive number' do
@@ -93,8 +101,10 @@ describe Event, 'run_state_jobs' do
   end
   
   it 'should change state to took_place after 2 days from ends_at day' do
-    @event1 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 4.days.ago)
-    @event2 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 4.days.ago, :ends_at => 3.days.ago)
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_closed], :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, :begins_at => 5.days.ago, 
+      :ends_at => 4.days.ago)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_closed], :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago,
+      :begins_at => 4.days.ago, :ends_at => 3.days.ago)
     
     Event.run_state_jobs
     @event1.reload
@@ -105,7 +115,8 @@ describe Event, 'run_state_jobs' do
   end
   
   it 'should not change state to took_place after 1 day from ends_at day' do
-    @event = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 1.day.ago)
+    @event = Factory(:event, :status => Event::STATUS[:registration_closed], :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, 
+      :begins_at => 5.days.ago, :ends_at => 1.day.ago)
     Event.run_state_jobs
     @event.reload
     @event.status.should eql(Event::STATUS[:registration_closed])    
@@ -162,8 +173,10 @@ describe Event, 'run_state_jobs' do
   end
   
   it 'should change state to took_place after 2 days from ends_at day' do
-    @event1 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 4.days.ago)
-    @event2 = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 4.days.ago, :ends_at => 3.days.ago)
+    @event1 = Factory(:event, :status => Event::STATUS[:registration_closed], :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, 
+      :begins_at => 5.days.ago, :ends_at => 4.days.ago)
+    @event2 = Factory(:event, :status => Event::STATUS[:registration_closed], :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, 
+      :begins_at => 4.days.ago, :ends_at => 3.days.ago)
     
     Event.run_state_jobs
     @event1.reload
@@ -174,7 +187,8 @@ describe Event, 'run_state_jobs' do
   end
   
   it 'should not change state to took_place after 1 day from ends_at day' do
-    @event = Factory(:event, :status => Event::STATUS[:registration_closed], :begins_at => 5.days.ago, :ends_at => 1.day.ago)
+    @event = Factory(:event, :status => Event::STATUS[:registration_closed], :registration_begins_at => 7.days.ago, :registration_ends_at => 6.days.ago, 
+      :begins_at => 5.days.ago, :ends_at => 1.day.ago)
     Event.run_state_jobs
     @event.reload
     @event.status.should eql(Event::STATUS[:registration_closed])    
