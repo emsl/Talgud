@@ -37,7 +37,7 @@
               
               google.maps.event.addListener(marker, 'click', function() {
                   var cbody = '<div class="infowindow">';
-                  cbody += '<h3><a href="' + point.url + '">' + point.name + '</a></h3>';
+                  cbody += '<h3><a href="' + point.url + '" target="blank">' + point.name + '</a></h3>';
                   cbody += '<span class="object-type">' + point.event_type + '</span> ' + point.address;
                   if (point.aim_desc && point.aim_desc != '') {
                     cbody += '<div class="label"><%= t('.event_aim') %></div>' + point.aim_desc;

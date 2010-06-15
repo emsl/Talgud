@@ -21,7 +21,7 @@ sheet1.row(1).concat [t('formtastic.labels.event.code'),
   ]
 
 @event_participants.each_with_index do |p, i|
-  sheet1.update_row i+2, p.event.code,
+  sheet1.update_row i + 2, p.event.code,
   p.event.name, 
   p.event.max_participants,
   p.event.current_participants, 
@@ -30,10 +30,10 @@ sheet1.row(1).concat [t('formtastic.labels.event.code'),
   p.lastname, 
   p.email, 
   p.phone, 
-  age_range_label(participant.age_range), 
+  age_range_label(p.age_range), 
   p.residence, 
   p.notes, 
-  p.participant.parent_name, 
+  p.parent_name,
   l(p.created_at),
   l(p.updated_at)    
 end

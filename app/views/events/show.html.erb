@@ -42,9 +42,8 @@
     <table class="vertical-data">
       <tr>
         <td></td>
-        <td><div class="object-detail-time"><%= t('.starts_at', :date => duration_dates(@event), :time => duration_times(@event)) %></div></td>
+        <td><div class="object-detail-time"><%= event_dates(@event) %></div></td>
       </tr>
-      
       <tr>
         <td class="first"><%= t('formtastic.labels.event.meta_aim_description') %></td>
         <td><%=h @event.meta_aim_description %></td>
@@ -56,11 +55,11 @@
       </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.registration_begins_at') %></td>
-        <td><%=l (@event.registration_begins_at) %></td>
+        <td><%= l(@event.registration_begins_at, :format => :long) %></td>
       </tr>
       <tr>
         <td class="first"><%= t('formtastic.labels.event.registration_ends_at') %></td>
-        <td><%=l (@event.registration_ends_at) %></td>
+        <td><%= l(@event.registration_ends_at, :format => :long) %></td>
       </tr>
       <% end %>
       <% unless @event.meta_job_description.blank? %>
@@ -168,7 +167,7 @@
       <tr>
         <td class="first"><%= t('formtastic.labels.event.code') %></td>
         <td>
-          <%=h @event.code %> <a href="http://www.teemeara.ee/loo-kaasa/toeta-talguid" target="blank"><%= t('.sponsor_this_event') %></a>
+          <%=h @event.code %>
         </td>
       </tr>
       <tr>

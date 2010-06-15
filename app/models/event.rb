@@ -30,6 +30,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :meta_aim_description, :meta_subject_owner, :meta_subject_protegee
   validates_presence_of :languages, :message => :pick_at_least_one
   validates_numericality_of :max_participants, :greater_than => 0, :only_integer => true
+  
   validates_each :ends_at  do |record, attr, value|
     if not record.begins_at.nil? and record.begins_at >= value
       record.errors.add :ends_at, :must_be_after_begin_time

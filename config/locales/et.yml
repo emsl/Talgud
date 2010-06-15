@@ -400,12 +400,13 @@ et:
       register_to_this_event: Registreeri nendele talgutele!
       no_vacancies: Kõik kohad on täidetud!
       registration_starts_at: "Talgutele registreerumine toimub <br/>{{time_begins}} kuni {{time_ends}}"
-      sponsor_this_event: Toeta neid talguid!
-      starts_at: "Talgud toimuvad {{date}} kell {{time}}"
+      occurring_at: "Talgud toimuvad {{date}} kell {{time}}"
+      occurred_at: "Talgud toimusid {{date}}"
+      occurring_dates: "Toimuvad {{begin_time}} kuni {{end_time}}"
     submenu:
       register: Registreeri talgud
       my_events: Minu talgud
-      show_all: Näita kõiki
+      show_all: Tulevased talgud
       latest: Viimati lisatud
       show_on_map: Näita kaardil
       registration_wiki: Abiks registreerujale
@@ -496,7 +497,7 @@ et:
         meta_aim_description: Talgute eesmärk ja hüvang
         meta_job_description: Talgutööd
         meta_bring_with_you: Kaasa võtta
-        meta_provided_for_participiants: Talgulistele pakutavad hüved va. toitlustamine
+        meta_provided_for_participiants: Talgulistele pakutav
         meta_subject_heritage_number: Objekti mälestise number
         meta_subject_info: Lähem info talguobjekti kohta
         meta_subject_owner: Talguobjekti omanik

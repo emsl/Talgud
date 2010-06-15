@@ -1,5 +1,15 @@
 module EventsHelper
 
+  def event_dates(event)
+    if event.begins_at.past?
+      t('.occurred_at', :date => duration_dates(@event))
+    elsif event.begins_at.to_date != event.ends_at.to_date
+      t('.occurring_dates', :begin_time => l(event.begins_at, :format => :short), :end_time => l(event.ends_at, :format => :long))
+    else
+      t('.occurring_at', :date => duration_dates(@event), :time => duration_times(@event))
+    end
+  end
+
   # Displays event start and end hours in a simple format, i.e. when event starts at 12:00 and ends 18:00, the result
   # would be 12-18
   def duration_times(event)
@@ -7,12 +17,11 @@ module EventsHelper
   end
 
   def duration_dates(event)
-    # event.begins_at.strftime('%d.%b')
-    l(event.begins_at.to_date, :format => :short)
+    l(event.begins_at.to_date, :format => :long)
   end
-
-  # Displays event registration start and end hours in a simple format, i.e. when event starts at 12:00 and ends 18:00, the result
-  # would be 12-18
+  
+  # Displays event registration start and end hours in a simple format, i.e. when event starts at 12:00 and ends 18:00,
+  # the result would be 12-18
   def format_time(date)
     l(date.to_time, :format => :short)
   end

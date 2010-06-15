@@ -7,6 +7,10 @@ form.formtastic abbr {
 
 form.formtastic fieldset { display: block; }
 
+form.formtastic fieldset ol li fieldset ol {
+  padding: 0;
+}
+
 form.formtastic fieldset ol li { 
   margin: 0;
   padding-bottom: 13px;
