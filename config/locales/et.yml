@@ -305,11 +305,6 @@ et:
   shared:
     logo: 
       home_link: Talgupäev
-    footer:
-      facebook: Vaata meid Facebookis
-      twitter: Jälgi meid Twitteris
-      join_us: Liitu korraldustiimiga
-      contact: Kontaktid
     mainmenu:
       main: Avaleht
       events: Talgud
@@ -337,10 +332,9 @@ et:
     paginate_next: "järgmised &raquo;"
   layouts:
     home:
-      intro: "Sinu Talgud, korralda need siin!"
-      objective: "Kõik inimesed on oodatud korraldama ja osalema erinevatel talgutel, et vajalikud tööd ühisel jõul ära teha."
+      intro: "Talgute veebileht"
+      objective: "Kõik on oodatud registreerima oma talguid või osalema välja kuulutatud talgutel."
       register_event: Registreeri oma talgud
-      internet_reflections: Kajastusi Internetis
       show_all_events: Näita kõiki
       register_link: Registreeru talgutele
       event_count: talgut
@@ -348,9 +342,9 @@ et:
       needed_participants: vaba kohta
   events:
     create:
-      notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui maakondlik koordinaator on saanud andmed üle vaadata. Sinu talgute kood on {{code}}."
-      em_notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed muutuvad avalikuks niipea kui avalikustad need enda talgute nimekirjast. Sinu talgute kood on {{code}}."
-      em_published_notice: "Tänan, et registreerisid talgud. Oleme andmed kätte saanud ning Sinu andmed on muudetud avalikuks. Sinu talgute kood on {{code}}."
+      notice: "Tänan, et registreerisid talgud. Sinu andmed muutuvad avalikuks niipea kui oled talgud avalikustanud. Sinu talgute kood on {{code}}."
+      em_notice: "Tänan, et registreerisid talgud. Sinu andmed muutuvad avalikuks niipea kui oled talgud avalikustanud. Sinu talgute kood on {{code}}."
+      em_published_notice: "Tänan, et registreerisid talgud. Sinu andmed on muudetud avalikuks. Sinu talgute kood on {{code}}."
       error: "Talgu andmete sisestamisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
     edit:
       title: Talguinfo muutmine
@@ -374,8 +368,8 @@ et:
       title: Minu talgud
     new:
       title: Registreeri oma talgud
-      header_hint: "Siin saad registreerida oma talgukoha ja kirjeldada talgulistele, mida tegema hakatakse ja mida igaühel kaasa tuleks võtta. Kuigi talgute andmeid saab ka hiljem muuta, püüa juba praegu kõik hoolega läbi mõelda. Sisestatud andmed jõuavad kodulehele mõne päeva jooksul."
-      footer_hint: "Talgukoha registreerimisega kinnitad, et oled vähemalt 18 aastat vana ning oled nõus saama talgupäeva toimkonnalt e-posti teel infot talgupäeva kohta."
+      header_hint: "Siin saad registreerida oma talgukoha ja kirjeldada talgulistele, mida tegema hakatakse ja mida igaühel kaasa tuleks võtta. Kuigi talgute andmeid saab ka hiljem muuta, püüa juba praegu kõik hoolega läbi mõelda. Sisestatud andmed jõuavad kodulehele ja kaardile, kui oled oma talgud avalikustanud."
+      footer_hint: "Talgukoha registreerimisega kinnitad, et oled vähemalt 18 aastat vana."
     update:
       notice: "Talgu andmed on uuendatud. Olulisemate muudatuste korral palume sellest teavitada ka talgulisi."
       em_published_notice: "Talgu andmed on uuendatud ning Sinu talgud on muudetud avalikuks. Olulisemate muudatuste korral palume sellest teavitada ka talgulisi."  
@@ -409,7 +403,6 @@ et:
       show_all: Tulevased talgud
       latest: Viimati lisatud
       show_on_map: Näita kaardil
-      registration_wiki: Abiks registreerujale
       past: Toimunud
     submenu_edit:
       event_info: Talgute info
@@ -419,7 +412,7 @@ et:
   event_managers:
     new:
       title: Lisa juht talgutele
-      intro: "Kui soovid talgute korraldamise õigust anda ka teisele kasutajale, siis sisesta siia tema nimi ja kontaktandmed. Pärast sisestamist saadetakse talle teavitus kutse kohta e-posti teel."
+      intro: "Kui soovid talgujuhiks kutsuda ja talgujuhi õigusi anda ka teisele kasutajale, siis sisesta siia tema nimi ja kontaktandmed. Pärast sisestamist saadetakse talle teavitus kutse kohta e-posti teel ning tema andmed ilmuvad kodulehele talgute juurde."
     create:
       error: "Talgujuhi lisamine ebaõnnestus, palun kontrolli andmete korrektsust ning proovi uuesti"
       notice: "Talgujuht on lisatud, kutse selle kohta saadeti ka tema e-posti aadressile"
@@ -543,7 +536,7 @@ et:
         notes: Lisainfo
         participant_name: Nimi
         phone: Telefon
-        tellafriend_emails: Kutsu ka teised sõbrad osalema (e-posti eraldajaks kasuta koma)
+        tellafriend_emails: Kutsu ka sõpru neile talgutele (e-posti aadresside eraldajaks kasuta koma)
         event_participant: Registreerija
         residence: "Elukoht"
       municipality:
@@ -585,7 +578,7 @@ et:
         registration_ends_at: Talgute regisreerumise lõpuaeg
         event_type: "Vali üks kategooria, mis tundub kõige paremini sobivat"
         gathering_location: "Kogunemise koht ja kellaaeg, vajadusel ka kohalejõudmise juhised. Mõistlik on kogunemine leppida kergesti leitavas kohas."
-        location_address_street: Sisesta võimalikult täpne aadress
+        location_address_street: Sisesta võimalikult täpne aadress võimalikult lühidalt
         max_participants: "Märgi oodatav talguliste arv, mis on mõistlik ja vajalik tööde tegemiseks ning mida jõuad hallata"
         current_participants: "Nendele talgutele registreerunud osavõtjate arv, mis arvutatakse registreerumise alusel. Seda välja sa muuta ei saa."
         meta_aim_description: "Kelle või mille hüvanguks talgutöid tehakse, mis on talgute eesmärk või kasu. Või mis on edasised plaanid talguobjektiga."
@@ -595,25 +588,25 @@ et:
         meta_subject_heritage_number: Muinsuskaitsealuse objekti puhul sisesta mälestise number. Otsi number mälestiste registrist <a href="http://register.muinas.ee" target="blank">http://register.muinas.ee</a>
         meta_subject_info: Võimalusel viide objekti puudutavale veebilehele
         meta_subject_owner: "Kes on talguobjekti/kinnistu omanik ja rentnik või valdaja, mida korrastatakse või millel talgud toimuvad"
-        meta_subject_protegee: "Kas objekt on äkki looduskaitse all või muinsuskaitse all?"
+        meta_subject_protegee: Kas objekt on looduskaitse all või muinsuskaitse all?
         name: "Talgute nimi võiks sisaldada viidet asukohale ja peamisele tööle (nt Metsküla pargi korrastamine, Leemu mõisatalli võsast puhastamine). Arvesta, et talgute nimi on see, mis andmebaasis ja veebis kuvatakse."
         notes: Vajadusel lisa siia talgulistele oluline muu info
         photogallery_url: "Sisesta siia pildigalerii aadress, millest soovid pilte näidata. Hetkel on toetatud NAGI.ee ja Flickr pildikeskkonnad.<br/><br/> Sisesta NAGI.ee aadress kujul http://nagi.ee/photos/peeter_meeter/<br/><br/>või Flickri galerii aadress kujul http://flickr.com/photos/kasutaja/sets/123"
-        meta_cash_info: "Info osavõtutasu, hinna sisse kuuluv, arvelduse kohta."
+        meta_cash_info: "Info osavõtutasu, hinna sisse kuuluva ja tasumise kohta."
         meta_transport_info: "Info transpordi kohta."
         meta_sleep_info: "Info ööbimise ja majutuse kohta"
         meta_food_info: "Kui pakud talgulistele süüa, siis kirjelda, kuidas on korraldatud toitlustamine? Mida talgulistele pakutakse?"
         name: Talgute nimi        
-        registration_text: "Tekst, mida näitatakse registreerumisel ning, mis saadetakse registreerujale e-postiga."
-        registration_notes_title: "Kirjelda, mida peab iga osaleja registreerumisel lisainfo välja sisestama. Antud teksti kuvatakse registeerumise lisainfo tiitlina."
-        instant_publish: "Avalikusta kohe või hiljem. Hiljem avalikustamise puhul Sinu talgud ei ilmu kaardile ega nähtavale talgute nimekirjas. Hiljem avalikustamiseks sisene uuesti antud lehele ning muuda oma talguid."
-        publish: "Avalikusta oma talgud ja Sinu talgud ilmuvad kaardile ja muutuvad nähtavale talgute nimekirjas."
+        registration_text: "Tervitustekst, mida näidatakse osalejate registreerimise ankeedi sissejuhatuses ning osalejatele saadetavas e-kirjas."
+        registration_notes_title: "Kui soovid talgulistelt registreerumisankeedil veel mingit infot küsida, siis kirjuta see siia . Antud tekst kuvatakse registeerumisankeedil lisainfo välja pealkirjas."
+        instant_publish: "Avalikusta kohe või hiljem. Hiljem avalikustamise puhul Sinu talgud ei ilmu nähtavale talgute nimekirjas ega kaardil. Hiljem avalikustamiseks sisene uuesti antud lehele ning muuda oma talguid menüüst 'Minu talgud'."
+        publish: "Avalikusta oma talgud ja Sinu talgud ilmuvad kaardile ja muutuvad nähtavaks talgute nimekirjas."
       event_participant:
         age_range: "Registreerumiseks pead olema vähemalt 18-aastane! Noorematel soovitame talgutele tulla koos täiskasvanutega."
-        email: "Edastame Sinu e-posti talgujuhile, kes vajadusel saadab Sulle täiendavat infot. Saadame Sinu e-postile vaid talgupäevaga seotud informatsiooni."
+        email: "Edastame Sinu e-posti talgujuhile, kes vajadusel saadab Sulle täiendavat infot."
         notes: "Kirjuta siia igasugust lisainformatsiooni, mida pead oluliseks enda kohta talgujuhile teada anda."
-        tellafriend_emails: "Sisesta siia nende sõprade e-posti aadressid, kellel tahad soovitada talgupäeval osalemist, eraldades aadressid komadega. Sõbrad saavad e-posti teel talgupäeva kutse."
-        residence: "Sisesta oma elukoht linna või valla täpsusega. Antud info aitab organiseerida ühes paigas elavaid inimesi koos ühist transporti kasutama."
+        tellafriend_emails: "Sisesta siia nende sõprade e-posti aadressid, kellele tahad soovitada nendel talgutel osalemist, eraldades aadressid komadega. Sõbrad saavad e-posti teel kutse."
+        residence: "Sisesta oma elukoht linna või valla täpsusega. See aitab talgujuhil transporti planeerida ja vajadusel soovitada ühest kandist tulijaile ühist transporti kasutada."
     actions:
       create: "Lisa {{model}}"
       invite_event_manager: Saada talgujuhile kutse
@@ -626,8 +619,8 @@ et:
   mailers:
     common:
       hello: Tere!
-      footer_text: "Teeme Ära talgupäeva meeskond"
-      disclaimer: "NB! Käesolev e-kiri saadetakse automaatselt kõigile registreerunutele ning sellele ei ole vaja vastata. Küsimuste korral pöördu oma talgujuhi poole, kelle andmed leiad ülaltoodud lingil klikkides või küsi abi talguliste infotelefonilt +372 59 074 000."
+      footer_text: ""
+      disclaimer: "NB! Käesolev e-kiri saadetakse automaatselt kõigile registreerunutele ning sellele ei ole vaja vastata. Küsimuste korral pöördu oma talgujuhi poole, kelle andmed leiad ülaltoodud lingil klikkides."
     user_mailer:
       activation_instructions:
         subject: Talgute keskkonna kasutajakonto aktiveerimine
@@ -646,12 +639,12 @@ et:
         login_at_url: "Sisse saad logida aadressilt {{login_url}}"
     event_mailer:
       invite_participant_notification:
-        subject: Talgupäevale registreerumine
+        subject: Talgutele registreerumine
         intro: "Tere {{name}}!"
         event_name: "Oled registreerunud talgutele {{event_name}}. Sind registreeris {{registrant_name}}."
-        event_link: "Sulle ja Sinu meeskonna liikmetele talgupäevaks vajalik informatsioon koos vajalike telefoninumbritega asub aadressil {{url}} Palun säilita see e-kiri ning kontrolli saadetud linki vahetult enne talguid, võib juhtuda, et informatsiooni osas toimub muudatusi. Talgupäevaks trüki infoleht välja ning võta talgutele kaasa."
+        event_link: "Sulle ja Sinu kaaslastele talguteks vajalik informatsioon koos vajalike telefoninumbritega asub aadressil {{url}} Palun säilita see e-kiri ning kontrolli saadetud linki vahetult enne talguid, võib juhtuda, et informatsiooni osas toimub muudatusi."
         edit_link: "Sinu registreerimisel esitatud andmeid saad vaadata ja muuta siin: {{url}} \n{{registration_text}}"
-        footer: "Kohtumiseni talgutel!"
+        footer: "Häid talguelamusi!"
       invite_event_manager_notification:
         subject: "{{name}} kutsub sind talgujuhiks!"
         intro: "Tere {{name}}!"
@@ -662,21 +655,21 @@ et:
         subject: "{{name}} registreerus talgutele {{event_name}}"
         intro: "{{name}} registreerus sinu poolt korraldatavatele talgutele"
         participant_info: "Registreeruja poolt sisestatud andmed on järgmised:"
-        event_participants_address: "Registreerunute andmeid saate hallata aadressilt {{url}}"
+        event_participants_address: "Registreerunute andmeid saate hallata aadressilt {{url}} oma kontole sisse logides."
       participant_notification:
-        subject: Talgupäevale registreerumine
+        subject: Talgutele registreerumine
         intro: "Tere {{name}}!"
         event_name: "Oled registreerunud talgutele {{event_name}}."
         event_link: "Kogu informatsioon talgute kohta koos vajalike telefoninumbritega asub aadressil {{url}} Palun säilita see e-kiri ning kontrolli seda linki ka vahetult enne talguid, võib juhtuda, et informatsiooni osas toimub muudatusi. Talgutele minnes võta kaasa kohalejõudmise juhised ning talgujuhi kontakttelefon."
         verify_data: "NB! Palun edasta see informatsioon ka kõigile oma sõpradele ja meeskonna liikmetele, kelle endaga koos talgutele registreerisid!"
         edit_address: "Sinu registreerumisel esitatud andmeid saad vaadata ja muuta siin {{url}} \n {{registration_text}}"
-        footer: "Kohtumiseni talgutel!"
+        footer: "Häid talguelamusi!"
       region_manager_notification:
         subject: Talgute registreerumise teavitus
-        intro: "Talgute keskkonnas registreeriti uus talgu järgmiste andmetega:"
+        intro: "Talgute keskkonnas registreeriti uued talgud järgmiste andmetega:"
         admin_url: Talgute andmeid saab hallata aadressilt
       tell_friend_notification:
-        subject: "{{name}} kutsub sind talgupäevale"
+        subject: "{{name}} kutsub sind talgutele"
         intro: "Sinu sõber {{name}} just registreerus talgutele {{event_name}} ja kutsub ka Sind osalema."
         event_info: "Talgud toimuvad {{time}}. Vaata lähemalt kodulehelt {{event_url}}."
         event_registrant_info: "{{name}} registreeris ennast just talgutele: {{event_name}}."
@@ -685,10 +678,10 @@ et:
   participations:
     confirmation:
       title: Aitäh registreerumast!
-      mail_info: "Registreerumiskinnitus saadeti Sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, võta ühendust talgujuhiga. Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta! Vaata talguinfot. Kohtumiseni talgupäeval!"
+      mail_info: "Registreerumiskinnitus saadeti Sinu poolt sisestatud e-posti aadressile. Kui kinnitust ei saabunud, võta ühendust talgujuhiga."
       contact_info: "Kirjuta endale üles talgujuhi kontaktid et saaksid alati tarvidusel ühendust võtta!"
       link_to_event: Vaata talguinfot
-      footer: Kohtumiseni talgupäeval!
+      footer: Häid talguelamusi!
     create:
       error: "Registreerumisel tekkis viga, palun kontrolli andmete korrektsust ning proovi uuesti."
     destroy:
@@ -696,7 +689,7 @@ et:
     form:
       add_participants: Lisa veel osavõtjaid
       choose_age_range: Vali vanus...
-      invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talgupäevaks vajamineva informatsiooni ise edastama!"
+      invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talguteks vajamineva informatsiooni ise edastama!"
     index:
       empty: Nendele talgutele ei ole veel registreerunuid.
       title: talgutel osalejad
@@ -716,11 +709,11 @@ et:
     form:
       add_participants: Lisa veel osavõtjaid
       choose_age_range: Vali vanus...
-      invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talgupäevaks vajamineva informatsiooni ise edastama!"
+      invite: "Kui soovid oma sõpru talgutele registreerida, siis lepi see nendega kokku ja sisesta sõprade nimed ja kontaktandmed. Kaaslaste e-posti aadresside sisestamisel saavad ka nemad info talgute kohta oma e-posti aadressile, e-posti aadresside puudumisel pead kaaslastele talguteks vajamineva informatsiooni ise edastama!"
     index:
       empty: Nendele talgutele ei ole veel registreerunuid.
       title: talgutel osalejad
-      new_email: Saada osalejatele kiri
+      new_email: Saada talgulistele kiri
     new_mail:
       title: Saada kiri talgulistele
       intro: "Registreerunutele e-kirja saatmiseks sisesta palun e-kirja teema ja sisu. Sisestatud teade edastatakse kõikidele registreerunutele, kes on märkinud oma e-posti aadressi."
@@ -739,7 +732,7 @@ et:
       user_inactive: Parooli meeldetuletust on võimalik tellida pärast konto aktiveerimist. Aktiveerimise juhised saadeti uuesti sinu e-postile.
   signups:
     create:
-      notice: "Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti teie e-posti aadressile. NB! Kui te 1 h jooksul e-kirja saanud ei ole, palun andke sellest teada aadressil talguinfo@teemeara.ee või helistage telefonil +372 59 074 000."
+      notice: "Konto loomine õnnestus. Juhised konto aktiveerimiseks saadeti sinu e-posti aadressile. NB! Kui te 12h jooksul e-kirja saanud ei ole, palun andke sellest teada aadressil talguinfo@teemeara.ee."
       error: "Registreerumine ebaõnnestus. Palun täida kõik väljad"
     activate: 
       activation_successful: "Sinu konto on aktiveeritud. Palun logige sisse."
