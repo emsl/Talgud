@@ -1,9 +1,12 @@
 class ParticipationsController < ApplicationController
 
   before_filter :load_event, :except => :redirect
-  before_filter :load_event_participant, :except => [:new, :create] #:only => [:show, :update, :redirect]
+  before_filter :load_event_participant, :except => [:new, :create, :index] #:only => [:show, :update, :redirect]
 
   cache_sweeper :event_participant_sweeper, :only => [:create, :update]
+
+  def index
+  end
 
   def new
     @event_participant = EventParticipant.new(:event => @event)
