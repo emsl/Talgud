@@ -140,7 +140,7 @@ ru:
         notice: "Данные участника полезного дела успешно обновлены"
       new_mail: 
         title: Пошлите участникам письмо  
-         intro: "Registreerunutele e-kirja saatmiseks sisesta palun e-kirja teema ja sisu. Sisestatud teade edastatakse kõikidele registreerunutele, kes on märkinud oma e-posti aadressi."
+         intro: "Чтобы послать зарегистрировавшимся электронное письмо, введите тему письма и его содержание. Введенное сообщение будет отправлено всем, кто указал свой адрес электронной почты."
     participants:
       index:
         title: "Зарегистрированные на полезное дело участники"
