@@ -86,8 +86,8 @@ Application settings are being configured in `./config/app_config.yml` file as Y
 * `mailer.smtp_settings.enable_starttls_auto` set to `true` for GMail
 * `mailer.smtp_settings.authentication` authentication method, set to `:plain` for GMail
 
-Cron tasks you may want to use
-------------------------------
+Application maintenance cron tasks
+----------------------------------
 
 There are maintenance tasks that should be run regularily, i.e. to close events that are filled with participants. You may want to create a hourly cron task to perform this action:
 
