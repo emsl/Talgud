@@ -715,6 +715,8 @@ ru:
     form:
       additional_questions: "Дополнительные вопросы (ответы не публикуются)"
       map_location_hint: "При необходимости уточните месторасположение на карте (для этого передвиньте красную кнопочку в правильное место на карте)."
+      event_publishing: Avalikustamine
+      registration: Registreerumise info
     index:
       empty: "Толоки не найдены"
       save_ical: "Сохрани в свой календарь"
@@ -742,7 +744,10 @@ ru:
       more_events_in_area: "Еще полезные дела в том же регионе"
       no_vacancies: "Все места заполнены!"
       register_to_this_event: "Зарегистрируйтесь на это полезное дело!"
-      registration_starts_at: "Регистрация на участие в полезных делах откроется с 1-го апреля."
+      registration_starts_at: "Talgutele registreerumine toimub <br/>{{time_begins}} kuni {{time_ends}}"
+      occurring_at: "Talgud toimuvad {{date}} kell {{time}}"
+      occurred_at: "Talgud toimusid {{date}}"
+      occurring_dates: "Toimuvad {{begin_time}} kuni {{end_time}}"
       sponsor_this_event: "Поддержать это полезное дело!"
       starts_at: "Начало толоки в"
     submenu:
@@ -752,6 +757,7 @@ ru:
       show_all: "Показать все"
       show_on_map: "Показать на карте"
       registration_wiki: "В помощь регистрирующемуся"
+      past: Toimunud
     submenu_edit:
       edit_event: "Изменить полезное дело"
       event_info: "Информация о полезном деле"
@@ -795,6 +801,7 @@ ru:
         email: "Мы передадим Ваш адрес электронной почты руководителю толоки и он при неодходимости вышлет Вам дополнительную информацию." 
         name: "Желательно, чтобы название полезного дела содержало место проведения и характер работы (например \"Приведение в порядок концертной площадки в Сиймусти\" или \"Ремонт народного дома в Кивиыли\"). Помните, что первое знакомство участника с Вашим полезным делом происходит через название и именно оно отображается в базе данных и в интернете."
         notes: "При необходимости укажите здесь другую важную информацию"
+        photogallery_url: "Sisesta siia pildigalerii aadress, millest soovid pilte näidata. Hetkel on toetatud NAGI.ee ja Flickr pildikeskkonnad.<br/><br/> Sisesta NAGI.ee aadress kujul http://nagi.ee/photos/peeter_meeter/<br/><br/>või Flickri galerii aadress kujul http://flickr.com/photos/kasutaja/sets/123"
       event_participant:
         age_range: "При регистрации действует возрастное ограничение 18 лет! Тем, кто моложе, рекомендуем прийти на мероприятие вместе со взрослыми."
         notes: "Дополнительные заметки для координатора полезного дела."
@@ -804,6 +811,7 @@ ru:
       account:
         domain: Домен
         name: "Название учетной записи"
+        managers: Координаторы
       county:
         name: "Название уезда"
         regional_managers: "Региональные координаторы"
@@ -843,9 +851,18 @@ ru:
         meta_subject_info: "Подробная информация об объекте"
         meta_subject_owner: "Владелец объекта"
         meta_subject_protegee: "Находится ли объект под охраной?"
+        meta_cash_info: Osavõtutasu
+        meta_transport_info: Transport
+        meta_sleep_info: Ööbimine
+        meta_food_info: Toitlustamine
+        registration_begins_at: Registreerumise algusaeg
+        registration_ends_at: Registreerumise lõpuaeg
         name: "Название полезного дела"
         notes: "Дополнительная информация"
         status: Статус
+        registration_text: Registreerumise tekst
+        registration_notes_title: Registreerumisvormi lisainfo täpsustus
+        instant_publish: Kohene avalikustamine
         photogallery_url: Адрес фотогалереи
         statuses:
           adjustment: Уточняется
@@ -886,6 +903,7 @@ ru:
         participant_name: Имя
         phone: Телефон
         tellafriend_emails: Пригласите на это полезное дело и друзей (для разделения адресов электронной почты используйте запятую)
+        residence: "Elukoht"
       event_type:
         name: "Наименование типа полезного дела"
         event_types:
@@ -1171,7 +1189,7 @@ ru:
   mailers:
     common:
       disclaimer: "Внимание! Данное письмо отсылается автоматически всем зарегистрировавшимся и на него не нужно отвечать. В случае возникновения вопросов обратитесь к своему руководителю толоки, чьи данные Вы найдете по приведенной выше ссылке."
-      footer_text: 
+      footer_text: ""
       hello: "Добро пожаловать!"
     event_mailer:
       invite_event_manager_notification:
@@ -1194,7 +1212,7 @@ ru:
         participant_info: "Участником введены следущие данные:"
         subject: "{{name}} зарегистрирован на полезное дело {{event_name}}"
       participant_notification:
-        edit_address: "Данные регистрации можно редактировать по адресу {{url}}"
+        edit_address: "Данные регистрации можно редактировать по адресу {{url}} \n\n {{registration_text}}"
         event_address: "При необходимости пошлите исправление или уточнение через электронную почту  своему координатору полезного дела. Контакты координаторов полезных дел найдете на странице {{url}}"
         event_link: "Информацию для Вас и Ваших участников команды полезного дела со всеми контактами найдете перейдя по ссылке {{url}}. Пожалуйста, не удаляйте это письмо и перед началом Дня полезных дел перепроверьте организационную информацию по указанным ссылкам, т.к. могли произойти изменения. Ко Дню полезных дел распечатайте инфолисток и возьмите с собой на место сборов."
         event_name: "Регистрация на полезное дело {{event_name}} успешно завершена."

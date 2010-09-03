@@ -26,7 +26,7 @@
     </div>
     <div class="object-right noprint">
       <div class="reg-link">
-      <%= link_to t('.register_to_this_event'), new_event_participation_path(@event), :class => I18n.locale %>
+      <%= link_to t('.register_to_this_event'), new_event_participation_path(@event), :class => I18n.locale if @event.can_register? %>
       </div>
       <% if not @event.can_register? %>
       <div class="splash-box" style="left: 23px; z-index: 10; width: 239px; top: 50px;"><%= t('.registration_starts_at', :time_begins => format_time(@event.registration_begins_at), :time_ends => format_time(@event.registration_ends_at)) %></div>

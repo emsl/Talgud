@@ -9,6 +9,7 @@ authorization do
       if_attribute :status => Event::STATUS[:published]
       if_attribute :status => Event::STATUS[:registration_open]
       if_attribute :status => Event::STATUS[:registration_closed]
+      if_attribute :status => Event::STATUS[:took_place]
     end
   end
 

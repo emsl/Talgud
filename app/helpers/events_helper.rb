@@ -4,7 +4,7 @@ module EventsHelper
     if event.begins_at.past?
       t('.occurred_at', :date => duration_dates(@event))
     elsif event.begins_at.to_date != event.ends_at.to_date
-      t('.occurring_dates', :begin_time => l(event.begins_at, :format => :short), :end_time => l(event.ends_at, :format => :long))
+      t('.occurring_dates', :begin_time => l(event.begins_at, :format => :short), :end_time => l(event.ends_at, :format => :short))
     else
       t('.occurring_at', :date => duration_dates(@event), :time => duration_times(@event))
     end

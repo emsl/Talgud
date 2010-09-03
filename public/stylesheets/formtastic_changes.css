@@ -87,6 +87,10 @@ form.formtastic div.form-extra fieldset ol li.text textarea {
   width: 378px;
 }
 
+form.formtastic div.form-extra fieldset ol li.boolean label {
+  padding-left: 0;
+}
+
 table.dataentry thead th {
   font-weight: normal;
   padding: 5px 7px;

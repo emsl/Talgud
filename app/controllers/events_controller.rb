@@ -10,9 +10,7 @@ class EventsController < ApplicationController
   INCLUDES = [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
 
   def index
-    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published(
-      :order => 'begins_at ASC'
-    )
+    @search = Event.by_manager_name(filter_manager_name_from_params).by_language_code(filter_language_code_from_params).published
     
     respond_to do |format|
       format.xml do
@@ -20,7 +18,7 @@ class EventsController < ApplicationController
         render :xml => @events
       end
       
-      format.html { @events = @search.paginate(:page => params[:page], :conditions => filter_from_params, :include => INCLUDES) }
+      format.html { @events = @search.paginate(:page => params[:page], :conditions => filter_from_params, :include => INCLUDES, :order => 'begins_at ASC') }
       format.ics do
         @events = @search.all
         render :text => self.generate_ical
@@ -30,14 +28,14 @@ class EventsController < ApplicationController
 
   def my
     @events = Event.my_events(@current_user).paginate(
-    :page => params[:page],
+    :page => params[:page], :order => 'begins_at ASC',
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
 
   def past
     @events = Event.past.search(filter_from_params).paginate(
-    :page => params[:page], 
+    :page => params[:page], :order => 'begins_at DESC',
     :include => [:event_type, :location_address_county, :location_address_municipality, :location_address_settlement]
     )
   end
@@ -86,9 +84,11 @@ class EventsController < ApplicationController
   end
 
   def new
-    # TODO: date is currenlty hard coded.
-    @event.attributes = {:begins_at => 10.days.from_now, :ends_at => 10.days.from_now, :registration_begins_at => 7.days.from_now, :registration_ends_at => 9.days.from_now}
-    @event.attributes = {:begin_time => '10:00', :end_time => '18:00', :registration_begin_time => '00:00', :registration_end_time => '00:00'}
+    @event.attributes = {
+      :begins_at => 10.days.from_now, :ends_at => 10.days.from_now, :registration_begins_at => 7.days.from_now,
+      :registration_ends_at => 9.days.from_now, :begin_time => '10:00', :end_time => '18:00',
+      :registration_begin_time => '00:00', :registration_end_time => '00:00', :instant_publish => true
+    }
   end
 
   def create
